@@ -45,3 +45,9 @@ func _apply_pose() -> void:
  model.rotation.z = tilt
  model.get_node("Spool").rotation.x = spin
  model.get_node("Crank").rotation.x = crank
+
+func line_guide_screen_position() -> Vector2:
+ var camera: Camera3D = $Viewport/Camera
+ var guide: Node3D = model.get_node("Guide")
+ var point := camera.unproject_position(guide.global_position) / Vector2($Viewport.size) * size
+ return get_global_transform_with_canvas() * point

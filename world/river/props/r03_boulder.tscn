@@ -1,0 +1,57 @@
+[gd_scene format=4]
+
+[ext_resource type="Texture2D" path="res://assets/environment/river/river_props_wetland_atlas_256.png" id="1_u0ch8"]
+[ext_resource type="Material" path="res://world/river/wood_material.tres" id="2_oenfd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm14v"]
+resource_name = "MAT_Wetland_SHARED_opaque"
+cull_mode = 2
+albedo_texture = ExtResource("1_u0ch8")
+roughness = 0.92
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y55ka"]
+_surfaces = [{
+"aabb": AABB(-1.0482335, -0.24779157, -0.91809404, 2.222084, 2.5628946, 1.942739),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAACAAQABQACAAMAAgAFAAQABgAFAAMAAwABAAcABgADAAcAAAAIAAEACAAHAAEAAAAEAAkAAAAJAAgACgAEAAUABgAKAAUABAAKAAkABgAHAAsABwAIAAsABgALAAoACQALAAgACwAJAAoA"),
+"name": "MAT_Wetland_SHARED_opaque",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("2y47fzgRAADDeP//byMAAGcAR7v6eAAAw3h4+4TLAAAAAPxC+ngAAJcYO3///wAAVck7fxjqAAD//7PC+ngAAO7OO38AAAAAw3gOFMYxAADDeAAAgc0AAFL8mD36eAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2sxed"]
+resource_name = "River_Export_Props_R03_Boulder_Mesh"
+_surfaces = [{
+"aabb": AABB(-1.0482335, -0.24779157, -0.91809404, 2.222084, 2.5628946, 1.942739),
+"attribute_data": PackedByteArray("/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c/wL/3P8c/8L/HP/c"),
+"format": 34896613399,
+"index_count": 60,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJwAoACkAKgArACwALQAuAC8AMAAxADIAMwA0ADUANgA3ADgAOQA6ADsA"),
+"material": SubResource("StandardMaterial3D_rm14v"),
+"name": "MAT_Wetland_SHARED_opaque",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 60,
+"vertex_data": PackedByteArray("2y47fzgRlNzDeP//byOU3GcAR7v6eJTc2y47fzgRuPjuzjt/AAC4+MN4//9vI7j42y47fzgRr/TDeA4UxjGv9O7OO38AAK/02y47fzgRQ98AAPxC+nhD38N4DhTGMUPf2y47fzgRkdVnAEe7+niR1QAA/EL6eJHV7s47fwAAmvT//7PC+nia9MN4//9vI5r0w3j//28jIeLDeHj7hMsh4mcAR7v6eCHiZwBHu/p4ytCXGDt////K0AAA/EL6eMrQAAD8Qvp4V83DeAAAgc1XzcN4DhTGMVfNw3gOFMYxmtxS/Jg9+nia3O7OO38AAJrcVck7fxjqCbDDeHj7hMsJsP//s8L6eAmwVck7fxjqmNSXGDt///+Y1MN4ePuEy5jUVck7fxjqgP/DeAAAgc2A/5cYO3///4D/Vck7fxjqVtZS/Jg9+nhW1sN4AACBzVbWVck7fxjq8bH//7PC+njxsVL8mD36ePGxw3h4+4TLtb7DeP//byO1vv//s8L6eLW+lxg7f///x71nAEe7+njHvcN4ePuEy8e9w3gAAIHN3NgAAPxC+njc2JcYO3///9zYUvyYPfp4wv7DeA4UxjHC/sN4AACBzcL+//+zwvp4NeDuzjt/AAA14FL8mD36eDXglqX31Jal99SWpffUv84qsb/OKrG/ziqxfgYzf34GM39+BjN/Djj6rA44+qwOOPqsuWWJ1bllidW5ZYnVOTt3JTk7dyU5O3clGH0Pwhh9D8IYfQ/CbFiwp2xYsKdsWLCnYSUggmElIIJhJSCCiC0eS4gtHkuILR5LNsZ8DTbGfA02xnwNQ+8aAkPvGgJD7xoCXgwS+l4MEvpeDBL6wo4LWsKOC1rCjgtabJRKOWyUSjlslEo5NNUYVjTVGFY01RhWEvAgxhLwIMYS8CDG1dFs8tXRbPLV0Wzy4zT95uM0/ebjNP3mmq89T5qvPU+arz1P")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_y55ka")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rqhv5"]
+data = PackedVector3Array(-0.6415, 1.026, -0.7874, 0, 2.3151, -0.64919996, -1.0447, 1.6271, 0, -0.6415, 1.026, -0.7874, 0.7479, 1.026, -0.9181, 0, 2.3151, -0.64919996, -0.6415, 1.026, -0.7874, 0, -0.047, -0.54039997, 0.7479, 1.026, -0.9181, -0.6415, 1.026, -0.7874, -1.0482, 0.42279997, 0, 0, -0.047, -0.54039997, -0.6415, 1.026, -0.7874, -1.0447, 1.6271, 0, -1.0482, 0.42279997, 0, 0.7479, 1.026, -0.9181, 1.1739, 1.7013999, 0, 0, 2.3151, -0.64919996, 0, 2.3151, -0.64919996, 0, 2.2698, 0.6264, -1.0447, 1.6271, 0, -1.0447, 1.6271, 0, -0.8348, 1.026, 1.0246, -1.0482, 0.42279997, 0, -1.0482, 0.42279997, 0, 0, -0.2478, 0.6415, 0, -0.047, -0.54039997, 0, -0.047, -0.54039997, 1.1419, 0.3689, 0, 0.7479, 1.026, -0.9181, 0.6994, 1.026, 0.8584, 0, 2.2698, 0.6264, 1.1739, 1.7013999, 0, 0.6994, 1.026, 0.8584, -0.8348, 1.026, 1.0246, 0, 2.2698, 0.6264, 0.6994, 1.026, 0.8584, 0, -0.2478, 0.6415, -0.8348, 1.026, 1.0246, 0.6994, 1.026, 0.8584, 1.1419, 0.3689, 0, 0, -0.2478, 0.6415, 0.6994, 1.026, 0.8584, 1.1739, 1.7013999, 0, 1.1419, 0.3689, 0, 0, 2.2698, 0.6264, 0, 2.3151, -0.64919996, 1.1739, 1.7013999, 0, -0.8348, 1.026, 1.0246, -1.0447, 1.6271, 0, 0, 2.2698, 0.6264, 0, -0.2478, 0.6415, -1.0482, 0.42279997, 0, -0.8348, 1.026, 1.0246, 1.1419, 0.3689, 0, 0, -0.047, -0.54039997, 0, -0.2478, 0.6415, 1.1739, 1.7013999, 0, 0.7479, 1.026, -0.9181, 1.1419, 0.3689, 0)
+
+[node name="R03_Boulder" type="Node3D" unique_id=314510614]
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=589969765]
+mesh = SubResource("ArrayMesh_2sxed")
+surface_material_override/0 = ExtResource("2_oenfd")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1022355719]
+
+[node name="Shape" type="CollisionShape3D" parent="Collision" unique_id=1207069456]
+shape = SubResource("ConcavePolygonShape3D_rqhv5")

@@ -22,3 +22,4 @@ swim_speed = 1.65
 pull_strength = 1.05
 struggle_frequency = 3.0
 body_scale = Vector3(1, 1, 1)
+tension_pressure = 0.11

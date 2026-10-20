@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://world/river/river_world.tscn" id="1_mf6ie"]
+[ext_resource type="Script" path="res://world/pond/pond.gd" id="2_tgi2n"]
+[ext_resource type="Resource" path="res://world/river/river_definition.tres" id="3_ggeal"]
+[ext_resource type="PackedScene" path="res://actors/player/player.tscn" id="4_5amkb"]
+[ext_resource type="Script" path="res://actors/player/player.gd" id="5_lk3nb"]
+
+[node name="RiverOverview" type="Node3D" unique_id=1120321303]
+
+[node name="World" type="Node3D" parent="." unique_id=754830963 instance=ExtResource("1_mf6ie")]
+script = ExtResource("2_tgi2n")
+definition = ExtResource("3_ggeal")
+
+[node name="HumanScaleReference" type="CharacterBody3D" parent="." unique_id=2130617581 instance=ExtResource("4_5amkb")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.52561, 0.45, 42)
+script = ExtResource("5_lk3nb")
+
+[node name="OverviewCamera" type="Camera3D" parent="." unique_id=1728218233]
+transform = Transform3D(1, 0, 0, 0, 0.838068, 0.5455658, 0, -0.5455658, 0.838068, 0, 165, 230)
+current = true
+fov = 56.0
+far = 1000.0

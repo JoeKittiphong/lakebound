@@ -16,4 +16,27 @@ extends Resource
 @export var swim_speed: float = 1.0
 @export var pull_strength: float = 0.8
 @export var struggle_frequency: float = 1.5
+## Extra tension during surges; tune independently for each species.
+@export_range(0.0, 0.3) var tension_pressure: float = 0.05
 @export var body_scale := Vector3(1, 1, 1)
+
+func fight_pressure(weight: float) -> float:
+ var size_in_species := clampf((weight - min_weight) / maxf(max_weight - min_weight, 0.001), 0.0, 1.0)
+ return tension_pressure * lerpf(0.8, 1.2, size_in_species)
+
+func red_zone_start(weight: float) -> float:
+ return fight_zones(weight, 1.0, 1.0).y
+
+## X = yellow begins, Y = red begins. Fresh/surging fish leave a narrow
+## yellow control window and more red than green; fatigue widens safe space.
+func fight_zones(weight: float, stamina: float, activity: float) -> Vector2:
+ var fresh := clampf(stamina, 0.0, 1.0)
+ var surge := clampf((activity - 0.42) / 0.93, 0.0, 1.0)
+ var red := clampf(lerpf(0.90, 0.54, fresh) - fresh * (surge * 0.06 + fight_pressure(weight) * 0.16), 0.42, 0.90)
+ var difficulty := clampf(fight_pressure(weight) / 0.24, 0.0, 1.0)
+ var width := lerpf(0.14, 0.055, difficulty) + (1.0 - fresh) * 0.025
+ if activity >= 1.5:
+  red = lerpf(0.30, 0.20, clampf((activity - 1.5) / 1.2, 0.0, 1.0))
+  width *= 0.7
+ var yellow := maxf(0.16, red - width)
+ return Vector2(yellow, red)

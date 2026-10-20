@@ -52,7 +52,7 @@ func fight_with_feedback(scene: Node, delta: float = 1.0 / 60.0) -> bool:
  var angler: Vector3 = scene.get_node("Player").position
  for tick in 7200:
   # Uses only visible tension and the direction inferred from the line.
-  var vertical := 1.0 if fishing.tension < 0.72 else -0.72
+  var vertical := 1.0 if fishing.tension < lerpf(fishing.yellow_start, fishing.red_start, 0.60) else -0.72
   fishing.rod_input = Vector2(-fishing.lateral_direction, vertical).limit_length(1.0)
   fishing.advance(delta, angler)
   if fishing.state == F.State.RESULT:
@@ -66,7 +66,7 @@ func fight_with_feedback(scene: Node, delta: float = 1.0 / 60.0) -> bool:
 
 func run_tests() -> void:
  root.get_node("FishCollection").recording_enabled = false
- Gameplay = load("res://features/gameplay/gameplay.tscn")
+ Gameplay = load("res://tests/legacy_gameplay.tscn")
  var scene := session()
  var pond := scene.get_node("PondEcosystem")
  expect(pond.fish.size() == 30, "population exists before casting")

@@ -1,5 +1,26 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 [ext_resource type="PackedScene" path="res://shared/ui/virtual_joystick.tscn" id="base"]
 [ext_resource type="Script" path="res://features/fishing/ui/rod_control.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/hook.svg" id="hook"]
 [node name="RodControl" instance=ExtResource("base")]
 script = ExtResource("script")
+
+[node name="Reel" parent="." index="2"]
+offset_left = -56.0
+offset_right = -56.0
+
+[node name="HookIcon" type="TextureRect" parent="Knob"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("hook")
+expand_mode = 1
+stretch_mode = 5

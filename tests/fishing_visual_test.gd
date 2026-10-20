@@ -46,7 +46,7 @@ func inside(control: Control) -> void:
 
 func run_checks() -> void:
  root.get_node("FishCollection").recording_enabled = false
- Gameplay = load("res://features/gameplay/gameplay.tscn")
+ Gameplay = load("res://tests/legacy_gameplay.tscn")
  root.size = Vector2i(1280, 720)
  var scene := Gameplay.instantiate()
  root.add_child(scene)
@@ -84,7 +84,7 @@ func run_checks() -> void:
  for size in [Vector2i(1280, 720), Vector2i(1600, 720), Vector2i(1024, 768)]:
   root.size = size
   await frames()
-  for path in ["SafeArea/Status", "SafeArea/MoveJoystick", "SafeArea/RodJoystick", "SafeArea/BaitPanel", "SafeArea/ActionButton", "SafeArea/CollectionButton", "SafeArea/EcologyButton", "SafeArea/BackButton", "SafeArea/BaitDock"]:
+  for path in ["SafeArea/Status", "SafeArea/MoveJoystick", "SafeArea/RodJoystick", "SafeArea/BaitPanel", "SafeArea/CollectionButton", "SafeArea/EcologyButton", "SafeArea/BackButton", "SafeArea/BaitDock"]:
    inside(hud.get_node(path))
   expect(not hud.get_node("SafeArea/BaitDock").get_global_rect().intersects(hud.get_node("SafeArea/MoveJoystick").get_global_rect()) and not hud.get_node("SafeArea/BaitDock").get_global_rect().intersects(hud.get_node("SafeArea/RodJoystick").get_global_rect()), "bait dock does not overlap either touch joystick")
   await capture("fishing-ready-%dx%d" % [size.x, size.y])
@@ -126,6 +126,9 @@ func run_checks() -> void:
  expect(controller.state == controller.State.CASTING, "releasing the aiming joystick starts the cast animation")
  await create_timer(0.65).timeout
  expect(controller.state == controller.State.WAITING, "bait enters the pond after the cast arc finishes")
+ expect(right.enabled and right.get_node("Reel").visible and not right.get_node("Knob").visible, "bait landing immediately switches the right control to an enabled reel")
+ expect(not hud.has_node("SafeArea/CancelButton"), "retrieval has no on-screen cancel button")
+ await capture("fishing-waiting-reel")
  var cast_anchor: Vector3 = controller.cast_position
  touch(21, true, Vector2(900, 200))
  drag(21, Vector2(970, 200), Vector2(70, 0))
@@ -141,9 +144,11 @@ func run_checks() -> void:
  await frames()
  controller.selected_bait = &"lure"
  controller.aim_offset = Vector3(0, 0, -14)
- hud.get_node("SafeArea/ActionButton").pressed.emit()
+ touch(40, true, center(right))
+ await frames(2)
+ touch(40, false, center(right))
  await frames()
- expect(controller.state == controller.State.CASTING, "cast button works")
+ expect(controller.state == controller.State.CASTING, "releasing the aiming control casts without a button")
  await create_timer(0.65).timeout
  controller.set_physics_process(false)
  pond.set_physics_process(false)
@@ -153,12 +158,13 @@ func run_checks() -> void:
    break
  expect(controller.state == controller.State.BITE, "real ecosystem reaches bite state")
  await frames()
- expect(hud.get_node("SafeArea/ActionButton").icon == hud.HOOK_ICON and hud.get_node("SafeArea/ActionButton").text.is_empty(), "bite state switches the action icon to a hook")
+ expect(not hud.has_node("SafeArea/ActionButton"), "cast and strike action buttons are absent")
  await capture("fishing-bite")
- hud.get_node("SafeArea/ActionButton").pressed.emit()
- await frames()
- expect(controller.state == controller.State.FIGHT, "strike button enters fight")
  touch(10, true, center(right) + Vector2(-28, 48))
+ await frames()
+ controller.advance(0.1, player.position)
+ await frames()
+ expect(controller.state == controller.State.FIGHT, "pulling the reel hooks the fish without a button")
  await frames()
  expect(controller.rod_input.y > 0.1, "battle joystick sends reel-in command")
  var reel := right.get_node("Reel")
@@ -199,7 +205,7 @@ func run_checks() -> void:
  await frames()
  expect(is_equal_approx(rig.rotation.y, yaw_after_release), "released camera finger cannot keep rotating")
  var meter := hud.meter as Control
- expect(meter.get_global_rect().end.x < right.get_global_rect().position.x, "straight tension meter sits left of joystick")
+ expect(absf(meter.get_global_rect().end.y - (right.reel_guide_position().y - 24.0)) < 1.0 and absf(meter.get_global_rect().get_center().x - right.reel_guide_position().x) < 1.0, "tension meter uses layout B on the actual reel axis")
  var battle_position: Vector3 = player.position
  touch(11, true, center(left) + Vector2(0, 46))
  await create_timer(0.3).timeout
@@ -210,14 +216,14 @@ func run_checks() -> void:
  await capture("fishing-fight-16x9")
  root.size = Vector2i(1600, 720)
  await frames()
- for path in ["SafeArea/TensionMeter", "SafeArea/LineInfo", "SafeArea/CancelButton"]:
+ for path in ["SafeArea/TensionMeter", "SafeArea/LineInfo"]:
   inside(hud.get_node(path))
  await capture("fishing-fight-20x9")
  touch(10, false, Vector2.ZERO)
  await frames()
  scene.set_process(false)
  for tick in 7200:
-  var vertical: float = 1.0 if controller.tension < 0.72 else -0.72
+  var vertical: float = 1.0 if controller.tension < lerpf(controller.yellow_start, controller.red_start, 0.60) else -0.72
   controller.rod_input = Vector2(-controller.lateral_direction, vertical).limit_length(1.0)
   controller.advance(1.0 / 60.0, player.position)
   if controller.state != controller.State.FIGHT:

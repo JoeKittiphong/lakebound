@@ -1,7 +1,7 @@
 extends SceneTree
 
 const Catalog = preload("res://data/fish/fish_catalog.gd")
-const Gameplay = preload("res://features/gameplay/gameplay.tscn")
+const Gameplay = preload("res://tests/legacy_gameplay.tscn")
 var failures := 0
 
 func _initialize() -> void:
@@ -37,7 +37,7 @@ func run() -> void:
   var landed := false
   if fishing.strike():
    for tick in 7200:
-    fishing.rod_input = Vector2(-fishing.lateral_direction, 1.0 if fishing.tension < 0.72 else -0.72).limit_length(1.0)
+    fishing.rod_input = Vector2(-fishing.lateral_direction, 1.0 if fishing.tension < lerpf(fishing.yellow_start, fishing.red_start, 0.60) else -0.72).limit_length(1.0)
     fishing.advance(1.0 / 60.0, player.position)
     if fishing.state == fishing.State.RESULT:
      landed = true

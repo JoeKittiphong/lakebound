@@ -9,3 +9,6 @@ func set_battle_mode(value: bool) -> void:
 func show_reel(command: Vector2, slipping: bool) -> void:
  $Reel.command = command
  $Reel.slipping = slipping
+
+func reel_guide_position() -> Vector2:
+ return $Reel.line_guide_screen_position()

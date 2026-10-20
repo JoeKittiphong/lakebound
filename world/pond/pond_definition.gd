@@ -23,6 +23,24 @@ func constrain_to_water(point: Vector3) -> Vector3:
    point.x = dock_clearance.end.x if point.x >= 0 else dock_clearance.position.x
  return point
 
+func water_depth_at(_point: Vector2) -> float:
+ return 12.0
+
+func is_castable(point: Vector3) -> bool:
+ return point.distance_to(constrain_to_water(point)) <= 0.05
+
+func spawn_position(rng: RandomNumberGenerator, depths: Vector2, slot: int) -> Vector3:
+ var point := Vector3(rng.randf_range(-17, 17), rng.randf_range(depths.x, depths.y), rng.randf_range(-28, -10))
+ if slot >= 0 and slot < 9:
+  point = Vector3(float(slot % 3 - 1) * 2.8, (depths.x + depths.y) * 0.5, -15.0 - float(slot / 3) * 3.0)
+ return point
+
+func roaming_position(rng: RandomNumberGenerator, _current: Vector3, depths: Vector2) -> Vector3:
+ return Vector3(rng.randf_range(-21, 21), rng.randf_range(depths.x, depths.y), rng.randf_range(-31, -10))
+
+func is_wading(_point: Vector3) -> bool:
+ return false
+
 func constrain_walking(point: Vector3) -> Vector3:
  point.z = clampf(point.z, walking_z.x, walking_z.y)
  var half_width := dock_walk_half_width if point.z < bank_start_z else bank_walk_half_width

@@ -22,11 +22,11 @@ func _ready() -> void:
  player.input_enabled = true
  player.facing_follows_camera = true
  player.joystick = hud.move_joystick
+ camera_rig.bind_touch_controls(hud.move_joystick, hud.rod_joystick)
  pond.definition = $World.definition
  camera_rig.view_changed.connect(_on_view_changed)
+ _on_view_changed(camera_rig.global_rotation.y)
  hud.bind(fishing, pond)
- hud.action_requested.connect(_on_action)
- hud.cancel_requested.connect(fishing.cancel)
  hud.keep_requested.connect(func(): fishing.resolve_catch(true))
  hud.release_requested.connect(func(): fishing.resolve_catch(false))
  hud.aim_released.connect(_on_aim_released)
@@ -63,18 +63,9 @@ func _process(_delta: float) -> void:
  player.set_rod_pose(fishing.state in [fishing.State.WAITING, fishing.State.BITE, fishing.State.FIGHT, fishing.State.CASTING], fishing.tension, rod.x)
 
 func _unhandled_input(event: InputEvent) -> void:
- if event.is_action_pressed("fish_action"):
-  _on_action()
-  get_viewport().set_input_as_handled()
- elif event.is_action_pressed("cancel_cast"):
+ if event.is_action_pressed("cancel_cast"):
   fishing.cancel()
   get_viewport().set_input_as_handled()
-
-func _on_action() -> void:
- if fishing.state == fishing.State.READY:
-  fishing.cast()
- elif fishing.state == fishing.State.BITE:
-  fishing.strike()
 
 func _on_aim_released() -> void:
  if fishing.state == fishing.State.READY:

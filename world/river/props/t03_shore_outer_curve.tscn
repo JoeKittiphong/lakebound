@@ -1,0 +1,49 @@
+[gd_scene format=4]
+
+[ext_resource type="Texture2D" path="res://assets/environment/river/river_props_wetland_atlas_256.png" id="1_p258x"]
+[ext_resource type="Material" path="res://world/river/wood_material.tres" id="2_v3j1k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm14v"]
+resource_name = "MAT_Wetland_SHARED_opaque"
+cull_mode = 2
+albedo_texture = ExtResource("1_p258x")
+roughness = 0.92
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_x551g"]
+_surfaces = [{
+"aabb": AABB(-3.5, -0.22, -1, 4.5, 0.45, 4.5),
+"format": 34896613377,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQAAgAEAAUAAQAGAAQAAwAHAAEAAQAHAAYAAwAIAAcABwAJAAYACAAKAAcABwAKAAkACAALAAoACgAMAAkACwANAAoACgANAAwACwAOAA0ADQAPAAwADgAQAA0ADQAQAA8ADgARABAAEAASAA8AEQATABAAEAATABIAEQAUABMAEwAVABIAFAAWABMAEwAWABUAFgAXABUAFAAYABYAFgAZABcAGAAZABYAGAAaABkA"),
+"name": "MAT_Wetland_SHARED_opaque",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 27,
+"vertex_data": PackedByteArray("mZkAAP//AABIw0mfJtkAABvHSZ///wAApZYAAAfiAAAT+///Dc4AAP///////wAAguz//weeAADzt0mfzLMAAOeNAAA3xQAA2tT//8VxAACNpUmfYJEAALZ/AACpqgAABLX///pKAADKjEmfNHMAAJxsAABikwAAOY7//yQrAACebkmfcVoAAFVVAABIgAAA92H//3wTAAAyTEmfC0gAAMc6AAAXcgAA8TH//+sEAADYJkmftjwAAAAA//8AAAAA9x0AAFlpAAAAAEmf4zgAAAAAAABlZgAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xskvx"]
+resource_name = "River_Export_Props_T03_Shore_Outer_Curve_Mesh"
+_surfaces = [{
+"aabb": AABB(-3.5, -0.22, -1, 4.5, 0.45, 4.5),
+"attribute_data": PackedByteArray("/yL/vP88/6L/Iv+i/zz/vP8i/7z/PP+i/yL/ov88/7z/Iv+8/zz/ov8i/6L/PP+8/yL/vP88/6L/Iv+i/zz/vP8i/7z/PP+i/yL/ov88/7z/Iv+8/zz/ov8i/6L/PP+8/yL/vP88/6L/Iv+i/zz/vP8i/7z/PP+i/yL/ov88/7z/Iv/8/zz/4v8i/+L/PP/8/yL//P88/+L/Iv/i/zz//P8i//z/PP/i/yL/4v88//z/Iv/8/zz/4v8i/+L/PP/8/yL//P88/+L/Iv/i/zz//P8i//z/PP/i/yL/4v88//z/Iv/8/zz/4v8i/+L/PP/8/yL//P88/+L/Iv/i/zz//A=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0A"),
+"material": SubResource("StandardMaterial3D_rm14v"),
+"name": "MAT_Wetland_SHARED_opaque",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("mZkAAP//eyBIw0mfJtl7IBvHSZ///3sgpZYAAAfieyCllgAAB+KkHPO3SZ/Ms6QcSMNJnybZpBznjQAAN8WkHOeNAAA3xZYYjaVJn2CRlhjzt0mfzLOWGLZ/AACpqpYYtn8AAKmqWRTKjEmfNHNZFI2lSZ9gkVkUnGwAAGKTWRScbAAAYpP4D55uSZ9xWvgPyoxJnzRz+A9VVQAASID4D1VVAABIgHsLMkxJnwtIewuebkmfcVp7C8c6AAAXcnsLxzoAABdy6wbYJkmftjzrBjJMSZ8LSOsG9x0AAFlp6wb3HQAAWWlPAgAASZ/jOE8C2CZJn7Y8TwIAAAAAZWZPAhvHSZ///34kE/v//w3OfiT///////9+JEjDSZ8m2X4kSMNJnybZICCC7P//B54gIBP7//8NziAg87dJn8yzICDzt0mfzLOIG9rU///FcYgbguz//weeiBuNpUmfYJGIG42lSZ9gkcIWBLX///pKwhba1P//xXHCFsqMSZ80c8IWyoxJnzRz2BE5jv//JCvYEQS1///6StgRnm5Jn3Fa2BGebkmfcVrRDPdh//98E9EMOY7//yQr0QwyTEmfC0jRDDJMSZ8LSLgH8TH//+sEuAf3Yf//fBO4B9gmSZ+2PLgH2CZJn7Y8lAIAAP//AACUAvEx///rBJQCAABJn+M4lAJR3V4sUd1eLFHdXixR3V4s/dq/Jv3avyb92r8m/dq/JrXYPiG12D4htdg+IbXYPiFu1sAbbtbAG27WwBtu1sAbHdQqFh3UKhYd1CoWHdQqFrXRXhC10V4QtdFeELXRXhApzzkKKc85CinPOQopzzkKaMyTA2jMkwNozJMDaMyTA7rYLyq62C8qutgvKrrYLyo51rckOda3JDnWtyQ51rcky9NnH8vTZx/L02cfy9NnH2HRIhph0SIaYdEiGmHRIhrxzs0U8c7NFPHOzRTxzs0UbsxPD27MTw9uzE8PbsxPD8nJiAnJyYgJycmICcnJiAnxxlID8cZSA/HGUgPxxlID")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_x551g")
+
+[node name="T03_Shore_Outer_Curve" type="Node3D" unique_id=735916468]
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=210836532]
+mesh = SubResource("ArrayMesh_xskvx")
+surface_material_override/0 = ExtResource("2_v3j1k")

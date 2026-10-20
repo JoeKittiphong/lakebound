@@ -11,8 +11,8 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-HEADLESS = ("startup_flow", "fishing_simulation", "fish_catalog_fishing", "fish_models", "refactor_boundaries")
-RENDER = ("collection", "fishing_visual", "fish_render", "water_render")
+HEADLESS = ("startup_flow", "camera_movement", "bait_retrieval", "tension_haptics", "fish_behavior", "fishing_simulation", "fish_catalog_fishing", "fish_models", "refactor_boundaries")
+RENDER = ("collection", "fishing_visual", "active_scene_movement", "rod_tension", "fish_render", "water_render")
 # These host/sandbox diagnostics do not concern game scripts; keep them in logs
 # and report them separately instead of treating every successful exit as proof.
 HOST_DIAGNOSTICS = (

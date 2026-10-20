@@ -6,12 +6,14 @@ signal bite_notified
 signal fish_landed(fish: RefCounted)
 signal fish_lost(reason: String)
 signal cast_started
+signal haptic_requested(duration_ms: int)
 
 enum State { READY, WAITING, BITE, FIGHT, RESULT, LOST, CASTING }
 @export var tuning: FishingTuning = preload("res://features/fishing/default_fishing_tuning.tres")
 @export var ecosystem: PondEcosystem
 @export var player: Node3D
 @export var haptics_enabled := true
+var _red_haptic_cooldown: float = 0.0
 var fight := FightSimulation.new()
 var state: State = State.READY
 var selected_bait: StringName = &"worm"
@@ -32,6 +34,12 @@ var line_length: float:
  set(value):
   fight.line_length = value
 var fish_distance: float = 0.0
+var yellow_start: float:
+ get:
+  return fight.yellow_start
+var red_start: float:
+ get:
+  return fight.red_start
 var fish_force: float:
  get:
   return fight.fish_force
@@ -86,7 +94,7 @@ func cast() -> bool:
  if state != State.READY or not is_instance_valid(player):
   return false
  var target := get_aim_position()
- if target.distance_to(ecosystem.constrain_to_water(target)) > 0.05:
+ if not ecosystem.definition.is_castable(target):
   feedback = "หันไปทางน้ำ แล้วเลือกจุดเหวี่ยงใหม่"
   return false
  cast_position = target
@@ -99,17 +107,18 @@ func cast() -> bool:
 func get_aim_position() -> Vector3:
  var target: Vector3 = player.global_position + aim_offset.rotated(Vector3.UP, aim_yaw)
  target.y = selected_depth
+ if is_instance_valid(ecosystem):
+  var available: float = ecosystem.definition.water_depth_at(Vector2(target.x, target.z))
+  target.y = minf(target.y, maxf(0.1, available - 0.14))
  return target
 
 func _on_fish_biting(record: RefCounted) -> void:
  if state != State.WAITING:
   return
  active_fish = record
- feedback = "ปลากินเบ็ด! กดวัดเบ็ด หรือกด Space"
+ feedback = "ปลากินเบ็ด! ดึงรอกลงเพื่อวัดเบ็ด"
  _change_state(State.BITE)
- # Notify only on a bite; no continuous battle vibration.
- if haptics_enabled and (OS.has_feature("android") or OS.has_feature("ios")):
-  Input.vibrate_handheld(180)
+ _request_haptic(180)
  bite_notified.emit()
 
 func strike() -> bool:
@@ -120,6 +129,9 @@ func strike() -> bool:
  line_length = fish_distance + 0.3
  tension = 0.45
  fight_time = 0.0
+ fight.begin(active_fish)
+ fight.update_zones(active_fish)
+ tension = (yellow_start + red_start) * 0.5
  overload_time = 0.0
  slack_time = 0.0
  rod_input = Vector2.ZERO
@@ -135,17 +147,39 @@ func advance(delta: float, angler_position: Vector3) -> void:
   _change_state(State.WAITING)
  elif state == State.BITE and state_time > tuning.bite_window:
   lose("วัดเบ็ดไม่ทัน ปลาคายเหยื่อแล้ว")
+ elif state == State.BITE and rod_input.y > 0.1:
+  strike()
+ elif state == State.WAITING:
+  _retrieve_step(delta, angler_position)
  elif state == State.LOST and state_time > 2.8:
   reset_cast()
  elif state == State.FIGHT:
   _fight_step(delta, angler_position)
+
+func _retrieve_step(delta: float, angler_position: Vector3) -> void:
+ if active_fish != null or ecosystem.reserved_fish != null:
+  return
+ var reel := maxf(0.0, rod_input.y)
+ var release_line := maxf(0.0, -rod_input.y)
+ line_length = clampf(line_length - reel * tuning.reel_speed * delta + release_line * tuning.release_speed * delta, 0.0, tuning.spool_capacity)
+ var distance := _planar_distance(angler_position, cast_position)
+ # Payout creates slack; winding takes up slack before moving the bait.
+ if reel > 0.0 and distance > line_length:
+  var direction := Vector2(cast_position.x - angler_position.x, cast_position.z - angler_position.z).normalized()
+  var point := Vector3(angler_position.x + direction.x * line_length, cast_position.y, angler_position.z + direction.y * line_length)
+  cast_position = ecosystem.constrain_to_water(point)
+  ecosystem.move_bait(cast_position)
+ var edge := ecosystem.constrain_to_water(angler_position)
+ if _planar_distance(cast_position, edge) <= tuning.retrieve_distance:
+  reset_cast()
+  feedback = "เก็บเหยื่อกลับแล้ว เล็งเพื่อเหวี่ยงใหม่"
 
 func _fight_step(delta: float, angler_position: Vector3) -> void:
  var stamina: float = active_fish.stamina
  fight.advance(delta, angler_position, active_fish, rod_input, tuning)
  active_fish.position = ecosystem.constrain_to_water(active_fish.position)
  fish_distance = _planar_distance(angler_position, active_fish.position)
- overload_time = overload_time + delta if tension >= 0.98 else maxf(0, overload_time - delta * 2.0)
+ overload_time = overload_time + delta if tension >= red_start else maxf(0, overload_time - delta * 2.0)
  slack_time = slack_time + delta if tension < 0.12 else maxf(0, slack_time - delta * 2.0)
  if overload_time >= tuning.break_grace:
   lose("สายขาด! ครั้งหน้าผ่อนสายเมื่อแรงตึงขึ้นสีแดง")
@@ -153,12 +187,28 @@ func _fight_step(delta: float, angler_position: Vector3) -> void:
   lose("สายหย่อนเกินไป ปลาสะบัดเบ็ดหลุด")
  elif fish_distance >= tuning.spool_capacity - 0.2:
   lose("สายหมดรอก ปลาหนีไปแล้ว")
- elif _within_landing_reach(angler_position) and stamina < 0.4 and tension > 0.15 and tension < 0.92:
+ elif _within_landing_reach(angler_position) and stamina < 0.4 and tension >= yellow_start and tension < red_start:
   active_fish.state = &"landed"
   ecosystem.bait_active = false
   feedback = "จับปลาได้แล้ว!"
   _change_state(State.RESULT)
   fish_landed.emit(active_fish)
+ _update_tension_haptics(delta)
+
+func _request_haptic(duration_ms: int) -> void:
+ if not haptics_enabled:
+  return
+ haptic_requested.emit(duration_ms)
+ if OS.has_feature("android") or OS.has_feature("ios"):
+  Input.vibrate_handheld(duration_ms)
+
+func _update_tension_haptics(delta: float) -> void:
+ _red_haptic_cooldown = maxf(0.0, _red_haptic_cooldown - delta)
+ if not haptics_enabled or state != State.FIGHT or active_fish == null:
+  return
+ if tension >= red_start and _red_haptic_cooldown <= 0.0:
+  _request_haptic(tuning.red_haptic_duration_ms)
+  _red_haptic_cooldown = tuning.red_haptic_interval
 
 func lose(reason: String) -> void:
  ecosystem.cancel_bait()
@@ -200,6 +250,10 @@ func resolve_catch(keep_fish: bool) -> void:
  reset_cast()
 
 func _change_state(value: State) -> void:
+ if value != State.FIGHT:
+  _red_haptic_cooldown = 0.0
+  if state == State.FIGHT and haptics_enabled and (OS.has_feature("android") or OS.has_feature("ios")):
+   Input.vibrate_handheld(0)
  state = value
  state_time = 0.0
  state_changed.emit()

@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environment/river/river_props_wetland_atlas_256.png" id="1_6lifo"]
+
+[resource]
+albedo_texture = ExtResource("1_6lifo")
+roughness = 0.95

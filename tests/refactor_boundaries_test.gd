@@ -40,7 +40,7 @@ func run() -> void:
  controller.reset_cast()
  expect(not player.fighting, "leaving fight restores walking mode")
  expect(pond.definition == ecosystem.definition, "world and simulation use the same pond definition")
- expect(pond.has_node("Lake") and pond.has_node("Dock"), "pond contains authored visual and collision nodes before Play")
+ expect(pond.has_node("RiverWater") and pond.has_node("Jetty"), "pond contains authored visual and collision nodes before Play")
  expect(camera.has_node("Camera3D") and scene.get_node("FishingEffects").has_node("Bobber"), "camera and effects retain their editable children")
  var spare := FishingController.new()
  spare.tuning = controller.tuning
@@ -119,4 +119,5 @@ func test_store() -> void:
  var bad := CollectionStore.save_records(output + "/missing-store-folder/save.cfg", {})
  expect(bad != OK, "store reports an unavailable destination to its caller")
  DirAccess.remove_absolute(path)
+
 

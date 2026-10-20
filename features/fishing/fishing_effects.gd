@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
   return
  time += delta
  var state: int = controller.state
- var working_reel: bool = audio_enabled and state == controller.State.FIGHT and absf(controller.rod_input.y) > 0.15
+ var working_reel: bool = audio_enabled and state in [controller.State.WAITING, controller.State.BITE, controller.State.FIGHT] and absf(controller.rod_input.y) > 0.15
  if working_reel:
   $ReelAudio.pitch_scale = 0.8 + controller.fish_force * 0.4
   if not $ReelAudio.playing:
@@ -91,7 +91,10 @@ func _update_fish_visuals() -> void:
  var records: Array = ecosystem.fish.duplicate()
  # Spend the fixed visual budget on the fish the player can actually see.
  records.sort_custom(func(a: RefCounted, b: RefCounted) -> bool:
-  return a.position.y < b.position.y if a.position.y != b.position.y else a.id < b.id)
+  var here := Vector2(player.global_position.x, player.global_position.z)
+  var da := here.distance_squared_to(Vector2(a.position.x, a.position.z))
+  var db := here.distance_squared_to(Vector2(b.position.x, b.position.z))
+  return da < db if not is_equal_approx(da, db) else a.id < b.id)
  if controller.active_fish != null:
   records.erase(controller.active_fish)
   records.push_front(controller.active_fish)
@@ -99,6 +102,8 @@ func _update_fish_visuals() -> void:
   if slot >= visual_pool.size():
    break
   var is_landed: bool = record.state == &"landed"
+  if record != controller.active_fish and Vector2(record.position.x - player.global_position.x, record.position.z - player.global_position.z).length() > 55.0:
+   continue
   if record.position.y > visible_fish_depth and not is_landed:
    continue
   var visual: Node3D = visual_pool[slot]

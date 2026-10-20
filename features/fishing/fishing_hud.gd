@@ -2,8 +2,6 @@ class_name FishingHUD
 extends Control
 
 signal collection_visibility_changed(opened: bool)
-signal action_requested
-signal cancel_requested
 signal keep_requested
 signal release_requested
 signal back_requested
@@ -11,8 +9,6 @@ signal aim_released
 signal configuration_changed(bait: StringName, depth: float)
 
 const F = preload("res://features/fishing/fishing_controller.gd")
-const CAST_ICON = preload("res://assets/ui/modern/cast.svg")
-const HOOK_ICON = preload("res://assets/ui/modern/hook.svg")
 const BAIT_ICONS = [preload("res://assets/ui/modern/worm.svg"), preload("res://assets/ui/modern/dough.svg"), preload("res://assets/ui/modern/lure.svg")]
 @onready var move_joystick: Control = $SafeArea/MoveJoystick
 @onready var rod_joystick: RodControl = $SafeArea/RodJoystick
@@ -24,6 +20,7 @@ var last_state: int = -1
 var toast_time := 0.0
 var last_feedback := ""
 var ready_feedback := ""
+@export var tension_reel_gap: float = 24.0
 
 func bind(fishing: FishingController, pond: PondEcosystem) -> void:
  controller = fishing
@@ -64,16 +61,21 @@ func _process(delta: float) -> void:
    _show_toast(last_feedback)
  var titles := ["", "รอปลา", "วัดเบ็ด!", "สู้ปลา", "", "ปลาหลุด", "เหวี่ยง"]
  $SafeArea/Status/Content/State.text = titles[state]
+ if state in [F.State.WAITING, F.State.BITE, F.State.FIGHT]:
+  rod_joystick.show_reel(controller.rod_input, state == F.State.FIGHT and controller.tension >= controller.red_start and controller.drag_strength < 0.95)
  if state == F.State.FIGHT:
-  rod_joystick.show_reel(controller.rod_input, controller.tension > 0.82 and controller.drag_strength < 0.95)
+  meter.set_zones(controller.yellow_start, controller.red_start)
+  _align_tension_meter()
   meter.value = controller.tension
   $SafeArea/TensionText.text = "%d%%" % int(controller.tension * 100)
-  $SafeArea/TensionText.modulate = Color(1, 0.4, 0.35) if controller.tension >= 0.9 else Color.WHITE
+  $SafeArea/TensionText.modulate = Color(1, 0.4, 0.35) if controller.tension >= meter.red_start else Color.WHITE
   $SafeArea/LineInfo/Content/Distance.text = "%.1f m" % controller.line_length
-  if controller.tension >= 0.9:
-   $SafeArea/Status/Content/State.text = "↑ ผ่อนสาย"
-  elif controller.tension < 0.15:
-   $SafeArea/Status/Content/State.text = "↓ เก็บสาย"
+  if controller.tension >= meter.red_start:
+   $SafeArea/Status/Content/State.text = "ปลากระชาก! ↑ ผ่อนสาย" if controller.fight.surge_active else "↑ ผ่อนสาย"
+  elif controller.tension < meter.yellow_start:
+   $SafeArea/Status/Content/State.text = "↓ เก็บสาย • ปลากำลังหนี"
+  else:
+   $SafeArea/Status/Content/State.text = "ประคองสีเหลือง"
  elif state == F.State.WAITING or state == F.State.BITE:
   $SafeArea/LineInfo/Content/Distance.text = "%.1f m" % controller.line_length
 
@@ -88,25 +90,31 @@ func _refresh_ecology() -> void:
    lines.append(text)
   $SafeArea/EcologyPanel/Content/Counts.text = "\n".join(lines)
 
+func _align_tension_meter() -> void:
+ var guide := rod_joystick.reel_guide_position()
+ meter.global_position = guide - Vector2(meter.size.x * 0.5, meter.size.y + tension_reel_gap)
+ $SafeArea/TensionText.global_position = Vector2(guide.x + 28.0, meter.global_position.y + meter.size.y * 0.5 - 14.0)
+
 func _refresh_state(state: int) -> void:
  toast_time = 0.0
  $SafeArea/Toast.hide()
  var battle := state == F.State.FIGHT
  var result := state == F.State.RESULT
- rod_joystick.set_battle_mode(battle)
+ if battle and controller.active_fish != null:
+  var fish: FishState = controller.active_fish
+  controller.fight.update_zones(fish)
+  meter.configure_fish(fish.weight, controller.red_start)
+  meter.set_zones(controller.yellow_start, controller.red_start)
+ rod_joystick.set_battle_mode(state in [F.State.WAITING, F.State.BITE, F.State.FIGHT])
  $SafeArea/CollectionButton.visible = state == F.State.READY
  settings_panel.hide()
  $SafeArea/BaitDock.visible = state == F.State.READY
  $SafeArea/Status.visible = state not in [F.State.READY, F.State.RESULT]
  $SafeArea/EcologyPanel.hide()
- $SafeArea/ActionButton.visible = state in [F.State.READY, F.State.BITE]
- $SafeArea/ActionButton.icon = HOOK_ICON if state == F.State.BITE else CAST_ICON
- $SafeArea/ActionButton.tooltip_text = "วัดเบ็ด" if state == F.State.BITE else "เหวี่ยงเบ็ด"
- $SafeArea/CancelButton.visible = state in [F.State.WAITING, F.State.BITE, F.State.FIGHT, F.State.CASTING]
  meter.visible = battle
  $SafeArea/TensionText.visible = battle
  $SafeArea/LineInfo.visible = state in [F.State.WAITING, F.State.BITE, F.State.FIGHT]
- rod_joystick.enabled = state in [F.State.READY, F.State.FIGHT]
+ rod_joystick.enabled = state in [F.State.READY, F.State.WAITING, F.State.BITE, F.State.FIGHT]
  move_joystick.enabled = not result
  rod_joystick.modulate.a = 1.0 if rod_joystick.enabled else 0.35
  move_joystick.modulate.a = 0.35 if result else 1.0
@@ -114,12 +122,6 @@ func _refresh_state(state: int) -> void:
 
 func _on_rod_released() -> void:
  aim_released.emit()
-
-func _on_action_pressed() -> void:
- action_requested.emit()
-
-func _on_cancel_pressed() -> void:
- cancel_requested.emit()
 
 func _on_keep_pressed() -> void:
  keep_requested.emit()

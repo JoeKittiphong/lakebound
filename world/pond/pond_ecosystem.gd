@@ -60,9 +60,7 @@ func _spawn(species_index: int, slot: int = -1) -> RefCounted:
  record.weight = rng.randf_range(record.species.min_weight, record.species.max_weight)
  var depth: Vector2 = record.species.preferred_depth
  # This population exists before casting; it is never spawned in response to bait.
- record.position = Vector3(rng.randf_range(-17, 17), rng.randf_range(depth.x, depth.y), rng.randf_range(-28, -10))
- if slot >= 0 and slot < 9:
-  record.position = Vector3(float(slot % 3 - 1) * 2.8, (depth.x + depth.y) * 0.5, -15.0 - float(slot / 3) * 3.0)
+ record.position = definition.spawn_position(rng, depth, slot)
  record.destination = _destination(record)
  record.hunger = rng.randf_range(0.65, 1.0)
  record.decision_timer = rng.randf_range(3, 8)
@@ -72,7 +70,7 @@ func _spawn(species_index: int, slot: int = -1) -> RefCounted:
 
 func _destination(record: RefCounted) -> Vector3:
  var depths: Vector2 = record.species.preferred_depth
- return Vector3(rng.randf_range(-21, 21), rng.randf_range(depths.x, depths.y), rng.randf_range(-31, -10))
+ return definition.roaming_position(rng, record.position, depths)
 
 func set_bait(point: Vector3, kind: StringName) -> void:
  cancel_bait()
@@ -87,6 +85,11 @@ func cancel_bait() -> void:
    record.state = &"roaming"
    record.timer = 0.0
  reserved_fish = null
+
+## Move an existing bait without resetting approach/inspection or population.
+func move_bait(point: Vector3) -> void:
+ if bait_active and reserved_fish == null:
+  bait_position = point
 
 func _physics_process(delta: float) -> void:
  accumulator += delta
@@ -129,6 +132,9 @@ func step(delta: float) -> void:
      record.state = &"biting"
      reserved_fish = record
      fish_biting.emit(record)
+   else:
+    record.state = &"approaching"
+    record.timer = 0.0
    continue
   if record.state in [&"approaching", &"inspecting"]:
    record.state = &"roaming"
@@ -145,8 +151,7 @@ func step(delta: float) -> void:
       prey.state = &"fleeing"
       var away: Vector3 = (prey.position - record.position).normalized()
       prey.destination = prey.position + away * 4.0
-      prey.destination.x = clampf(prey.destination.x, -23, 23)
-      prey.destination.z = clampf(prey.destination.z, -31, -10)
+      prey.destination = constrain_to_water(prey.destination)
       prey.decision_timer = 2.5
       break
    record.decision_timer = rng.randf_range(3, 7)
@@ -162,7 +167,7 @@ func step(delta: float) -> void:
 
 func _move_fish(record: RefCounted, target: Vector3, distance: float) -> void:
  var previous: Vector3 = record.position
- record.position = record.position.move_toward(target, distance)
+ record.position = constrain_to_water(record.position.move_toward(target, distance))
  var movement: Vector3 = record.position - previous
  if Vector2(movement.x, movement.z).length_squared() > 0.000001:
   record.heading = atan2(-movement.x, -movement.z)

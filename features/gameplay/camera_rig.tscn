@@ -10,4 +10,4 @@ position = Vector3(0, 4.8, 9.8)
 rotation_degrees = Vector3(-18, 0, 0)
 current = true
 fov = 58.0
-far = 240.0
+far = 700.0

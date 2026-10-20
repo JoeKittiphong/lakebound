@@ -1,0 +1,49 @@
+[gd_scene format=4]
+
+[ext_resource type="Texture2D" path="res://assets/environment/river/river_props_wetland_atlas_256.png" id="1_ngoj3"]
+[ext_resource type="Material" path="res://world/river/wood_material.tres" id="2_mvphc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm14v"]
+resource_name = "MAT_Wetland_SHARED_opaque"
+cull_mode = 2
+albedo_texture = ExtResource("1_ngoj3")
+roughness = 0.92
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f1u0v"]
+_surfaces = [{
+"aabb": AABB(-3, -0.25, -1.5, 6, 0.49, 3),
+"format": 34896613377,
+"index_count": 54,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAgABAAQAAgAEAAUABQAEAAYABQAGAAcABAAIAAYABAAJAAgAAQAJAAQACQAKAAgACQALAAoAAQAMAAkADAALAAkAAwAMAAEADAANAAsAAwAOAAwADgANAAwADgAPAA0A"),
+"name": "MAT_Wetland_SHARED_opaque",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAAP//AABVVQ+NZaYAAFVVAAD//wAAAAAPjWWmAACqqg+NZaYAAKqqAAD//wAA//8PjWWmAAD//wAA//8AAP//GeuZWQAAqqoZ65lZAAD/////AAAAAKqq//8AAAAAVVUZ65lZAABVVf//AAAAAAAAGeuZWQAAAAD//wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wmykf"]
+resource_name = "River_Export_Props_T02_Shore_Straight_Mesh"
+_surfaces = [{
+"aabb": AABB(-3, -0.25, -1.5, 6, 0.49, 3),
+"attribute_data": PackedByteArray("/yL/vP88/6L/PP+8/yL/ov8i/7z/PP+i/zz/vP8i/6L/Iv+8/zz/ov88/7z/Iv+i/0L/vP9c/6L/XP+8/0L/ov9C/7z/XP+i/1z/vP9C/6L/Qv+8/1z/ov9c/7z/Qv+i/yL//P88/+L/PP/8/yL/4v8i//z/PP/i/zz//P8i/+L/Iv/8/zz/4v88//z/Iv/i"),
+"format": 34896613399,
+"index_count": 54,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEA"),
+"material": SubResource("StandardMaterial3D_rm14v"),
+"name": "MAT_Wetland_SHARED_opaque",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AAAAAP//vrVVVQ+NZaa+tVVVAAD//761AAAPjWWmvrVVVQAA//++taqqD41lpr61qqoAAP//vrVVVQ+NZaa+taqqAAD//761//8PjWWmvrX//wAA//++taqqD41lpr61AAAPjWWm9LdVVRnrmVn0t1VVD41lpvS3AAAZ65lZ9LdVVQ+NZab0t6qqGeuZWfS3qqoPjWWm9LdVVRnrmVn0t6qqD41lpvS3//8Z65lZ9Lf//w+NZab0t6qqGeuZWfS3AAAZ65lZcb5VVf//AABxvlVVGeuZWXG+AAD//wAAcb5VVRnrmVlxvqqq//8AAHG+qqoZ65lZcb5VVf//AABxvqqqGeuZWXG+/////wAAcb7//xnrmVlxvqqq//8AAHG+////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_f1u0v")
+
+[node name="T02_Shore_Straight" type="Node3D" unique_id=1979609987]
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=232034633]
+mesh = SubResource("ArrayMesh_wmykf")
+surface_material_override/0 = ExtResource("2_mvphc")

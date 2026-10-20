@@ -17,8 +17,9 @@ var mouse_active := false
 func _input(event: InputEvent) -> void:
  if not enabled:
   return
- # Touch may also produce synthetic mouse events; track the real finger only.
- if (event is InputEventMouseButton or event is InputEventMouseMotion) and event.device == InputEvent.DEVICE_ID_EMULATION:
+ # Forwarded desktop mouse events may also use DEVICE_ID_EMULATION.
+ # Ignore mouse duplicates only while this joystick owns a real finger.
+ if touch_index != -1 and (event is InputEventMouseButton or event is InputEventMouseMotion):
   return
  if event is InputEventScreenTouch:
   if event.pressed and touch_index == -1 and not mouse_active and _inside(event.position):

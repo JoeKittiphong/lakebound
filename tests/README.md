@@ -17,6 +17,10 @@ Runner import project ก่อนทดสอบ จำกัดเวลาแ
 | Test | สิ่งที่ตรวจ |
 |---|---|
 | startup_flow | threaded loading → menu → Play → gameplay → Back |
+| camera_movement | จอยและ keyboard ตามกล้อง 0°/90°/180°/−90°, แพนขณะกดเดิน และก้มกล้องโดยไม่ลดความเร็ว |
+| bait_retrieval | รอกหลังเหยื่อลงน้ำ, สายหย่อน/เก็บสาย, เหยื่อเคลื่อนจริง, เก็บอัตโนมัติ และดึงรอกวัดเบ็ด |
+| rod_tension | บาร์คันเบ็ดเหนือรอก, ความยาวตามน้ำหนักปลา, โซนแดงตามชนิดปลา และแรงตึงจริง |
+| active_scene_movement | จอยสัมผัสและเมาส์จำลอง device −1 ในฉากเล่นจริง, ทิศเดินเทียบกล้อง, ปล่อยจอยและอินพุตสัมผัสซ้ำ |
 | fishing_simulation | bait/depth, bite, fight, failures, keep/release, seeds และ frame rates |
 | fish_catalog_fishing | ตกปลาได้ครบ 16 species |
 | fish_models | catalog/model/animation resources |
@@ -29,3 +33,5 @@ Runner import project ก่อนทดสอบ จำกัดเวลาแ
 `host_diagnostics` เก็บข้อความเฉพาะที่ทราบว่ามาจาก host/sandbox โดยไม่กลบ SCRIPT ERROR ข้อความใหม่ที่ไม่อยู่ในรายการจะทำให้ suite ล้มเหลวและต้องตรวจ log
 
 Desktop tests ไม่ยืนยัน Android hardware, touch จริง, system safe area หรือ vibration และ runner ไม่ build/sign/release แอป
+
+`fish_behavior_test.gd` checks all species for fresh red > green, fatigue/surge zone changes, actual green escape distance, and faster fatigue under yellow control. Fight regression bots follow the visible dynamic yellow band rather than the former fixed 72% threshold.

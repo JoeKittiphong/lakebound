@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://features/gameplay/gameplay.gd" id="script"]
 
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" path="res://features/fishing/fishing_hud.tscn" id="fishing_hud"]
 [ext_resource type="Script" path="res://world/pond/pond_ecosystem.gd" id="ecosystem"]
 [ext_resource type="Script" path="res://features/fishing/fishing_controller.gd" id="controller"]
-[ext_resource type="PackedScene" path="res://world/pond/pond.tscn" id="pond_scene"]
+[ext_resource type="PackedScene" path="res://world/river/river_world.tscn" id="pond_scene"]
+[ext_resource type="Resource" path="res://world/river/river_definition.tres" id="river_definition"]
 [ext_resource type="PackedScene" path="res://features/gameplay/camera_rig.tscn" id="camera_scene"]
 [ext_resource type="PackedScene" path="res://features/fishing/fishing_effects.tscn" id="effects_scene"]
 [node name="Gameplay" type="Node3D"]
@@ -15,15 +16,20 @@ script = ExtResource("script")
 
 [node name="World" parent="." instance=ExtResource("pond_scene")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("pond") instance=ExtResource("player")]
-position = Vector3(0, 0.06, -3)
+[node name="Player" parent="." node_paths=PackedStringArray("pond", "movement_reference") instance=ExtResource("player")]
+position = Vector3(-69.52561, 0.45, 42)
 pond = NodePath("../World")
+movement_reference = NodePath("../CameraRig")
 
 [node name="CameraRig" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera_scene")]
+position = Vector3(-69.52561, 0.45, 42)
+rotation_degrees = Vector3(0, -90, 0)
 target = NodePath("../Player")
 
 [node name="PondEcosystem" type="Node" parent="."]
 script = ExtResource("ecosystem")
+definition = ExtResource("river_definition")
+population_limit = 112
 
 [node name="FishingController" type="Node" parent="." node_paths=PackedStringArray("ecosystem", "player")]
 script = ExtResource("controller")

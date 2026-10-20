@@ -2,10 +2,13 @@ class_name AnglerPlayer
 extends CharacterBody3D
 @export var move_speed: float = 3.8
 @export var fight_move_speed: float = 1.8
+@export_range(0.2, 1.0) var wading_speed_multiplier: float = 0.65
 var fighting := false
 @export var pond: Pond
 @export var turn_speed: float = 10.0
 @export var joystick: Control
+## Camera rig defining screen-relative movement; independent of model facing.
+@export var movement_reference: Node3D
 @onready var visual: Node3D = $Visual
 var walk_time := 0.0
 var input_enabled := true
@@ -28,12 +31,27 @@ func _physics_process(delta: float) -> void:
  if not input_enabled:
   input_vector = Vector2.ZERO
  var speed := fight_move_speed if fighting else move_speed
- velocity.x = input_vector.x * speed
- velocity.z = input_vector.y * speed
+ if is_instance_valid(pond) and pond.definition.is_wading(global_position):
+  speed *= wading_speed_multiplier
+ var movement := Vector3(input_vector.x, 0, input_vector.y)
+ if facing_follows_camera and is_instance_valid(movement_reference):
+  var forward := -movement_reference.global_basis.z
+  forward.y = 0.0
+  forward = forward.normalized()
+  var right := forward.cross(Vector3.UP)
+  movement = right * input_vector.x - forward * input_vector.y
+ elif facing_follows_camera:
+  movement = movement.rotated(Vector3.UP, visual.rotation.y)
+ velocity.x = movement.x * speed
+ velocity.z = movement.z * speed
  if not is_on_floor():
   velocity.y -= 20.0 * delta
  else:
   velocity.y = 0.0
+ if is_instance_valid(pond) and delta > 0.0:
+  var next_position := pond.constrain_walking(global_position + Vector3(velocity.x, 0, velocity.z) * delta)
+  velocity.x = (next_position.x - global_position.x) / delta
+  velocity.z = (next_position.z - global_position.z) / delta
  move_and_slide()
  if is_instance_valid(pond):
   global_position = pond.constrain_walking(global_position)
@@ -65,3 +83,4 @@ func set_rod_pose(active: bool, tension: float, side: float) -> void:
 
 func play_cast() -> void:
  $CastAnimation.play("cast")
+

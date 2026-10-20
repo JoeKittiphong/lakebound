@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="PackedScene" path="res://features/collection/collection_panel.tscn" id="collection"]
 [ext_resource type="Script" path="res://features/fishing/fishing_hud.gd" id="script"]
@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" path="res://assets/ui/modern/help.svg" id="i_help"]
 [ext_resource type="Texture2D" path="res://assets/ui/modern/back.svg" id="i_back"]
 [ext_resource type="Texture2D" path="res://assets/ui/modern/cast.svg" id="i_cast"]
-[ext_resource type="Texture2D" path="res://assets/ui/modern/cancel.svg" id="i_cancel"]
 [ext_resource type="Texture2D" path="res://assets/ui/modern/depth.svg" id="i_depth"]
 [ext_resource type="Texture2D" path="res://assets/ui/modern/worm.svg" id="i_worm"]
 [ext_resource type="StyleBox" path="res://assets/ui/modern/button.tres" id="m_button"]
@@ -204,7 +203,7 @@ theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
 [node name="Guide" type="Label" parent="SafeArea/EcologyPanel/Content"]
 layout_mode = 2
 mouse_filter = 2
-text = "จอยซ้าย: เดิน\nจอยขวา: เล็ง แล้วปล่อยเพื่อเหวี่ยง\nปลากินเบ็ด: แตะรูปเบ็ด\nสู้ปลา: ดึงลงเก็บสาย ดันขึ้นผ่อนสาย\nลากพื้นที่ว่างด้านขวา: หมุนกล้อง"
+text = "จอยซ้าย: เดิน • จอยขวา: เล็งแล้วปล่อยเพื่อเหวี่ยง\nเหยื่อลงน้ำ: ดึงรอกลงเก็บสาย ดันขึ้นผ่อนสาย\nเหยื่อใกล้ตัวโดยไม่มีปลา: เก็บกลับอัตโนมัติ\nปลากินเบ็ด: ดึงรอกลงเพื่อวัดเบ็ด\nลากพื้นที่ว่างด้านขวา: หมุนกล้อง"
 theme_override_font_sizes/font_size = 15
 theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
 
@@ -277,10 +276,10 @@ anchor_left = 1
 anchor_top = 1
 anchor_right = 1
 anchor_bottom = 1
-offset_left = -250
-offset_top = -220
-offset_right = -226
-offset_bottom = -88
+offset_left = -200.7
+offset_top = -311.03
+offset_right = -176.7
+offset_bottom = -179.03
 grow_horizontal = 2
 grow_vertical = 2
 visible = false
@@ -293,10 +292,10 @@ anchor_left = 1
 anchor_top = 1
 anchor_right = 1
 anchor_bottom = 1
-offset_left = -210
-offset_top = -260
-offset_right = -20
-offset_bottom = -228
+offset_left = -152.0
+offset_top = -258
+offset_right = -84.0
+offset_bottom = -226
 grow_horizontal = 2
 grow_vertical = 2
 visible = false
@@ -308,13 +307,13 @@ theme_override_font_sizes/font_size = 18
 [node name="LineInfo" type="PanelContainer" parent="SafeArea"]
 layout_mode = 1
 anchor_left = 1
-anchor_top = 0.5
+anchor_top = 1
 anchor_right = 1
-anchor_bottom = 0.5
-offset_left = -144
-offset_top = -70
-offset_right = 0
-offset_bottom = -10
+anchor_bottom = 1
+offset_left = -396.0
+offset_top = -152
+offset_right = -276.0
+offset_bottom = -100
 grow_horizontal = 2
 grow_vertical = 2
 visible = false
@@ -340,55 +339,6 @@ text = "เบรกประคองสาย"
 theme_override_font_sizes/font_size = 16
 theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
 visible = false
-
-[node name="ActionButton" type="Button" parent="SafeArea"]
-layout_mode = 1
-anchor_left = 1
-anchor_top = 1
-anchor_right = 1
-anchor_bottom = 1
-offset_left = -144
-offset_top = -312
-offset_right = -56
-offset_bottom = -232
-grow_horizontal = 2
-grow_vertical = 2
-text = ""
-theme_override_font_sizes/font_size = 18
-focus_mode = 0
-icon = ExtResource("i_cast")
-tooltip_text = "เหวี่ยงเบ็ด"
-expand_icon = true
-icon_alignment = 1
-theme_override_constants/icon_max_width = 36
-theme_override_styles/normal = ExtResource("m_accent")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
-
-[node name="CancelButton" type="Button" parent="SafeArea"]
-layout_mode = 1
-anchor_left = 1
-anchor_top = 1
-anchor_right = 1
-anchor_bottom = 1
-offset_left = -330
-offset_top = -84
-offset_right = -266
-offset_bottom = -20
-grow_horizontal = 2
-grow_vertical = 2
-visible = false
-text = ""
-theme_override_font_sizes/font_size = 18
-focus_mode = 0
-icon = ExtResource("i_cancel")
-tooltip_text = "เก็บเบ็ด"
-expand_icon = true
-icon_alignment = 1
-theme_override_constants/icon_max_width = 28
-theme_override_styles/normal = ExtResource("m_button")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
 
 [node name="BaitPanel" type="PanelContainer" parent="SafeArea"]
 layout_mode = 1
@@ -469,9 +419,7 @@ custom_minimum_size = Vector2(60, 0)
 
 [connection signal="pressed" from="SafeArea/BackButton" to="." method="_on_back_pressed"]
 
-[connection signal="pressed" from="SafeArea/ActionButton" to="." method="_on_action_pressed"]
 
-[connection signal="pressed" from="SafeArea/CancelButton" to="." method="_on_cancel_pressed"]
 
 [connection signal="item_selected" from="SafeArea/BaitPanel/Content/BaitRow/BaitSelect" to="." method="_on_config_changed"]
 
