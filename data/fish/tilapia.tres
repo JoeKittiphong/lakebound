@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="FishSpecies" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="1"]
+[ext_resource type="PackedScene" path="res://world/pond/models/tilapia.tscn" id="model"]
+
+[ext_resource type="Texture2D" path="res://assets/fish/icons/tilapia.tres" id="icon"]
+
+[resource]
+script = ExtResource("1")
+id = &"tilapia"
+display_name = "ปลานิล"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.5
+preview_tilt_degrees = 12.0
+min_weight = 0.5
+max_weight = 1.8
+preferred_depth = Vector2(0.5, 2.4)
+bait_preferences = PackedStringArray("worm", "dough")
+detection_radius = 8.0
+swim_speed = 1.05
+pull_strength = 0.66
+struggle_frequency = 1.8
+body_scale = Vector3(1, 1, 1)

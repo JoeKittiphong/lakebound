@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://shared/ui/virtual_joystick.tscn" id="base"]
+[ext_resource type="Script" path="res://features/fishing/ui/rod_control.gd" id="script"]
+[node name="RodControl" instance=ExtResource("base")]
+script = ExtResource("script")

@@ -1,0 +1,537 @@
+[gd_scene load_steps=67 format=3]
+
+[ext_resource type="Shader" path="res://world/water.gdshader" id="water_shader"]
+[ext_resource type="Shader" path="res://world/pond/lake_bed.gdshader" id="bed_shader"]
+[ext_resource type="ArrayMesh" path="res://world/pond/lake_bed.obj" id="bed_mesh"]
+
+[ext_resource type="Script" path="res://world/pond/pond.gd" id="pond_script"]
+[ext_resource type="Resource" path="res://world/pond/default_pond.tres" id="pond_definition"]
+[sub_resource type="FastNoiseLite" id="water_noise"]
+seed = 37
+frequency = 0.045
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="water_normal"]
+width = 256
+height = 256
+seamless = true
+as_normal_map = true
+bump_strength = 2.0
+noise = SubResource("water_noise")
+
+[sub_resource type="ShaderMaterial" id="water"]
+shader = ExtResource("water_shader")
+shader_parameter/ripple_normal = SubResource("water_normal")
+
+[sub_resource type="ShaderMaterial" id="bed_material"]
+shader = ExtResource("bed_shader")
+
+[sub_resource type="StandardMaterial3D" id="grass"]
+albedo_color = Color(0.3, 0.47, 0.25, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="wood"]
+albedo_color = Color(0.49, 0.32, 0.18, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="leaf"]
+albedo_color = Color(0.16, 0.39, 0.25, 1)
+roughness = 0.9
+
+
+[sub_resource type="SphereMesh" id="leaf2"]
+radius = 2.58
+height = 4.800000000000001
+radial_segments = 7
+rings = 4
+material = SubResource("leaf")
+
+[sub_resource type="StandardMaterial3D" id="trunk"]
+albedo_color = Color(0.28, 0.19, 0.13, 1)
+roughness = 0.9
+
+
+[sub_resource type="StandardMaterial3D" id="sand"]
+albedo_color = Color(0.68, 0.65, 0.43, 1)
+roughness = 0.9
+
+
+[sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
+sky_top_color = Color(0.27, 0.61, 0.77, 1)
+sky_horizon_color = Color(0.72, 0.88, 0.86, 1)
+ground_horizon_color = Color(0.72, 0.88, 0.86, 1)
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="env"]
+background_mode = 2
+sky = SubResource("sky")
+ambient_light_source = 3
+ambient_light_color = Color(0.76, 0.9, 0.93, 1)
+ambient_light_energy = 0.65
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.62, 0.8, 0.8, 1)
+fog_density = 0.003
+
+[sub_resource type="PlaneMesh" id="LakeMesh"]
+size = Vector2(180, 130)
+material = SubResource("water")
+
+[sub_resource type="BoxMesh" id="BankMesh"]
+size = Vector3(55, 0.8, 25)
+material = SubResource("grass")
+
+[sub_resource type="BoxShape3D" id="BankShape"]
+size = Vector3(55, 0.8, 25)
+
+[sub_resource type="BoxMesh" id="ShoreMesh"]
+size = Vector3(55, 0.3, 2)
+material = SubResource("sand")
+
+[sub_resource type="BoxMesh" id="DockMesh"]
+size = Vector3(4.3, 0.24, 12)
+material = SubResource("wood")
+
+[sub_resource type="BoxShape3D" id="DockShape"]
+size = Vector3(4.3, 0.24, 12)
+
+[sub_resource type="BoxMesh" id="Plank00Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank01Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank02Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank03Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank04Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank05Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank06Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank07Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank08Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank09Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank10Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank11Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank12Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank13Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank14Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank15Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank16Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank17Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank18Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank19Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank20Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank21Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank22Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Plank23Mesh"]
+size = Vector3(4.22, 0.035, 0.035)
+material = SubResource("trunk")
+
+[sub_resource type="BoxMesh" id="Post00Mesh"]
+size = Vector3(0.16, 1.1, 0.16)
+material = SubResource("wood")
+
+[sub_resource type="BoxMesh" id="Post01Mesh"]
+size = Vector3(0.16, 1.1, 0.16)
+material = SubResource("wood")
+
+[sub_resource type="BoxMesh" id="Post10Mesh"]
+size = Vector3(0.16, 1.1, 0.16)
+material = SubResource("wood")
+
+[sub_resource type="BoxMesh" id="Post11Mesh"]
+size = Vector3(0.16, 1.1, 0.16)
+material = SubResource("wood")
+
+[sub_resource type="BoxMesh" id="Post20Mesh"]
+size = Vector3(0.16, 1.1, 0.16)
+material = SubResource("wood")
+
+[sub_resource type="BoxMesh" id="Post21Mesh"]
+size = Vector3(0.16, 1.1, 0.16)
+material = SubResource("wood")
+
+[sub_resource type="CylinderMesh" id="trunk0"]
+top_radius = 0.16
+bottom_radius = 0.25
+height = 3.25
+radial_segments = 6
+material = SubResource("trunk")
+
+[sub_resource type="SphereMesh" id="leaf0"]
+radius = 2.15
+height = 4.0
+radial_segments = 7
+rings = 4
+material = SubResource("leaf")
+
+[sub_resource type="CylinderMesh" id="trunk1"]
+top_radius = 0.16
+bottom_radius = 0.25
+height = 2.6
+radial_segments = 6
+material = SubResource("trunk")
+
+[sub_resource type="SphereMesh" id="leaf1"]
+radius = 1.72
+height = 3.2
+radial_segments = 7
+rings = 4
+material = SubResource("leaf")
+
+[sub_resource type="CylinderMesh" id="trunk2"]
+top_radius = 0.16
+bottom_radius = 0.25
+height = 3.9000000000000004
+radial_segments = 6
+material = SubResource("trunk")
+
+[sub_resource type="CylinderMesh" id="trunk3"]
+top_radius = 0.16
+bottom_radius = 0.25
+height = 3.25
+radial_segments = 6
+material = SubResource("trunk")
+
+[sub_resource type="SphereMesh" id="leaf3"]
+radius = 2.15
+height = 4.0
+radial_segments = 7
+rings = 4
+material = SubResource("leaf")
+
+[sub_resource type="CylinderMesh" id="trunk4"]
+top_radius = 0.16
+bottom_radius = 0.25
+height = 3.9000000000000004
+radial_segments = 6
+material = SubResource("trunk")
+
+[sub_resource type="SphereMesh" id="leaf4"]
+radius = 2.58
+height = 4.800000000000001
+radial_segments = 7
+rings = 4
+material = SubResource("leaf")
+
+[sub_resource type="CylinderMesh" id="trunk5"]
+top_radius = 0.16
+bottom_radius = 0.25
+height = 2.6
+radial_segments = 6
+material = SubResource("trunk")
+
+[sub_resource type="SphereMesh" id="leaf5"]
+radius = 1.72
+height = 3.2
+radial_segments = 7
+rings = 4
+material = SubResource("leaf")
+
+[sub_resource type="BoxMesh" id="TackleBoxMesh"]
+size = Vector3(0.65, 0.5, 0.4)
+material = SubResource("leaf")
+
+[node name="World" type="Node3D"]
+script = ExtResource("pond_script")
+definition = ExtResource("pond_definition")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -32, 0)
+light_color = Color(1, 0.91, 0.73, 1)
+light_energy = 1.3
+shadow_enabled = true
+directional_shadow_max_distance = 50.0
+
+[node name="Lake" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.18, -35)
+cast_shadow = 0
+mesh = SubResource("LakeMesh")
+
+[node name="LakeBed" type="MeshInstance3D" parent="."]
+mesh = ExtResource("bed_mesh")
+material_override = SubResource("bed_material")
+cast_shadow = 0
+
+[node name="Bank" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.4, 15)
+
+[node name="Mesh" type="MeshInstance3D" parent="Bank"]
+mesh = SubResource("BankMesh")
+
+[node name="Collision" type="CollisionShape3D" parent="Bank"]
+shape = SubResource("BankShape")
+
+[node name="Shore" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.35, 2.5)
+mesh = SubResource("ShoreMesh")
+
+[node name="Dock" type="StaticBody3D" parent="."]
+position = Vector3(0, -0.12, -2.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="Dock"]
+mesh = SubResource("DockMesh")
+
+[node name="Collision" type="CollisionShape3D" parent="Dock"]
+shape = SubResource("DockShape")
+
+[node name="Plank00" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -8.2)
+mesh = SubResource("Plank00Mesh")
+
+[node name="Plank01" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -7.709999999999999)
+mesh = SubResource("Plank01Mesh")
+
+[node name="Plank02" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -7.219999999999999)
+mesh = SubResource("Plank02Mesh")
+
+[node name="Plank03" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -6.7299999999999995)
+mesh = SubResource("Plank03Mesh")
+
+[node name="Plank04" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -6.239999999999999)
+mesh = SubResource("Plank04Mesh")
+
+[node name="Plank05" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -5.749999999999999)
+mesh = SubResource("Plank05Mesh")
+
+[node name="Plank06" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -5.26)
+mesh = SubResource("Plank06Mesh")
+
+[node name="Plank07" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -4.77)
+mesh = SubResource("Plank07Mesh")
+
+[node name="Plank08" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -4.279999999999999)
+mesh = SubResource("Plank08Mesh")
+
+[node name="Plank09" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -3.789999999999999)
+mesh = SubResource("Plank09Mesh")
+
+[node name="Plank10" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -3.299999999999999)
+mesh = SubResource("Plank10Mesh")
+
+[node name="Plank11" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -2.8099999999999996)
+mesh = SubResource("Plank11Mesh")
+
+[node name="Plank12" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -2.3199999999999994)
+mesh = SubResource("Plank12Mesh")
+
+[node name="Plank13" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -1.8299999999999992)
+mesh = SubResource("Plank13Mesh")
+
+[node name="Plank14" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -1.3399999999999999)
+mesh = SubResource("Plank14Mesh")
+
+[node name="Plank15" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -0.8499999999999996)
+mesh = SubResource("Plank15Mesh")
+
+[node name="Plank16" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, -0.35999999999999943)
+mesh = SubResource("Plank16Mesh")
+
+[node name="Plank17" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, 0.13000000000000078)
+mesh = SubResource("Plank17Mesh")
+
+[node name="Plank18" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, 0.620000000000001)
+mesh = SubResource("Plank18Mesh")
+
+[node name="Plank19" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, 1.1100000000000012)
+mesh = SubResource("Plank19Mesh")
+
+[node name="Plank20" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, 1.6000000000000014)
+mesh = SubResource("Plank20Mesh")
+
+[node name="Plank21" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, 2.09)
+mesh = SubResource("Plank21Mesh")
+
+[node name="Plank22" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, 2.58)
+mesh = SubResource("Plank22Mesh")
+
+[node name="Plank23" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.012, 3.0700000000000003)
+mesh = SubResource("Plank23Mesh")
+
+[node name="Post00" type="MeshInstance3D" parent="."]
+position = Vector3(-2, 0.18, -8)
+mesh = SubResource("Post00Mesh")
+
+[node name="Post01" type="MeshInstance3D" parent="."]
+position = Vector3(2, 0.18, -8)
+mesh = SubResource("Post01Mesh")
+
+[node name="Post10" type="MeshInstance3D" parent="."]
+position = Vector3(-2, 0.18, -4)
+mesh = SubResource("Post10Mesh")
+
+[node name="Post11" type="MeshInstance3D" parent="."]
+position = Vector3(2, 0.18, -4)
+mesh = SubResource("Post11Mesh")
+
+[node name="Post20" type="MeshInstance3D" parent="."]
+position = Vector3(-2, 0.18, 0)
+mesh = SubResource("Post20Mesh")
+
+[node name="Post21" type="MeshInstance3D" parent="."]
+position = Vector3(2, 0.18, 0)
+mesh = SubResource("Post21Mesh")
+
+[node name="Tree00" type="Node3D" parent="."]
+position = Vector3(-14, 0, 5)
+
+[node name="Trunk" type="MeshInstance3D" parent="Tree00"]
+position = Vector3(0, 1.5, 0)
+mesh = SubResource("trunk0")
+
+[node name="Canopy" type="MeshInstance3D" parent="Tree00"]
+position = Vector3(0, 4.0, 0)
+mesh = SubResource("leaf0")
+
+[node name="Tree01" type="Node3D" parent="."]
+position = Vector3(-8, 0, 7)
+
+[node name="Trunk" type="MeshInstance3D" parent="Tree01"]
+position = Vector3(0, 1.2, 0)
+mesh = SubResource("trunk1")
+
+[node name="Canopy" type="MeshInstance3D" parent="Tree01"]
+position = Vector3(0, 3.2, 0)
+mesh = SubResource("leaf1")
+
+[node name="Tree02" type="Node3D" parent="."]
+position = Vector3(-20, 0, 12)
+
+[node name="Trunk" type="MeshInstance3D" parent="Tree02"]
+position = Vector3(0, 1.7999999999999998, 0)
+mesh = SubResource("trunk2")
+
+[node name="Canopy" type="MeshInstance3D" parent="Tree02"]
+position = Vector3(0, 4.800000000000001, 0)
+mesh = SubResource("leaf2")
+
+[node name="Tree03" type="Node3D" parent="."]
+position = Vector3(11, 0, 5)
+
+[node name="Trunk" type="MeshInstance3D" parent="Tree03"]
+position = Vector3(0, 1.5, 0)
+mesh = SubResource("trunk3")
+
+[node name="Canopy" type="MeshInstance3D" parent="Tree03"]
+position = Vector3(0, 4.0, 0)
+mesh = SubResource("leaf3")
+
+[node name="Tree04" type="Node3D" parent="."]
+position = Vector3(17, 0, 9)
+
+[node name="Trunk" type="MeshInstance3D" parent="Tree04"]
+position = Vector3(0, 1.7999999999999998, 0)
+mesh = SubResource("trunk4")
+
+[node name="Canopy" type="MeshInstance3D" parent="Tree04"]
+position = Vector3(0, 4.800000000000001, 0)
+mesh = SubResource("leaf4")
+
+[node name="Tree05" type="Node3D" parent="."]
+position = Vector3(7, 0, 12)
+
+[node name="Trunk" type="MeshInstance3D" parent="Tree05"]
+position = Vector3(0, 1.2, 0)
+mesh = SubResource("trunk5")
+
+[node name="Canopy" type="MeshInstance3D" parent="Tree05"]
+position = Vector3(0, 3.2, 0)
+mesh = SubResource("leaf5")
+
+[node name="TackleBox" type="MeshInstance3D" parent="."]
+position = Vector3(1.3, 0.26, -1.0)
+mesh = SubResource("TackleBoxMesh")

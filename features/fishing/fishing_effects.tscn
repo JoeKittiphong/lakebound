@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://features/fishing/fishing_effects.gd" id="effects"]
+
+[ext_resource type="AudioStream" path="res://features/fishing/audio/bite.wav" id="audio_bite"]
+[ext_resource type="AudioStream" path="res://features/fishing/audio/reel.wav" id="audio_reel"]
+[ext_resource type="AudioStream" path="res://features/fishing/audio/splash.wav" id="audio_splash"]
+
+[sub_resource type="ImmediateMesh" id="FishingLineMesh"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="FishingLineMaterial"]
+shading_mode = 0
+albedo_color = Color(0.94, 0.98, 0.86, 1)
+no_depth_test = false
+
+[sub_resource type="StandardMaterial3D" id="MarkerMaterial"]
+shading_mode = 0
+albedo_color = Color(0.48, 1, 0.78, 1)
+
+[sub_resource type="TorusMesh" id="AimRingMesh"]
+inner_radius = 0.6
+outer_radius = 0.68
+rings = 24
+ring_segments = 6
+material = SubResource("MarkerMaterial")
+
+[sub_resource type="TorusMesh" id="RippleMesh"]
+inner_radius = 0.33
+outer_radius = 0.36
+rings = 24
+ring_segments = 6
+material = SubResource("MarkerMaterial")
+
+[sub_resource type="StandardMaterial3D" id="BobberMaterial"]
+albedo_color = Color(0.94, 0.22, 0.16, 1)
+
+[sub_resource type="SphereMesh" id="BobberMesh"]
+radius = 0.12
+height = 0.35
+radial_segments = 10
+rings = 5
+material = SubResource("BobberMaterial")
+
+[node name="FishingEffects" type="Node3D"]
+script = ExtResource("effects")
+
+[node name="Line" type="MeshInstance3D" parent="."]
+mesh = SubResource("FishingLineMesh")
+material_override = SubResource("FishingLineMaterial")
+cast_shadow = 0
+
+[node name="AimMarker" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.12, -17)
+mesh = SubResource("AimRingMesh")
+cast_shadow = 0
+
+[node name="Bobber" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BobberMesh")
+
+[node name="Ripple" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("RippleMesh")
+cast_shadow = 0
+
+[node name="FishVisuals" type="Node3D" parent="."]
+
+[node name="BiteAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_bite")
+volume_db = -9
+
+[node name="ReelAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_reel")
+volume_db = -13
+
+[node name="SplashAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("audio_splash")
+volume_db = -8

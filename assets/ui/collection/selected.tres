@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3]
+[ext_resource type="Texture2D" path="res://assets/ui/collection/journal_skin.png" id="skin"]
+[resource]
+texture = ExtResource("skin")
+region_rect = Rect2(512, 0, 256, 256)
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+

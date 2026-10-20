@@ -1,0 +1,572 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="PackedScene" path="res://features/collection/collection_panel.tscn" id="collection"]
+[ext_resource type="Script" path="res://features/fishing/fishing_hud.gd" id="script"]
+
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+
+[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
+
+[ext_resource type="PackedScene" path="res://shared/ui/virtual_joystick.tscn" id="joy"]
+
+[ext_resource type="Script" path="res://shared/ui/tension_meter.gd" id="meter"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/modern/book.svg" id="i_book"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/help.svg" id="i_help"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/back.svg" id="i_back"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/cast.svg" id="i_cast"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/cancel.svg" id="i_cancel"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/depth.svg" id="i_depth"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/worm.svg" id="i_worm"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/button.tres" id="m_button"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/pressed.tres" id="m_pressed"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/accent.tres" id="m_accent"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/panel.tres" id="m_panel"]
+
+[ext_resource type="PackedScene" path="res://features/fishing/ui/catch_result.tscn" id="result_scene"]
+[ext_resource type="PackedScene" path="res://features/fishing/ui/rod_control.tscn" id="rod_control"]
+[node name="FishingHUD" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("safe")
+
+[node name="Location" type="PanelContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 0
+anchor_right = 0
+anchor_bottom = 0
+offset_left = 0
+offset_top = 0
+offset_right = 232
+offset_bottom = 94
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/Location"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="SafeArea/Location/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "บ่อสายลม"
+theme_override_font_sizes/font_size = 25
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+
+
+[node name="Statistics" type="Label" parent="SafeArea/Location/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "เก็บ 0  •  ปล่อย 0"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+
+
+[node name="EcologyButton" type="Button" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 0
+anchor_right = 0
+anchor_bottom = 0
+offset_left = 76
+offset_top = 0
+offset_right = 140
+offset_bottom = 64
+grow_horizontal = 2
+grow_vertical = 2
+text = ""
+theme_override_font_sizes/font_size = 18
+focus_mode = 0
+icon = ExtResource("i_help")
+tooltip_text = "วิธีเล่นและปลาในบ่อ"
+expand_icon = true
+icon_alignment = 1
+theme_override_constants/icon_max_width = 28
+theme_override_styles/normal = ExtResource("m_button")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+
+[node name="Status" type="PanelContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0
+anchor_right = 0.5
+anchor_bottom = 0
+offset_left = -120
+offset_top = 0
+offset_right = 120
+offset_bottom = 52
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+visible = false
+theme_override_styles/panel = ExtResource("m_panel")
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/Status"]
+layout_mode = 2
+theme_override_constants/separation = 3
+mouse_filter = 2
+
+[node name="State" type="Label" parent="SafeArea/Status/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "รอปลา"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="SafeArea/Status/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "เลือกเหยื่อและความลึก แล้วเหวี่ยงเบ็ด"
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+horizontal_alignment = 1
+autowrap_mode = 3
+visible = false
+
+[node name="BackButton" type="Button" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 0
+anchor_right = 1
+anchor_bottom = 0
+offset_left = -64
+offset_top = 0
+offset_right = 0
+offset_bottom = 64
+grow_horizontal = 2
+grow_vertical = 2
+text = ""
+theme_override_font_sizes/font_size = 18
+focus_mode = 0
+icon = ExtResource("i_back")
+tooltip_text = "หน้าหลัก"
+expand_icon = true
+icon_alignment = 1
+theme_override_constants/icon_max_width = 28
+theme_override_styles/normal = ExtResource("m_button")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+
+[node name="EcologyPanel" type="PanelContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 0
+anchor_right = 0
+anchor_bottom = 0
+offset_left = 0
+offset_top = 80
+offset_right = 390
+offset_bottom = 560
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/EcologyPanel"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Title" type="Label" parent="SafeArea/EcologyPanel/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "บ่อที่มีชีวิต"
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+
+
+[node name="Counts" type="Label" parent="SafeArea/EcologyPanel/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "ปลาในบ่อ 16 ชนิด"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+
+
+[node name="Guide" type="Label" parent="SafeArea/EcologyPanel/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "จอยซ้าย: เดิน\nจอยขวา: เล็ง แล้วปล่อยเพื่อเหวี่ยง\nปลากินเบ็ด: แตะรูปเบ็ด\nสู้ปลา: ดึงลงเก็บสาย ดันขึ้นผ่อนสาย\nลากพื้นที่ว่างด้านขวา: หมุนกล้อง"
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+
+
+[node name="MoveJoystick" parent="SafeArea" instance=ExtResource("joy")]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 1
+anchor_right = 0
+anchor_bottom = 1
+offset_left = 20
+offset_top = -212
+offset_right = 204
+offset_bottom = -28
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoveLabel" type="Label" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 1
+anchor_right = 0
+anchor_bottom = 1
+offset_left = 20
+offset_top = -25
+offset_right = 204
+offset_bottom = 0
+grow_horizontal = 2
+grow_vertical = 2
+text = "เดิน / เปลี่ยนมุมสาย"
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+visible = false
+
+[node name="RodJoystick" parent="SafeArea" instance=ExtResource("rod_control")]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 1
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -204
+offset_top = -212
+offset_right = -20
+offset_bottom = -28
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RodInstructions" type="Label" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 1
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -274
+offset_top = -25
+offset_right = 0
+offset_bottom = 0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ลากเล็ง • ปล่อยเพื่อเหวี่ยง"
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+visible = false
+
+[node name="TensionMeter" type="Control" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 1
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -250
+offset_top = -220
+offset_right = -226
+offset_bottom = -88
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+mouse_filter = 2
+script = ExtResource("meter")
+
+[node name="TensionText" type="Label" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 1
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -210
+offset_top = -260
+offset_right = -20
+offset_bottom = -228
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+mouse_filter = 2
+text = "45%"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+
+[node name="LineInfo" type="PanelContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 0.5
+anchor_right = 1
+anchor_bottom = 0.5
+offset_left = -144
+offset_top = -70
+offset_right = 0
+offset_bottom = -10
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/LineInfo"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="Distance" type="Label" parent="SafeArea/LineInfo/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "14.0 m"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+horizontal_alignment = 1
+
+[node name="Reel" type="Label" parent="SafeArea/LineInfo/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "เบรกประคองสาย"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+visible = false
+
+[node name="ActionButton" type="Button" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 1
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -144
+offset_top = -312
+offset_right = -56
+offset_bottom = -232
+grow_horizontal = 2
+grow_vertical = 2
+text = ""
+theme_override_font_sizes/font_size = 18
+focus_mode = 0
+icon = ExtResource("i_cast")
+tooltip_text = "เหวี่ยงเบ็ด"
+expand_icon = true
+icon_alignment = 1
+theme_override_constants/icon_max_width = 36
+theme_override_styles/normal = ExtResource("m_accent")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+
+[node name="CancelButton" type="Button" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 1
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -330
+offset_top = -84
+offset_right = -266
+offset_bottom = -20
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+text = ""
+theme_override_font_sizes/font_size = 18
+focus_mode = 0
+icon = ExtResource("i_cancel")
+tooltip_text = "เก็บเบ็ด"
+expand_icon = true
+icon_alignment = 1
+theme_override_constants/icon_max_width = 28
+theme_override_styles/normal = ExtResource("m_button")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+
+[node name="BaitPanel" type="PanelContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1
+anchor_right = 0.5
+anchor_bottom = 1
+offset_left = -192
+offset_top = -260
+offset_right = 192
+offset_bottom = -112
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/BaitPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BaitRow" type="HBoxContainer" parent="SafeArea/BaitPanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SafeArea/BaitPanel/Content/BaitRow"]
+layout_mode = 2
+mouse_filter = 2
+text = "เหยื่อ"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+
+
+[node name="BaitSelect" type="OptionButton" parent="SafeArea/BaitPanel/Content/BaitRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+item_count = 3
+selected = 0
+popup/item_0/text = "ไส้เดือน"
+popup/item_0/id = 0
+popup/item_1/text = "รำปั้น"
+popup/item_1/id = 1
+popup/item_2/text = "เหยื่อปลอม"
+popup/item_2/id = 2
+
+[node name="DepthRow" type="HBoxContainer" parent="SafeArea/BaitPanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="SafeArea/BaitPanel/Content/DepthRow"]
+layout_mode = 2
+mouse_filter = 2
+text = "ลึก"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+
+
+[node name="Depth" type="HSlider" parent="SafeArea/BaitPanel/Content/DepthRow"]
+custom_minimum_size = Vector2(160, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.5
+max_value = 5.5
+step = 0.5
+value = 1.5
+focus_mode = 0
+
+[node name="Value" type="Label" parent="SafeArea/BaitPanel/Content/DepthRow"]
+layout_mode = 2
+mouse_filter = 2
+text = "1.5 ม."
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+custom_minimum_size = Vector2(60, 0)
+
+[node name="ResultLayer" parent="." instance=ExtResource("result_scene")]
+
+[connection signal="pressed" from="SafeArea/EcologyButton" to="." method="_on_ecology_pressed"]
+
+[connection signal="pressed" from="SafeArea/BackButton" to="." method="_on_back_pressed"]
+
+[connection signal="pressed" from="SafeArea/ActionButton" to="." method="_on_action_pressed"]
+
+[connection signal="pressed" from="SafeArea/CancelButton" to="." method="_on_cancel_pressed"]
+
+[connection signal="item_selected" from="SafeArea/BaitPanel/Content/BaitRow/BaitSelect" to="." method="_on_config_changed"]
+
+[connection signal="value_changed" from="SafeArea/BaitPanel/Content/DepthRow/Depth" to="." method="_on_config_changed"]
+
+
+
+[connection signal="drag_released" from="SafeArea/RodJoystick" to="." method="_on_rod_released"]
+
+[node name="CollectionButton" type="Button" parent="SafeArea"]
+layout_mode = 1
+offset_left = 0
+offset_top = 0
+offset_right = 64
+offset_bottom = 64
+text = ""
+focus_mode = 0
+theme_override_styles/normal = ExtResource("m_button")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+theme_override_colors/font_color = Color(1, 0.92, 0.70, 1)
+theme_override_colors/font_hover_color = Color(1, 0.97, 0.85, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.92, 0.70, 1)
+icon = ExtResource("i_book")
+tooltip_text = "สมุดสะสมปลา"
+expand_icon = true
+icon_alignment = 1
+theme_override_constants/icon_max_width = 28
+anchor_left = 0
+anchor_right = 0
+anchor_top = 0
+anchor_bottom = 0
+
+[node name="CollectionPanel" parent="." instance=ExtResource("collection")]
+visible = false
+
+[connection signal="pressed" from="SafeArea/CollectionButton" to="." method="_on_collection_pressed"]
+
+[node name="BaitDock" type="HBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -80.0
+offset_right = 86.0
+offset_bottom = -16.0
+theme_override_constants/separation = 12
+mouse_filter = 2
+
+[node name="BaitButton" type="Button" parent="SafeArea/BaitDock"]
+layout_mode = 2
+custom_minimum_size = Vector2(64, 64)
+icon = ExtResource("i_worm")
+expand_icon = true
+icon_alignment = 1
+focus_mode = 0
+tooltip_text = "ไส้เดือน"
+theme_override_constants/icon_max_width = 28
+theme_override_styles/normal = ExtResource("m_button")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+
+[node name="DepthButton" type="Button" parent="SafeArea/BaitDock"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 64)
+icon = ExtResource("i_depth")
+text = "1.5"
+expand_icon = true
+focus_mode = 0
+tooltip_text = "ปรับความลึก (เมตร)"
+theme_override_constants/icon_max_width = 24
+theme_override_styles/normal = ExtResource("m_button")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+
+[node name="Toast" type="Label" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_right = 220.0
+offset_top = 72.0
+offset_bottom = 112.0
+text = ""
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18
+theme_override_constants/outline_size = 5
+theme_override_colors/font_outline_color = Color(0.02, 0.04, 0.06, 0.9)
+mouse_filter = 2
+visible = false
+
+[connection signal="pressed" from="SafeArea/BaitDock/BaitButton" to="." method="_on_bait_pressed"]
+[connection signal="pressed" from="SafeArea/BaitDock/DepthButton" to="." method="_on_depth_pressed"]
+
+[connection signal="keep_requested" from="ResultLayer" to="." method="_on_keep_pressed"]
+[connection signal="release_requested" from="ResultLayer" to="." method="_on_release_pressed"]

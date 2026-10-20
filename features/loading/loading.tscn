@@ -1,0 +1,160 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Theme" path="res://shared/ui/game_theme.tres" id="theme"]
+
+[ext_resource type="Script" path="res://features/loading/loading.gd" id="script"]
+
+[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
+
+[ext_resource type="Texture2D" path="res://features/loading/art/loading_lake.png" id="background"]
+
+[sub_resource type="Gradient" id="shade_gradient"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0.01, 0.04, 0.06, 0.45, 0.01, 0.04, 0.06, 0.02, 0.01, 0.04, 0.06, 0.82)
+
+[sub_resource type="GradientTexture2D" id="shade_texture"]
+gradient = SubResource("shade_gradient")
+fill_from = Vector2(0, 0)
+fill_to = Vector2(0, 1)
+
+[node name="Loading" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ReadabilityShade" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("shade_texture")
+expand_mode = 1
+
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+mouse_filter = 2
+script = ExtResource("safe")
+
+[node name="Title" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 0
+anchor_right = 0.6
+anchor_bottom = 0
+offset_left = 20
+offset_top = 35
+offset_right = 0
+offset_bottom = 240
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Eyebrow" type="Label" parent="SafeArea/Title"]
+layout_mode = 2
+mouse_filter = 2
+text = "A LITTLE ESCAPE. A BIG CATCH."
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.63, 1, 0.86, 1)
+
+
+[node name="GameName" type="Label" parent="SafeArea/Title"]
+layout_mode = 2
+mouse_filter = 2
+text = "LAKEBOUND"
+theme_override_font_sizes/font_size = 68
+theme_override_colors/font_color = Color(0.91, 0.96, 0.96, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.05, 0.08, 0.6)
+theme_override_constants/shadow_offset_y = 3
+
+[node name="Subtitle" type="Label" parent="SafeArea/Title"]
+layout_mode = 2
+mouse_filter = 2
+text = "ออกไปค้นพบความสุขริมบ่อ"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.91, 0.96, 0.96, 1)
+
+
+[node name="LoadPanel" type="PanelContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0.15
+anchor_top = 1
+anchor_right = 0.85
+anchor_bottom = 1
+offset_left = 0
+offset_top = -160
+offset_right = 0
+offset_bottom = -18
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/LoadPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatusRow" type="HBoxContainer" parent="SafeArea/LoadPanel/Content"]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="SafeArea/LoadPanel/Content/StatusRow"]
+layout_mode = 2
+mouse_filter = 2
+text = "กำลังโหลดทรัพยากร…"
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.91, 0.96, 0.96, 1)
+size_flags_horizontal = 3
+
+[node name="Percent" type="Label" parent="SafeArea/LoadPanel/Content/StatusRow"]
+layout_mode = 2
+mouse_filter = 2
+text = "0%"
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.52, 0.97, 0.79, 1)
+
+
+[node name="ProgressBar" type="ProgressBar" parent="SafeArea/LoadPanel/Content"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+show_percentage = false
+
+[node name="Tip" type="Label" parent="SafeArea/LoadPanel/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "TIP   ลองเดินสำรวจริมบ่อ เพื่อหามุมโปรดของคุณ"
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.65, 0.77, 0.78, 1)
+
+
+[node name="RetryButton" type="Button" parent="SafeArea/LoadPanel/Content"]
+visible = false
+layout_mode = 2
+text = "ลองอีกครั้ง"
+
+[connection signal="pressed" from="SafeArea/LoadPanel/Content/RetryButton" to="." method="_on_retry_pressed"]

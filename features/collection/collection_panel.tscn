@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://features/collection/collection_panel.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://features/collection/collection_row.tscn" id="row"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/panel.tres" id="panel"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/button.tres" id="button"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/pressed.tres" id="pressed"]
+
+
+[node name="CollectionPanel" type="Control"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+z_index = 20
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01, 0.03, 0.05, 0.88)
+
+[node name="Card" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.04
+anchor_top = 0.025
+anchor_right = 0.96
+anchor_bottom = 0.975
+theme_override_styles/panel = ExtResource("panel")
+
+[node name="Content" type="VBoxContainer" parent="Card"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="HBoxContainer" parent="Card/Content"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Card/Content/Header"]
+layout_mode = 2
+text = "สมุดปลา"
+theme_override_font_sizes/font_size = 24
+
+[node name="Summary" type="Label" parent="Card/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 / 16"
+theme_override_font_sizes/font_size = 18
+
+[node name="Close" type="Button" parent="Card/Content/Header"]
+layout_mode = 2
+custom_minimum_size = Vector2(96, 44)
+theme_override_styles/normal = ExtResource("button")
+theme_override_styles/hover = ExtResource("button")
+theme_override_styles/pressed = ExtResource("pressed")
+theme_override_colors/font_color = Color(0.92, 0.97, 1, 1)
+theme_override_colors/font_hover_color = Color(0.7, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(0.92, 0.97, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "ปิด"
+
+[node name="Scroll" type="ScrollContainer" parent="Card/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Rows" type="GridContainer" parent="Card/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 4
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="PreviewRow" parent="Card/Content/Scroll/Rows" instance=ExtResource("row")]
+layout_mode = 2
+
+[node name="SaveStatus" type="Label" parent="Card/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 3
+
+[connection signal="pressed" from="Card/Content/Header/Close" to="." method="close"]

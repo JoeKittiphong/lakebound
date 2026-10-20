@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://features/gameplay/camera_rig.gd" id="camera_script"]
+[node name="CameraRig" type="Node3D"]
+script = ExtResource("camera_script")
+position = Vector3(0, 0, -3)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0, 4.8, 9.8)
+rotation_degrees = Vector3(-18, 0, 0)
+current = true
+fov = 58.0
+far = 240.0

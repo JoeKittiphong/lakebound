@@ -1,0 +1,26 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Generated Android exports and local signing credentials.
+/exports/
+*.keystore
+*.jks
+/signing/
+/.signing/
+
+# Python tooling caches.
+__pycache__/
+*.pyc
+
+# Local diagnostics, editor templates, and credentials.
+*.log
+/export_templates/
+/feature_profiles/
+/script_templates/
+/text_editor_themes/
+.env
+.env.*
+!.env.example
+*.dpapi
+release-credentials.json

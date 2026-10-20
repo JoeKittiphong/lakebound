@@ -1,0 +1,154 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+
+[ext_resource type="PackedScene" path="res://world/pond/fish_visual.tscn" id="preview_fish"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/modern/keep.svg" id="i_keep"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/release.svg" id="i_release"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/button.tres" id="m_button"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/pressed.tres" id="m_pressed"]
+[ext_resource type="Script" path="res://features/fishing/ui/catch_result.gd" id="result_script"]
+[sub_resource type="Environment" id="PreviewEnvironment"]
+ambient_light_source = 3
+ambient_light_color = Color(0.8, 0.93, 1, 1)
+ambient_light_energy = 1.1
+
+
+[node name="CatchResult" type="Control"]
+theme = ExtResource("theme")
+script = ExtResource("result_script")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+mouse_filter = 0
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.01, 0.04, 0.06, 0.7)
+
+[node name="Card" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260
+offset_top = -220
+offset_right = 260
+offset_bottom = 220
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="Card"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Eyebrow" type="Label" parent="Card/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "A LITTLE PATIENCE. A GREAT CATCH."
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+horizontal_alignment = 1
+visible = false
+
+[node name="FishName" type="Label" parent="Card/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "ปลานิล"
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+horizontal_alignment = 1
+
+[node name="Preview" type="SubViewportContainer" parent="Card/Content"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+mouse_filter = 2
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="Card/Content/Preview"]
+transparent_bg = true
+size = Vector2i(476, 120)
+own_world_3d = true
+handle_input_locally = false
+render_target_update_mode = 2
+
+[node name="Environment" type="WorldEnvironment" parent="Card/Content/Preview/Viewport"]
+environment = SubResource("PreviewEnvironment")
+
+[node name="Light" type="DirectionalLight3D" parent="Card/Content/Preview/Viewport"]
+rotation_degrees = Vector3(-35, -40, 0)
+light_energy = 1.5
+
+[node name="Camera" type="Camera3D" parent="Card/Content/Preview/Viewport"]
+position = Vector3(0, 0, 4)
+projection = 1
+size = 0.8
+current = true
+fov = 30.0
+
+[node name="Fish" parent="Card/Content/Preview/Viewport" instance=ExtResource("preview_fish")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="Weight" type="Label" parent="Card/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "1.20 กก."
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="Card/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "บันทึกแล้ว"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.86, 0.96, 0.92, 1)
+horizontal_alignment = 1
+
+[node name="ReleaseButton" type="Button" parent="Card/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 58)
+text = "ปล่อย"
+theme_override_font_sizes/font_size = 18
+focus_mode = 0
+icon = ExtResource("i_release")
+tooltip_text = "ปล่อย"
+expand_icon = true
+icon_alignment = 0
+theme_override_constants/icon_max_width = 24
+theme_override_styles/normal = ExtResource("m_button")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+theme_override_constants/h_separation = 12
+
+[node name="KeepButton" type="Button" parent="Card/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 58)
+text = "เก็บ"
+theme_override_font_sizes/font_size = 18
+focus_mode = 0
+icon = ExtResource("i_keep")
+tooltip_text = "เก็บ"
+expand_icon = true
+icon_alignment = 0
+theme_override_constants/icon_max_width = 24
+theme_override_styles/normal = ExtResource("m_button")
+theme_override_styles/hover = ExtResource("m_pressed")
+theme_override_styles/pressed = ExtResource("m_pressed")
+theme_override_constants/h_separation = 12
+
+
+[connection signal="pressed" from="Card/Content/ReleaseButton" to="." method="_on_release_pressed"]
+[connection signal="pressed" from="Card/Content/KeepButton" to="." method="_on_keep_pressed"]

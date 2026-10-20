@@ -1,0 +1,58 @@
+[gd_resource type="Theme" load_steps=7 format=3]
+[ext_resource type="FontFile" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.025, 0.085, 0.105, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.85, 0.8, 0.22)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_left = 18
+corner_radius_bottom_right = 18
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
+[sub_resource type="StyleBoxFlat" id="button"]
+bg_color = Color(0.39, 0.89, 0.75, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+content_margin_left = 24.0
+content_margin_top = 12.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+[sub_resource type="StyleBoxFlat" id="hover"]
+bg_color = Color(0.61, 1, 0.86, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+[sub_resource type="StyleBoxFlat" id="track"]
+bg_color = Color(0.08, 0.18, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+[sub_resource type="StyleBoxFlat" id="fill"]
+bg_color = Color(0.4, 0.94, 0.77, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+[resource]
+default_font = ExtResource("font")
+default_font_size = 20
+PanelContainer/styles/panel = SubResource("panel")
+Button/styles/normal = SubResource("button")
+Button/styles/hover = SubResource("hover")
+Button/styles/pressed = SubResource("hover")
+Button/colors/font_color = Color(0.025, 0.12, 0.14, 1)
+Button/colors/font_hover_color = Color(0.025, 0.12, 0.14, 1)
+Button/colors/font_pressed_color = Color(0.025, 0.12, 0.14, 1)
+Button/font_sizes/font_size = 24
+ProgressBar/styles/background = SubResource("track")
+ProgressBar/styles/fill = SubResource("fill")

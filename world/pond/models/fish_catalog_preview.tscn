@@ -1,0 +1,294 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="PackedScene" path="res://world/pond/models/tilapia.tscn" id="tilapia"]
+[ext_resource type="PackedScene" path="res://world/pond/models/snakehead.tscn" id="snakehead"]
+[ext_resource type="PackedScene" path="res://world/pond/models/catfish.tscn" id="catfish"]
+[ext_resource type="PackedScene" path="res://world/pond/models/golden_barb.tscn" id="golden_barb"]
+[ext_resource type="PackedScene" path="res://world/pond/models/gourami.tscn" id="gourami"]
+[ext_resource type="PackedScene" path="res://world/pond/models/featherback.tscn" id="featherback"]
+[ext_resource type="PackedScene" path="res://world/pond/models/betta.tscn" id="betta"]
+[ext_resource type="PackedScene" path="res://world/pond/models/lionhead_goldfish.tscn" id="lionhead_goldfish"]
+[ext_resource type="PackedScene" path="res://world/pond/models/koi.tscn" id="koi"]
+[ext_resource type="PackedScene" path="res://world/pond/models/arowana.tscn" id="arowana"]
+[ext_resource type="PackedScene" path="res://world/pond/models/tigerfish.tscn" id="tigerfish"]
+[ext_resource type="PackedScene" path="res://world/pond/models/hampala.tscn" id="hampala"]
+[ext_resource type="PackedScene" path="res://world/pond/models/giant_catfish.tscn" id="giant_catfish"]
+[ext_resource type="PackedScene" path="res://world/pond/models/redtail_catfish.tscn" id="redtail_catfish"]
+[ext_resource type="PackedScene" path="res://world/pond/models/freshwater_eel.tscn" id="freshwater_eel"]
+[ext_resource type="PackedScene" path="res://world/pond/models/freshwater_stingray.tscn" id="freshwater_stingray"]
+[ext_resource type="FontFile" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
+
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.025, 0.06, 0.085, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.8, 0.88, 1, 1)
+ambient_light_energy = 1.0
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="backdrop"]
+albedo_color = Color(0.035, 0.09, 0.12, 1)
+roughness = 1.0
+
+[sub_resource type="QuadMesh" id="quad"]
+size = Vector2(20, 10)
+material = SubResource("backdrop")
+
+[node name="FishCatalogPreview" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+
+[node name="Light" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-30, -35, 0)
+light_energy = 1.5
+
+[node name="Camera" type="Camera3D" parent="."]
+position = Vector3(0, 0, 7)
+projection = 1
+size = 4.8
+current = true
+
+[node name="Backdrop" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0, -0.6)
+mesh = SubResource("quad")
+
+[node name="tilapiaPose" type="Node3D" parent="."]
+position = Vector3(-2.4749999999999996, 1.6500000000000001, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="tilapiaPose" instance=ExtResource("tilapia")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="tilapiaLabel" type="Label3D" parent="."]
+position = Vector3(-2.4749999999999996, 1.3000000000000003, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลานิล"
+outline_size = 3
+
+[node name="snakeheadPose" type="Node3D" parent="."]
+position = Vector3(-0.825, 1.6500000000000001, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="snakeheadPose" instance=ExtResource("snakehead")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="snakeheadLabel" type="Label3D" parent="."]
+position = Vector3(-0.825, 1.3000000000000003, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาช่อน"
+outline_size = 3
+
+[node name="catfishPose" type="Node3D" parent="."]
+position = Vector3(0.825, 1.6500000000000001, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="catfishPose" instance=ExtResource("catfish")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="catfishLabel" type="Label3D" parent="."]
+position = Vector3(0.825, 1.3000000000000003, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาดุก"
+outline_size = 3
+
+[node name="golden_barbPose" type="Node3D" parent="."]
+position = Vector3(2.4749999999999996, 1.6500000000000001, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="golden_barbPose" instance=ExtResource("golden_barb")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="golden_barbLabel" type="Label3D" parent="."]
+position = Vector3(2.4749999999999996, 1.3000000000000003, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาตะเพียนทอง"
+outline_size = 3
+
+[node name="gouramiPose" type="Node3D" parent="."]
+position = Vector3(-2.4749999999999996, 0.55, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="gouramiPose" instance=ExtResource("gourami")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="gouramiLabel" type="Label3D" parent="."]
+position = Vector3(-2.4749999999999996, 0.20000000000000007, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาแรด"
+outline_size = 3
+
+[node name="featherbackPose" type="Node3D" parent="."]
+position = Vector3(-0.825, 0.55, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="featherbackPose" instance=ExtResource("featherback")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="featherbackLabel" type="Label3D" parent="."]
+position = Vector3(-0.825, 0.20000000000000007, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลากราย"
+outline_size = 3
+
+[node name="bettaPose" type="Node3D" parent="."]
+position = Vector3(0.825, 0.55, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="bettaPose" instance=ExtResource("betta")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="bettaLabel" type="Label3D" parent="."]
+position = Vector3(0.825, 0.20000000000000007, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลากัด"
+outline_size = 3
+
+[node name="lionhead_goldfishPose" type="Node3D" parent="."]
+position = Vector3(2.4749999999999996, 0.55, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="lionhead_goldfishPose" instance=ExtResource("lionhead_goldfish")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="lionhead_goldfishLabel" type="Label3D" parent="."]
+position = Vector3(2.4749999999999996, 0.20000000000000007, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาทองหัวสิงห์"
+outline_size = 3
+
+[node name="koiPose" type="Node3D" parent="."]
+position = Vector3(-2.4749999999999996, -0.55, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="koiPose" instance=ExtResource("koi")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="koiLabel" type="Label3D" parent="."]
+position = Vector3(-2.4749999999999996, -0.9, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาคาร์ปโค่ย"
+outline_size = 3
+
+[node name="arowanaPose" type="Node3D" parent="."]
+position = Vector3(-0.825, -0.55, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="arowanaPose" instance=ExtResource("arowana")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="arowanaLabel" type="Label3D" parent="."]
+position = Vector3(-0.825, -0.9, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาอะโรวาน่า"
+outline_size = 3
+
+[node name="tigerfishPose" type="Node3D" parent="."]
+position = Vector3(0.825, -0.55, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="tigerfishPose" instance=ExtResource("tigerfish")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="tigerfishLabel" type="Label3D" parent="."]
+position = Vector3(0.825, -0.9, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาเสือตอ"
+outline_size = 3
+
+[node name="hampalaPose" type="Node3D" parent="."]
+position = Vector3(2.4749999999999996, -0.55, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="hampalaPose" instance=ExtResource("hampala")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="hampalaLabel" type="Label3D" parent="."]
+position = Vector3(2.4749999999999996, -0.9, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลากระสูบขีด"
+outline_size = 3
+
+[node name="giant_catfishPose" type="Node3D" parent="."]
+position = Vector3(-2.4749999999999996, -1.6500000000000001, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="giant_catfishPose" instance=ExtResource("giant_catfish")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="giant_catfishLabel" type="Label3D" parent="."]
+position = Vector3(-2.4749999999999996, -2.0, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาบึก"
+outline_size = 3
+
+[node name="redtail_catfishPose" type="Node3D" parent="."]
+position = Vector3(-0.825, -1.6500000000000001, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="redtail_catfishPose" instance=ExtResource("redtail_catfish")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="redtail_catfishLabel" type="Label3D" parent="."]
+position = Vector3(-0.825, -2.0, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลากดหางแดง"
+outline_size = 3
+
+[node name="freshwater_eelPose" type="Node3D" parent="."]
+position = Vector3(0.825, -1.6500000000000001, 0)
+rotation_degrees = Vector3(12, 0, 0)
+
+[node name="Model" parent="freshwater_eelPose" instance=ExtResource("freshwater_eel")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="freshwater_eelLabel" type="Label3D" parent="."]
+position = Vector3(0.825, -2.0, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลาไหล"
+outline_size = 3
+
+[node name="freshwater_stingrayPose" type="Node3D" parent="."]
+position = Vector3(2.4749999999999996, -1.6500000000000001, 0)
+rotation_degrees = Vector3(68, 0, 0)
+
+[node name="Model" parent="freshwater_stingrayPose" instance=ExtResource("freshwater_stingray")]
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="freshwater_stingrayLabel" type="Label3D" parent="."]
+position = Vector3(2.4749999999999996, -2.0, 0.15)
+font = ExtResource("font")
+font_size = 24
+pixel_size = 0.0026
+text = "ปลากระเบนน้ำจืด"
+outline_size = 3

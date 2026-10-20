@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://features/gameplay/gameplay.gd" id="script"]
+
+[ext_resource type="PackedScene" path="res://actors/player/player.tscn" id="player"]
+
+[ext_resource type="PackedScene" path="res://features/fishing/fishing_hud.tscn" id="fishing_hud"]
+[ext_resource type="Script" path="res://world/pond/pond_ecosystem.gd" id="ecosystem"]
+[ext_resource type="Script" path="res://features/fishing/fishing_controller.gd" id="controller"]
+[ext_resource type="PackedScene" path="res://world/pond/pond.tscn" id="pond_scene"]
+[ext_resource type="PackedScene" path="res://features/gameplay/camera_rig.tscn" id="camera_scene"]
+[ext_resource type="PackedScene" path="res://features/fishing/fishing_effects.tscn" id="effects_scene"]
+[node name="Gameplay" type="Node3D"]
+script = ExtResource("script")
+
+[node name="World" parent="." instance=ExtResource("pond_scene")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("pond") instance=ExtResource("player")]
+position = Vector3(0, 0.06, -3)
+pond = NodePath("../World")
+
+[node name="CameraRig" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera_scene")]
+target = NodePath("../Player")
+
+[node name="PondEcosystem" type="Node" parent="."]
+script = ExtResource("ecosystem")
+
+[node name="FishingController" type="Node" parent="." node_paths=PackedStringArray("ecosystem", "player")]
+script = ExtResource("controller")
+ecosystem = NodePath("../PondEcosystem")
+player = NodePath("../Player")
+
+[node name="FishingEffects" parent="." node_paths=PackedStringArray("controller", "player", "ecosystem", "rod_tip") instance=ExtResource("effects_scene")]
+controller = NodePath("../FishingController")
+player = NodePath("../Player")
+ecosystem = NodePath("../PondEcosystem")
+rod_tip = NodePath("../Player/Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5/Tip")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="FishingHUD" parent="HUD" instance=ExtResource("fishing_hud")]
