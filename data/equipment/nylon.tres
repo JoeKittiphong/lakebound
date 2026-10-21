@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"nylon"
+display_name = "ไนลอน 5 kgf · 65 ม."
+kind = "line"
+price = 40
+strength = 5.0
+length = 65.0

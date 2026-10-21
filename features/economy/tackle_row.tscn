@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/economy/tackle_row.gd" id="1"]
+[node name="TackleRow" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 52)
+script = ExtResource("1")
+theme_override_constants/separation = 12
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "เหยื่อและอุปกรณ์"
+[node name="Count" type="Label" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(66, 0)
+text = "มี 0"
+[node name="Buy" type="Button" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(130, 48)
+text = "ซื้อ"
+[node name="Equip" type="Button" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 48)
+text = "เลือกใช้"

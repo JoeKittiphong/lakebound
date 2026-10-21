@@ -58,15 +58,33 @@ func _process(delta: float) -> void:
   target = Vector3(controller.cast_position.x, -0.12, controller.cast_position.z)
  if state == controller.State.FIGHT and controller.active_fish != null:
   target = Vector3(controller.active_fish.position.x, -0.12, controller.active_fish.position.z)
+ var lure: bool = controller.using_lure()
+ $LureVisual.visible = lure and state in [controller.State.WAITING, controller.State.BITE, controller.State.CASTING]
+ if lure and line_visible:
+  $Bobber.hide()
+  target.y = water_height - controller.cast_position.y
+ if controller.profile != null and state == controller.State.FIGHT and controller.active_fish != null:
+  target.y = water_height - controller.active_fish.position.y
  if state == controller.State.CASTING:
   var fraction: float = controller.cast_progress()
   target = (player.global_position + Vector3(0.4, 1.7, 0)).lerp(target, fraction)
   target.y += sin(fraction * PI) * 2.5
  $AimMarker.global_position = Vector3(target.x, -0.12, target.z)
  $Bobber.global_position = target + Vector3(0, sin(time * 3.0) * 0.045, 0)
+ if $LureVisual.visible:
+  $LureVisual.global_position = target
+  var motion: String = controller.profile.equipped("bait").motion
+  $LureVisual/Minnow.visible = motion == "swim"
+  $LureVisual/Frog.visible = motion == "float"
+  $LureVisual/SoftPlastic.visible = motion == "sink"
+  var heading := player.global_position - target
+  $LureVisual.rotation.y = atan2(-heading.x, -heading.z)
+  $LureVisual.rotation.z = sin(time * 10.0) * 0.15 if controller.lure_holding else 0.0
  if state == controller.State.BITE:
   $Bobber.global_position.y -= absf(sin(time * 15.0)) * 0.35
- $Ripple.global_position = target
+ $Ripple.global_position = Vector3(target.x, -0.12, target.z)
+ if lure and target.y < water_height - 0.35:
+  $Ripple.hide()
  if state == controller.State.CASTING:
   $Ripple.hide()
  $Ripple.scale = Vector3.ONE * (0.8 + fmod(time * 0.6, 1.0))

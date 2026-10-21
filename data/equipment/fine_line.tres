@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"fine_line"
+display_name = "สายเล็ก 3 kgf · 100 ม."
+kind = "line"
+price = 30
+strength = 3.0
+visibility = 0.8
+length = 100.0

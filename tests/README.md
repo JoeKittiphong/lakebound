@@ -16,6 +16,10 @@ Runner import project ก่อนทดสอบ จำกัดเวลาแ
 
 | Test | สิ่งที่ตรวจ |
 |---|---|
+| economy | wallet/inventory save/reload, ซื้อ/เปลี่ยนสาย, กล่องปลา/ขาย, กู้คืนด้วยเพชรหรือ reward ที่ยืนยันแล้ว, callback ซ้ำ, save failure rollback, ชุดสำรอง, lure gestures และ boss population |
+| expansion_flow | กระเป๋า/pause, cast → lure action → slack/break → recovery → boss catch → keep → sell → save pond |
+| expansion_visual | หน้าร้าน/กู้คืน/ข้อมูลบ่อ, ปุ่มซื้อ/ยอมเสียเหยื่อ และภาพ 1280×720 / 1600×720 |
+| first_catch_tutorial | ผู้เล่นใหม่, waypoint, รอ/วัด/สู้ปลา, บันทึก completion และกลับเข้าเกม |
 | startup_flow | threaded loading → menu → Play → gameplay → Back |
 | camera_movement | จอยและ keyboard ตามกล้อง 0°/90°/180°/−90°, แพนขณะกดเดิน และก้มกล้องโดยไม่ลดความเร็ว |
 | bait_retrieval | รอกหลังเหยื่อลงน้ำ, สายหย่อน/เก็บสาย, เหยื่อเคลื่อนจริง, เก็บอัตโนมัติ และดึงรอกวัดเบ็ด |

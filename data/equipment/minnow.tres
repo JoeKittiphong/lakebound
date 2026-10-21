@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"minnow"
+display_name = "มินนาว"
+kind = "lure"
+price = 150
+bait_type = "lure"
+motion = "swim"

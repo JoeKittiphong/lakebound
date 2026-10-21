@@ -17,13 +17,15 @@ func run() -> void:
  collection.records.clear()
  collection.recording_enabled = false
  var scene: Node3D = load("res://features/gameplay/gameplay.tscn").instantiate()
+ # Configure before _ready reads the completion flag; do not touch a player's
+ # tutorial file or depend on another suite's completion state.
+ var tutorial = scene.get_node("HUD/FishingHUD/SafeArea/FirstCatch")
+ tutorial.save_path = "user://tutorial_test_%d.cfg" % Time.get_ticks_usec()
  root.add_child(scene)
  current_scene = scene
  scene.set_process(false)
  var fishing: FishingController = scene.get_node("FishingController")
  fishing.set_physics_process(false)
- var tutorial = scene.get_node("HUD/FishingHUD/SafeArea/FirstCatch")
- tutorial.save_path = "user://tutorial_test.cfg"
  if DisplayServer.get_name() != "headless":
   await process_frame
   await RenderingServer.frame_post_draw
@@ -60,4 +62,5 @@ func run() -> void:
  DirAccess.remove_absolute(tutorial.save_path)
  scene.queue_free()
  await process_frame
+ print("TUTORIAL RESULT: ", failures, " failures")
  quit(1 if failures else 0)

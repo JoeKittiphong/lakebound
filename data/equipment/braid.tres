@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"braid"
+display_name = "สายถัก 12 kgf · 80 ม."
+kind = "line"
+price = 100
+strength = 12.0
+visibility = 1.35
+length = 80.0

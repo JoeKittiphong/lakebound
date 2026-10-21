@@ -1,0 +1,133 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://features/economy/tackle_panel.gd" id="1"]
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
+[node name="TacklePanel" type="Control"]
+visible = false
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("1")
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01, 0.025, 0.035, 0.94)
+[node name="Card" type="MarginContainer" parent="."]
+script = ExtResource("safe")
+minimum_margin = 24.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = 20.0
+offset_right = -36.0
+offset_bottom = -20.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+[node name="Content" type="VBoxContainer" parent="Card"]
+layout_mode = 2
+theme_override_constants/separation = 10
+[node name="Header" type="HBoxContainer" parent="Card/Content"]
+layout_mode = 2
+[node name="Title" type="Label" parent="Card/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "อุปกรณ์ · ร้านค้า · บันทึกการตก"
+theme_override_font_sizes/font_size = 26
+[node name="Close" type="Button" parent="Card/Content/Header"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 48)
+text = "กลับ"
+[node name="Wallet" type="Label" parent="Card/Content"]
+layout_mode = 2
+text = "350 เหรียญ • 0 เพชร • สาย 65 ม."
+autowrap_mode = 3
+[node name="Tabs" type="TabContainer" parent="Card/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tackle" type="VBoxContainer" parent="Card/Content/Tabs"]
+layout_mode = 2
+metadata/_tab_name = "ซื้อ / จัดอุปกรณ์"
+[node name="Scroll" type="ScrollContainer" parent="Card/Content/Tabs/Tackle"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Rows" type="VBoxContainer" parent="Card/Content/Tabs/Tackle/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Storage" type="VBoxContainer" parent="Card/Content/Tabs"]
+layout_mode = 2
+metadata/_tab_name = "กล่องปลา"
+[node name="Scroll" type="ScrollContainer" parent="Card/Content/Tabs/Storage"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Items" type="Label" parent="Card/Content/Tabs/Storage/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+[node name="Sell" type="Button" parent="Card/Content/Tabs/Storage"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+text = "ขายปลาทั้งหมด"
+
+[node name="Journal" type="VBoxContainer" parent="Card/Content/Tabs"]
+layout_mode = 2
+metadata/_tab_name = "วิธีตกที่บันทึก"
+[node name="Scroll" type="ScrollContainer" parent="Card/Content/Tabs/Journal"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Records" type="Label" parent="Card/Content/Tabs/Journal/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+
+[node name="Map" type="VBoxContainer" parent="Card/Content/Tabs"]
+layout_mode = 2
+metadata/_tab_name = "จ้าวบ่อ / ออนไลน์"
+[node name="Info" type="Label" parent="Card/Content/Tabs/Map"]
+layout_mode = 2
+autowrap_mode = 3
+text = "จ้าวบ่อ: ??? — 0.00 กก."
+[node name="Recovery" type="VBoxContainer" parent="Card/Content"]
+layout_mode = 2
+visible = false
+[node name="Title" type="Label" parent="Card/Content/Recovery"]
+layout_mode = 2
+autowrap_mode = 3
+text = "เหยื่อปลอมสูญหาย"
+[node name="Choices" type="HBoxContainer" parent="Card/Content/Recovery"]
+layout_mode = 2
+[node name="Ad" type="Button" parent="Card/Content/Recovery/Choices"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+size_flags_horizontal = 3
+text = "ดูโฆษณา (ยังไม่พร้อม)"
+[node name="Diamonds" type="Button" parent="Card/Content/Recovery/Choices"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+size_flags_horizontal = 3
+text = "ใช้เพชร"
+[node name="Discard" type="Button" parent="Card/Content/Recovery/Choices"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+size_flags_horizontal = 3
+text = "ยอมเสียเหยื่อ"
+[node name="Emergency" type="Button" parent="Card/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+text = "ชุดสำรองฟรี (เมื่อเงินหมดและเหยื่อหรือสายหมด)"
+
+[node name="Message" type="Label" parent="Card/Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "ยังไม่เปิดบริการออนไลน์"

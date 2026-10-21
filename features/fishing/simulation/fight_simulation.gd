@@ -20,6 +20,8 @@ var _width_roll: float = 1.0
 var _surge_remaining: float = 0.0
 var _surge_wait: float = 4.0
 var _surge_strength: float = 2.0
+var line_strength: float = 5.0
+var rod_strength: float = 5.0
 
 func begin(fish: FishState) -> void:
  _fish = fish
@@ -83,6 +85,11 @@ func advance(delta: float, angler_position: Vector3, active_fish: FishState, rod
  var stretch := maxf(0.0, distance - line_length)
  var target := (yellow_start + red_start) * 0.5 + (fish_force - 0.6) * 0.16 + reel * 0.28 - release_line * 0.45 + stretch * 0.18 + (1.0 - counter) * 0.02
  target += active_fish.species.fight_pressure(active_fish.weight) * burst * stamina * 0.18
+ # Gear changes load tolerance, never grants a catch. Fast reels still raise
+ # tension; heavy rods damp surges but are less responsive to lateral input.
+ target += fish_force * (5.0 / maxf(line_strength, 0.1) - 1.0) * 0.16
+ target -= maxf(0.0, rod_strength - 5.0) * burst * 0.004
+ alignment *= clampf(5.0 / maxf(rod_strength, 5.0), 0.7, 1.0)
  tension = lerpf(tension, clampf(target, 0.0, 1.25), 1.0 - exp(-5.0 * delta))
  # The reel's brake can slip under a surge; manual release still matters.
  var in_yellow := tension >= yellow_start and tension < red_start

@@ -1,4 +1,6 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://features/fishing/lure_visual.tscn" id="lure"]
 
 [ext_resource type="Script" path="res://features/fishing/fishing_effects.gd" id="effects"]
 
@@ -65,6 +67,8 @@ mesh = SubResource("RippleMesh")
 cast_shadow = 0
 
 [node name="FishVisuals" type="Node3D" parent="."]
+
+[node name="LureVisual" parent="." instance=ExtResource("lure")]
 
 [node name="BiteAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("audio_bite")

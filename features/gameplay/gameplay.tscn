@@ -1,4 +1,6 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://features/economy/commerce_gateway.gd" id="commerce"]
 
 [ext_resource type="Script" path="res://features/gameplay/gameplay.gd" id="script"]
 
@@ -14,6 +16,10 @@
 [ext_resource type="PackedScene" path="res://world/pond/water_interactions.tscn" id="water_interactions"]
 [node name="Gameplay" type="Node3D"]
 script = ExtResource("script")
+economy_enabled = true
+
+[node name="CommerceGateway" type="Node" parent="."]
+script = ExtResource("commerce")
 
 [node name="World" parent="." instance=ExtResource("pond_scene")]
 

@@ -20,6 +20,7 @@ config/icon="res://shared/branding/icon.png"
 [autoload]
 
 FishCollection="*res://features/collection/fish_collection.gd"
+AnglerSave="*res://features/economy/angler_profile.gd"
 
 [display]
 

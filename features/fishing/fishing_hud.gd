@@ -42,7 +42,7 @@ func rod_direction() -> Vector2:
  return rod_joystick.direction
 
 func is_collection_open() -> bool:
- return $CollectionPanel.visible
+ return $CollectionPanel.visible or $TacklePanel.visible
 
 func close_collection() -> void:
  $CollectionPanel.close()
@@ -54,6 +54,12 @@ func _process(delta: float) -> void:
  if not is_instance_valid(controller):
   return
  var state: int = controller.state
+ $SafeArea/LureAction.visible = controller.using_lure() and state == F.State.WAITING
+ if controller.profile != null:
+  $SafeArea/TackleButton.visible = state in [F.State.READY, F.State.RESULT, F.State.LOST]
+  $SafeArea/BaitDock/BaitButton.tooltip_text = controller.profile.equipped("bait").display_name
+  if state == F.State.RESULT:
+   $ResultLayer/Card/Content/Description.text = controller.feedback
  toast_time = maxf(0.0, toast_time - delta)
  $SafeArea/Toast.visible = toast_time > 0.0
  if controller.feedback != last_feedback:
@@ -85,9 +91,15 @@ func _refresh_ecology() -> void:
   var counts: Dictionary = ecology.counts()
   var lines := PackedStringArray()
   for index in range(0, ecology.species.size(), 2):
-   var text: String = "%s %d" % [ecology.species[index].display_name, counts[ecology.species[index].id]]
+   var name_a: String = ecology.species[index].display_name
+   if controller.profile != null and get_node("/root/FishCollection").stats(ecology.species[index].id).count == 0:
+    name_a = "???"
+   var text: String = "%s %d" % [name_a, counts[ecology.species[index].id]]
    if index + 1 < ecology.species.size():
-    text += "  •  %s %d" % [ecology.species[index + 1].display_name, counts[ecology.species[index + 1].id]]
+    var name_b: String = ecology.species[index + 1].display_name
+    if controller.profile != null and get_node("/root/FishCollection").stats(ecology.species[index + 1].id).count == 0:
+     name_b = "???"
+    text += "  •  %s %d" % [name_b, counts[ecology.species[index + 1].id]]
    lines.append(text)
   $SafeArea/EcologyPanel/Content/Counts.text = "\n".join(lines)
 
@@ -159,6 +171,9 @@ func _on_config_changed(_value = 0) -> void:
 func _on_bait_pressed() -> void:
  if controller.state != F.State.READY:
   return
+ if controller.profile != null:
+  _on_tackle_pressed()
+  return
  var select: OptionButton = $SafeArea/BaitPanel/Content/BaitRow/BaitSelect
  select.select((select.selected + 1) % select.item_count)
  _on_config_changed()
@@ -171,3 +186,28 @@ func _on_depth_pressed() -> void:
 func _show_toast(message: String) -> void:
  $SafeArea/Toast.text = message
  toast_time = 1.8
+
+func _on_tackle_pressed() -> void:
+ if controller.profile == null or controller.state not in [F.State.READY, F.State.RESULT, F.State.LOST]:
+  return
+ rod_joystick.reset()
+ move_joystick.reset()
+ $TacklePanel.open()
+
+func _on_lure_down() -> void:
+ controller.lure_input.press()
+
+func _on_lure_up() -> void:
+ controller.lure_input.release()
+
+func sync_equipment() -> void:
+ # The bag owns bait selection once inventory is enabled. The depth control
+ # remains independent and editable during preparation.
+ if controller == null or controller.profile == null:
+  return
+ var select: OptionButton = $SafeArea/BaitPanel/Content/BaitRow/BaitSelect
+ var index := [&"worm", &"dough", &"lure"].find(controller.profile.equipped("bait").bait_type)
+ select.select(maxi(0, index))
+ select.disabled = true
+ $SafeArea/BaitDock/BaitButton.icon = BAIT_ICONS[maxi(0, index)]
+ $SafeArea/BaitDock/BaitButton.tooltip_text = controller.profile.equipped("bait").display_name

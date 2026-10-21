@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"basic_reel"
+display_name = "รอกพื้นฐาน · 100 ม."
+kind = "reel"
+price = 100
+length = 100.0
+reel_speed = 2.6

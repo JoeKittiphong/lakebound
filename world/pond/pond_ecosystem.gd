@@ -21,6 +21,7 @@ var next_id := 1
 var restock_clock := 0.0
 var accumulator := 0.0
 var rng := RandomNumberGenerator.new()
+var line_visibility := 1.0
 
 @export var definition: PondDefinition = preload("res://world/pond/default_pond.tres")
 var water_bounds: Rect2:
@@ -117,7 +118,7 @@ func step(delta: float) -> void:
    continue
   var interested: bool = bait_active and reserved_fish == null and record.caution < 0.6 and record.hunger > 0.35 and String(bait_type) in record.species.bait_preferences
   # Distance includes depth. A bottom bait is not instantly visible to surface fish.
-  interested = interested and record.position.distance_to(bait_position) <= record.species.detection_radius
+  interested = interested and record.position.distance_to(bait_position) <= record.species.detection_radius / maxf(0.5, line_visibility)
   var preferred: Vector2 = record.species.preferred_depth
   interested = interested and bait_position.y >= preferred.x - 0.5 and bait_position.y <= preferred.y + 0.5
   if interested and record.state not in [&"approaching", &"inspecting"]:
@@ -201,3 +202,51 @@ func counts() -> Dictionary:
  for record in fish:
   result[record.species.id] += 1
  return result
+
+func boss() -> RefCounted:
+ var largest: RefCounted
+ for record in fish:
+  if largest == null or record.weight > largest.weight:
+   largest = record
+ return largest
+
+func snapshot() -> Array:
+ var records: Array = []
+ for record in fish:
+  records.append({"id": record.id, "species": String(record.species.id), "weight": record.weight,
+   "position": record.position, "stamina": record.stamina, "hunger": record.hunger, "caution": record.caution})
+ return records
+
+func restore(records: Array) -> bool:
+ var restored: Array[RefCounted] = []
+ var ids := {}
+ for entry in records:
+  if not entry is Dictionary or not entry.get("position") is Vector3:
+   return false
+  var definition_found: Resource
+  for candidate in species:
+   if String(candidate.id) == str(entry.get("species", "")):
+    definition_found = candidate
+  if definition_found == null or not entry.get("id") is int or entry.id <= 0 or ids.has(entry.id):
+   return false
+  if not is_finite(float(entry.get("weight", 0))) or entry.weight < definition_found.min_weight or entry.weight > definition_found.max_weight or not entry.position.is_finite():
+   return false
+  var record := FishState.new()
+  record.id = entry.id
+  ids[entry.id] = true
+  record.species = definition_found
+  record.weight = entry.weight
+  record.position = constrain_to_water(entry.position)
+  record.stamina = clampf(float(entry.get("stamina", 1.0)), 0.0, 1.0)
+  record.hunger = clampf(float(entry.get("hunger", 0.7)), 0.0, 1.0)
+  record.caution = clampf(float(entry.get("caution", 0.0)), 0.0, 1.0)
+  record.destination = _destination(record)
+  restored.append(record)
+ fish = restored
+ next_id = 1
+ for record in fish:
+  next_id = maxi(next_id, record.id + 1)
+ reserved_fish = null
+ bait_active = false
+ population_changed.emit()
+ return true
