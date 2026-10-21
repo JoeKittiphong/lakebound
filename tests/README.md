@@ -29,6 +29,8 @@ Runner import project ก่อนทดสอบ จำกัดเวลาแ
 | fishing_visual | gestures, two joysticks, camera, fight/result actions และหลาย aspect ratios |
 | fish_render | model gallery, collection, ปลาใกล้ผิวน้ำ และ catch preview |
 | water_render | ความลึกปลา, visual pool, ผิวน้ำและพื้นทะเลสาบ; ภาพของชุดนี้อยู่ใน `exports/qa-water/` |
+| water_interactions | คลื่นจากปลาโผล่และการลุยน้ำ, ไม่เกิดวงน้ำบนสะพาน, จำกัด pool และหมดอายุ; ภาพอยู่ใน `exports/qa-water-interactions/` |
+| water_optimization | วัด CPU/GPU ของ field คลื่น, ตรวจหมดอายุ/ล้างข้อมูล; ตั้ง `LAKEBOUND_WATER_REFERENCE` เพื่อเทียบข้อมูลกับ script รุ่นก่อน; ผลอยู่ใน `exports/qa-water-optimization/` |
 
 `host_diagnostics` เก็บข้อความเฉพาะที่ทราบว่ามาจาก host/sandbox โดยไม่กลบ SCRIPT ERROR ข้อความใหม่ที่ไม่อยู่ในรายการจะทำให้ suite ล้มเหลวและต้องตรวจ log
 

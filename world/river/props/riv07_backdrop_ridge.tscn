@@ -42,8 +42,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1c2eo")
 
-[node name="RIV07_Backdrop_Ridge" type="Node3D" unique_id=1366461398]
+[node name="RIV07_Backdrop_Ridge" type="Node3D" unique_id=1834128567]
 
-[node name="Model" type="MeshInstance3D" parent="." unique_id=433769967]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=611888713]
 mesh = SubResource("ArrayMesh_q2b0n")
 surface_material_override/0 = ExtResource("2_ye5d3")

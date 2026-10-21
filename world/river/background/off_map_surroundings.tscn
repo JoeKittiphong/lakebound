@@ -1,0 +1,100 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_0_0.res" id="1_v25qf"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_0_1.res" id="2_5ekjv"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_0_2.res" id="3_1gjhs"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_0_3.res" id="4_nhx6n"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_1_0.res" id="5_ygqvy"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_1_1.res" id="6_stqkb"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_1_2.res" id="7_x74hf"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_1_3.res" id="8_t3xgh"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_2_0.res" id="9_xvj2h"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_2_1.res" id="10_d0uh8"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_2_2.res" id="11_pn54i"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_2_3.res" id="12_fs7in"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_3_0.res" id="13_sd563"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_3_1.res" id="14_4xumt"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_3_2.res" id="15_dsavt"]
+[ext_resource type="ArrayMesh" path="res://world/river/background/meshes/outer_3_3.res" id="16_ff3kx"]
+
+[node name="OffMapSurroundings" type="Node3D" unique_id=232577211]
+
+[node name="OuterTerrain_0_0" type="MeshInstance3D" parent="." unique_id=359036954]
+cast_shadow = 0
+mesh = ExtResource("1_v25qf")
+metadata/triangles = 180
+
+[node name="OuterTerrain_0_1" type="MeshInstance3D" parent="." unique_id=587057190]
+cast_shadow = 0
+mesh = ExtResource("2_5ekjv")
+metadata/triangles = 180
+
+[node name="OuterTerrain_0_2" type="MeshInstance3D" parent="." unique_id=137354312]
+cast_shadow = 0
+mesh = ExtResource("3_1gjhs")
+metadata/triangles = 180
+
+[node name="OuterTerrain_0_3" type="MeshInstance3D" parent="." unique_id=346371780]
+cast_shadow = 0
+mesh = ExtResource("4_nhx6n")
+metadata/triangles = 180
+
+[node name="OuterTerrain_1_0" type="MeshInstance3D" parent="." unique_id=1115317143]
+cast_shadow = 0
+mesh = ExtResource("5_ygqvy")
+metadata/triangles = 180
+
+[node name="OuterTerrain_1_1" type="MeshInstance3D" parent="." unique_id=1074021837]
+cast_shadow = 0
+mesh = ExtResource("6_stqkb")
+metadata/triangles = 180
+
+[node name="OuterTerrain_1_2" type="MeshInstance3D" parent="." unique_id=1749635722]
+cast_shadow = 0
+mesh = ExtResource("7_x74hf")
+metadata/triangles = 180
+
+[node name="OuterTerrain_1_3" type="MeshInstance3D" parent="." unique_id=945198652]
+cast_shadow = 0
+mesh = ExtResource("8_t3xgh")
+metadata/triangles = 180
+
+[node name="OuterTerrain_2_0" type="MeshInstance3D" parent="." unique_id=1980340764]
+cast_shadow = 0
+mesh = ExtResource("9_xvj2h")
+metadata/triangles = 180
+
+[node name="OuterTerrain_2_1" type="MeshInstance3D" parent="." unique_id=2049210339]
+cast_shadow = 0
+mesh = ExtResource("10_d0uh8")
+metadata/triangles = 180
+
+[node name="OuterTerrain_2_2" type="MeshInstance3D" parent="." unique_id=1231467813]
+cast_shadow = 0
+mesh = ExtResource("11_pn54i")
+metadata/triangles = 180
+
+[node name="OuterTerrain_2_3" type="MeshInstance3D" parent="." unique_id=1611039015]
+cast_shadow = 0
+mesh = ExtResource("12_fs7in")
+metadata/triangles = 180
+
+[node name="OuterTerrain_3_0" type="MeshInstance3D" parent="." unique_id=446169975]
+cast_shadow = 0
+mesh = ExtResource("13_sd563")
+metadata/triangles = 180
+
+[node name="OuterTerrain_3_1" type="MeshInstance3D" parent="." unique_id=1272568057]
+cast_shadow = 0
+mesh = ExtResource("14_4xumt")
+metadata/triangles = 180
+
+[node name="OuterTerrain_3_2" type="MeshInstance3D" parent="." unique_id=1356000088]
+cast_shadow = 0
+mesh = ExtResource("15_dsavt")
+metadata/triangles = 180
+
+[node name="OuterTerrain_3_3" type="MeshInstance3D" parent="." unique_id=1558657739]
+cast_shadow = 0
+mesh = ExtResource("16_ff3kx")
+metadata/triangles = 180

@@ -42,8 +42,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xardy")
 
-[node name="T04_Shore_Inner_Cove" type="Node3D" unique_id=1721778855]
+[node name="T04_Shore_Inner_Cove" type="Node3D" unique_id=982602873]
 
-[node name="Model" type="MeshInstance3D" parent="." unique_id=856635922]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=954500328]
 mesh = SubResource("ArrayMesh_lt63q")
 surface_material_override/0 = ExtResource("2_67y6y")

@@ -99,23 +99,23 @@ size = Vector2(6.4, 6.4)
 height = 3.0
 radius = 0.24
 
-[node name="F01_Tree_Broad_A" type="Node3D" unique_id=1395118552]
+[node name="F01_Tree_Broad_A" type="Node3D" unique_id=1744875490]
 
-[node name="Model" type="MeshInstance3D" parent="." unique_id=942011372]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=676982311]
 visibility_range_end = 64.0
 mesh = SubResource("ArrayMesh_awkhc")
 surface_material_override/0 = ExtResource("3_3pt7a")
 surface_material_override/1 = ExtResource("4_laoc8")
 
-[node name="DistantTree" type="MeshInstance3D" parent="." unique_id=953452033]
+[node name="DistantTree" type="MeshInstance3D" parent="." unique_id=1417730570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
 material_override = SubResource("StandardMaterial3D_8lod2")
 cast_shadow = 0
 visibility_range_begin = 64.0
 mesh = SubResource("QuadMesh_ynm27")
 
-[node name="Collision" type="StaticBody3D" parent="." unique_id=464748820]
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1128095304]
 
-[node name="Shape" type="CollisionShape3D" parent="Collision" unique_id=2087645463]
+[node name="Shape" type="CollisionShape3D" parent="Collision" unique_id=1131707107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CylinderShape3D_qyvw4")

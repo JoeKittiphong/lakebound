@@ -1,7 +1,7 @@
 extends Control
 @export_file("*.tscn") var next_scene_path: String = "res://features/menu/main_menu.tscn"
 @export_range(0.0, 8.0) var minimum_display_seconds: float = 2.5
-@onready var bar: ProgressBar = $SafeArea/LoadPanel/Content/ProgressBar
+@onready var bar: ProgressBar = $SafeArea/LoadPanel/Content/SwimmingProgress/ProgressBar
 @onready var status: Label = $SafeArea/LoadPanel/Content/StatusRow/Status
 @onready var percent: Label = $SafeArea/LoadPanel/Content/StatusRow/Percent
 var elapsed := 0.0

@@ -7,6 +7,8 @@ signal closed
 
 func _ready() -> void:
  $Card/Content/Scroll.resized.connect(_queue_fit)
+ visibility_changed.connect(_queue_fit)
+ get_viewport().size_changed.connect(_queue_fit)
 
 var _fit_queued := false
 
@@ -20,8 +22,14 @@ func _fit_grid() -> void:
  if not visible:
   return
  var rows: GridContainer = $Card/Content/Scroll/Rows
+ var scroll: ScrollContainer = $Card/Content/Scroll
+ rows.columns = clampi(floori((scroll.size.x + 8.0) / 138.0), 1, 4)
  var row_count := maxi(1, ceili(rows.get_child_count() / float(rows.columns)))
- var height := maxf(100.0, floorf(($Card/Content/Scroll.size.y - (row_count - 1) * rows.get_theme_constant("v_separation")) / row_count))
+ var spacing := (row_count - 1) * rows.get_theme_constant("v_separation")
+ var height := maxf(100.0, floorf((scroll.size.y - spacing) / row_count))
+ # Give the ScrollContainer an explicit content extent, including while the
+ # game is paused and container sorting has not yet run on a mobile frame.
+ rows.custom_minimum_size.y = row_count * height + spacing
  for row in rows.get_children():
   row.custom_minimum_size.y = height
 
@@ -42,6 +50,7 @@ func open() -> void:
  $Card/Content/SaveStatus.visible = not collection.save_error.is_empty()
  $Card/Content/Scroll.scroll_vertical = 0
  show()
+ _fit_grid()
  opened.emit()
  _queue_fit()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://features/gameplay/gameplay.gd" id="script"]
 
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" path="res://world/river/river_definition.tres" id="river_definition"]
 [ext_resource type="PackedScene" path="res://features/gameplay/camera_rig.tscn" id="camera_scene"]
 [ext_resource type="PackedScene" path="res://features/fishing/fishing_effects.tscn" id="effects_scene"]
+[ext_resource type="PackedScene" path="res://world/pond/water_interactions.tscn" id="water_interactions"]
 [node name="Gameplay" type="Node3D"]
 script = ExtResource("script")
 
@@ -41,6 +42,12 @@ controller = NodePath("../FishingController")
 player = NodePath("../Player")
 ecosystem = NodePath("../PondEcosystem")
 rod_tip = NodePath("../Player/Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5/Tip")
+
+[node name="WaterInteractions" parent="." node_paths=PackedStringArray("player", "pond", "ecosystem", "water_surface") instance=ExtResource("water_interactions")]
+player = NodePath("../Player")
+pond = NodePath("../World")
+ecosystem = NodePath("../PondEcosystem")
+water_surface = NodePath("../World/RiverWater")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

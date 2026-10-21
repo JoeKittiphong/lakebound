@@ -42,8 +42,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ngyto")
 
-[node name="T01_Lake_Terrain" type="Node3D" unique_id=1608779090]
+[node name="T01_Lake_Terrain" type="Node3D" unique_id=1326444057]
 
-[node name="Model" type="MeshInstance3D" parent="." unique_id=1155338445]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=1912597951]
 mesh = SubResource("ArrayMesh_7xr56")
 surface_material_override/0 = ExtResource("2_86ews")

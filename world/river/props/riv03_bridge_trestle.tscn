@@ -42,8 +42,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7c2qk")
 
-[node name="RIV03_Bridge_Trestle" type="Node3D" unique_id=1794993861]
+[node name="RIV03_Bridge_Trestle" type="Node3D" unique_id=1985399454]
 
-[node name="Model" type="MeshInstance3D" parent="." unique_id=1803082507]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=306431182]
 mesh = SubResource("ArrayMesh_45xig")
 surface_material_override/0 = ExtResource("2_3wp6r")

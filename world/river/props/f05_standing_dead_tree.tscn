@@ -48,15 +48,15 @@ shadow_mesh = SubResource("ArrayMesh_ft0e6")
 height = 2.9974666
 radius = 0.24
 
-[node name="F05_Standing_Dead_Tree" type="Node3D" unique_id=2139592883]
+[node name="F05_Standing_Dead_Tree" type="Node3D" unique_id=1926707661]
 
-[node name="Model" type="MeshInstance3D" parent="." unique_id=585979936]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=1433248736]
 visibility_range_end = 90.0
 mesh = SubResource("ArrayMesh_b0y48")
 surface_material_override/0 = ExtResource("2_6mvey")
 
-[node name="Collision" type="StaticBody3D" parent="." unique_id=333250591]
+[node name="Collision" type="StaticBody3D" parent="." unique_id=171549459]
 
-[node name="Shape" type="CollisionShape3D" parent="Collision" unique_id=1854157761]
+[node name="Shape" type="CollisionShape3D" parent="Collision" unique_id=1798774781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4987333, 0)
 shape = SubResource("CylinderShape3D_lt8d2")

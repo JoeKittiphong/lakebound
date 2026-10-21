@@ -28,7 +28,11 @@ func bind_touch_controls(movement: TouchJoystick, rod: TouchJoystick) -> void:
  touch_controls = [movement, rod]
 
 func _is_touch_mouse_duplicate(event: InputEvent) -> bool:
- if not (event is InputEventMouseButton or event is InputEventMouseMotion) or event.device != InputEvent.DEVICE_ID_EMULATION:
+ if not (event is InputEventMouseButton or event is InputEventMouseMotion):
+  return false
+ if OS.has_feature("mobile"):
+  return true
+ if event.device != InputEvent.DEVICE_ID_EMULATION:
   return false
  if look_finger != -1:
   return true
@@ -38,7 +42,7 @@ func _is_touch_mouse_duplicate(event: InputEvent) -> bool:
  return false
 
 func _notification(what: int) -> void:
- if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+ if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
   reset_input()
 
 func _input(event: InputEvent) -> void:
@@ -75,7 +79,8 @@ func _unhandled_input(event: InputEvent) -> void:
     return
  # Only a press that escaped HUD controls can claim the camera.
  if enabled:
-  if event is InputEventScreenTouch and event.pressed and look_finger == -1 and not look_mouse and event.position.x > get_viewport().get_visible_rect().size.x * 0.5:
+  if event is InputEventScreenTouch and event.pressed and look_finger == -1 and event.position.x > get_viewport().get_visible_rect().size.x * 0.5:
+   look_mouse = false
    look_finger = event.index
    get_viewport().set_input_as_handled()
   elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and look_finger == -1 and event.position.x > get_viewport().get_visible_rect().size.x * 0.5:

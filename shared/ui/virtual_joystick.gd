@@ -18,16 +18,18 @@ func _input(event: InputEvent) -> void:
  if not enabled:
   return
  # Forwarded desktop mouse events may also use DEVICE_ID_EMULATION.
- # Ignore mouse duplicates only while this joystick owns a real finger.
- if touch_index != -1 and (event is InputEventMouseButton or event is InputEventMouseMotion):
+ # Mobile uses real touches; desktop still accepts forwarded mouse input.
+ if (OS.has_feature("mobile") or touch_index != -1) and (event is InputEventMouseButton or event is InputEventMouseMotion):
   return
  if event is InputEventScreenTouch:
-  if event.pressed and touch_index == -1 and not mouse_active and _inside(event.position):
+  if event.pressed and touch_index == -1 and _inside(event.position):
+   mouse_active = false
    touch_index = event.index
    _update_direction(event.position)
    get_viewport().set_input_as_handled()
   elif event.index == touch_index and not event.pressed:
    reset()
+   if event.canceled: return
    drag_released.emit()
  elif event is InputEventScreenDrag and event.index == touch_index:
   _update_direction(event.position)
@@ -64,5 +66,5 @@ func reset() -> void:
  direction_changed.emit(direction)
 
 func _notification(what: int) -> void:
- if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+ if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
   reset()

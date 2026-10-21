@@ -78,9 +78,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_v8i2r")
 
-[node name="B02_Bush_Tall" type="Node3D" unique_id=1844744604]
+[node name="B02_Bush_Tall" type="Node3D" unique_id=1954168029]
 
-[node name="Model" type="MeshInstance3D" parent="." unique_id=638375983]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=2132906516]
 visibility_range_end = 90.0
 mesh = SubResource("ArrayMesh_y355c")
 surface_material_override/0 = ExtResource("3_nlvih")

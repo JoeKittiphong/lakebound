@@ -1,7 +1,7 @@
 [gd_scene format=4]
 
 [ext_resource type="Texture2D" path="res://assets/environment/river/river_props_wetland_atlas_256.png" id="1_x6mx1"]
-[ext_resource type="Material" path="res://world/river/wood_material.tres" id="2_er1u4"]
+[ext_resource type="Material" path="res://world/river/aquatic_material.tres" id="2_er1u4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm14v"]
 resource_name = "MAT_Wetland_SHARED_opaque"
@@ -44,8 +44,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_okcld")
 
-[node name="V05_Submerged_Algae" type="Node3D" unique_id=1150911575]
+[node name="V05_Submerged_Algae" type="Node3D" unique_id=2047460201]
 
-[node name="Model" type="MeshInstance3D" parent="." unique_id=1174651493]
+[node name="Model" type="MeshInstance3D" parent="." unique_id=202199031]
+visibility_range_end = 85.0
 mesh = SubResource("ArrayMesh_vev1e")
 surface_material_override/0 = ExtResource("2_er1u4")

@@ -12,7 +12,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 HEADLESS = ("startup_flow", "camera_movement", "bait_retrieval", "tension_haptics", "fish_behavior", "fishing_simulation", "fish_catalog_fishing", "fish_models", "refactor_boundaries")
-RENDER = ("collection", "fishing_visual", "active_scene_movement", "rod_tension", "fish_render", "water_render")
+RENDER = ("collection", "mobile_collection", "mobile_multitouch", "fishing_visual", "active_scene_movement", "rod_tension", "fish_render", "water_render", "water_interactions", "water_optimization")
 # These host/sandbox diagnostics do not concern game scripts; keep them in logs
 # and report them separately instead of treating every successful exit as proof.
 HOST_DIAGNOSTICS = (
@@ -32,6 +32,7 @@ def main() -> int:
     parser.add_argument("--suite", choices=("headless", "render", "all"), default="headless")
     parser.add_argument("--output", type=Path, default=ROOT / "exports/qa")
     parser.add_argument("--timeout", type=float, default=120, help="Seconds per process")
+    parser.add_argument("--android-pack", type=Path, help="Also check an existing Android PCK for exported UI and touch regressions")
     args = parser.parse_args()
     if not args.godot:
         parser.error("Set LAKEBOUND_GODOT, pass --godot, or add godot to PATH")
@@ -92,6 +93,11 @@ def main() -> int:
                 command += ["--headless"]
             command += ["--script", f"res://tests/{test}_test.gd"]
             run(test, command)
+        if args.android_pack:
+            for test in ("mobile_collection", "mobile_multitouch"):
+                run(f"packed_{test}", [args.godot, "--main-pack", str(args.android_pack.resolve()),
+                    "--log-file", str(output / f"packed_{test}.log"),
+                    "--script", str(ROOT / f"tests/{test}_test.gd")])
     (output / "results.json").write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
     return 0 if all(result["passed"] for result in results) else 1
 

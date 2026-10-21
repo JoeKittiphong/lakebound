@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://world/pond/water_interactions.gd" id="script"]
+[ext_resource type="Shader" path="res://world/pond/wave_field.gdshader" id="wave_shader"]
+[ext_resource type="Shader" path="res://world/pond/wave_field_background.gdshader" id="background_shader"]
+[sub_resource type="PlaneMesh" id="plane"]
+size = Vector2(16, 16)
+subdivide_width = 63
+subdivide_depth = 63
+
+[sub_resource type="ShaderMaterial" id="wave_material"]
+shader = ExtResource("wave_shader")
+
+[sub_resource type="ShaderMaterial" id="background_material"]
+shader = ExtResource("background_shader")
+
+[sub_resource type="QuadMesh" id="stamp_quad"]
+size = Vector2(2, 2)
+
+[sub_resource type="MultiMesh" id="stamps"]
+transform_format = 0
+use_custom_data = true
+mesh = SubResource("stamp_quad")
+instance_count = 12
+visible_instance_count = 0
+
+[node name="WaterInteractions" type="Node3D"]
+script = ExtResource("script")
+
+[node name="SurfaceDetail" type="MeshInstance3D" parent="."]
+top_level = true
+cast_shadow = 0
+extra_cull_margin = 0.25
+mesh = SubResource("plane")
+
+[node name="FieldViewport" type="SubViewport" parent="."]
+disable_3d = true
+use_hdr_2d = true
+size = Vector2i(256, 256)
+render_target_update_mode = 0
+
+[node name="Neutral" type="ColorRect" parent="FieldViewport"]
+material = SubResource("background_material")
+offset_right = 256.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="WaveStamps" type="MultiMeshInstance2D" parent="FieldViewport"]
+material = SubResource("wave_material")
+multimesh = SubResource("stamps")

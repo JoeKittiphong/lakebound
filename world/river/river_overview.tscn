@@ -6,18 +6,18 @@
 [ext_resource type="PackedScene" path="res://actors/player/player.tscn" id="4_5amkb"]
 [ext_resource type="Script" path="res://actors/player/player.gd" id="5_lk3nb"]
 
-[node name="RiverOverview" type="Node3D" unique_id=1120321303]
+[node name="RiverOverview" type="Node3D" unique_id=1502868079]
 
-[node name="World" type="Node3D" parent="." unique_id=754830963 instance=ExtResource("1_mf6ie")]
+[node name="World" type="Node3D" parent="." unique_id=62322607 instance=ExtResource("1_mf6ie")]
 script = ExtResource("2_tgi2n")
 definition = ExtResource("3_ggeal")
 
-[node name="HumanScaleReference" type="CharacterBody3D" parent="." unique_id=2130617581 instance=ExtResource("4_5amkb")]
+[node name="HumanScaleReference" type="CharacterBody3D" parent="." unique_id=1521962859 instance=ExtResource("4_5amkb")]
 process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.52561, 0.45, 42)
 script = ExtResource("5_lk3nb")
 
-[node name="OverviewCamera" type="Camera3D" parent="." unique_id=1728218233]
+[node name="OverviewCamera" type="Camera3D" parent="." unique_id=1200411408]
 transform = Transform3D(1, 0, 0, 0, 0.838068, 0.5455658, 0, -0.5455658, 0.838068, 0, 165, 230)
 current = true
 fov = 56.0

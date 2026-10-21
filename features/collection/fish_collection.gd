@@ -3,7 +3,7 @@ extends Node
 signal changed
 const Catalog = preload("res://data/fish/fish_catalog.gd")
 const SPECIES = Catalog.SPECIES
-var save_path := "user://fish_collection.cfg"
+var save_path := PlayerSavePaths.COLLECTION
 var records: Dictionary = {}
 var save_error := ""
 var recording_enabled := true

@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="FishSpecies" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="FishSpecies" format=3 uid="uid://cwkw77tcxf864"]
 
-[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="1"]
-[ext_resource type="PackedScene" path="res://world/pond/models/betta.tscn" id="model"]
-
+[ext_resource type="Script" uid="uid://d3yvukpaxjuug" path="res://data/fish/fish_species.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/fish/icons/betta.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://world/pond/models/betta.tscn" id="model"]
 
 [resource]
 script = ExtResource("1")
@@ -12,7 +11,6 @@ display_name = "ปลากัด"
 model_scene = ExtResource("model")
 collection_icon = ExtResource("icon")
 visual_length_m = 0.15
-preview_tilt_degrees = 12.0
 min_weight = 0.01
 max_weight = 0.035
 preferred_depth = Vector2(0.15, 0.8)
@@ -21,5 +19,4 @@ detection_radius = 8.0
 swim_speed = 0.55
 pull_strength = 0.36
 struggle_frequency = 2.8
-body_scale = Vector3(1, 1, 1)
 tension_pressure = 0.015

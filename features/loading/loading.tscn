@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene format=3 uid="uid://byagapmja025m"]
 
+[ext_resource type="Texture2D" uid="uid://berc6srghtdnk" path="res://features/loading/art/loading_lake.png" id="background"]
+[ext_resource type="Texture2D" uid="uid://gfqajnbso68b" path="res://features/loading/art/swimmer_body.svg" id="fish_body"]
+[ext_resource type="Texture2D" uid="uid://c8t7nvkwfx4dg" path="res://features/loading/art/swimmer_tail.svg" id="fish_tail"]
+[ext_resource type="Texture2D" uid="uid://d0efekkl4pk1y" path="res://features/loading/art/lakebound_logo_b.png" id="logo"]
+[ext_resource type="Script" uid="uid://bauj5h6ekupiu" path="res://shared/ui/safe_area.gd" id="safe"]
+[ext_resource type="Script" uid="uid://lixibkgtfd0c" path="res://features/loading/loading.gd" id="script"]
+[ext_resource type="Script" uid="uid://dhhelw03up18n" path="res://features/loading/swimming_progress.gd" id="swimming"]
 [ext_resource type="Theme" path="res://shared/ui/game_theme.tres" id="theme"]
-
-[ext_resource type="Script" path="res://features/loading/loading.gd" id="script"]
-
-[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
-
-[ext_resource type="Texture2D" path="res://features/loading/art/loading_lake.png" id="background"]
 
 [sub_resource type="Gradient" id="shade_gradient"]
 offsets = PackedFloat32Array(0, 0.55, 1)
@@ -14,11 +15,31 @@ colors = PackedColorArray(0.01, 0.04, 0.06, 0.45, 0.01, 0.04, 0.06, 0.02, 0.01, 
 
 [sub_resource type="GradientTexture2D" id="shade_texture"]
 gradient = SubResource("shade_gradient")
-fill_from = Vector2(0, 0)
 fill_to = Vector2(0, 1)
 
-[node name="Loading" type="Control"]
-layout_mode = 1
+[sub_resource type="StyleBoxFlat" id="water_track"]
+bg_color = Color(0.025, 0.1, 0.13, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.88, 0.69, 0.34, 0.65)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id="water_fill"]
+bg_color = Color(0.27, 0.79, 0.78, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+shadow_color = Color(0.2, 0.85, 0.83, 0.28)
+shadow_size = 5
+
+[node name="Loading" type="Control" unique_id=2053389083]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,7 +48,7 @@ grow_vertical = 2
 theme = ExtResource("theme")
 script = ExtResource("script")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=766644041]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,7 +60,7 @@ texture = ExtResource("background")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="ReadabilityShade" type="TextureRect" parent="."]
+[node name="ReadabilityShade" type="TextureRect" parent="." unique_id=2145582383]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,109 +71,120 @@ mouse_filter = 2
 texture = SubResource("shade_texture")
 expand_mode = 1
 
-[node name="SafeArea" type="Control" parent="."]
+[node name="SafeArea" type="Control" parent="." unique_id=504310057]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 offset_left = 32.0
 offset_top = 32.0
 offset_right = -32.0
 offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("safe")
 
-[node name="Title" type="VBoxContainer" parent="SafeArea"]
+[node name="Title" type="TextureRect" parent="SafeArea" unique_id=1494965078]
 layout_mode = 1
-anchor_left = 0
-anchor_top = 0
-anchor_right = 0.6
-anchor_bottom = 0
-offset_left = 20
-offset_top = 35
-offset_right = 0
-offset_bottom = 240
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -691.0
+offset_top = -41.0
+offset_right = -1.0
+offset_bottom = 357.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-
-[node name="Eyebrow" type="Label" parent="SafeArea/Title"]
-layout_mode = 2
 mouse_filter = 2
-text = "A LITTLE ESCAPE. A BIG CATCH."
-theme_override_font_sizes/font_size = 17
-theme_override_colors/font_color = Color(0.63, 1, 0.86, 1)
+texture = ExtResource("logo")
+expand_mode = 1
+stretch_mode = 5
 
-
-[node name="GameName" type="Label" parent="SafeArea/Title"]
-layout_mode = 2
-mouse_filter = 2
-text = "LAKEBOUND"
-theme_override_font_sizes/font_size = 68
-theme_override_colors/font_color = Color(0.91, 0.96, 0.96, 1)
-theme_override_colors/font_shadow_color = Color(0, 0.05, 0.08, 0.6)
-theme_override_constants/shadow_offset_y = 3
-
-[node name="Subtitle" type="Label" parent="SafeArea/Title"]
-layout_mode = 2
-mouse_filter = 2
-text = "ออกไปค้นพบความสุขริมบ่อ"
-theme_override_font_sizes/font_size = 22
-theme_override_colors/font_color = Color(0.91, 0.96, 0.96, 1)
-
-
-[node name="LoadPanel" type="PanelContainer" parent="SafeArea"]
+[node name="LoadPanel" type="PanelContainer" parent="SafeArea" unique_id=1963352507]
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.15
-anchor_top = 1
+anchor_top = 1.0
 anchor_right = 0.85
-anchor_bottom = 1
-offset_left = 0
-offset_top = -160
-offset_right = 0
-offset_bottom = -18
+anchor_bottom = 1.0
+offset_top = -210.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Content" type="VBoxContainer" parent="SafeArea/LoadPanel"]
+[node name="Content" type="VBoxContainer" parent="SafeArea/LoadPanel" unique_id=805105313]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 8
 
-[node name="StatusRow" type="HBoxContainer" parent="SafeArea/LoadPanel/Content"]
+[node name="StatusRow" type="HBoxContainer" parent="SafeArea/LoadPanel/Content" unique_id=1385906835]
 layout_mode = 2
 
-[node name="Status" type="Label" parent="SafeArea/LoadPanel/Content/StatusRow"]
+[node name="Status" type="Label" parent="SafeArea/LoadPanel/Content/StatusRow" unique_id=1873012673]
 layout_mode = 2
-mouse_filter = 2
-text = "กำลังโหลดทรัพยากร…"
-theme_override_font_sizes/font_size = 20
-theme_override_colors/font_color = Color(0.91, 0.96, 0.96, 1)
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.91, 0.96, 0.96, 1)
+theme_override_font_sizes/font_size = 20
+text = "กำลังโหลดทรัพยากร…"
 
-[node name="Percent" type="Label" parent="SafeArea/LoadPanel/Content/StatusRow"]
+[node name="Percent" type="Label" parent="SafeArea/LoadPanel/Content/StatusRow" unique_id=240206974]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.52, 0.97, 0.79, 1)
+theme_override_font_sizes/font_size = 20
+text = "0%"
+
+[node name="SwimmingProgress" type="Control" parent="SafeArea/LoadPanel/Content" unique_id=1943870425]
+custom_minimum_size = Vector2(120, 65)
 layout_mode = 2
 mouse_filter = 2
-text = "0%"
-theme_override_font_sizes/font_size = 20
-theme_override_colors/font_color = Color(0.52, 0.97, 0.79, 1)
+script = ExtResource("swimming")
 
-
-[node name="ProgressBar" type="ProgressBar" parent="SafeArea/LoadPanel/Content"]
-custom_minimum_size = Vector2(0, 12)
-layout_mode = 2
+[node name="ProgressBar" type="ProgressBar" parent="SafeArea/LoadPanel/Content/SwimmingProgress" unique_id=1865991998]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -14.0
+offset_right = -10.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("water_track")
+theme_override_styles/fill = SubResource("water_fill")
 show_percentage = false
 
-[node name="Tip" type="Label" parent="SafeArea/LoadPanel/Content"]
-layout_mode = 2
+[node name="Fish" type="Control" parent="SafeArea/LoadPanel/Content/SwimmingProgress" unique_id=1054663553]
+anchors_preset = 0
+offset_right = 88.0
+offset_bottom = 49.0
+pivot_offset = Vector2(44, 25)
 mouse_filter = 2
-text = "TIP   ลองเดินสำรวจริมบ่อ เพื่อหามุมโปรดของคุณ"
-theme_override_font_sizes/font_size = 17
+
+[node name="Tail" type="TextureRect" parent="SafeArea/LoadPanel/Content/SwimmingProgress/Fish" unique_id=869932161]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 8.0
+offset_right = 27.0
+offset_bottom = 43.0
+pivot_offset = Vector2(25, 18)
+mouse_filter = 2
+texture = ExtResource("fish_tail")
+expand_mode = 1
+
+[node name="Body" type="TextureRect" parent="SafeArea/LoadPanel/Content/SwimmingProgress/Fish" unique_id=1667730885]
+layout_mode = 0
+offset_right = 88.0
+offset_bottom = 49.0
+mouse_filter = 2
+texture = ExtResource("fish_body")
+expand_mode = 1
+
+[node name="Tip" type="Label" parent="SafeArea/LoadPanel/Content" unique_id=760878007]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.77, 0.78, 1)
+theme_override_font_sizes/font_size = 17
+text = "TIP   ลองเดินสำรวจริมบ่อ เพื่อหามุมโปรดของคุณ"
 
-
-[node name="RetryButton" type="Button" parent="SafeArea/LoadPanel/Content"]
+[node name="RetryButton" type="Button" parent="SafeArea/LoadPanel/Content" unique_id=375803443]
 visible = false
 layout_mode = 2
 text = "ลองอีกครั้ง"

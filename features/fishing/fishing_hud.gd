@@ -32,6 +32,7 @@ func bind(fishing: FishingController, pond: PondEcosystem) -> void:
  $CollectionPanel.opened.connect(func(): collection_visibility_changed.emit(true))
  $CollectionPanel.closed.connect(func(): collection_visibility_changed.emit(false))
  _on_state_changed()
+ $SafeArea/FirstCatch.bind(controller, self)
 
 func _on_state_changed() -> void:
  last_state = controller.state

@@ -3,7 +3,13 @@ const OUT = "res://world/river/"
 var manifest: Dictionary
 var asset_scenes: Dictionary = {}
 func _initialize() -> void:
- call_deferred("build")
+ call_deferred("run_build")
+func run_build() -> void:
+ await build()
+ # Let all authoring-local material references leave scope before server shutdown.
+ await process_frame
+ await process_frame
+ quit()
 func own_tree(node: Node, owner_node: Node) -> void:
  for child in node.get_children():
   child.owner = owner_node
@@ -16,6 +22,10 @@ func save_scene(node: Node, path: String) -> void:
  assert(ResourceSaver.save(packed, path) == OK, path)
 func build() -> void:
  manifest = JSON.parse_string(FileAccess.get_file_as_string("res://assets/environment/river/river_manifest.json"))
+ if not manifest.get("dense_aquatic",[]).is_empty() and DisplayServer.get_name() == "headless":
+  push_error("Dense MultiMesh authoring requires --rendering-method gl_compatibility without --headless so transforms can be serialized.")
+  quit(1)
+  return
  DirAccess.make_dir_recursive_absolute(OUT + "props")
  var props = load("res://assets/environment/river/river_props.glb").instantiate()
  root.add_child(props)
@@ -44,6 +54,10 @@ func build() -> void:
  ResourceSaver.save(leaves, OUT + "leaf_material.tres")
  wood = load(OUT + "wood_material.tres")
  leaves = load(OUT + "leaf_material.tres")
+ var aquatic := wood.duplicate() as StandardMaterial3D
+ aquatic.cull_mode = BaseMaterial3D.CULL_DISABLED
+ ResourceSaver.save(aquatic, OUT + "aquatic_material.tres")
+ aquatic = load(OUT + "aquatic_material.tres")
  for item in manifest.assets:
   var id: String = item.id
   assert(meshes.has(id), "missing imported prop: " + id)
@@ -56,10 +70,10 @@ func build() -> void:
   visual.transform = original.global_transform
   visual.position = Vector3.ZERO
   var foliage: bool = String(item.category) in ["trees", "bushes"]
-  visual.visibility_range_end = 90.0 if foliage else (85.0 if String(item.category) in ["aquatic", "grass"] else 0.0)
+  visual.visibility_range_end = 90.0 if foliage else (85.0 if String(item.category) in ["aquatic", "aquatic plants", "grass"] else 0.0)
   for index in visual.mesh.get_surface_count():
    var old_mat: Material = visual.mesh.surface_get_material(index)
-   visual.set_surface_override_material(index, leaves if old_mat.resource_name.contains("Foliage") else wood)
+   visual.set_surface_override_material(index, aquatic if id.begins_with("V0") else (leaves if old_mat.resource_name.contains("Foliage") else wood))
   actor.add_child(visual)
   if id in ["F01_Tree_Broad_A", "F02_Tree_Broad_B", "F03_Tree_Slender", "F04_Tree_Flooded_Roots"]:
    visual.visibility_range_end = 64.0
@@ -108,11 +122,13 @@ func build() -> void:
  world.set_script(load("res://world/pond/pond.gd"))
  world.definition = load(OUT + "river_definition.tres")
  root.add_child(world)
- # Preserve the existing Godot water shader, noise texture and environment.
+ # Preserve gameplay lighting and water; add a compact panorama and distant ground.
  var previous = load("res://world/pond/pond.tscn").instantiate()
  var env: WorldEnvironment = previous.get_node("WorldEnvironment").duplicate()
  env.environment = env.environment.duplicate(true)
- env.environment.fog_density = 0.00015
+ env.environment.sky = load(OUT + "background/river_sky.tres")
+ env.environment.fog_density = 0.00035
+ env.environment.fog_sky_affect = 0.08
  world.add_child(env)
  var sun: DirectionalLight3D = previous.get_node("Sun").duplicate()
  sun.directional_shadow_max_distance = 75.0
@@ -120,7 +136,7 @@ func build() -> void:
  var water: MeshInstance3D = previous.get_node("Lake").duplicate()
  water.name = "RiverWater"
  var plane := PlaneMesh.new()
- plane.size = Vector2(1200, 1200)
+ plane.size = Vector2(3000, 3000)
  plane.material = water.mesh.surface_get_material(0)
  water.mesh = plane
  water.position = Vector3(0, -0.18, 0)
@@ -152,6 +168,9 @@ func build() -> void:
   body.add_child(shape)
   tile.add_child(body)
  imported.free()
+ var surroundings: Node3D = load(OUT + "background/off_map_surroundings.tscn").instantiate()
+ surroundings.name = "OffMapSurroundings"
+ world.add_child(surroundings)
  var categories: Dictionary = {}
  for category in ["bridge", "trees", "bushes", "rocks", "aquatic", "grass", "landmarks", "backdrop", "jetty"]:
   var group := Node3D.new()
@@ -177,7 +196,10 @@ func build() -> void:
   prop.rotation.y = item.yaw
   prop.scale = Vector3.ONE * float(item.scale)
   prop.set_meta("source_asset", id)
+  if item.has("aquatic_layer"):
+   prop.set_meta("aquatic_layer", item.aquatic_layer)
   categories[category].add_child(prop)
+ build_dense_habitats(world, aquatic)
  var markers := Node3D.new()
  markers.name = "Landmarks"
  # Avoid duplicate name with existing landmarks group.
@@ -188,6 +210,10 @@ func build() -> void:
   marker.name = point.name
   marker.position = Vector3(point.p[0], point.p[1], point.p[2])
   markers.add_child(marker)
+ # MultiMesh transforms must reach the rendering server before serialization.
+ # Run this authoring tool with the Compatibility renderer, not the dummy server.
+ await process_frame
+ await process_frame
  save_scene(world, OUT + "river_world.tscn")
  # An independent overview can be opened without gameplay.
  var overview := Node3D.new()
@@ -216,6 +242,47 @@ func build() -> void:
  asset_scenes.clear()
  await process_frame
  await process_frame
- quit()
 
+
+
+# Bake editable spatial batches once; gameplay never builds vegetation at startup.
+func build_dense_habitats(world: Node3D, material: Material) -> void:
+ var habitats := Node3D.new()
+ habitats.name = "AquaticHabitats"
+ world.add_child(habitats)
+ var batches: Dictionary = {}
+ var cell_size: float = manifest.get("aquatic_batch_cell_m",32.0)
+ for item in manifest.get("dense_aquatic",[]):
+  var cell := Vector2i(floori(float(item.position[0])/cell_size),floori(float(item.position[2])/cell_size))
+  var key := "%s_%s_%d_%d" % [item.id,item.habitat,cell.x,cell.y]
+  if not batches.has(key): batches[key] = {"cell":cell,"id":item.id,"habitat":item.habitat,"items":[]}
+  batches[key].items.append(item)
+ for key in batches:
+  var batch: Dictionary = batches[key]
+  var cell: Vector2i = batch.cell
+  var origin := Vector3((cell.x+.5)*cell_size,0,(cell.y+.5)*cell_size)
+  var prototype: Node3D = asset_scenes[batch.id].instantiate()
+  var model: MeshInstance3D = prototype.get_node("Model")
+  var multi := MultiMesh.new()
+  multi.transform_format = MultiMesh.TRANSFORM_3D
+  multi.mesh = model.mesh
+  multi.instance_count = batch.items.size()
+  for i in batch.items.size():
+   var item: Dictionary = batch.items[i]
+   var position := Vector3(item.position[0],item.position[1],item.position[2])-origin
+   var basis := Basis(Vector3.UP,float(item.yaw)).scaled(Vector3.ONE*float(item.scale))
+   multi.set_instance_transform(i,Transform3D(basis,position)*model.transform)
+  var node := MultiMeshInstance3D.new()
+  node.name = key
+  node.position = origin
+  node.multimesh = multi
+  node.material_override = material
+  node.visibility_range_end = 42.0 if batch.habitat == "deep" else (75.0 if batch.habitat == "shallow" else 100.0)
+  node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON if batch.habitat == "emergent" else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+  node.set_meta("source_asset",batch.id)
+  node.set_meta("habitat",batch.habitat)
+  node.set_meta("plant_count",multi.instance_count)
+  habitats.add_child(node)
+  prototype.free()
+ print("DENSE FLORA BAKED: ",manifest.get("dense_aquatic",[]).size()," plants in ",batches.size()," spatial batches")
 

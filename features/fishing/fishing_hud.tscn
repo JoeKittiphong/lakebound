@@ -1,4 +1,6 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="PackedScene" path="res://features/tutorial/first_catch.tscn" id="tutorial"]
 
 [ext_resource type="PackedScene" path="res://features/collection/collection_panel.tscn" id="collection"]
 [ext_resource type="Script" path="res://features/fishing/fishing_hud.gd" id="script"]
@@ -455,6 +457,12 @@ anchor_bottom = 0
 
 [node name="CollectionPanel" parent="." instance=ExtResource("collection")]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="SafeArea/CollectionButton" to="." method="_on_collection_pressed"]
 
@@ -518,3 +526,5 @@ visible = false
 
 [connection signal="keep_requested" from="ResultLayer" to="." method="_on_keep_pressed"]
 [connection signal="release_requested" from="ResultLayer" to="." method="_on_release_pressed"]
+
+[node name="FirstCatch" parent="SafeArea" instance=ExtResource("tutorial")]

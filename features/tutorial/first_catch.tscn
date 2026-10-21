@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://features/tutorial/first_catch.gd" id="script"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/panel.tres" id="panel"]
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+[node name="FirstCatch" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Card" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -292.0
+offset_right = 292.0
+offset_top = 18.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("panel")
+[node name="Content" type="VBoxContainer" parent="Card"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+[node name="Title" type="Label" parent="Card/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 23
+theme_override_colors/font_color = Color(0.6, 1, 0.82, 1)
+text = "1/5 เดินไปริมน้ำ"
+horizontal_alignment = 1
+[node name="Instruction" type="Label" parent="Card/Content"]
+custom_minimum_size = Vector2(550, 62)
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "ลากจอยซ้ายไปยังหมุดจุดตกปลา"
+horizontal_alignment = 1
+autowrap_mode = 2
+[node name="Progress" type="ProgressBar" parent="Card/Content"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+mouse_filter = 2
+max_value = 5.0
+show_percentage = false
+[node name="Waypoint" type="Label" parent="."]
+offset_right = 200.0
+offset_bottom = 42.0
+mouse_filter = 2
+text = "▼ จุดตกปลา"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.6, 1, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22

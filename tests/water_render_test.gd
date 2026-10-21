@@ -23,7 +23,8 @@ func run() -> void:
  DirAccess.make_dir_recursive_absolute(OUTPUT)
  root.size = Vector2i(1280, 720)
  root.get_node("FishCollection").recording_enabled = false
- var scene: Node3D = load("res://features/gameplay/gameplay.tscn").instantiate()
+ # This depth comparison targets the authored lake fixture, not the river map.
+ var scene: Node3D = load("res://tests/legacy_gameplay.tscn").instantiate()
  root.add_child(scene)
  current_scene = scene
  var ecosystem = scene.get_node("PondEcosystem")
@@ -41,10 +42,12 @@ func run() -> void:
  effects._update_fish_visuals()
  expect(effects.visual_pool.size() == 7, "fish pool remains bounded at seven")
  for i in 4:
-  var visual = effects.visual_pool[i]
-  expect(visual.visible, "fish visible at depth " + str(depths[i]))
-  expect(is_equal_approx(visual.global_position.y, -0.18 - depths[i]), "true fish depth " + str(depths[i]))
- expect(not effects.visual_pool[4].visible, "deep fish culled below visibility budget")
+  # The visual pool is sorted by distance, so identify the fish by its record.
+  var matches = effects.visual_pool.filter(func(visual): return visual.visible and visual.record == ecosystem.fish[i])
+  expect(matches.size() == 1, "fish visible at depth " + str(depths[i]))
+  if matches.size() == 1:
+   expect(is_equal_approx(matches[0].global_position.y, effects.water_height - depths[i]), "true fish depth " + str(depths[i]))
+ expect(effects.visual_pool.filter(func(visual): return visual.visible and visual.record == ecosystem.fish[4]).is_empty(), "deep fish culled below visibility budget")
  expect(scene.get_node("World/Lake").mesh is PlaneMesh, "water is one single-sided plane")
  expect(scene.get_node("World/LakeBed").mesh != null, "authored lake bed loaded")
  await capture("gameplay")

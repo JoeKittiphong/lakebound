@@ -1,5 +1,13 @@
 # Lakebound internal release preparation
 
+## Current status — 21 October 2026, 0.1.7
+
+Bundle 8 (0.1.7) exported with original upload certificate, accepted by Google Play and submitted as Alpha release 7. Includes the owner-requested one-time tester collection/tutorial reset. Managed publishing remains enabled. See release-0.1.7.md and exports/play-store/0.1.7-submitted.png.
+
+## Current status — 21 October 2026, 0.1.6
+
+Signed bundle 7 (0.1.6), original upload certificate, accepted and submitted as closed Alpha release 6. Publishing overview confirms Changes in review. Managed publishing remains enabled. See release-0.1.6.md for verification and the legacy lake-test limitation; screenshot: exports/play-store/0.1.6-submitted.png.
+
 ## Current status — 20 October 2026, 0.1.4
 
 Exported signed bundle 5 (0.1.4), Google Play accepted it, and closed Alpha release 5 was submitted for review. Simulation, collection and visual/input tests passed with zero failures. Previous 0.1.3 was approved while this task was running and remains ready to publish; it was not published here. Managed publishing remains enabled. See `release-0.1.4.md` and `exports/play-store/0.1.4-submitted.png`.
