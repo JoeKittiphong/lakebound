@@ -21,6 +21,8 @@ const BAIT_ICONS = [preload("res://assets/ui/atlas/icon_worm.tres"), preload("re
 @onready var rod_joystick: RodControl = $SafeArea/RodJoystick
 @onready var settings_panel: Control = $SafeArea/BaitPanel
 @onready var meter: Control = $SafeArea/TensionMeter
+@onready var _modal_panels: Array[Control] = [$CollectionPanel, $TacklePanel, $MissionPanel]
+var _modal_reported := false
 var controller: FishingController
 var ecology: PondEcosystem
 var last_state: int = -1
@@ -34,6 +36,62 @@ var pending_mission_completions: Array[String] = []
 var mission_toast_time := 0.0
 @export var tension_reel_gap: float = 24.0
 
+func _ready() -> void:
+ # HUD owns its panels. Session receives only aggregate modal transitions so
+ # closing one panel cannot unpause another panel that is still open.
+ for panel in _modal_panels:
+  panel.connect("opened", _on_modal_changed)
+  panel.connect("closed", _on_modal_changed)
+
+func configure_session(region_id: String, depth_limit: float) -> void:
+ $SafeArea/BaitPanel/Content/DepthRow/Depth.max_value = depth_limit
+ $TacklePanel.map_id = region_id
+ $MissionPanel.map_id = region_id
+
+func bind_economy(profile: AnglerProfile, fishing: FishingController, pond: PondEcosystem, commerce: CommerceGateway) -> void:
+ $TacklePanel.bind(profile, fishing, pond, commerce)
+ $MissionPanel.bind(profile)
+
+func is_tutorial_active() -> bool:
+ return $SafeArea/FirstCatch.active
+
+func is_lure_action_held() -> bool:
+ return $SafeArea/LureAction.button_pressed
+
+func open_tackle() -> void:
+ $TacklePanel.open()
+
+func close_top_panel() -> bool:
+ # Preserve the session's existing Back priority: missions, tackle, collection.
+ for index in range(_modal_panels.size() - 1, -1, -1):
+  if _modal_panels[index].visible:
+   _modal_panels[index].call("close")
+   return true
+ return false
+
+func update_wallet(coins: int) -> void:
+ $SafeArea/TackleButton.visible = true
+ $SafeArea/TackleButton.text = "กระเป๋า · %d เหรียญ" % coins
+
+func set_boss_notice(message: String) -> void:
+ $SafeArea/BossToast.text = message
+
+func set_boss_notice_visible(value: bool) -> void:
+ $SafeArea/BossToast.visible = value
+
+func _on_modal_changed() -> void:
+ var opened := is_collection_open()
+ if opened == _modal_reported:
+  return
+ _modal_reported = opened
+ if opened:
+  rod_joystick.reset()
+  move_joystick.reset()
+  _aim_gesture = false
+  settings_panel.hide()
+  $SafeArea/FirstCatch.hide()
+ collection_visibility_changed.emit(opened)
+
 func bind(fishing: FishingController, pond: PondEcosystem) -> void:
  controller = fishing
  ecology = pond
@@ -42,8 +100,6 @@ func bind(fishing: FishingController, pond: PondEcosystem) -> void:
  controller.state_changed.connect(_on_state_changed)
  rod_joystick.drag_started.connect(_on_rod_started)
  ecology.population_changed.connect(_refresh_ecology)
- $CollectionPanel.opened.connect(func(): collection_visibility_changed.emit(true))
- $CollectionPanel.closed.connect(func(): collection_visibility_changed.emit(false))
  _on_state_changed()
  $SafeArea/FirstCatch.bind(controller, self)
 
@@ -308,7 +364,7 @@ func _on_tackle_pressed() -> void:
   return
  rod_joystick.reset()
  move_joystick.reset()
- $TacklePanel.open()
+ open_tackle()
 
 func _on_lure_down() -> void:
  controller.lure_input.press()

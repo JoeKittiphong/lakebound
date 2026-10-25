@@ -1,5 +1,31 @@
 # Regression tests
 
+## เลือกชุดตรวจสำหรับ refactor
+
+```powershell
+python tools/run_tests.py --list
+python tools/run_tests.py --godot <godot-console.exe> --tests hud_session refactor_boundaries startup_flow
+python tools/run_tests.py --godot <godot-console.exe> --tests regions_integration mobile_multitouch missions_visual --rendering-method gl_compatibility
+python tools/run_tests.py --godot <godot-console.exe> --suite slow --timeout 600
+```
+
+`--list` ตรวจด้วยว่ามี test script ตกหล่นจากทะเบียนหรือทะเบียนอ้างไฟล์ที่หายไป
+`--tests` เลือกตรวจเฉพาะชื่อที่ระบุโดยใช้โหมด headless/render ของทะเบียนเดิม
+`content` เป็นชุดตรวจ asset authoring ที่เลือกแยกได้; `all` รวม content และ slow
+ด้วย ส่วน `packed_size`/`packed_memory_smoke` ต้องเรียกด้วย artifact จริงผ่าน
+Godot `--main-pack` ไม่ใช่รันจาก source แล้วอ้างว่าผ่าน packed verification
+
+`slow` แยก river_integration ที่เดินรอบแม่น้ำด้วยความเร็วจริงออกจากรอบเร็ว
+อย่าเร่งตัวละครหรือลดเส้นทางเพื่อให้ผ่าน timeout ของรอบเร็ว ให้ตั้งเวลาตามคำสั่งข้างบน
+runner ไม่ถือว่า timeout คือ pass และจะหยุด process tree ของ Godot บน Windows
+
+บน Windows แต่ละ test process มี APPDATA/LOCALAPPDATA และ `user://` แยกใต้
+`<output>/profiles/<test>/` เพื่อไม่ให้ tutorial/เซฟที่ suite ก่อนหน้าเขียนมีผลต่อ
+suite ถัดไป Fixtures บางตัวเขียนไฟล์ QA ลง `res://exports/` โดยตรง จึงยังไม่ควร
+รัน suite เดียวกันหลาย process ทับกันใน checkout เดียว
+
+ขอบเขตและผลรอบล่าสุด: [refactor-phase1-verification.md](../docs/refactor-phase1-verification.md)
+
 ต้องมี Godot console executable รุ่นเดียวกับโปรเจค และ Python 3 ตั้ง `LAKEBOUND_GODOT` หรือส่ง `--godot` ไม่มีการดาวน์โหลด engine อัตโนมัติ
 
 ```powershell

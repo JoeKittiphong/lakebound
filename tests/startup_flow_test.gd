@@ -43,13 +43,19 @@ func run() -> void:
   expect(root.get_camera_3d() == original_camera, "Start preserves the active camera")
   expect(loading.cinematic.stage == loading.cinematic.Stage.WAITING, "main menu keeps the angler waiting instead of replaying the intro")
   expect(not loading.get_node("SafeArea").visible, "loading controls are hidden beneath the main menu UI")
+  # Play now opens a region scene inheriting Gameplay, not gameplay.tscn
+  # itself. Wait for the asynchronous scene change and assert its exact route.
+  var selected_region: String = loading.menu_ui.selected_region
+  var expected_scene: String = RegionCatalog.find(selected_region).scene
   loading.menu_ui._on_play_pressed()
-  await process_frame
-  await process_frame
-  var gameplay_ready := current_scene.scene_file_path == "res://features/gameplay/gameplay.tscn"
-  expect(gameplay_ready, "menu Play opens the composed gameplay session")
+  var deadline := Time.get_ticks_msec() + 10000
+  while (not is_instance_valid(current_scene) or current_scene.scene_file_path != expected_scene) and Time.get_ticks_msec() < deadline:
+   await process_frame
+  var gameplay_ready := is_instance_valid(current_scene) and current_scene.scene_file_path == expected_scene
+  expect(gameplay_ready, "menu Play opens the selected region's composed gameplay session")
   if gameplay_ready:
    var session := current_scene
+   expect(session.map_id == selected_region, "selected region retains its save namespace")
    session.get_node("FishingEffects").audio_enabled = false
    session._on_back_pressed()
    await process_frame

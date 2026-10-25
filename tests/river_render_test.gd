@@ -43,6 +43,7 @@ func run() -> void:
  game.queue_free()
  for frame in 3:
   await process_frame
+ print("RIVER RENDER RESULT: captures complete")
  quit()
 
 

@@ -9,6 +9,12 @@ var pond: PondEcosystem
 var commerce: CommerceGateway
 var map_id := "river"
 
+func _exit_tree() -> void:
+ if is_instance_valid(profile) and profile.changed.is_connected(refresh):
+  profile.changed.disconnect(refresh)
+ if is_instance_valid(commerce) and commerce.status_changed.is_connected(refresh):
+  commerce.status_changed.disconnect(refresh)
+
 func bind(value: AnglerProfile, controller: FishingController, ecosystem: PondEcosystem, gateway: CommerceGateway) -> void:
  profile = value
  fishing = controller

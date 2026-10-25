@@ -37,6 +37,10 @@ func run() -> void:
  scene.get_node("FishingEffects").audio_enabled = false
  var hud: FishingHUD = scene.get_node("HUD/FishingHUD")
  var panel: Control = hud.get_node("TacklePanel")
+ # Opening the first modal pauses physics immediately. Establish actual floor
+ # contact before it opens so the later cast does not depend on render speed.
+ for frame in 30:
+  await physics_frame
  for size in [Vector2i(1280, 720), Vector2i(1600, 720)]:
   root.size = size
   hud._on_tackle_pressed()

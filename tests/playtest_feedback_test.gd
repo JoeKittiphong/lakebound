@@ -182,4 +182,5 @@ func run() -> void:
   camera.set_orbiting(false)
  scene.queue_free()
  await process_frame
+ print("PLAYTEST FEEDBACK RESULT: ", failures, " failures")
  quit(1 if failures else 0)

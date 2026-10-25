@@ -56,6 +56,10 @@ func run_checks() -> void:
  var controller := scene.get_node("FishingController")
  var pond := scene.get_node("PondEcosystem")
  var player := scene.get_node("Player")
+ # This suite tests free play; tutorial interaction has its own suite. A fresh
+ # isolated profile otherwise puts the tutorial card over the camera gesture.
+ hud.get_node("SafeArea/FirstCatch").active = false
+ hud.get_node("SafeArea/FirstCatch").hide()
  expect(hud.get_node("SafeArea/BaitPanel/Content/BaitRow/BaitSelect").item_count == 3, "three editor-authored bait options")
  expect(hud.get_node("SafeArea/CollectionButton").icon != null and hud.get_node("SafeArea/CollectionButton").text.is_empty(), "collection opens with a book icon instead of a text button")
  expect(not hud.get_node("SafeArea/BaitPanel").visible and not hud.get_node("SafeArea/Status").visible and not hud.get_node("SafeArea/MoveLabel").visible and not hud.get_node("SafeArea/RodInstructions").visible, "ready HUD keeps instructions and configuration off the playfield")
@@ -91,6 +95,8 @@ func run_checks() -> void:
  root.size = Vector2i(1280, 720)
  await frames()
  var rig := scene.get_node("CameraRig")
+ # Facing follows camera yaw while aiming; traversal follows the move stick.
+ touch(21, true, center(hud.rod_joystick))
  touch(20, true, Vector2(900, 200))
  drag(20, Vector2(960, 210), Vector2(60, 10))
  await frames()
@@ -99,6 +105,8 @@ func run_checks() -> void:
  var aimed: Vector3 = controller.get_aim_position() - player.global_position
  expect(aimed.x > 1.0, "casting target rotates with character facing")
  touch(20, false, Vector2(960, 210))
+ hud.rod_joystick.notification(NOTIFICATION_APPLICATION_FOCUS_OUT)
+ touch(21, false, center(hud.rod_joystick))
  controller.aim_yaw = PI
  expect(not controller.cast() and controller.state == controller.State.READY, "casting onto land is rejected without moving bait into pond")
  touch(23, true, Vector2(900, 200))

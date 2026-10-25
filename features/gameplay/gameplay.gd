@@ -30,10 +30,8 @@ func _notification(what: int) -> void:
   get_tree().quit()
 
 func _ready() -> void:
- hud.get_node("SafeArea/BaitPanel/Content/DepthRow/Depth").max_value = maximum_fishing_depth
+ hud.configure_session(map_id, maximum_fishing_depth)
  fishing.map_id = map_id
- hud.get_node("TacklePanel").map_id = map_id
- hud.get_node("MissionPanel").map_id = map_id
  if economy_enabled:
   profile = get_node("/root/AnglerSave")
   fishing.bind_profile(profile)
@@ -45,9 +43,7 @@ func _ready() -> void:
    pond.reset_population(randi())
    profile.store_pond(map_id, pond.snapshot())
   commerce = $CommerceGateway
-  hud.get_node("TacklePanel").bind(profile, fishing, pond, commerce)
-  hud.get_node("TacklePanel").opened.connect(func(): _on_collection_visibility_changed(true))
-  hud.get_node("TacklePanel").closed.connect(func(): _on_collection_visibility_changed(false))
+  hud.bind_economy(profile, fishing, pond, commerce)
   commerce.reward_completed.connect(func(receipt: String, recovery_id: String): profile.apply_verified_reward(receipt, recovery_id))
   commerce.purchase_completed.connect(func(receipt: String, diamonds: int): profile.apply_verified_purchase(receipt, diamonds))
   profile.changed.connect(_refresh_profile)
@@ -57,7 +53,7 @@ func _ready() -> void:
   fishing.fish_lost.connect(func(_reason: String):
    profile.store_pond(map_id, pond.snapshot())
    if not profile.data.pending.is_empty():
-    hud.get_node("TacklePanel").open())
+    hud.open_tackle())
   _refresh_profile()
   _boss_toast = 5.0
  player.input_enabled = true
@@ -77,9 +73,6 @@ func _ready() -> void:
  hud.orbit_requested.connect(camera_rig.set_orbiting)
  hud.orbit_dragged.connect(camera_rig.drag_orbit)
  if profile != null:
-  hud.get_node("MissionPanel").bind(profile)
-  hud.get_node("MissionPanel").opened.connect(func(): _on_collection_visibility_changed(true))
-  hud.get_node("MissionPanel").closed.connect(func(): _on_collection_visibility_changed(false))
   _start_missions_if_ready()
  hud.keep_requested.connect(func(): fishing.resolve_catch(true))
  hud.release_requested.connect(func(): fishing.resolve_catch(false))
@@ -93,7 +86,7 @@ func _ready() -> void:
  _on_fishing_state_changed()
 
  if profile != null and not profile.data.pending.is_empty():
-  hud.get_node("TacklePanel").open.call_deferred()
+  hud.open_tackle.call_deferred()
 
 func _on_fish_landed(fish: RefCounted) -> void:
  if profile != null:
@@ -104,7 +97,7 @@ func _on_fish_landed(fish: RefCounted) -> void:
    "catch_id": fishing.catch_event_id, "fish_key": map_id + ":" + fish.persistent_key,
    "bait_id": fishing.cast_bait_id if not fishing.cast_bait_id.is_empty() else String(profile.equipped("bait").id),
    "bait_kind": profile.equipped("bait").kind, "boss": pond.boss() == fish,
-   "mission_eligible": bool(profile.data.missions.started) and not hud.get_node("SafeArea/FirstCatch").active,
+   "mission_eligible": bool(profile.data.missions.started) and not hud.is_tutorial_active(),
    "bait": profile.equipped("bait").display_name, "rod": profile.equipped("rod").display_name,
    "reel": profile.equipped("reel").display_name, "line": profile.equipped("line").display_name,
    "time": Time.get_unix_time_from_system()}
@@ -137,10 +130,10 @@ func _process(_delta: float) -> void:
  if profile != null:
   _start_missions_if_ready()
   _boss_toast = maxf(0.0, _boss_toast - _delta)
-  hud.get_node("SafeArea/BossToast").visible = _boss_toast > 0 and fishing.state == fishing.State.READY
+  hud.set_boss_notice_visible(_boss_toast > 0 and fishing.state == fishing.State.READY)
   if Input.is_physical_key_pressed(KEY_E) and fishing.state == fishing.State.WAITING and fishing.using_lure():
    fishing.lure_input.press()
-  elif fishing.lure_input.pressed and not hud.get_node("SafeArea/LureAction").button_pressed:
+  elif fishing.lure_input.pressed and not hud.is_lure_action_held():
    fishing.lure_input.release()
  var rod := hud.rod_direction()
  var keys := Input.get_vector("rod_left", "rod_right", "reel_out", "reel_in")
@@ -198,8 +191,6 @@ func _on_configuration_changed(bait: StringName, depth: float) -> void:
 
 func _on_collection_visibility_changed(opened: bool) -> void:
  camera_rig.reset_input()
- if opened:
-  hud.get_node("SafeArea/FirstCatch").hide()
  if opened and not _modal_active:
   _previous_pause = get_tree().paused
   _modal_active = true
@@ -210,20 +201,17 @@ func _on_collection_visibility_changed(opened: bool) -> void:
  _on_fishing_state_changed()
 
 func _exit_tree() -> void:
+ # Persistent services must not refresh child panels while the session's
+ # children are already detached and this final population save emits changed.
+ if is_instance_valid(profile) and profile.changed.is_connected(_refresh_profile):
+  profile.changed.disconnect(_refresh_profile)
  if profile != null and is_instance_valid(pond):
   profile.store_pond(map_id, pond.snapshot())
  if _modal_active:
   get_tree().paused = _previous_pause
 
 func _on_back_pressed() -> void:
- if hud.get_node("MissionPanel").visible:
-  hud.get_node("MissionPanel").close()
-  return
- if hud.get_node("TacklePanel").visible:
-  hud.get_node("TacklePanel").close()
-  return
- if hud.is_collection_open():
-  hud.close_collection()
+ if hud.close_top_panel():
   return
  fishing.cancel()
  if fishing.state == FishingController.State.RESULT:
@@ -232,7 +220,7 @@ func _on_back_pressed() -> void:
 
 func _start_missions_if_ready() -> void:
  _track_current_region()
- if profile != null and not profile.data.missions.started and not hud.get_node("SafeArea/FirstCatch").active:
+ if profile != null and not profile.data.missions.started and not hud.is_tutorial_active():
   # Avoid retrying an unavailable save every frame. The mission panel provides
   # an explicit retry, while free fishing remains available.
   if profile.save_error.is_empty() and not profile.incompatible:
@@ -253,9 +241,8 @@ func _refresh_profile() -> void:
   return
  fishing.refresh_equipment()
  hud.sync_equipment()
- hud.get_node("SafeArea/TackleButton").visible = true
- hud.get_node("SafeArea/TackleButton").text = "กระเป๋า · %d เหรียญ" % profile.data.coins
+ hud.update_wallet(profile.data.coins)
  var boss := pond.boss()
  if boss != null:
   var discovered: bool = collection.stats(boss.species.id).count > 0
-  hud.get_node("SafeArea/BossToast").text = "จ้าวบ่อ: %s — %.2f กก." % [boss.species.display_name if discovered else "???", boss.weight]
+  hud.set_boss_notice("จ้าวบ่อ: %s — %.2f กก." % [boss.species.display_name if discovered else "???", boss.weight])

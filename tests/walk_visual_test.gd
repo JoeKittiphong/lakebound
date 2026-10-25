@@ -27,7 +27,7 @@ func run() -> void:
   await RenderingServer.frame_post_draw
   root.get_texture().get_image().save_png(output + "/walk_%02d.png" % i)
  Input.action_release("move_forward")
- print("WALK VISUAL: 24 frames rendered at measured ground speed")
+ print("WALK VISUAL RESULT: 24 frames rendered at measured ground speed")
  scene.queue_free()
  await process_frame
  quit()
