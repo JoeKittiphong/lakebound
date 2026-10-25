@@ -34,7 +34,9 @@ func _ready() -> void:
  fishing.map_id = map_id
  if economy_enabled:
   profile = get_node("/root/AnglerSave")
-  fishing.bind_profile(profile)
+  fishing.bind_profile(profile, collection)
+  if not CatchSettlement.reconcile(profile, collection) and not collection.save_error.is_empty():
+   profile.save_error = collection.save_error
   if profile.data.ponds.has(map_id):
    if not pond.restore(profile.data.ponds[map_id]):
     profile.incompatible = true
@@ -88,26 +90,24 @@ func _ready() -> void:
  if profile != null and not profile.data.pending.is_empty():
   hud.open_tackle.call_deferred()
 
-func _on_fish_landed(fish: RefCounted) -> void:
+func _on_fish_landed(fish: FishState) -> void:
+ var outcome: Dictionary = {}
+ var error: String = collection.save_error
  if profile != null:
   if fishing.catch_event_id.is_empty():
    fishing.catch_event_id = Crypto.new().generate_random_bytes(16).hex_encode()
-  fishing.catch_record = {"species": String(fish.species.id), "name": fish.species.display_name,
-   "weight": fish.weight, "map": map_id, "depth": fishing.bite_depth,
-   "catch_id": fishing.catch_event_id, "fish_key": map_id + ":" + fish.persistent_key,
-   "bait_id": fishing.cast_bait_id if not fishing.cast_bait_id.is_empty() else String(profile.equipped("bait").id),
-   "bait_kind": profile.equipped("bait").kind, "boss": pond.boss() == fish,
-   "mission_eligible": bool(profile.data.missions.started) and not hud.is_tutorial_active(),
-   "bait": profile.equipped("bait").display_name, "rod": profile.equipped("rod").display_name,
-   "reel": profile.equipped("reel").display_name, "line": profile.equipped("line").display_name,
-   "time": Time.get_unix_time_from_system()}
-  profile.record_catch(fishing.catch_record, pond.boss() == fish)
- var outcome: Dictionary = collection.record_catch_result(fish)
- if profile != null:
-  fishing.feedback = collection.catch_message(outcome) + " • เก็บในกล่องหรือปล่อยกลับ"
-  if not profile.save_error.is_empty():
-   fishing.feedback = profile.save_error
- hud.show_catch_result(fish, collection.save_error)
+  if fishing.catch_record.is_empty():
+   fishing.catch_record = CatchSettlement.make_record(fish, profile, map_id,
+    fishing.catch_event_id, fishing.cast_bait_id, fishing.bite_depth,
+    pond.boss() == fish, bool(profile.data.missions.started) and not hud.is_tutorial_active())
+  var result := CatchSettlement.persist(profile, collection, fishing.catch_record)
+  outcome = result.outcome
+  error = result.error
+  fishing.feedback = collection.catch_message(outcome) + " • เก็บในกล่องหรือปล่อยกลับ" if result.saved else result.error
+ else:
+  outcome = collection.record_catch_result(fish)
+  error = collection.save_error
+ hud.show_catch_result(fish, error)
 
 func _on_view_changed(yaw: float) -> void:
  if camera_rig.orbiting:

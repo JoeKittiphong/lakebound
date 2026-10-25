@@ -1,6 +1,9 @@
 extends SubViewportContainer
 
 @export var reel_scene: PackedScene = preload("res://features/equipment/reels/baitcaster.tscn")
+## Enable for replacement models with autonomous animations or time shaders.
+@export var continuous_rendering := false
+var _redraw_needed := true
 var spin := 0.0
 var crank := 0.0
 var tilt := 0.0
@@ -12,6 +15,8 @@ func _ready() -> void:
  if reel_scene != null and model.scene_file_path != reel_scene.resource_path:
   equip(reel_scene)
  visibility_changed.connect(_update_rendering)
+ resized.connect(_request_redraw)
+ $Viewport.size_changed.connect(_request_redraw)
  _update_rendering()
 
 # Future equipment selection can provide another scene with the same pivot names.
@@ -28,18 +33,32 @@ func equip(scene: PackedScene) -> bool:
  $Viewport.add_child(model)
  reel_scene = scene
  _apply_pose()
+ _request_redraw()
  return true
 
 func _update_rendering() -> void:
- $Viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS if is_visible_in_tree() else SubViewport.UPDATE_DISABLED
+ _redraw_needed = true
+ $Viewport.render_target_update_mode = SubViewport.UPDATE_ONCE if is_visible_in_tree() else SubViewport.UPDATE_DISABLED
+
+func _request_redraw() -> void:
+ _redraw_needed = true
+ if is_visible_in_tree():
+  $Viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 
 func _process(delta: float) -> void:
  if not is_visible_in_tree():
   return
+ var previous := Vector3(spin, crank, tilt)
  crank += command.y * delta * 7.0
  spin += (-3.0 if slipping and absf(command.y) < 0.1 else command.y * 9.0) * delta
  tilt = lerpf(tilt, command.x * 0.16, 1.0 - exp(-12.0 * delta))
+ if absf(tilt - command.x * 0.16) < 0.00001:
+  tilt = command.x * 0.16
+ if not _redraw_needed and not continuous_rendering and previous == Vector3(spin, crank, tilt):
+  return
  _apply_pose()
+ $Viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+ _redraw_needed = false
 
 func _apply_pose() -> void:
  model.rotation.z = tilt

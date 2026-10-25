@@ -99,6 +99,7 @@ func run() -> void:
  profile.data.pending = {}
  for fraction in [0.0, 0.85, 1.0]:
   profile.data.catches = [] if fraction == 0.0 else [{"weight": profile.equipped("box").capacity * fraction}]
+  profile.changed.emit()
   hud._process(0.01)
   var info := hud.get_node("SafeArea/FishBox/Row/Info")
   expect(info.get_node("Count").text.contains("0 ตัว" if fraction == 0 else "1 ตัว"), "box count reflects retained fish at %.0f%%" % (fraction * 100))
@@ -106,6 +107,7 @@ func run() -> void:
   if fraction >= 0.8:
    expect(("เต็มแล้ว" if fraction == 1.0 else "ใกล้เต็ม") in info.get_node("State").text, "box warns near/full %.0f%%" % (fraction * 100))
  profile.data.catches = []
+ profile.changed.emit()
  hud._process(0.01)
  expect(hud.get_node("SafeArea/FishBox/Row/Info/Fill").value == 0, "selling/removing stored fish clears the capacity indicator")
  controller.profile = null

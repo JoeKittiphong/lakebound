@@ -13,88 +13,24 @@ func _ready() -> void:
  load_profile()
 
 func defaults() -> Dictionary:
- return {"coins": 350, "diamonds": 0, "stock": {"worm": 20, "dough": 10, "minnow": 1, "light_rod": 1, "basic_reel": 1, "small_box": 1},
-  "equipped": {"bait": "worm", "lure": "minnow", "rod": "light_rod", "reel": "basic_reel", "box": "small_box", "line": "nylon"},
-  "line_remaining": 65.0, "spares": {}, "catches": [], "journal": [], "boss_history": [], "ponds": {}, "pending": {}, "receipts": [], "missions": MissionProgress.defaults()}
+ return ProfileStore.defaults()
 
 func load_profile() -> void:
- data = defaults()
- var config := ConfigFile.new()
- var error := config.load(save_path)
- if error == ERR_FILE_NOT_FOUND:
-  return
- if error != OK or config.get_value("meta", "version", 0) != 1:
-  incompatible = true
-  save_error = "อ่านข้อมูลผู้เล่นไม่ได้ — เก็บไฟล์เดิมไว้"
-  return
- var saved = config.get_value("profile", "data", {})
- # Additive migration: old v1 profiles keep every existing balance and record.
- if saved is Dictionary and not saved.has("missions"):
-  saved["missions"] = MissionProgress.defaults()
- if not _valid(saved):
-  incompatible = true
-  save_error = "ข้อมูลผู้เล่นไม่ถูกต้อง — เก็บไฟล์เดิมไว้"
-  return
- data = saved
+ var result := ProfileStore.load_profile(save_path)
+ data = result.data
+ incompatible = result.incompatible
+ save_error = ""
+ if incompatible:
+  save_error = "ข้อมูลผู้เล่นไม่ถูกต้อง — เก็บไฟล์เดิมไว้" if result.invalid_data else "อ่านข้อมูลผู้เล่นไม่ได้ — เก็บไฟล์เดิมไว้"
 
 func _valid(value: Variant) -> bool:
- if not value is Dictionary:
-  return false
- var expected := defaults()
- for key in expected:
-  if not value.has(key) or typeof(value[key]) != typeof(expected[key]):
-   return false
- if value.coins < 0 or value.diamonds < 0 or not is_finite(value.line_remaining) or value.line_remaining < 0:
-  return false
- if not MissionProgress.valid(value.missions):
-  return false
- for slot in expected.equipped:
-  var entry := Catalog.item(str(value.equipped.get(slot, "")))
-  if entry == null or (entry.kind != slot and not (slot == "bait" and entry.kind == "lure")):
-   return false
- for key in value.stock:
-  if Catalog.item(str(key)) == null or not value.stock[key] is int or value.stock[key] < 0:
-   return false
- for key in value.spares:
-  var spare := Catalog.item(str(key))
-  if spare == null or spare.kind != "line" or not value.spares[key] is int or value.spares[key] < 0:
-   return false
- if value.line_remaining > Catalog.item(str(value.equipped.line)).length:
-  return false
- if not value.pending.is_empty():
-  var lure := Catalog.item(str(value.pending.get("lure", "")))
-  if lure == null or lure.kind != "lure" or not value.pending.get("id") is String or str(value.pending.id).is_empty() or value.pending.get("cost", -1) != lure.recovery_cost:
-   return false
- for receipt in value.receipts:
-  if not receipt is String or receipt.is_empty():
-   return false
- for entries in [value.catches, value.journal, value.boss_history]:
-  for record in entries:
-   if not record is Dictionary:
-    return false
-   for key in ["name", "map", "bait", "rod", "reel", "line", "species"]:
-    if not record.get(key) is String:
-     return false
-   for key in ["weight", "depth", "time"]:
-    if not (record.get(key) is float or record.get(key) is int) or not is_finite(float(record[key])) or record[key] < 0:
-     return false
-   if record.weight <= 0:
-    return false
- for map_id in value.ponds:
-  if not map_id is String or not value.ponds[map_id] is Array:
-   return false
- return true
+ return ProfileStore.valid(value)
 
 func _commit(before: Dictionary) -> bool:
  if incompatible:
   data = before
   return false
- var config := ConfigFile.new()
- config.set_value("meta", "version", 1)
- config.set_value("profile", "data", data)
- var error := config.save(save_path + ".tmp")
- if error == OK:
-  error = DirAccess.rename_absolute(save_path + ".tmp", save_path)
+ var error := ProfileStore.save_profile(save_path, data)
  if error != OK:
   data = before
   save_error = "บันทึกไม่สำเร็จ — ยกเลิกรายการแล้ว"

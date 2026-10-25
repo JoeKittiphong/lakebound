@@ -1,5 +1,23 @@
 # Regression tests
 
+## Persistence และ performance (phase 2)
+
+```powershell
+python tools/run_tests.py --godot <godot-console.exe> --tests catch_settlement economy refactor_boundaries
+python tools/run_tests.py --godot <godot-console.exe> --suite performance --rendering-method gl_compatibility --output exports/qa-performance
+```
+
+`catch_settlement` ตรวจ legacy migration, duplicate events, failed writes,
+restart/replay, collection corruption และ Keep gate ใน controller จริง
+`hud_performance` วัด CPU ของ HUD แยกจาก FPS และตรวจว่าไม่มี weight scan ซ้ำ
+เมื่อข้อมูลคงเดิม; `frame_performance` เก็บ engine process/draw-call counters
+จากฉาก rendered; `reel_render` ตรวจ cached viewport พร้อม animation/resize
+ชุดวัดไม่ตั้งเกณฑ์เวลาฮาร์ดแวร์ตายตัว แต่ใช้ assertions ของงานที่ต้องไม่ทำซ้ำ
+ตัวเลือก `-- --baseline` ของ Godot script `hud_performance_test.gd` ใช้เมื่อวัด
+checkout **ก่อน** optimization เท่านั้น และปิดเฉพาะ assertions ของ cache ที่ยังไม่มี
+
+ผลและวิธีเปรียบเทียบ: [refactor-phase2-performance.md](../docs/refactor-phase2-performance.md)
+
 ## เลือกชุดตรวจสำหรับ refactor
 
 ```powershell

@@ -84,7 +84,10 @@ var lure_input := LureInput.new()
 var lure_holding := false
 var lure_action_name: StringName = &"release"
 
-func bind_profile(value: AnglerProfile) -> void:
+var _catch_collection: Node
+
+func bind_profile(value: AnglerProfile, collection: Node = null) -> void:
+ _catch_collection = collection
  profile = value
  tuning = tuning.duplicate()
  lure_input.action.connect(_on_lure_action)
@@ -151,6 +154,8 @@ func cast() -> bool:
  return true
 
 func cast_block_reason() -> String:
+ if is_instance_valid(_catch_collection) and _catch_collection.recording_enabled and _catch_collection.incompatible_save:
+  return "อ่านสมุดสะสมเดิมไม่ได้ — เก็บไฟล์เดิมไว้ กรุณาตรวจข้อมูลก่อนตกต่อ"
  if profile != null:
   if profile.incompatible:
    return "อ่านข้อมูลผู้เล่นไม่ได้ — ยังเหวี่ยงเบ็ดไม่ได้"
@@ -334,9 +339,15 @@ func resolve_catch(keep_fish: bool) -> void:
   return
  # Retry the same immutable landed event after a save failure, before allowing
  # the result screen to discard it. Successful events are idempotent.
- if profile != null and catch_record.has("catch_id") and not profile.record_catch(catch_record, bool(catch_record.get("boss", false))):
-  feedback = profile.save_error
-  return
+ if profile != null and catch_record.has("catch_id"):
+  if is_instance_valid(_catch_collection):
+   var result := CatchSettlement.persist(profile, _catch_collection, catch_record)
+   if not result.saved:
+    feedback = result.error
+    return
+  elif not profile.record_catch(catch_record, bool(catch_record.get("boss", false))):
+   feedback = profile.save_error
+   return
  if keep_fish:
   if profile != null:
    var population := ecosystem.snapshot()

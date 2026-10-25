@@ -23,6 +23,10 @@ godot --path .
 ดู [นโยบายไฟล์ GitHub](docs/repository-policy.md) และ
 [แผน refactor รอบถัดไป](docs/refactor-roadmap-2026-10.md)
 
+ผลรอบล่าสุด: [Persistence และ performance](docs/refactor-phase2-performance.md)
+แยก ProfileStore/CatchSettlement, กู้ journal events ที่ยังลงสมุดปลาไม่ครบ,
+อัปเดตกล่องปลาเมื่อข้อมูลเปลี่ยน และ cache ภาพรอก 3D ตอนนิ่ง
+
 เนื้อหาปัจจุบันมี 6 แหล่งน้ำ เรือ ภารกิจ และสมุดสะสม 105 รายการ ดูรายละเอียดที่
 [แผนที่และสารานุกรม](docs/regions-and-encyclopedia.md)
 

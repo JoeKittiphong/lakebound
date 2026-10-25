@@ -4,6 +4,9 @@
 > missions และ regions เพิ่ม การเข้าถึง HUD ภายในจาก session ถูกแทนด้วย API แล้ว
 > ใน [refactor phase 1](refactor-phase1-verification.md)
 > ดูผลสำรวจซอร์สจริงและแผนแก้ล่าสุดที่ [refactor-roadmap-2026-10.md](refactor-roadmap-2026-10.md)
+> Persistence และ presentation ล่าสุดอยู่ที่ [phase 2 + performance](refactor-phase2-performance.md):
+> AnglerSave delegate IO ไป ProfileStore, journal/collection ใช้ CatchSettlement
+> และ additive applied-event metadata, FishBoxView invalidate ตาม profile.changed
 > อย่าใช้ข้อความ ownership ด้านล่างเป็นหลักฐานว่าทุก boundary ถูกบังคับครบแล้ว
 
 ## Ownership

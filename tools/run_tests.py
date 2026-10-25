@@ -14,13 +14,16 @@ ROOT = Path(__file__).resolve().parents[1]
 HEADLESS = ("fishing_recovery", "boat_integration", "traversal_equipment", "character_integration", "walk_sync", "playtest_feedback", "export_size", "ui_atlas", "missions", "economy", "expansion_flow", "first_catch_tutorial", "startup_flow", "camera_movement", "bait_retrieval", "tension_haptics", "fish_behavior", "fishing_simulation", "fish_catalog_fishing", "fish_models", "refactor_boundaries")
 RENDER = ("fishing_recovery_visual", "fisherman_visual", "ui_atlas_visual", "missions_visual", "expansion_visual", "collection", "mobile_collection", "mobile_multitouch", "fishing_visual", "active_scene_movement", "rod_tension", "fish_render", "water_render", "water_interactions", "water_optimization")
 HEADLESS += ("hud_session", "loading_flow", "fish_encyclopedia", "regions_fishing", "regions_legacy_save", "wooden_jetty_integration", "mobile_fishing_tuning")
+HEADLESS += ("catch_settlement",)
+PERFORMANCE = ("hud_performance",)
+PERFORMANCE_RENDER = ("frame_performance", "reel_render")
 SLOW_HEADLESS = ("river_integration",)  # Walks the full river loop at production speed.
 RENDER += ("regions_integration", "loading_cinematic_visual", "character_preview", "mobile_refinements", "mobile_fishing_visual", "walk_visual", "river_render")
 # Asset authoring checks are opt-in; unlike gameplay regression they may need
 # source art/tool outputs and a renderer. Packed checks require an artifact.
 CONTENT = ("aquatic", "background", "dense_flora", "bridge_normal_visual", "concept_rocks", "reference_rocks", "rock_asset", "rock_clusters", "rock_landscaping")
 PACKED = ("packed_size", "packed_memory_smoke")
-SOURCE_TESTS = HEADLESS + SLOW_HEADLESS + RENDER + CONTENT
+SOURCE_TESTS = HEADLESS + SLOW_HEADLESS + RENDER + CONTENT + PERFORMANCE + PERFORMANCE_RENDER
 # These host/sandbox diagnostics do not concern game scripts; keep them in logs
 # and report them separately instead of treating every successful exit as proof.
 HOST_DIAGNOSTICS = (
@@ -37,7 +40,7 @@ HOST_DIAGNOSTICS = (
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", default=os.environ.get("LAKEBOUND_GODOT") or shutil.which("godot"))
-    parser.add_argument("--suite", choices=("headless", "slow", "render", "content", "all"), default="headless")
+    parser.add_argument("--suite", choices=("headless", "slow", "render", "content", "performance", "all"), default="headless")
     parser.add_argument("--tests", nargs="+", choices=SOURCE_TESTS, help="Run selected source tests instead of a whole suite")
     parser.add_argument("--list", action="store_true", help="List registered tests without starting Godot")
     parser.add_argument("--rendering-method", choices=("mobile", "gl_compatibility", "forward_plus"), help="Explicit renderer for GPU tests")
@@ -46,7 +49,7 @@ def main() -> int:
     parser.add_argument("--android-pack", type=Path, help="Also check an existing Android PCK for exported UI and touch regressions")
     args = parser.parse_args()
     if args.list:
-        for group, tests in (("headless", HEADLESS), ("slow/headless", SLOW_HEADLESS), ("render", RENDER), ("content", CONTENT), ("packed (artifact required)", PACKED)):
+        for group, tests in (("headless", HEADLESS), ("slow/headless", SLOW_HEADLESS), ("render", RENDER), ("content", CONTENT), ("performance/headless", PERFORMANCE), ("performance/render", PERFORMANCE_RENDER), ("packed (artifact required)", PACKED)):
             print(f"{group}: {', '.join(tests)}")
         registered = set(SOURCE_TESTS + PACKED)
         found = {path.stem.removesuffix("_test") for path in (ROOT / "tests").glob("*_test.gd")}
@@ -120,12 +123,15 @@ def main() -> int:
             suites += [(test, True) for test in HEADLESS]
         if args.suite in ("slow", "all"):
             suites += [(test, True) for test in SLOW_HEADLESS]
+        if args.suite in ("performance", "all"):
+            suites += [(test, True) for test in PERFORMANCE]
+            suites += [(test, False) for test in PERFORMANCE_RENDER]
         if args.suite in ("render", "all"):
             suites += [(test, False) for test in RENDER]
         if args.suite in ("content", "all"):
             suites += [(test, False) for test in CONTENT]
         if args.tests:
-            suites = [(test, test in HEADLESS + SLOW_HEADLESS) for test in dict.fromkeys(args.tests)]
+            suites = [(test, test in HEADLESS + SLOW_HEADLESS + PERFORMANCE) for test in dict.fromkeys(args.tests)]
         for test, headless in suites:
             command = [args.godot, "--path", str(ROOT), "--log-file", str(output / f"{test}.log")]
             if headless:

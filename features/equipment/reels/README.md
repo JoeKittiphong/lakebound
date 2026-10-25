@@ -2,9 +2,9 @@
 
 `baitcaster.tscn` is the first overhead charcoal/turquoise double-paddle model. Its meshes, materials, mounting foot, spool, frame and crank are saved in the scene and editable before running.
 
-The UI in `shared/ui/reel_control.tscn` provides a transparent isolated 3D viewport, orthographic overhead camera and lighting. `shared/ui/reel_visual.gd` drives the model; hidden reels disable viewport rendering.
+The UI in `shared/ui/reel_control.tscn` provides a transparent isolated 3D viewport, orthographic overhead camera and lighting. `shared/ui/reel_visual.gd` drives the model; hidden reels disable viewport rendering. Static visible reels retain their last texture and request a new render only when pose, visibility, equipment or viewport size changes. Winding, brake slip and tilt settling still update every animated frame. Enable `continuous_rendering` in the Inspector for models with autonomous animations or time-based shaders.
 
-To add a model, create a Node3D scene with direct Node3D children named `Spool` and `Crank`. Their local X axes are the shared shaft direction; place each pivot at its actual axle and model its geometry under that pivot. The controller sets their X rotations and the root Z tilt. Use the first model's scale and framing as a reference.
+To add a model, create a Node3D scene with direct Node3D children named `Spool` and `Crank`, plus the `Guide` node used to align the tension meter. Their local X axes are the shared shaft direction; place each pivot at its actual axle and model its geometry under that pivot. The controller sets their X rotations and the root Z tilt. Use the first model's scale and framing as a reference.
 
 Assign the PackedScene to the Reel Scene Inspector property, or call `equip(scene)` when an equipment selection is made. Invalid scenes are rejected before replacing the current model. This prepares visual swapping; ownership, prices and an equipment selection menu are not implemented here.
 

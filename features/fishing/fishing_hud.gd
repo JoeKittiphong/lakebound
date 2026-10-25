@@ -237,24 +237,10 @@ func _refresh_cast_reason(state: int) -> void:
   label.text = controller.cast_block_reason()
 
 func _refresh_fish_box() -> void:
- var box: Control = $SafeArea/FishBox
+ var box: FishBoxView = $SafeArea/FishBox
  box.visible = controller.profile != null and not is_collection_open()
- if controller.profile == null:
-  return
- var profile := controller.profile
- var weight := profile.box_weight()
- var capacity: float = profile.equipped("box").capacity
- var remaining := maxf(0.0, capacity - weight)
- var fraction := clampf(weight / maxf(capacity, 0.01), 0.0, 1.0)
- var info := box.get_node("Row/Info")
- info.get_node("Count").text = "กล่องปลา · %d ตัว" % profile.data.catches.size()
- info.get_node("Weight").text = "%.1f / %.1f กก." % [weight, capacity]
- info.get_node("Fill").value = fraction * 100.0
- var status_text := "เต็มแล้ว" if remaining < 0.001 else "ใกล้เต็ม" if fraction >= 0.8 else "ยังว่าง" if weight == 0.0 else "มีที่ว่าง"
- info.get_node("State").text = "%s · เหลือ %.1f กก." % [status_text, remaining]
- var color := Color(1, 0.4, 0.35) if remaining < 0.001 else Color(1, 0.82, 0.35) if fraction >= 0.8 else Color(0.65, 1, 0.84)
- info.get_node("State").modulate = color
- info.get_node("Fill").modulate = color
+ box.bind(controller.profile)
+ box.refresh_if_needed()
 
 func _align_tension_meter() -> void:
  var guide := rod_joystick.reel_guide_position()

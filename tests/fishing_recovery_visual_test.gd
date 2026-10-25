@@ -37,6 +37,7 @@ func run() -> void:
   for frame in 5:
    await process_frame
   profile.data.catches = [{"weight": profile.equipped("box").capacity * 0.85}]
+  profile.changed.emit()
   profile.data.stock.worm = 0
   controller.reset_cast()
   hud._process(0.01)
@@ -47,6 +48,7 @@ func run() -> void:
   profile.data.stock.worm = 20
   profile.data.line_remaining = 0
   profile.data.catches = [{"weight": profile.equipped("box").capacity}]
+  profile.changed.emit()
   await capture("line-empty-box-full-" + str(resolution.x))
   profile.data.line_remaining = 65
   var fish := FishState.new()

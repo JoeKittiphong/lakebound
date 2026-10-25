@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://features/fishing/ui/fish_box.gd" id="view"]
 [ext_resource type="Texture2D" path="res://features/fishing/ui/fish_box.svg" id="icon"]
 [ext_resource type="StyleBox" path="res://assets/ui/modern/panel.tres" id="panel"]
 [node name="FishBox" type="PanelContainer"]
+script = ExtResource("view")
 custom_minimum_size = Vector2(240, 86)
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("panel")
@@ -30,7 +32,7 @@ text = "กล่องปลา · 0 ตัว"
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 16
-text = "0.0 / 15.0 กก."
+text = "0.0 / 25.0 กก."
 [node name="Fill" type="ProgressBar" parent="Row/Info"]
 custom_minimum_size = Vector2(140, 10)
 layout_mode = 2
@@ -40,4 +42,4 @@ show_percentage = false
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 15
-text = "ยังว่าง · เหลือ 15.0 กก."
+text = "ยังว่าง · เหลือ 25.0 กก."
