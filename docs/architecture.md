@@ -63,3 +63,22 @@ CollectionPanel emit `opened`/`closed`; session เก็บ pause state ก่�
 ดูผลตรวจครบและ warning ที่ยังไม่ได้ยืนยันสาเหตุใน [refactor_verification.md](refactor_verification.md)
 
 ยังต้องตรวจ multi-touch, safe area, back/focus, vibration และ save/reopen บนอุปกรณ์ Android จริง รวมถึง export bundle ใหม่ก่อนนำ release ไปใช้
+
+## Shared operations and HUD presentation
+
+`shared/persistence/atomic_config.gd` owns temporary-file save and rename for
+ProfileStore, CollectionStore and tutorial completion. Each feature still owns
+its schema, validation, error messages and rollback policy.
+
+`FishCollection._apply_catch()` updates statistics for both direct catches and
+journal replay. Event identity/deduplication remains outside that calculation.
+
+`features/missions/ui/mission_hud.gd` owns tracker and notification presentation,
+including queued completion IDs and the timer that pauses outside ready play.
+FishingHUD supplies references to the existing scene-authored controls. No UI
+nodes or resource paths were moved. Modal input clearing occurs once at the
+aggregate opening transition, for button and programmatic opens alike.
+
+HUD caches frequently accessed readout labels and shares constant bait IDs and
+state titles. Ecology entries use one discovery/count formatter for both columns.
+Verification for this slice is recorded in `exports/qa-refactor-phase3/`.

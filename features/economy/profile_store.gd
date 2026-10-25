@@ -81,7 +81,4 @@ static func save_profile(path: String, value: Dictionary) -> Error:
  var config := ConfigFile.new()
  config.set_value("meta", "version", 1)
  config.set_value("profile", "data", value)
- var error := config.save(path + ".tmp")
- if error == OK:
-  error = DirAccess.rename_absolute(path + ".tmp", path)
- return error
+ return AtomicConfig.save(config, path)

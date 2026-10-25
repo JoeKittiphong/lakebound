@@ -95,17 +95,18 @@ func _on_landed(_fish: RefCounted) -> void:
  if not active or completed:
   return
  completed = true
- var config := ConfigFile.new()
- config.set_value("tutorial", "completed", true)
- if config.save(save_path) != OK:
+ if _save_completion() != OK:
   push_warning("Could not save tutorial completion.")
 
 func _skip() -> void:
- var config := ConfigFile.new()
- config.set_value("tutorial", "completed", true)
- if config.save(save_path) != OK:
+ if _save_completion() != OK:
   $Card/Content/Instruction.text = "บันทึกไม่สำเร็จ ลองข้ามบทสอนอีกครั้งได้"
   return
  completed = true
  active = false
  hide()
+
+func _save_completion() -> Error:
+ var config := ConfigFile.new()
+ config.set_value("tutorial", "completed", true)
+ return AtomicConfig.save(config, save_path)

@@ -35,16 +35,21 @@ static func catch_message(outcome: Dictionary) -> String:
 func record_catch_result(fish: RefCounted) -> Dictionary:
  if not recording_enabled or fish == null or fish.species == null or not is_finite(fish.weight) or fish.weight <= 0:
   return {}
- var entry := stats(fish.species.id)
- var outcome := {"new_species": entry.count == 0, "new_record": fish.weight > entry.best}
- entry.smallest = fish.weight if entry.count == 0 else minf(entry.smallest, fish.weight)
- entry.count += 1
- entry.total += fish.weight
- entry.best = maxf(entry.best, fish.weight)
- entry.last = fish.weight
- records[String(fish.species.id)] = entry
+ var outcome := _apply_catch(fish.species.id, fish.weight)
  outcome.saved = save_records()
  changed.emit()
+ return outcome
+
+## Shared statistics update for direct catches and idempotent journal events.
+func _apply_catch(species: StringName, weight: float) -> Dictionary:
+ var entry := stats(species)
+ var outcome := {"new_species": entry.count == 0, "new_record": weight > entry.best}
+ entry.smallest = weight if entry.count == 0 else minf(entry.smallest, weight)
+ entry.count += 1
+ entry.total += weight
+ entry.best = maxf(entry.best, weight)
+ entry.last = weight
+ records[String(species)] = entry
  return outcome
 
 func save_records() -> bool:
@@ -102,15 +107,8 @@ func _stage_event(record: Dictionary) -> Dictionary:
   return {}
  var changed_stats := false
  if not _catch_events.has(id):
-  var entry := stats(StringName(species))
-  var flags := int(entry.count == 0) | (int(weight > entry.best) << 1)
-  entry.smallest = weight if entry.count == 0 else minf(entry.smallest, weight)
-  entry.count += 1
-  entry.total += weight
-  entry.best = maxf(entry.best, weight)
-  entry.last = weight
-  records[species] = entry
-  _catch_events[id] = flags
+  var outcome := _apply_catch(StringName(species), weight)
+  _catch_events[id] = int(outcome.new_species) | (int(outcome.new_record) << 1)
   _events_dirty = true
   changed_stats = true
  var flags: int = _catch_events[id]

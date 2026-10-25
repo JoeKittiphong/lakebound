@@ -16,11 +16,17 @@ signal boat_exit_requested
 signal configuration_changed(bait: StringName, depth: float)
 
 const F = preload("res://features/fishing/fishing_controller.gd")
+const STATE_TITLES = ["", "รอปลา", "วัดเบ็ด!", "สู้ปลา", "", "ปลาหลุด", "เหวี่ยง"]
+const BAIT_IDS = [&"worm", &"dough", &"lure"]
 const BAIT_ICONS = [preload("res://assets/ui/atlas/icon_worm.tres"), preload("res://assets/ui/atlas/circle_mint.tres"), preload("res://assets/ui/atlas/icon_hook.tres")]
 @onready var move_joystick: Control = $SafeArea/MoveJoystick
 @onready var rod_joystick: RodControl = $SafeArea/RodJoystick
 @onready var settings_panel: Control = $SafeArea/BaitPanel
 @onready var meter: Control = $SafeArea/TensionMeter
+@onready var _state_text: Label = $SafeArea/Status/Content/State
+@onready var _line_distance: Label = $SafeArea/LineInfo/Content/Distance
+@onready var _line_load: Label = $SafeArea/LineInfo/Content/Reel
+@onready var _tension_text: Label = $SafeArea/TensionText
 @onready var _modal_panels: Array[Control] = [$CollectionPanel, $TacklePanel, $MissionPanel]
 var _modal_reported := false
 var controller: FishingController
@@ -32,8 +38,7 @@ var _on_boat := false
 var toast_time := 0.0
 var last_feedback := ""
 var ready_feedback := ""
-var pending_mission_completions: Array[String] = []
-var mission_toast_time := 0.0
+@onready var _mission_hud := MissionHUD.new($SafeArea/MissionButton, $SafeArea/MissionTracker, $SafeArea/MissionToast)
 @export var tension_reel_gap: float = 24.0
 
 func _ready() -> void:
@@ -89,6 +94,7 @@ func _on_modal_changed() -> void:
   move_joystick.reset()
   _aim_gesture = false
   settings_panel.hide()
+  $SafeArea/EcologyPanel.hide()
   $SafeArea/FirstCatch.hide()
  collection_visibility_changed.emit(opened)
 
@@ -174,7 +180,7 @@ func _process(delta: float) -> void:
  var state: int = controller.state
  _refresh_cast_reason(state)
  _refresh_fish_box()
- _refresh_mission_hud(delta)
+ _mission_hud.refresh(controller.profile, controller.profile != null and not is_tutorial_active() and state == F.State.READY and not is_collection_open(), delta)
  $SafeArea/LureAction.visible = controller.using_lure() and state == F.State.WAITING
  if controller.profile != null:
   $SafeArea/TackleButton.visible = state in [F.State.READY, F.State.RESULT, F.State.LOST] and not $SafeArea/FirstCatch.active
@@ -187,48 +193,46 @@ func _process(delta: float) -> void:
   last_feedback = controller.feedback
   if state == F.State.READY and last_feedback != ready_feedback:
    _show_toast(last_feedback)
- var titles := ["", "รอปลา", "วัดเบ็ด!", "สู้ปลา", "", "ปลาหลุด", "เหวี่ยง"]
- $SafeArea/Status/Content/State.text = titles[state]
+ _state_text.text = STATE_TITLES[state]
  if state in [F.State.WAITING, F.State.BITE, F.State.FIGHT]:
   rod_joystick.show_reel(controller.rod_input, state == F.State.FIGHT and controller.tension >= controller.red_start and controller.drag_strength < 0.95)
  if state == F.State.FIGHT:
   meter.set_zones(controller.yellow_start, controller.red_start)
   _align_tension_meter()
   meter.value = controller.tension
-  $SafeArea/TensionText.text = "%d%%" % int(controller.tension * 100)
-  $SafeArea/TensionText.modulate = Color(1, 0.4, 0.35) if controller.tension >= meter.red_start else Color.WHITE
-  $SafeArea/LineInfo/Content/Distance.text = "%.1f m" % controller.line_length
-  $SafeArea/LineInfo/Content/Reel.visible = true
-  $SafeArea/LineInfo/Content/Reel.text = "แรง %.1f / %.0f kgf" % [controller.fight.line_load_kgf, controller.fight.line_strength]
-  $SafeArea/LineInfo/Content/Reel.modulate = Color(1, 0.4, 0.35) if controller.fight.line_load_kgf >= controller.fight.line_strength else Color.WHITE
+  _tension_text.text = "%d%%" % int(controller.tension * 100)
+  _tension_text.modulate = Color(1, 0.4, 0.35) if controller.tension >= meter.red_start else Color.WHITE
+  _line_distance.text = "%.1f m" % controller.line_length
+  _line_load.visible = true
+  _line_load.text = "แรง %.1f / %.0f kgf" % [controller.fight.line_load_kgf, controller.fight.line_strength]
+  _line_load.modulate = Color(1, 0.4, 0.35) if controller.fight.line_load_kgf >= controller.fight.line_strength else Color.WHITE
   if controller.tension >= meter.red_start:
-   $SafeArea/Status/Content/State.text = "ปลากระชาก! ↑ ผ่อนสาย" if controller.fight.surge_active else "↑ ผ่อนสาย"
+   _state_text.text = "ปลากระชาก! ↑ ผ่อนสาย" if controller.fight.surge_active else "↑ ผ่อนสาย"
   elif controller.tension < meter.yellow_start:
-   $SafeArea/Status/Content/State.text = "↓ เก็บสาย • ปลากำลังหนี"
+   _state_text.text = "↓ เก็บสาย • ปลากำลังหนี"
   else:
-   $SafeArea/Status/Content/State.text = "ประคองสีเหลือง"
+   _state_text.text = "ประคองสีเหลือง"
   if controller.fight.line_load_kgf >= controller.fight.line_strength:
-   $SafeArea/Status/Content/State.text = "แรงดึงเกินสเปคเอ็น! ↑ ผ่อนสาย"
+   _state_text.text = "แรงดึงเกินสเปคเอ็น! ↑ ผ่อนสาย"
  elif state == F.State.WAITING or state == F.State.BITE:
-  $SafeArea/LineInfo/Content/Reel.visible = false
-  $SafeArea/LineInfo/Content/Distance.text = "%.1f m" % controller.line_length
+  _line_load.visible = false
+  _line_distance.text = "%.1f m" % controller.line_length
 
 func _refresh_ecology() -> void:
  if $SafeArea/EcologyPanel.visible:
   var counts: Dictionary = ecology.counts()
   var lines := PackedStringArray()
   for index in range(0, ecology.species.size(), 2):
-   var name_a: String = ecology.species[index].display_name
-   if controller.profile != null and get_node("/root/FishCollection").stats(ecology.species[index].id).count == 0:
-    name_a = "???"
-   var text: String = "%s %d" % [name_a, counts[ecology.species[index].id]]
+   var text := _ecology_entry(index, counts)
    if index + 1 < ecology.species.size():
-    var name_b: String = ecology.species[index + 1].display_name
-    if controller.profile != null and get_node("/root/FishCollection").stats(ecology.species[index + 1].id).count == 0:
-     name_b = "???"
-    text += "  •  %s %d" % [name_b, counts[ecology.species[index + 1].id]]
+    text += "  •  " + _ecology_entry(index + 1, counts)
    lines.append(text)
   $SafeArea/EcologyPanel/Content/Counts.text = "\n".join(lines)
+
+func _ecology_entry(index: int, counts: Dictionary) -> String:
+ var species = ecology.species[index]
+ var discovered: bool = controller.profile == null or get_node("/root/FishCollection").stats(species.id).count > 0
+ return "%s %d" % [species.display_name if discovered else "???", counts[species.id]]
 
 func _refresh_cast_reason(state: int) -> void:
  var label: Label = $SafeArea/CastReason
@@ -245,7 +249,7 @@ func _refresh_fish_box() -> void:
 func _align_tension_meter() -> void:
  var guide := rod_joystick.reel_guide_position()
  meter.global_position = guide - Vector2(meter.size.x * 0.5, meter.size.y + tension_reel_gap)
- $SafeArea/TensionText.global_position = Vector2(guide.x + 28.0, meter.global_position.y + meter.size.y * 0.5 - 14.0)
+ _tension_text.global_position = Vector2(guide.x + 28.0, meter.global_position.y + meter.size.y * 0.5 - 14.0)
 
 func _refresh_state(state: int) -> void:
  toast_time = 0.0
@@ -268,7 +272,7 @@ func _refresh_state(state: int) -> void:
  $SafeArea/Status.visible = state not in [F.State.READY, F.State.RESULT]
  $SafeArea/EcologyPanel.hide()
  meter.visible = battle
- $SafeArea/TensionText.visible = battle
+ _tension_text.visible = battle
  $SafeArea/LineInfo.visible = state in [F.State.WAITING, F.State.BITE, F.State.FIGHT]
  rod_joystick.enabled = state in [F.State.READY, F.State.WAITING, F.State.BITE, F.State.FIGHT]
  move_joystick.enabled = not result
@@ -310,21 +314,16 @@ func _on_ecology_pressed() -> void:
 func _on_collection_pressed() -> void:
  if controller.state != F.State.READY:
   return
- rod_joystick.reset()
- move_joystick.reset()
- settings_panel.hide()
- $SafeArea/EcologyPanel.hide()
  $CollectionPanel.open()
 
 func _on_config_changed(_value = 0) -> void:
- var bait_ids := [&"worm", &"dough", &"lure"]
  var depth: float = $SafeArea/BaitPanel/Content/DepthRow/Depth.value
  $SafeArea/BaitPanel/Content/DepthRow/Value.text = "%.1f ม." % depth
  $SafeArea/BaitDock/DepthButton.text = "%.1f" % depth
  var selected: int = $SafeArea/BaitPanel/Content/BaitRow/BaitSelect.selected
  $SafeArea/BaitDock/BaitButton.icon = BAIT_ICONS[selected]
  $SafeArea/BaitDock/BaitButton.tooltip_text = $SafeArea/BaitPanel/Content/BaitRow/BaitSelect.get_item_text(selected)
- configuration_changed.emit(bait_ids[$SafeArea/BaitPanel/Content/BaitRow/BaitSelect.selected], depth)
+ configuration_changed.emit(BAIT_IDS[$SafeArea/BaitPanel/Content/BaitRow/BaitSelect.selected], depth)
 
 func _on_bait_pressed() -> void:
  if controller.state != F.State.READY:
@@ -348,8 +347,6 @@ func _show_toast(message: String) -> void:
 func _on_tackle_pressed() -> void:
  if controller.profile == null or controller.state not in [F.State.READY, F.State.RESULT, F.State.LOST]:
   return
- rod_joystick.reset()
- move_joystick.reset()
  open_tackle()
 
 func _on_lure_down() -> void:
@@ -364,7 +361,7 @@ func sync_equipment() -> void:
  if controller == null or controller.profile == null:
   return
  var select: OptionButton = $SafeArea/BaitPanel/Content/BaitRow/BaitSelect
- var index := [&"worm", &"dough", &"lure"].find(controller.profile.equipped("bait").bait_type)
+ var index := BAIT_IDS.find(controller.profile.equipped("bait").bait_type)
  select.select(maxi(0, index))
  select.disabled = true
  $SafeArea/BaitDock/BaitButton.icon = BAIT_ICONS[maxi(0, index)]
@@ -373,35 +370,7 @@ func sync_equipment() -> void:
 func _on_missions_pressed() -> void:
  if controller == null or controller.profile == null or controller.state != F.State.READY or $SafeArea/FirstCatch.active:
   return
- rod_joystick.reset()
- move_joystick.reset()
- settings_panel.hide()
- $SafeArea/EcologyPanel.hide()
  $MissionPanel.open()
 
 func notify_missions_completed(ids: Array[String]) -> void:
- for id in ids:
-  if id not in pending_mission_completions:
-   pending_mission_completions.append(id)
-
-func _refresh_mission_hud(delta: float) -> void:
- var ready: bool = controller.profile != null and not $SafeArea/FirstCatch.active and controller.state == F.State.READY and not is_collection_open()
- $SafeArea/MissionButton.visible = ready
- $SafeArea/MissionTracker.hide()
- $SafeArea/MissionToast.visible = ready and mission_toast_time > 0.0
- if not ready:
-  return
- var state: Dictionary = controller.profile.data.missions
- var definition := MissionCatalog.find(state.tracked)
- if definition != null:
-  var entry := MissionProgress.entry(state, definition)
-  $SafeArea/MissionTracker.visible = not entry.claimed
-  $SafeArea/MissionTracker/Text.text = "ภารกิจ · %s\n%s%s" % [definition.title, MissionProgress.progress_text(state, definition), " · รับรางวัลได้" if MissionProgress.completed(state, definition) else ""]
- if mission_toast_time <= 0.0 and not pending_mission_completions.is_empty():
-  var count := pending_mission_completions.size()
-  var first := MissionCatalog.find(pending_mission_completions[0])
-  $SafeArea/MissionToast.text = "ภารกิจสำเร็จ · %s%s\nเปิดภารกิจเพื่อรับรางวัล" % [first.title, " และอีก %d ข้อ" % (count - 1) if count > 1 else ""]
-  pending_mission_completions.clear()
-  mission_toast_time = 5.0
- mission_toast_time = maxf(0.0, mission_toast_time - delta)
- $SafeArea/MissionToast.visible = mission_toast_time > 0.0
+ _mission_hud.notify_completed(ids)

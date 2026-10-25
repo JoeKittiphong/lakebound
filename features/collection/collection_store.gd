@@ -9,10 +9,7 @@ static func save_records(save_path: String, records: Dictionary, events: Diction
   config.set_value("meta", "catch_events", events)
  for id in records:
   config.set_value("fish", id, records[id])
- var error := config.save(save_path + ".tmp")
- if error == OK:
-  error = DirAccess.rename_absolute(save_path + ".tmp", save_path)
- return error
+ return AtomicConfig.save(config, save_path)
 
 static func load_records(save_path: String) -> Dictionary:
  var records := {}
