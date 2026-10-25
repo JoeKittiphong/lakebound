@@ -36,6 +36,7 @@ func run() -> void:
    hud._process(1.0 / 60.0)
   var samples: Array[float] = []
   profile.weight_queries = 0
+  var tracker_before: int = hud._mission_hud.tracker_refreshes
   for repetition in 5:
    var start := Time.get_ticks_usec()
    for frame in 2000:
@@ -43,13 +44,22 @@ func run() -> void:
    samples.append(float(Time.get_ticks_usec() - start) / 2000.0)
   samples.sort()
   report.append({"stored_fish": count, "median_hud_us": samples[2], "iterations": 10000, "box_weight_queries": profile.weight_queries})
+  var tracker_updates: int = hud._mission_hud.tracker_refreshes - tracker_before
+  report[-1]["mission_tracker_updates"] = tracker_updates
+  if not baseline and tracker_updates != 0:
+   failures += 1
+   print("FAIL: unchanged HUD must not rebuild the mission tracker")
   if not baseline and profile.weight_queries != 0:
    failures += 1
    print("FAIL: unchanged HUD must not recalculate stored-fish weight")
   profile.weight_queries = 0
+  tracker_before = hud._mission_hud.tracker_refreshes
   profile.changed.emit()
   for frame in 3:
    hud._process(1.0 / 60.0)
+  if not baseline and hud._mission_hud.tracker_refreshes - tracker_before != 1:
+   failures += 1
+   print("FAIL: profile change must refresh mission tracker exactly once")
   if not baseline and profile.weight_queries != 1:
    failures += 1
    print("FAIL: a profile change must refresh the box exactly once")
@@ -58,8 +68,12 @@ func run() -> void:
   var file := FileAccess.open(output.path_join("hud-performance.json"), FileAccess.WRITE)
   file.store_string(JSON.stringify(report, " "))
  print("HUD PERFORMANCE RESULT: ", JSON.stringify(report), " failures=", failures)
+ var presenter := hud._mission_hud
  hud.controller.profile = null
  game.queue_free()
  await process_frame
+ if profile.changed.is_connected(presenter._invalidate):
+  failures += 1
+  print("FAIL: HUD teardown must disconnect the persistent profile")
  profile.free()
  quit(failures)

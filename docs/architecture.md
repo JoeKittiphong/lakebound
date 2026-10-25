@@ -82,3 +82,11 @@ aggregate opening transition, for button and programmatic opens alike.
 HUD caches frequently accessed readout labels and shares constant bait IDs and
 state titles. Ecology entries use one discovery/count formatter for both columns.
 Verification for this slice is recorded in `exports/qa-refactor-phase3/`.
+
+MissionHUD invalidates cached tracker text on profile changes and disconnects
+when its HUD leaves the tree. Catalog lookups use lazy ID indexes without
+changing catalog ordering or resource identity. Profile transaction snapshots
+copy append-only record containers shallowly; existing records remain immutable
+within transactions, while mutable mission data retains deep rollback copies.
+See [optimization results](optimization-2026-10-25.md) for measured costs,
+visual selection equivalence, regression results and device limitations.

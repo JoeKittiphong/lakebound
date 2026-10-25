@@ -85,3 +85,13 @@ Runner import project ก่อนทดสอบ จำกัดเวลาแ
 Desktop tests ไม่ยืนยัน Android hardware, touch จริง, system safe area หรือ vibration และ runner ไม่ build/sign/release แอป
 
 `fish_behavior_test.gd` checks all species for fresh red > green, fatigue/surge zone changes, actual green escape distance, and faster fatigue under yellow control. Fight regression bots follow the visible dynamic yellow band rather than the former fixed 72% threshold.
+
+## Optimization regression
+
+`optimization` (performance suite) checks indexed catalog identity, compares
+visible-fish selection against the previous full-sort policy, measures rollback
+snapshot/deep-copy and atomic save costs at 0/200/2,000 journal entries, and tests
+full rollback on failed purchases, missions, pond replacement, catch and Keep.
+`hud_performance` also asserts mission tracker invalidation and profile cleanup.
+Run `--tests optimization hud_performance`; timings are diagnostic, with no
+hardware-specific pass threshold. See `docs/optimization-2026-10-25.md`.

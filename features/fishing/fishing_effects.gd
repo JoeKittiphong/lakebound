@@ -10,6 +10,7 @@ const FishVisual = preload("res://world/pond/fish_visual.tscn")
 @export var water_height: float = -0.18
 @onready var line_mesh: ImmediateMesh = $Line.mesh
 var visual_pool: Array[Node3D] = []
+var _visible_candidates: Array = []
 var update_clock := 0.0
 var time := 0.0
 
@@ -106,24 +107,28 @@ func _process(delta: float) -> void:
 
 func _update_fish_visuals() -> void:
  var slot := 0
- var records: Array = ecosystem.fish.duplicate()
- # Spend the fixed visual budget on the fish the player can actually see.
- records.sort_custom(func(a: RefCounted, b: RefCounted) -> bool:
-  var here := Vector2(player.global_position.x, player.global_position.z)
+ var here := Vector2(player.global_position.x, player.global_position.z)
+ _visible_candidates.clear()
+ # Reject invisible fish before sorting; retain the same seven-fish budget,
+ # depth rules and deterministic nearest-first ordering.
+ for record in ecosystem.fish:
+  if record == controller.active_fish:
+   continue
+  if record.position.y > visible_fish_depth and record.state != &"landed":
+   continue
+  if here.distance_squared_to(Vector2(record.position.x, record.position.z)) <= 55.0 * 55.0:
+   _visible_candidates.append(record)
+ _visible_candidates.sort_custom(func(a: RefCounted, b: RefCounted) -> bool:
   var da := here.distance_squared_to(Vector2(a.position.x, a.position.z))
   var db := here.distance_squared_to(Vector2(b.position.x, b.position.z))
   return da < db if not is_equal_approx(da, db) else a.id < b.id)
- if controller.active_fish != null:
-  records.erase(controller.active_fish)
-  records.push_front(controller.active_fish)
- for record in records:
+ var active := controller.active_fish
+ if active != null and (active.position.y <= visible_fish_depth or active.state == &"landed"):
+  _visible_candidates.push_front(active)
+ for record in _visible_candidates:
   if slot >= visual_pool.size():
    break
   var is_landed: bool = record.state == &"landed"
-  if record != controller.active_fish and Vector2(record.position.x - player.global_position.x, record.position.z - player.global_position.z).length() > 55.0:
-   continue
-  if record.position.y > visible_fish_depth and not is_landed:
-   continue
   var visual: Node3D = visual_pool[slot]
   var changed_fish: bool = visual.record != record
   if changed_fish:

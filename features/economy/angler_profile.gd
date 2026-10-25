@@ -4,6 +4,7 @@ extends Node
 signal changed
 signal missions_completed(ids: Array[String])
 const Catalog = preload("res://data/equipment/tackle_catalog.gd")
+const SNAPSHOT_RECORD_CONTAINERS = ["catches", "journal", "boss_history", "ponds", "receipts"]
 var save_path := "user://angler_profile_v1.cfg"
 var data: Dictionary = {}
 var save_error := ""
@@ -25,6 +26,18 @@ func load_profile() -> void:
 
 func _valid(value: Variant) -> bool:
  return ProfileStore.valid(value)
+
+func _transaction_snapshot() -> Dictionary:
+ # Transactions append/remove records or replace a pond snapshot; they never
+ # edit existing history records/population entries in place. Copy their outer
+ # containers only. Mutable domains (notably mission entries) stay deep copies.
+ if data.journal.is_empty() and data.catches.is_empty() and data.boss_history.is_empty() and data.ponds.is_empty():
+  return data.duplicate(true)
+ var before := data.duplicate()
+ for key in data:
+  if data[key] is Array or data[key] is Dictionary:
+   before[key] = data[key].duplicate(key not in SNAPSHOT_RECORD_CONTAINERS)
+ return before
 
 func _commit(before: Dictionary) -> bool:
  if incompatible:
@@ -52,7 +65,7 @@ func buy(id: String) -> bool:
   return false
  if entry.kind not in ["bait", "lure", "line"] and quantity(id) > 0:
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.coins -= entry.price
  if entry.kind == "line":
   data.spares[id] = int(data.spares.get(id, 0)) + 1
@@ -66,7 +79,7 @@ func equip(id: String) -> bool:
   return false
  if entry.kind == "box" and box_weight() > entry.capacity:
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  if entry.kind == "line":
   if int(data.spares.get(id, 0)) <= 0:
    return false
@@ -87,14 +100,14 @@ func prepare_cast() -> bool:
   return false
  if bait.kind == "lure":
   return true
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.stock[String(bait.id)] -= 1
  return _commit(before)
 
 func break_line(deployed: float, lure_id: String) -> bool:
  if not is_finite(deployed) or deployed < 0 or not data.pending.is_empty():
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.line_remaining = maxf(0.0, data.line_remaining - deployed)
  var entry := Catalog.item(lure_id)
  if entry != null and entry.kind == "lure" and quantity(lure_id) > 0:
@@ -105,7 +118,7 @@ func break_line(deployed: float, lure_id: String) -> bool:
 func recover_with_diamonds() -> bool:
  if data.pending.is_empty() or data.diamonds < int(data.pending.cost):
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.diamonds -= int(data.pending.cost)
  var id: String = data.pending.lure
  data.stock[id] = quantity(id) + 1
@@ -117,7 +130,7 @@ func recover_with_diamonds() -> bool:
 func apply_verified_reward(receipt: String, recovery_id: String) -> bool:
  if receipt.is_empty() or receipt in data.receipts or data.pending.is_empty() or str(data.pending.id) != recovery_id:
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  var id: String = data.pending.lure
  data.stock[id] = quantity(id) + 1
  data.pending = {}
@@ -127,7 +140,7 @@ func apply_verified_reward(receipt: String, recovery_id: String) -> bool:
 func apply_verified_purchase(receipt: String, amount: int) -> bool:
  if receipt.is_empty() or amount <= 0 or receipt in data.receipts:
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.diamonds += amount
  data.receipts.append(receipt)
  return _commit(before)
@@ -135,7 +148,7 @@ func apply_verified_purchase(receipt: String, amount: int) -> bool:
 func discard_lure() -> bool:
  if data.pending.is_empty():
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.pending = {}
  return _commit(before)
 
@@ -148,7 +161,7 @@ func box_weight() -> float:
 func keep_catch(record: Dictionary, map_id: String = "", population: Array = []) -> bool:
  if not record.has("weight") or not is_finite(float(record.weight)) or record.weight <= 0 or box_weight() + record.weight > equipped("box").capacity:
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.catches.append(record.duplicate(true))
  if not map_id.is_empty():
   data.ponds[map_id] = population
@@ -157,7 +170,7 @@ func keep_catch(record: Dictionary, map_id: String = "", population: Array = [])
 func sell_catches() -> bool:
  if data.catches.is_empty():
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  for record in data.catches:
   data.coins += maxi(1, int(round(float(record.weight) * 35.0)))
  data.catches = []
@@ -169,7 +182,7 @@ func record_catch(record: Dictionary, boss: bool) -> bool:
   for previous in data.journal:
    if previous.get("catch_id", "") == record.catch_id:
     return true
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.journal.append(record.duplicate(true))
  if boss:
   data.boss_history.append(record.duplicate(true))
@@ -187,7 +200,7 @@ func record_catch(record: Dictionary, boss: bool) -> bool:
 func start_missions() -> bool:
  if data.missions.started:
   return true
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.missions.started = true
  data.missions.tracked = "first_three"
  return _commit(before)
@@ -195,7 +208,7 @@ func start_missions() -> bool:
 func track_mission(id: String) -> bool:
  if not data.missions.started or (not id.is_empty() and MissionCatalog.find(id) == null):
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.missions.tracked = id
  return _commit(before)
 
@@ -206,7 +219,7 @@ func claim_mission(id: String) -> bool:
  var value := MissionProgress.entry(data.missions, definition)
  if value.claimed or value.progress < definition.target:
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  value.claimed = true
  data.missions.entries[id] = value
  data.coins += definition.reward_coins
@@ -215,7 +228,7 @@ func claim_mission(id: String) -> bool:
  return _commit(before)
 
 func store_pond(map_id: String, records: Array) -> bool:
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.ponds[map_id] = records
  return _commit(before)
 
@@ -226,7 +239,7 @@ func emergency_supplies() -> bool:
   return false
  if quantity("worm") + quantity("dough") > 0 and data.line_remaining >= 1.0:
   return false
- var before := data.duplicate(true)
+ var before := _transaction_snapshot()
  data.stock.worm = maxi(quantity("worm"), 3)
  data.equipped.bait = "worm"
  if data.line_remaining < 1.0:

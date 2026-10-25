@@ -122,3 +122,10 @@ props ซ้ำ/foliage batching และ shadow budgets บน Android ก่�
 ไม่รวม mesh ทั้งฉากจนแก้ใน Editor ไม่ได้ และไม่ลดคุณภาพ/ขนาด texture โดยไม่มีภาพ
 และ device measurements รองรับ Profile ยัง serialize/deep-copy ทั้งข้อมูลต่อ
 transaction ซึ่งควรวัดกับ save ขนาดใหญ่ก่อนแยก dirty domains หรือเปลี่ยน format
+
+## งานต่อเนื่องที่ลงมือแล้ว
+
+รวม mission tracker invalidation, indexed catalog lookup, visible-fish filtering
+และ rollback snapshot สำหรับเซฟใหญ่แล้ว ดูผลและขอบเขตที่
+[optimization-2026-10-25.md](optimization-2026-10-25.md).
+งาน GPU/LOD/shadow budgets ยังต้องวัดบน Android จริง ไม่ใช้ผล CPU มาอ้างแทน.

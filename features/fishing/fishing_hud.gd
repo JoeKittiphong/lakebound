@@ -41,6 +41,9 @@ var ready_feedback := ""
 @onready var _mission_hud := MissionHUD.new($SafeArea/MissionButton, $SafeArea/MissionTracker, $SafeArea/MissionToast)
 @export var tension_reel_gap: float = 24.0
 
+func _exit_tree() -> void:
+ _mission_hud.bind(null)
+
 func _ready() -> void:
  # HUD owns its panels. Session receives only aggregate modal transitions so
  # closing one panel cannot unpause another panel that is still open.

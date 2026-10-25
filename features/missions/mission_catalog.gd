@@ -50,8 +50,11 @@ const REGION_ITEMS: Array[MissionDefinition] = [
 ]
 const ALL_ITEMS: Array[MissionDefinition] = ITEMS + REGION_ITEMS
 
+# IDs are stable authored catalog keys; retain the original Resource instances.
+static var _by_id: Dictionary = {}
+
 static func find(id: String) -> MissionDefinition:
- for definition in ALL_ITEMS:
-  if definition.id == id:
-   return definition
- return null
+ if _by_id.is_empty():
+  for entry in ALL_ITEMS:
+   _by_id[String(entry.id)] = entry
+ return _by_id.get(id)

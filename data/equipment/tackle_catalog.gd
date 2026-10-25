@@ -9,8 +9,11 @@ const ITEMS: Array[Resource] = [
  preload("res://data/equipment/nylon.tres"), preload("res://data/equipment/fine_line.tres"), preload("res://data/equipment/braid.tres"),
  preload("res://data/equipment/small_box.tres"), preload("res://data/equipment/large_box.tres")]
 
+# IDs are stable authored catalog keys; retain the original Resource instances.
+static var _by_id: Dictionary = {}
+
 static func item(id: String) -> Resource:
- for entry in ITEMS:
-  if String(entry.id) == id:
-   return entry
- return null
+ if _by_id.is_empty():
+  for entry in ITEMS:
+   _by_id[String(entry.id)] = entry
+ return _by_id.get(id)
