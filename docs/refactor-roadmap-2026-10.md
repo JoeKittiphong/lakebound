@@ -2,7 +2,9 @@
 
 วันที่ประเมิน: 25 ตุลาคม 2026 · baseline ปัจจุบัน: 0.1.12
 
-เอกสารนี้เป็นแผน ยังไม่เริ่มย้ายระบบหรือเปลี่ยนกติกาเกมในงานนำขึ้น GitHub
+เริ่มทำ phase 0–1 แล้ว: baseline/test inventory และ Session/HUD APIs พร้อม
+aggregate modal ownership ดู [ผลตรวจ phase 1](refactor-phase1-verification.md)
+ส่วน phase 2–6 ยังเป็นแผน ไม่ได้เปลี่ยนกติกาเกมหรือ schema เซฟในรอบแรก
 `refactor_plan.md` และ `architecture.md` เป็นประวัติรอบก่อน บางขอบเขตในเอกสารเดิม
 แยกไปแล้ว เช่น FightSimulation และ CollectionStore จึงไม่ควรทำซ้ำ
 
@@ -108,7 +110,7 @@ RefCounted/plain data; ส่วนที่ต้องมี lifecycle หร�
 
 ## สถานะ
 
-ตอนนี้เป็นแผนจากการอ่านซอร์ส งานนำขึ้น GitHub แก้เฉพาะ repository hygiene,
-เครื่องมือตรวจ และเอกสาร ยังไม่ได้เริ่ม refactor runtime หรือเพิ่ม CI release
-ที่เข้าถึงคีย์ลงนาม การทำ build/import บนเครื่องสะอาดยังต้องมี Godot 4.7.2 และ
+phase 0–1 ลงมือแล้วตามผลตรวจที่ลิงก์ด้านบน งานนำขึ้น GitHub รอบก่อนแยกจาก
+refactor นี้ ยังไม่ได้เพิ่ม CI release ที่เข้าถึงคีย์ลงนาม หรือเริ่มย้าย persistence
+การทำ build/import บนเครื่องสะอาดยังต้องมี Godot 4.7.2 และ
 Android toolchain สำหรับขั้น Android ตาม README

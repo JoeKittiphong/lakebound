@@ -41,7 +41,7 @@ func run() -> void:
   print("YELLOW BAND: ", size, " yellow px=",yellow_pixels)
   await RenderingServer.frame_post_draw
   root.get_texture().get_image().save_png(OS.get_environment("LAKEBOUND_QA_DIR") + "/yellow_mobile_%dx%d.png" % [size.x, size.y])
- print("MOBILE FISHING VISUAL: camera and three HUD sizes captured")
+ print("MOBILE FISHING VISUAL RESULT: camera and three HUD sizes captured")
  scene.queue_free()
  await process_frame
  quit()

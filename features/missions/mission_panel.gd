@@ -9,6 +9,10 @@ var map_id := "river"
 var definitions: Array[MissionDefinition] = []
 var rows: Array[Control] = []
 
+func _exit_tree() -> void:
+ if is_instance_valid(profile) and profile.changed.is_connected(refresh):
+  profile.changed.disconnect(refresh)
+
 func bind(value: AnglerProfile) -> void:
  profile = value
  profile.changed.connect(refresh)

@@ -1,7 +1,8 @@
 # Runtime architecture
 
 > เอกสารขอบเขตจาก refactor รอบก่อน: ปัจจุบัน session มี economy, boats,
-> missions และ regions เพิ่ม และยังมีการเข้าถึง HUD ภายในบางจุด
+> missions และ regions เพิ่ม การเข้าถึง HUD ภายในจาก session ถูกแทนด้วย API แล้ว
+> ใน [refactor phase 1](refactor-phase1-verification.md)
 > ดูผลสำรวจซอร์สจริงและแผนแก้ล่าสุดที่ [refactor-roadmap-2026-10.md](refactor-roadmap-2026-10.md)
 > อย่าใช้ข้อความ ownership ด้านล่างเป็นหลักฐานว่าทุก boundary ถูกบังคับครบแล้ว
 
