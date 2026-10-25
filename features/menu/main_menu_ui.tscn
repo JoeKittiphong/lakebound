@@ -1,0 +1,216 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://features/menu/region_selector.tscn" id="regions"]
+[ext_resource type="Theme" path="res://features/menu/lake_menu_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://features/menu/main_menu.gd" id="script"]
+[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
+[ext_resource type="PackedScene" path="res://features/gameplay/gameplay.tscn" id="game"]
+[sub_resource type="Gradient" id="header_gradient"]
+colors = PackedColorArray(0.87, 0.96, 1, 0.85, 0.87, 0.96, 1, 0)
+[sub_resource type="GradientTexture2D" id="header_fade"]
+gradient = SubResource("header_gradient")
+fill_from = Vector2(0, 0)
+fill_to = Vector2(0, 1)
+[node name="MainMenuUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+gameplay_scene = ExtResource("game")
+[node name="HeaderReadability" type="TextureRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_bottom = 210.0
+mouse_filter = 2
+texture = SubResource("header_fade")
+expand_mode = 1
+[node name="SafeArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+mouse_filter = 2
+script = ExtResource("safe")
+
+[node name="Brand" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 0
+anchor_right = 0.6
+anchor_bottom = 0
+offset_left = 16
+offset_top = 10
+offset_right = 0
+offset_bottom = 170
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -8
+
+[node name="Name" type="Label" parent="SafeArea/Brand"]
+layout_mode = 2
+mouse_filter = 2
+text = "LAKEBOUND"
+theme_override_font_sizes/font_size = 58
+theme_override_colors/font_color = Color(0.04, 0.22, 0.28, 1)
+
+
+[node name="Sub" type="Label" parent="SafeArea/Brand"]
+layout_mode = 2
+mouse_filter = 2
+text = "วันดี ๆ เริ่มต้นที่ริมน้ำ"
+theme_override_font_sizes/font_size = 19
+theme_override_colors/font_color = Color(0.04, 0.22, 0.28, 1)
+
+
+[node name="Profile" type="PanelContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 0
+anchor_right = 1
+anchor_bottom = 0
+offset_left = -244
+offset_top = 0
+offset_right = 0
+offset_bottom = 76
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Row" type="HBoxContainer" parent="SafeArea/Profile"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Badge" type="Label" parent="SafeArea/Profile/Row"]
+layout_mode = 2
+mouse_filter = 2
+text = "01"
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(0.06, 0.46, 0.54, 1)
+
+
+[node name="Name" type="Label" parent="SafeArea/Profile/Row"]
+layout_mode = 2
+mouse_filter = 2
+text = "นักตกปลามือใหม่"
+theme_override_font_sizes/font_size = 19
+theme_override_colors/font_color = Color(0.04, 0.22, 0.28, 1)
+
+
+[node name="PlayCard" type="PanelContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 1
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -380
+offset_top = -355
+offset_right = 0
+offset_bottom = -30
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/PlayCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Eyebrow" type="Label" parent="SafeArea/PlayCard/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "พร้อมออกไปริมน้ำหรือยัง"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.06, 0.46, 0.54, 1)
+
+
+[node name="Location" type="Label" parent="SafeArea/PlayCard/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "แม่น้ำสายใหญ่"
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.04, 0.22, 0.28, 1)
+
+
+[node name="ChooseRegion" type="Button" parent="SafeArea/PlayCard/Content"]
+custom_minimum_size = Vector2(0,48)
+layout_mode = 2
+text = "เลือกแหล่งน้ำ · 6 โซน  ▾"
+theme_override_font_sizes/font_size = 18
+[node name="Description" type="Label" parent="SafeArea/PlayCard/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "วังน้ำลึก · ตลิ่งหิน · ปลายักษ์"
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.24, 0.40, 0.44, 1)
+
+
+[node name="PlayButton" type="Button" parent="SafeArea/PlayCard/Content"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "เริ่มตกปลา    →"
+
+[node name="Build" type="Label" parent="SafeArea/PlayCard/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "รุ่นทดสอบระบบตกปลา"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.24, 0.40, 0.44, 1)
+horizontal_alignment = 1
+
+[node name="BottomNote" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 1
+anchor_right = 0.5
+anchor_bottom = 1
+offset_left = 16
+offset_top = -84
+offset_right = 0
+offset_bottom = 0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Welcome" type="Label" parent="SafeArea/BottomNote"]
+layout_mode = 2
+mouse_filter = 2
+text = ""
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.04, 0.22, 0.28, 1)
+
+
+[node name="Version" type="Label" parent="SafeArea/BottomNote"]
+layout_mode = 2
+mouse_filter = 2
+text = "TEST BUILD 0.1.12   /   LAKEBOUND"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.17, 0.34, 0.39, 1)
+
+
+[node name="PrivacyButton" type="Button" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -290.0
+offset_top = 90.0
+offset_right = 0.0
+offset_bottom = 142.0
+grow_horizontal = 0
+text = "นโยบายความเป็นส่วนตัว ↗"
+tooltip_text = "เปิดในเบราว์เซอร์"
+theme_override_font_sizes/font_size = 17
+
+[node name="RegionSelector" parent="." instance=ExtResource("regions")]
+
+[connection signal="pressed" from="SafeArea/PlayCard/Content/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="SafeArea/PrivacyButton" to="." method="_on_privacy_pressed"]
+
+[connection signal="pressed" from="SafeArea/PlayCard/Content/ChooseRegion" to="." method="_on_regions_pressed"]
+[connection signal="region_selected" from="RegionSelector" to="." method="_select_region"]

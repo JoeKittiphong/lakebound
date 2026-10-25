@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/catfish.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/icons/catfish.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"catfish"
+display_name = "ปลาดุกอุย"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.487
+preview_tilt_degrees = 12.0
+min_weight = 0.5
+max_weight = 2.8
+preferred_depth = Vector2(1.0,2.2)
+bait_preferences = PackedStringArray("worm")
+swim_speed = 0.7
+pull_strength = 0.85
+struggle_frequency = 1.2
+detection_radius = 10.0
+tension_pressure = 0.0818

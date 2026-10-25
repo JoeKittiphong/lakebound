@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/mythic_golden_dragon.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/mythic_golden_dragon.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"mythic_golden_dragon"
+display_name = "พญามังกรทองแห่งป่าลึก"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.814
+preview_tilt_degrees = 12.0
+min_weight = 6.0
+max_weight = 14.0
+preferred_depth = Vector2(0.5,2.5)
+bait_preferences = PackedStringArray("worm")
+swim_speed = 1.9
+pull_strength = 1.6
+struggle_frequency = 2.8
+detection_radius = 10.0
+tension_pressure = 0.1230

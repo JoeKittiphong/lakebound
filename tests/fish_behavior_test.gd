@@ -70,11 +70,11 @@ func run() -> void:
   hard.advance(0.02, Vector3.ZERO, hard_fish, Vector2(0, clampf((midpoint - hard.tension) * 8.0, -1.0, 1.0)), tuning)
   if hard.surge_active:
    saw_surge = true
-   surge_range_ok = surge_range_ok and 1.0 - hard.red_start >= 0.699 and 1.0 - hard.red_start <= 0.801
+   surge_range_ok = surge_range_ok and 1.0 - hard.red_start >= 0.599 and 1.0 - hard.red_start <= 0.661 and hard.red_start - hard.yellow_start >= 0.179
   elif previous_surge:
    saw_recovery = hard.red_start > 0.3
   previous_surge = hard.surge_active
  expect(saw_surge and saw_recovery, "surges occur as short bursts and return to the normal band")
- expect(saw_surge and surge_range_ok, "sudden surges expand red to 70-80 percent")
+ expect(saw_surge and surge_range_ok, "surges retain at least an 18-percent yellow window for mobile control")
  print("FISH BEHAVIOR RESULT: ", errors, " failures")
  quit(errors)

@@ -11,8 +11,8 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-HEADLESS = ("economy", "expansion_flow", "first_catch_tutorial", "startup_flow", "camera_movement", "bait_retrieval", "tension_haptics", "fish_behavior", "fishing_simulation", "fish_catalog_fishing", "fish_models", "refactor_boundaries")
-RENDER = ("expansion_visual", "collection", "mobile_collection", "mobile_multitouch", "fishing_visual", "active_scene_movement", "rod_tension", "fish_render", "water_render", "water_interactions", "water_optimization")
+HEADLESS = ("fishing_recovery", "boat_integration", "traversal_equipment", "character_integration", "walk_sync", "playtest_feedback", "export_size", "ui_atlas", "missions", "economy", "expansion_flow", "first_catch_tutorial", "startup_flow", "camera_movement", "bait_retrieval", "tension_haptics", "fish_behavior", "fishing_simulation", "fish_catalog_fishing", "fish_models", "refactor_boundaries")
+RENDER = ("fishing_recovery_visual", "fisherman_visual", "ui_atlas_visual", "missions_visual", "expansion_visual", "collection", "mobile_collection", "mobile_multitouch", "fishing_visual", "active_scene_movement", "rod_tension", "fish_render", "water_render", "water_interactions", "water_optimization")
 # These host/sandbox diagnostics do not concern game scripts; keep them in logs
 # and report them separately instead of treating every successful exit as proof.
 HOST_DIAGNOSTICS = (
@@ -94,7 +94,7 @@ def main() -> int:
             command += ["--script", f"res://tests/{test}_test.gd"]
             run(test, command)
         if args.android_pack:
-            for test in ("mobile_collection", "mobile_multitouch"):
+            for test in ("startup_flow", "mobile_collection", "mobile_multitouch"):
                 run(f"packed_{test}", [args.godot, "--main-pack", str(args.android_pack.resolve()),
                     "--log-file", str(output / f"packed_{test}.log"),
                     "--script", str(ROOT / f"tests/{test}_test.gd")])

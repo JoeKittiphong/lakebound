@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://features/equipment/rods/light_rod.tscn" id="rod"]
+[sub_resource type="StandardMaterial3D" id="red"]
+albedo_color = Color(0.38, 0.055, 0.035, 1)
+metallic = 0.35
+roughness = 0.45
+[node name="HeavyRod" instance=ExtResource("rod")]
+scale = Vector3(1.3, 1.18, 1.3)
+bend_per_joint = 0.085
+[node name="Shaft" parent="Joint1" index="0"]
+material_override = SubResource("red")
+[node name="Shaft" parent="Joint1/Joint2" index="0"]
+material_override = SubResource("red")
+[node name="Shaft" parent="Joint1/Joint2/Joint3" index="0"]
+material_override = SubResource("red")
+[node name="Shaft" parent="Joint1/Joint2/Joint3/Joint4" index="0"]
+material_override = SubResource("red")
+[node name="Shaft" parent="Joint1/Joint2/Joint3/Joint4/Joint5" index="0"]
+material_override = SubResource("red")

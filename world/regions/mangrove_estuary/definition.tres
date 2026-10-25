@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RegionDefinition" format=3]
+
+[ext_resource type="Script" path="res://world/regions/region_definition.gd" id="1_0gupc"]
+
+[resource]
+script = ExtResource("1_0gupc")
+region_kind = "estuary"
+basin_radii = Vector2(58, 74)
+maximum_depth = 8.0
+shore_transition = 18.0
+dock_origin = Vector2(-33.152718, 20)
+islands = Array[Vector4]([Vector4(6, -25, 9, 16), Vector4(-9, 38, 7, 14)])
+walking_bounds = Rect2(-90, -88, 180, 176)
+water_bounds = Rect2(-88, -86, 176, 172)

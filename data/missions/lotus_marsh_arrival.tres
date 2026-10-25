@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionDefinition" format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+id = "lotus_marsh_arrival"
+tier = 0
+title = "เปิดบันทึกบึงบัวริมทุ่ง"
+description = "ตกปลาในพื้นที่นี้ให้ได้ 3 ตัว"
+metric = "count"
+target = 3.0
+map_id = "lotus_marsh"
+species_id = ""
+depth_range = Vector2(0,100)
+reward_coins = 70

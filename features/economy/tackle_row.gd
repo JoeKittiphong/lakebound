@@ -13,8 +13,8 @@ func bind(item: Resource, profile: AnglerProfile) -> void:
  $Name.text = item.display_name
  var count := int(profile.data.spares.get(String(item.id), 0)) if item.kind == "line" else profile.quantity(String(item.id))
  $Count.text = "มี %d" % count
- $Buy.text = "%d เหรียญ" % item.price
- $Buy.disabled = profile.data.coins < item.price or (item.kind not in ["bait", "lure", "line"] and count > 0)
+ $Buy.text = "ซื้อ %d ชิ้น · %d เหรียญ" % [item.quantity, item.price]
+ $Buy.disabled = profile.data.coins < item.price or not profile.data.pending.is_empty() or (item.kind not in ["bait", "lure", "line"] and count > 0)
  $Equip.disabled = count <= 0 or not profile.data.pending.is_empty()
  var selected := str(profile.data.equipped.get(item.kind, "")) == String(item.id)
  if item.kind == "lure":

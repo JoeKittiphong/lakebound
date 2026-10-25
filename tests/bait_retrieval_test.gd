@@ -19,6 +19,8 @@ func run() -> void:
  var scene: Node3D = load("res://tests/legacy_gameplay.tscn").instantiate()
  root.add_child(scene)
  current_scene = scene
+ for frame in 12:
+  await physics_frame
  scene.set_process(false)
  var controller: FishingController = scene.get_node("FishingController")
  var pond: PondEcosystem = scene.get_node("PondEcosystem")

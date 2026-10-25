@@ -361,7 +361,10 @@ func _sample_contacts() -> void:
  if not is_instance_valid(player) or not is_instance_valid(pond):
   return
  var point := player.global_position
- var in_water := pond.definition.is_wading(point)
+ var in_water: bool = pond.definition.is_wading(point) or (player is AnglerPlayer and player.swimming)
+ if player is AnglerPlayer and player.boat != null:
+  point = player.boat.global_position + player.boat.global_basis.z * 2.6
+  in_water = true
  # A bridge/jetty above water must never produce footsteps on the water.
  if in_water:
   if not was_in_water:

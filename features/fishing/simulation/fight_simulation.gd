@@ -21,6 +21,8 @@ var _surge_remaining: float = 0.0
 var _surge_wait: float = 4.0
 var _surge_strength: float = 2.0
 var line_strength: float = 5.0
+## Estimated instantaneous load in kgf, compared with the equipped line rating.
+var line_load_kgf: float = 0.0
 var rod_strength: float = 5.0
 
 func begin(fish: FishState) -> void:
@@ -52,7 +54,7 @@ func update_zones(fish: FishState) -> void:
   activity = _surge_strength
  var zones := fish.species.fight_zones(fish.weight, fish.stamina, activity)
  red_start = zones.y
- yellow_width = (zones.y - zones.x) * _width_roll
+ yellow_width = clampf((zones.y - zones.x) * _width_roll, 0.18, red_start - 0.16)
  yellow_start = maxf(0.16, red_start - yellow_width)
 
 ## Advances only numeric state and the hooked fish; caller applies pond constraints.
@@ -83,12 +85,24 @@ func advance(delta: float, angler_position: Vector3, active_fish: FishState, rod
  relative += sideways * lateral_direction * definition.swim_speed * delta * 0.45
  var distance := relative.length()
  var stretch := maxf(0.0, distance - line_length)
- var target := (yellow_start + red_start) * 0.5 + (fish_force - 0.6) * 0.16 + reel * 0.28 - release_line * 0.45 + stretch * 0.18 + (1.0 - counter) * 0.02
- target += active_fish.species.fight_pressure(active_fish.weight) * burst * stamina * 0.18
+ # Fish mass alone is not line load: surges, cranking against the fish and
+ # stretch add force; paying out and the reel brake relieve it. Keep units
+ # independent of the gameplay control band's moving red/yellow boundaries.
+ line_load_kgf = active_fish.weight * (0.25 + fish_force * 0.35 + reel * 0.65 + stretch * 0.18 + (1.0 - counter) * 0.04)
+ line_load_kgf *= (1.0 - release_line * 0.70) * lerpf(0.65, 1.0, clampf(drag_strength, 0.0, 1.0))
+ var load_offset := (fish_force - 0.6) * 0.16 + stretch * 0.18
+ load_offset += active_fish.species.fight_pressure(active_fish.weight) * burst * stamina * 0.18
  # Gear changes load tolerance, never grants a catch. Fast reels still raise
  # tension; heavy rods damp surges but are less responsive to lateral input.
- target += fish_force * (5.0 / maxf(line_strength, 0.1) - 1.0) * 0.16
- target -= maxf(0.0, rod_strength - 5.0) * burst * 0.004
+ load_offset += clampf((line_load_kgf / maxf(line_strength, 0.1) - 0.65) * 0.30, -0.08, 0.24)
+ load_offset -= maxf(0.0, rod_strength - 5.0) * burst * 0.004
+ if previous_distance >= tuning.spool_capacity - 0.2:
+  load_offset += 0.12
+ # Keep environmental load within the player's control range. Previously a
+ # strong surge (or the end-of-spool override in the controller) could pin red
+ # even with full payout, so no gesture could recover before the break timer.
+ var target := (yellow_start + red_start) * 0.5 + clampf(load_offset, -0.10, 0.32)
+ target += reel * 0.28 - release_line * 0.65 + (1.0 - counter) * 0.02
  alignment *= clampf(5.0 / maxf(rod_strength, 5.0), 0.7, 1.0)
  tension = lerpf(tension, clampf(target, 0.0, 1.25), 1.0 - exp(-5.0 * delta))
  # The reel's brake can slip under a surge; manual release still matters.

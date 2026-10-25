@@ -1,5 +1,9 @@
 [gd_scene format=4]
 
+[ext_resource type="PackedScene" path="res://world/river/rock_landscaping.tscn" id="rock_landscaping"]
+[ext_resource type="PackedScene" path="res://world/river/props/wooden_jetty.tscn" id="new_jetty"]
+[ext_resource type="Texture2D" path="res://assets/environment/bridge/wooden_bridge_joined_bridge_joined_albedo_2048.png" id="new_wood_color"]
+[ext_resource type="Texture2D" path="res://assets/environment/bridge/wooden_bridge_joined_bridge_joined_normal_opengl_2048.png" id="new_wood_normal"]
 [ext_resource type="Script" path="res://world/pond/pond.gd" id="1_y50fq"]
 [ext_resource type="Resource" path="res://world/river/river_definition.tres" id="2_poncg"]
 [ext_resource type="Sky" path="res://world/river/background/river_sky.tres" id="3_1gahe"]
@@ -19,9 +23,6 @@
 [ext_resource type="PackedScene" path="res://world/river/props/b01_bush_low.tscn" id="17_d8gxv"]
 [ext_resource type="PackedScene" path="res://world/river/props/b02_bush_tall.tscn" id="18_cx5de"]
 [ext_resource type="PackedScene" path="res://world/river/props/b03_hedge_cluster.tscn" id="19_s1eie"]
-[ext_resource type="PackedScene" path="res://world/river/props/riv05_shore_rock_ledge.tscn" id="20_mgbaa"]
-[ext_resource type="PackedScene" path="res://world/river/props/r04_rock_cluster.tscn" id="21_o1vb4"]
-[ext_resource type="PackedScene" path="res://world/river/props/riv04_ford_pebble_group.tscn" id="22_3fbqt"]
 [ext_resource type="PackedScene" path="res://world/river/props/v02_cattail_clump.tscn" id="23_wmwf5"]
 [ext_resource type="PackedScene" path="res://world/river/props/v01_reed_clump.tscn" id="24_5wqjh"]
 [ext_resource type="PackedScene" path="res://world/river/props/v05_submerged_algae.tscn" id="25_vgw0d"]
@@ -31,7 +32,6 @@
 [ext_resource type="PackedScene" path="res://world/river/props/d03_fallen_log.tscn" id="29_6no3s"]
 [ext_resource type="PackedScene" path="res://world/river/props/riv07_backdrop_ridge.tscn" id="30_7wqk1"]
 [ext_resource type="PackedScene" path="res://world/river/props/riv06_backdrop_hill.tscn" id="31_bx834"]
-[ext_resource type="PackedScene" path="res://world/river/props/p01_dock_straight.tscn" id="32_qc6ru"]
 [ext_resource type="Material" path="res://world/river/aquatic_material.tres" id="33_cd2l3"]
 [ext_resource type="Texture2D" path="res://assets/environment/river/river_props_wetland_atlas_256.png" id="34_rsvrl"]
 
@@ -11655,6 +11655,21 @@ instance_count = 8
 mesh = SubResource("ArrayMesh_nnh88")
 buffer = PackedFloat32Array(1.4331094, 0, 0.6786987, 11.024895, 0, 1.5856968, 0, -5.2627587, -0.6786987, 0, 1.4331094, -15.5907135, -0.39826795, 0, 1.1712464, 15.120327, 0, 1.2371078, 0, -7.907606, -1.1712464, 0, -0.39826795, -15.5907135, 1.0022594, 0, 0.45657042, 11.211815, 0, 1.1013539, 0, -4.4077935, -0.45657042, 0, 1.0022594, -13.666443, -0.7928054, 0, -1.4640452, 15.492142, 0, 1.664923, 0, -8.066922, 1.4640452, 0, -0.7928054, -13.666443, -0.5238761, 0, -1.1715066, 13.404762, 0, 1.2833059, 0, -5.5456934, 1.1715066, 0, -0.5238761, -11.340698, -1.2253146, 0, 0.8165237, 15.071468, 0, 1.4724493, 0, -6.9165726, -0.8165237, 0, -1.2253146, -11.340698, -1.3832098, 0, 0.42814556, 13.176346, 0, 1.4479564, 0, -4.9730926, -0.42814556, 0, -1.3832098, -9.246811, -0.73366946, 0, -1.0709659, 15.527695, 0, 1.2981675, 0, -5.139664, 1.0709659, 0, -0.73366946, -4.9987793)
 
+[sub_resource type="StandardMaterial3D" id="new_approach_wood"]
+albedo_texture = ExtResource("new_wood_color")
+roughness = 0.88
+normal_enabled = true
+normal_scale = 0.7
+normal_texture = ExtResource("new_wood_normal")
+uv1_scale = Vector3(0.02, 0.12, 1)
+uv1_offset = Vector3(0.01, 0.06, 0)
+
+[sub_resource type="BoxMesh" id="new_approach_mesh"]
+material = SubResource("new_approach_wood")
+size = Vector3(2.8, 0.14, 4)
+[sub_resource type="BoxShape3D" id="new_approach_shape"]
+size = Vector3(2.8, 0.14, 4)
+
 [node name="RiverWorld" type="Node3D" unique_id=62322607]
 script = ExtResource("1_y50fq")
 definition = ExtResource("2_poncg")
@@ -14927,312 +14942,6 @@ metadata/source_asset = "B01_Bush_Low"
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 45.96854, 0.729961, -61.4)
 metadata/source_asset = "B01_Bush_Low"
 
-[node name="Rocks" type="Node3D" parent="." unique_id=1733828660]
-
-[node name="RIV05_Shore_Rock_Ledge_077" type="Node3D" parent="Rocks" unique_id=985337328 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.0010281, 0, -1.1227423, 0, 1.5041966, 0, 1.1227423, 0, 1.0010281, -49.671127, 0.07576709, -134)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_078" type="Node3D" parent="Rocks" unique_id=241061805 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-2.0912914, 0, 0.5749524, 0, 2.168887, 0, -0.5749524, 0, -2.0912914, -50.48464, -0.29739732, -125)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_079" type="Node3D" parent="Rocks" unique_id=1403097661 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-1.8457944, 0, 0.5688909, 0, 1.9314746, 0, -0.5688909, 0, -1.8457944, -54.558933, -0.28607082, -116)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_080" type="Node3D" parent="Rocks" unique_id=1159160532 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(-0.7098578, 0, 2.0717804, 0, 2.1900165, 0, -2.0717804, 0, -0.7098578, -59.447617, -0.22893345, -107)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_081" type="Node3D" parent="Rocks" unique_id=280070004 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.91875005, 0, -0.77321804, 0, 1.2008196, 0, 0.77321804, 0, 0.91875005, -63.904823, -0.26059106, -98)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_082" type="Node3D" parent="Rocks" unique_id=1566378578 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.029462, 0, -1.4362917, 0, 1.7671236, 0, 1.4362917, 0, 1.029462, -70.60126, -0.02672489, -89)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_083" type="Node3D" parent="Rocks" unique_id=917896397 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(-0.38444602, 0, -1.0933595, 0, 1.1589795, 0, 1.0933595, 0, -0.38444602, -73.479866, -0.2955399, -80)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_084" type="Node3D" parent="Rocks" unique_id=1809753410 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-0.5736471, 0, 1.1629632, 0, 1.2967476, 0, -1.1629632, 0, -0.5736471, -80.06892, -0.052746873, -71)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_085" type="Node3D" parent="Rocks" unique_id=2122231188 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.7071605, 0, 0.71167666, 0, 1.8495623, 0, -0.71167666, 0, 1.7071605, -83.310745, -0.20768532, -62)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_086" type="Node3D" parent="Rocks" unique_id=1442811132 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.6824133, 0, -0.0069105555, 0, 1.6824275, 0, 0.0069105555, 0, 1.6824133, -87.03652, -0.20723398, -53)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_087" type="Node3D" parent="Rocks" unique_id=1367919940 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-0.49823305, 0, -1.1542854, 0, 1.2572236, 0, 1.1542854, 0, -0.49823305, -90.562645, -0.12734193, -44)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_088" type="Node3D" parent="Rocks" unique_id=265770194 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.3337111, 0, 1.1825986, 0, 1.2287809, 0, -1.1825986, 0, 0.3337111, -91.741325, -0.21903381, -35)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_089" type="Node3D" parent="Rocks" unique_id=1179955871 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(0.9461565, 0, -0.7725714, 0, 1.2215067, 0, 0.7725714, 0, 0.9461565, -93.72405, -0.06761566, -26)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_090" type="Node3D" parent="Rocks" unique_id=984472139 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.079547964, 0, 1.211056, 0, 1.2136657, 0, -1.211056, 0, 0.079547964, -91.74215, -0.27523354, -17)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_091" type="Node3D" parent="Rocks" unique_id=1134225241 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.0334538, 0, 0.90603566, 0, 1.3743825, 0, -0.90603566, 0, 1.0334538, -90.92802, -0.20283297, -8)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_092" type="Node3D" parent="Rocks" unique_id=1670702803 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(2.0835223, 0, 0.16710797, 0, 2.090213, 0, -0.16710797, 0, 2.0835223, -89.014824, -0.08659523, 1)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_093" type="Node3D" parent="Rocks" unique_id=479426393 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-0.5565371, 0, -1.1982782, 0, 1.3212131, 0, 1.1982782, 0, -0.5565371, -84.10431, -0.23209183, 10)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_094" type="Node3D" parent="Rocks" unique_id=257600331 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.2137507, 0, -1.4919834, 0, 1.9233317, 0, 1.4919834, 0, 1.2137507, -78.50997, -0.38566056, 19)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_095" type="Node3D" parent="Rocks" unique_id=131446169 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.2310565, 0, 0.45948476, 0, 1.3140116, 0, -0.45948476, 0, 1.2310565, -76.50193, 0.08390725, 28)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_096" type="Node3D" parent="Rocks" unique_id=437310474 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-1.0642933, 0, 1.4529182, 0, 1.801025, 0, -1.4529182, 0, -1.0642933, -69.15088, -0.20147571, 37)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_097" type="Node3D" parent="Rocks" unique_id=896277293 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.6557065, 0, -1.7745712, 0, 1.8918388, 0, 1.7745712, 0, 0.6557065, -62.25038, -0.4033344, 46)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_098" type="Node3D" parent="Rocks" unique_id=694372793 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.474415, 0, -0.4219067, 0, 1.5335921, 0, 0.4219067, 0, 1.474415, -59.12167, -0.19081825, 55)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_099" type="Node3D" parent="Rocks" unique_id=266029081 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-0.6706063, 0, 1.3882176, 0, 1.5417072, 0, -1.3882176, 0, -0.6706063, -56.449726, 0.048706844, 64)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_100" type="Node3D" parent="Rocks" unique_id=1477187096 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.8488791, 0, -0.6097073, 0, 1.9468172, 0, 0.6097073, 0, 1.8488791, -51.22068, -0.29762807, 73)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_101" type="Node3D" parent="Rocks" unique_id=2115966919 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.7932096, 0, 0.30183148, 0, 1.8184341, 0, -0.30183148, 0, 1.7932096, -51.408596, -0.09834196, 82)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_102" type="Node3D" parent="Rocks" unique_id=1433284812 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.30446196, 0, -1.2560028, 0, 1.2923777, 0, 1.2560028, 0, 0.30446196, -51.275707, -0.052715052, 91)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_103" type="Node3D" parent="Rocks" unique_id=888577408 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-1.6031123, 0, -0.33108187, 0, 1.6369436, 0, 0.33108187, 0, -1.6031123, -44.172035, -0.37466714, 127)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_104" type="Node3D" parent="Rocks" unique_id=881935155 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.8282056, 0, 0.5017165, 0, 1.8957993, 0, -0.5017165, 0, 1.8282056, -42.91678, -0.044152517, 136)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="RIV05_Shore_Rock_Ledge_229" type="Node3D" parent="Rocks" unique_id=639910927 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.0644699, 0, -1.2011281, 0, 1.6049315, 0, 1.2011281, 0, 1.0644699, 31.962524, -0.033124685, -134)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_230" type="Node3D" parent="Rocks" unique_id=1259537434 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-1.1977521, 0, -1.1533141, 0, 1.6627518, 0, 1.1533141, 0, -1.1977521, 34.22778, 0.0043083355, -125)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_231" type="Node3D" parent="Rocks" unique_id=1831200916 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-1.197419, 0, -1.2020346, 0, 1.696673, 0, 1.2020346, 0, -1.197419, 35.54168, -0.19549996, -116)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_232" type="Node3D" parent="Rocks" unique_id=1490695639 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.55467, 0, 0.8226025, 0, 1.7588842, 0, -0.8226025, 0, 1.55467, 39.502563, -0.044787746, -107)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_233" type="Node3D" parent="Rocks" unique_id=1517781446 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.4529797, 0, -0.44129527, 0, 1.5185163, 0, 0.44129527, 0, 1.4529797, 40.746796, -0.38803792, -98)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_234" type="Node3D" parent="Rocks" unique_id=1649858460 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.89363253, 0, -0.84659845, 0, 1.2309785, 0, 0.84659845, 0, 0.89363253, 45.581146, -0.28636274, -89)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_235" type="Node3D" parent="Rocks" unique_id=386019847 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.5219066, 0, -0.60759574, 0, 1.6387106, 0, 0.60759574, 0, 1.5219066, 52.85251, 0.04703937, -80)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_236" type="Node3D" parent="Rocks" unique_id=374657792 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-1.4000111, 0, -0.93907446, 0, 1.6857911, 0, 0.93907446, 0, -1.4000111, 55.62389, -0.30412036, -71)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_237" type="Node3D" parent="Rocks" unique_id=240908494 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.642036, 0, -1.2933948, 0, 2.0902517, 0, 1.2933948, 0, 1.642036, 63.847927, 0.04924164, -62)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_238" type="Node3D" parent="Rocks" unique_id=1498307754 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(-1.5964916, 0, -0.60353595, 0, 1.7067634, 0, 0.60353595, 0, -1.5964916, 68.02915, -0.2034545, -53)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_239" type="Node3D" parent="Rocks" unique_id=422473789 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.5868618, 0, 1.2185047, 0, 1.3524646, 0, -1.2185047, 0, 0.5868618, 75.279976, 0.019257732, -44)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_240" type="Node3D" parent="Rocks" unique_id=784928498 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-2.0709517, 0, -0.3262742, 0, 2.096496, 0, 0.3262742, 0, -2.0709517, 78.81469, -0.2491879, -35)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_241" type="Node3D" parent="Rocks" unique_id=466949287 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(-1.7057796, 0, -0.51499563, 0, 1.7818261, 0, 0.51499563, 0, -1.7057796, 83.58, -0.28205374, -26)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_242" type="Node3D" parent="Rocks" unique_id=1847570333 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.5344788, 0, 1.1984705, 0, 1.9470378, 0, -1.1984705, 0, 1.5344788, 87.25956, -0.39261892, -17)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_243" type="Node3D" parent="Rocks" unique_id=902398802 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-0.16492206, 0, 1.49185, 0, 1.5009383, 0, -1.49185, 0, -0.16492206, 90.78186, -0.36473343, -8)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_244" type="Node3D" parent="Rocks" unique_id=1519820342 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(-1.1208105, 0, 1.4608243, 0, 1.841256, 0, -1.4608243, 0, -1.1208105, 94.336105, -0.20540123, 1)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_245" type="Node3D" parent="Rocks" unique_id=8964865 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.77050716, 0, 1.7633097, 0, 1.9243032, 0, -1.7633097, 0, 0.77050716, 95.00125, -0.25659364, 10)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_246" type="Node3D" parent="Rocks" unique_id=320804473 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.725535, 0, 1.6534057, 0, 1.805589, 0, -1.6534057, 0, 0.725535, 94.68188, -0.31426573, 19)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_247" type="Node3D" parent="Rocks" unique_id=1601270601 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(1.5364547, 0, 0.54562134, 0, 1.6304587, 0, -0.54562134, 0, 1.5364547, 93.67245, -0.31571186, 28)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_248" type="Node3D" parent="Rocks" unique_id=895622426 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(0.6353856, 0, -0.9921723, 0, 1.1781853, 0, 0.9921723, 0, 0.6353856, 91.668526, -0.33147365, 37)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_249" type="Node3D" parent="Rocks" unique_id=1903425188 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.278389, 0, -0.90726566, 0, 1.5676126, 0, 0.90726566, 0, 1.278389, 90.46903, -0.19181453, 46)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_250" type="Node3D" parent="Rocks" unique_id=394475212 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(2.0640218, 0, 0.3412696, 0, 2.0920446, 0, -0.3412696, 0, 2.0640218, 88.714455, 0.011123174, 55)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_251" type="Node3D" parent="Rocks" unique_id=424336912 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-0.45996144, 0, 1.6688046, 0, 1.7310325, 0, -1.6688046, 0, -0.45996144, 86.12991, 0.043784235, 64)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_252" type="Node3D" parent="Rocks" unique_id=1020486252 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.7467161, 0, -0.36532483, 0, 1.784511, 0, 0.36532483, 0, 1.7467161, 81.73508, -0.2341774, 73)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_253" type="Node3D" parent="Rocks" unique_id=729544099 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(0.19882704, 0, 1.3111539, 0, 1.3261435, 0, -1.3111539, 0, 0.19882704, 82.14567, 0.09420025, 82)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="R04_Rock_Cluster_254" type="Node3D" parent="Rocks" unique_id=679925574 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(-0.94580156, 0, -0.7961513, 0, 1.2362838, 0, 0.7961513, 0, -0.94580156, 79.88817, -0.005564803, 91)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="R04_Rock_Cluster_255" type="Node3D" parent="Rocks" unique_id=979369645 instance=ExtResource("21_o1vb4")]
-transform = Transform3D(1.8394518, 0, -0.57982785, 0, 1.928674, 0, 0.57982785, 0, 1.8394518, 66.005, 0.028192915, 127)
-metadata/source_asset = "R04_Rock_Cluster"
-
-[node name="RIV05_Shore_Rock_Ledge_256" type="Node3D" parent="Rocks" unique_id=819693907 instance=ExtResource("20_mgbaa")]
-transform = Transform3D(-1.0697379, 0, 0.97062594, 0, 1.4444562, 0, -0.97062594, 0, -1.0697379, 59.573803, -0.0017670381, 136)
-metadata/source_asset = "RIV05_Shore_Rock_Ledge"
-
-[node name="RIV04_Ford_Pebble_Group_332" type="Node3D" parent="Rocks" unique_id=430165765 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-1.0687494, 0, -0.74329275, 0, 1.3018101, 0, 0.74329275, 0, -1.0687494, -50.266815, -0.16976842, 108.67147)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_333" type="Node3D" parent="Rocks" unique_id=1064409329 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(0.6439544, 0, -1.2887685, 0, 1.4406948, 0, 1.2887685, 0, 0.6439544, -43.68568, -0.5258244, 105.57813)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_334" type="Node3D" parent="Rocks" unique_id=1899453084 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.9179783, 0, 0.70893544, 0, 1.1598593, 0, -0.70893544, 0, -0.9179783, -37.104546, -0.5510084, 105.50992)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_335" type="Node3D" parent="Rocks" unique_id=266576557 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-1.1123053, 0, 0.54437757, 0, 1.2383739, 0, -0.54437757, 0, -1.1123053, -30.523409, -0.55167955, 111.72601)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_336" type="Node3D" parent="Rocks" unique_id=2024949058 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(0.08347531, 0, 1.5391417, 0, 1.5414037, 0, -1.5391417, 0, 0.08347531, -23.942274, -0.5273073, 111.97591)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_337" type="Node3D" parent="Rocks" unique_id=1102618507 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.7608904, 0, -0.76815605, 0, 1.0812113, 0, 0.76815605, 0, -0.7608904, -17.361137, -0.4971584, 109.488556)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_338" type="Node3D" parent="Rocks" unique_id=596698907 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.18287717, 0, 1.2479674, 0, 1.2612957, 0, -1.2479674, 0, -0.18287717, -10.780003, -0.48506638, 104.5035)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_339" type="Node3D" parent="Rocks" unique_id=1431061563 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-1.443959, 0, 0.6764984, 0, 1.5945745, 0, -0.6764984, 0, -1.443959, -4.198867, -0.5005902, 109.945656)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_340" type="Node3D" parent="Rocks" unique_id=1142770201 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-1.2375652, 0, -0.22765936, 0, 1.2583308, 0, 0.22765936, 0, -1.2375652, 2.382269, -0.5314579, 105.4715)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_341" type="Node3D" parent="Rocks" unique_id=1267429535 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.32748786, 0, 1.5680534, 0, 1.6018863, 0, -1.5680534, 0, -0.32748786, 8.963405, -0.5532679, 109.85998)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_342" type="Node3D" parent="Rocks" unique_id=1905219505 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.6146846, 0, -1.5104464, 0, 1.6307316, 0, 1.5104464, 0, -0.6146846, 15.54454, -0.54877883, 110.528854)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_343" type="Node3D" parent="Rocks" unique_id=2082914460 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.7403448, 0, -0.69197136, 0, 1.0133779, 0, 0.69197136, 0, -0.7403448, 22.125675, -0.52153945, 103.77054)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_344" type="Node3D" parent="Rocks" unique_id=206092610 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-1.0544322, 0, 1.2642359, 0, 1.646244, 0, -1.2642359, 0, -1.0544322, 28.706812, -0.4930831, 109.897125)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_345" type="Node3D" parent="Rocks" unique_id=302078745 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.7880079, 0, 1.2634262, 0, 1.4890273, 0, -1.2634262, 0, -0.7880079, 35.28795, -0.48590517, 107.49949)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_346" type="Node3D" parent="Rocks" unique_id=1299070683 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.14764962, 0, -1.2260408, 0, 1.2348994, 0, 1.2260408, 0, -0.14764962, 41.869083, -0.50568, 103.85097)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_347" type="Node3D" parent="Rocks" unique_id=532861441 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(0.8814024, 0, -0.5104255, 0, 1.0185305, 0, 0.5104255, 0, 0.8814024, 48.45022, -0.5367751, 107.61291)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_348" type="Node3D" parent="Rocks" unique_id=2059174253 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(1.6498938, 0, 0.21631953, 0, 1.6640142, 0, -0.21631953, 0, 1.6498938, 55.031353, -0.5546091, 103.62776)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_349" type="Node3D" parent="Rocks" unique_id=839496391 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(0.21915434, 0, 1.0246307, 0, 1.0478057, 0, -1.0246307, 0, 0.21915434, 61.612488, -0.54508376, 109.30858)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_350" type="Node3D" parent="Rocks" unique_id=1648679043 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.9812779, 0, -0.93991214, 0, 1.3588014, 0, 0.93991214, 0, -0.9812779, 68.19363, -0.5157291, 103.71264)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
-[node name="RIV04_Ford_Pebble_Group_351" type="Node3D" parent="Rocks" unique_id=1775750152 instance=ExtResource("22_3fbqt")]
-transform = Transform3D(-0.38182116, 0, 1.5130124, 0, 1.5604467, 0, -1.5130124, 0, -0.38182116, 74.77476, -0.4897507, 104.33294)
-metadata/source_asset = "RIV04_Ford_Pebble_Group"
-
 [node name="Aquatic" type="Node3D" parent="." unique_id=555790672]
 
 [node name="V02_Cattail_Clump_105" type="Node3D" parent="Aquatic" unique_id=931760807 instance=ExtResource("23_wmwf5")]
@@ -16295,19 +16004,17 @@ metadata/source_asset = "RIV07_Backdrop_Ridge"
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 200, 9.466353, -220)
 metadata/source_asset = "RIV07_Backdrop_Ridge"
 
-[node name="Jetty" type="Node3D" parent="." unique_id=979625593]
+[node name="Jetty" parent="." unique_id=979625593 instance=ExtResource("new_jetty")]
+position = Vector3(96.68943, 0.52, 24)
+rotation_degrees = Vector3(0, -90, 0)
 
-[node name="P01_Dock_Straight_352" type="Node3D" parent="Jetty" unique_id=1814711399 instance=ExtResource("32_qc6ru")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 94.18943, -0.25, 24)
-metadata/source_asset = "P01_Dock_Straight"
-
-[node name="P01_Dock_Straight_353" type="Node3D" parent="Jetty" unique_id=873208449 instance=ExtResource("32_qc6ru")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 91.18943, -0.25, 24)
-metadata/source_asset = "P01_Dock_Straight"
-
-[node name="P01_Dock_Straight_354" type="Node3D" parent="Jetty" unique_id=569902299 instance=ExtResource("32_qc6ru")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 88.18943, -0.25, 24)
-metadata/source_asset = "P01_Dock_Straight"
+[node name="Approach" type="StaticBody3D" parent="Jetty"]
+position = Vector3(0, 0.04, -2)
+rotation_degrees = Vector3(1.4324, 0, 0)
+[node name="Model" type="MeshInstance3D" parent="Jetty/Approach"]
+mesh = SubResource("new_approach_mesh")
+[node name="Shape" type="CollisionShape3D" parent="Jetty/Approach"]
+shape = SubResource("new_approach_shape")
 
 [node name="AquaticHabitats" type="Node3D" parent="." unique_id=893579163]
 
@@ -20931,3 +20638,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.990753, 1.55, -116)
 
 [node name="Ford" type="Marker3D" parent="GameplayMarkers" unique_id=1968954423]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.253972, -0.52, 108)
+
+[node name="RockLandscaping" parent="." instance=ExtResource("rock_landscaping")]

@@ -8,6 +8,8 @@ extends Resource
 @export var quantity: int = 1
 @export var bait_type: StringName = &"worm"
 @export var strength: float = 5.0
+## Swappable rod scene: origin at the grip, +Y along the shaft, Marker3D named Tip.
+@export var model_scene: PackedScene
 @export_range(0.5, 2.0) var visibility: float = 1.0
 @export var length: float = 65.0
 @export var reel_speed: float = 2.6

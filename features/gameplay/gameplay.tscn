@@ -1,4 +1,6 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://actors/boat/fishing_boat.tscn" id="boat"]
 
 [ext_resource type="Script" path="res://features/economy/commerce_gateway.gd" id="commerce"]
 
@@ -22,6 +24,11 @@ economy_enabled = true
 script = ExtResource("commerce")
 
 [node name="World" parent="." instance=ExtResource("pond_scene")]
+
+[node name="FishingBoat" parent="." node_paths=PackedStringArray("pond") instance=ExtResource("boat")]
+position = Vector3(-64.0, -0.18, 35)
+rotation = Vector3(0, -1.5707963, 0)
+pond = NodePath("../World")
 
 [node name="Player" parent="." node_paths=PackedStringArray("pond", "movement_reference") instance=ExtResource("player")]
 position = Vector3(-69.52561, 0.45, 42)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MissionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "pond_champion"
+tier = 3
+title = "พิชิตจ้าวบ่อ"
+description = "จับปลาที่เป็นจ้าวบ่อ ณ ตอนจับสำเร็จ 1 ตัว"
+metric = "count"
+target = 1.0
+reward_coins = 120
+boss_only = true

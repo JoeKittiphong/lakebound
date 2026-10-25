@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/giant_catfish.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/icons/giant_catfish.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"giant_catfish"
+display_name = "ปลาบึก (Mekong Giant Catfish)"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 1.297
+preview_tilt_degrees = 12.0
+min_weight = 15.0
+max_weight = 60.0
+preferred_depth = Vector2(3.5,8.0)
+bait_preferences = PackedStringArray("dough")
+swim_speed = 0.8
+pull_strength = 1.6
+struggle_frequency = 1.1
+detection_radius = 10.0
+tension_pressure = 0.1230

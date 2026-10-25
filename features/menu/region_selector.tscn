@@ -1,0 +1,112 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/menu/region_selector.gd" id="script"]
+[ext_resource type="Script" path="res://shared/ui/swipe_scroll.gd" id="scroll"]
+[ext_resource type="Theme" path="res://features/menu/lake_menu_theme.tres" id="theme"]
+[node name="RegionSelector" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("script")
+theme = ExtResource("theme")
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.015,0.05,0.07,0.82)
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = 28.0
+offset_right = -48.0
+offset_bottom = -28.0
+[node name="Content" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+[node name="Header" type="HBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+[node name="Title" type="Label" parent="Panel/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "เลือกแหล่งน้ำ"
+theme_override_font_sizes/font_size = 30
+[node name="Close" type="Button" parent="Panel/Content/Header"]
+custom_minimum_size = Vector2(90,54)
+layout_mode = 2
+text = "ปิด"
+[node name="Hint" type="Label" parent="Panel/Content"]
+layout_mode = 2
+text = "6 แหล่งน้ำ · ปลาและภารกิจเฉพาะพื้นที่ · เลือกเล่นได้ทุกโซน"
+theme_override_font_sizes/font_size = 17
+mouse_filter = 2
+[node name="Scroll" type="ScrollContainer" parent="Panel/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+script = ExtResource("scroll")
+[node name="Cards" type="GridContainer" parent="Panel/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+[node name="river" type="Button" parent="Panel/Content/Scroll/Cards"]
+custom_minimum_size = Vector2(0,134)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "01  แม่น้ำสายใหญ่
+วังน้ำลึก · ตลิ่งหิน · ปลายักษ์
+ปลา 28 รายการ · ภารกิจ 12 รายการ"
+theme_override_font_sizes/font_size = 20
+[node name="lotus_marsh" type="Button" parent="Panel/Content/Scroll/Cards"]
+custom_minimum_size = Vector2(0,134)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "02  บึงบัวริมทุ่ง
+น้ำนิ่งตื้น · กอบัว · ฝึกตกปลา
+ปลา 14 รายการ · ภารกิจ 6 รายการ"
+theme_override_font_sizes/font_size = 20
+[node name="forest_stream" type="Button" parent="Panel/Content/Scroll/Cards"]
+custom_minimum_size = Vector2(0,134)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "03  ลำธารป่าภูเขา
+แก่งหิน · ป่าลึก · ปลาพื้นถิ่น
+ปลา 28 รายการ · ภารกิจ 6 รายการ"
+theme_override_font_sizes/font_size = 20
+[node name="wild_reservoir" type="Button" parent="Panel/Content/Scroll/Cards"]
+custom_minimum_size = Vector2(0,134)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "04  เขื่อนดงตอไม้
+อ่างน้ำลึก · ซากไม้จม · ชะโดยักษ์
+ปลา 14 รายการ · ภารกิจ 6 รายการ"
+theme_override_font_sizes/font_size = 20
+[node name="mangrove_estuary" type="Button" parent="Panel/Content/Scroll/Cards"]
+custom_minimum_size = Vector2(0,134)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "05  ปากอ่าวป่าชายเลน
+น้ำกร่อย · รากโกงกาง · ชายเลน
+ปลา 14 รายการ · ภารกิจ 6 รายการ"
+theme_override_font_sizes/font_size = 20
+[node name="coral_coast" type="Button" parent="Panel/Content/Scroll/Cards"]
+custom_minimum_size = Vector2(0,134)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "06  ทะเลแนวปะการัง
+หาดทราย · แนวหิน · ทูน่าและกระโทง
+ปลา 15 รายการ · ภารกิจ 6 รายการ"
+theme_override_font_sizes/font_size = 20
+[connection signal="pressed" from="Panel/Content/Header/Close" to="." method="close"]
+[connection signal="pressed" from="Panel/Content/Scroll/Cards/river" to="." method="_choose" binds=["river"]]
+[connection signal="pressed" from="Panel/Content/Scroll/Cards/lotus_marsh" to="." method="_choose" binds=["lotus_marsh"]]
+[connection signal="pressed" from="Panel/Content/Scroll/Cards/forest_stream" to="." method="_choose" binds=["forest_stream"]]
+[connection signal="pressed" from="Panel/Content/Scroll/Cards/wild_reservoir" to="." method="_choose" binds=["wild_reservoir"]]
+[connection signal="pressed" from="Panel/Content/Scroll/Cards/mangrove_estuary" to="." method="_choose" binds=["mangrove_estuary"]]
+[connection signal="pressed" from="Panel/Content/Scroll/Cards/coral_coast" to="." method="_choose" binds=["coral_coast"]]

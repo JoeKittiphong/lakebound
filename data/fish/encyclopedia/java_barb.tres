@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/java_barb.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/java_barb.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"java_barb"
+display_name = "ปลาตะเพียนขาว"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.437
+preview_tilt_degrees = 12.0
+min_weight = 0.3
+max_weight = 2.0
+preferred_depth = Vector2(0.4,1.8)
+bait_preferences = PackedStringArray("dough")
+swim_speed = 1.2
+pull_strength = 0.6
+struggle_frequency = 1.7
+detection_radius = 10.0
+tension_pressure = 0.0680

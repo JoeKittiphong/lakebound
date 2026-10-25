@@ -74,9 +74,12 @@ var drag_strength: float:
 var feedback := "เลือกเหยื่อและความลึก แล้วเหวี่ยงเบ็ด"
 var kept_count := 0
 var released_count := 0
+@export var map_id: String = "river"
 var profile: AnglerProfile
 var cast_bait_id := ""
 var catch_record: Dictionary = {}
+var catch_event_id := ""
+var bite_depth := 0.0
 var lure_input := LureInput.new()
 var lure_holding := false
 var lure_action_name: StringName = &"release"
@@ -96,6 +99,8 @@ func refresh_equipment() -> void:
  fight.rod_strength = profile.equipped("rod").strength
  ecosystem.line_visibility = profile.equipped("line").visibility
  selected_bait = profile.equipped("bait").bait_type
+ if is_instance_valid(player) and player is AnglerPlayer:
+  player.equip_rod(profile.equipped("rod"))
 
 func using_lure() -> bool:
  return profile != null and profile.equipped("bait").kind == "lure"
@@ -118,6 +123,10 @@ func set_aim(value: Vector2) -> void:
 func cast() -> bool:
  if state != State.READY or not is_instance_valid(player):
   return false
+ var reason := cast_block_reason()
+ if not reason.is_empty():
+  feedback = reason
+  return false
  var target := get_aim_position()
  if not ecosystem.definition.is_castable(target):
   feedback = "หันไปทางน้ำ แล้วเลือกจุดเหวี่ยงใหม่"
@@ -126,7 +135,7 @@ func cast() -> bool:
   refresh_equipment()
   target = get_aim_position()
   if tuning.spool_capacity < 1.0 or Vector2(_planar_distance(player.global_position, target), target.y).length() > tuning.spool_capacity:
-   feedback = "สายเอ็นสั้นเกินไป — เปลี่ยนสายหรือเลือกจุดใกล้ขึ้น"
+   feedback = "เอ็นเหลือไม่พอถึงจุดนี้ — เปลี่ยนสายหรือเลือกจุดใกล้ขึ้น"
    return false
   if not profile.prepare_cast():
    feedback = profile.save_error if not profile.save_error.is_empty() else "เหยื่อหมด หรือมีเหยื่อรอกู้คืน — เปิดกระเป๋าอุปกรณ์"
@@ -141,22 +150,51 @@ func cast() -> bool:
  cast_started.emit()
  return true
 
+func cast_block_reason() -> String:
+ if profile != null:
+  if profile.incompatible:
+   return "อ่านข้อมูลผู้เล่นไม่ได้ — ยังเหวี่ยงเบ็ดไม่ได้"
+  if not profile.data.pending.is_empty():
+   return "มีเหยื่อปลอมรอกู้คืน — เปิดกระเป๋าเพื่อกู้คืนหรือสละเหยื่อ"
+  if profile.data.line_remaining < 1.0:
+   return "เอ็นหมด — เปิดกระเป๋าอุปกรณ์เพื่อเปลี่ยนสายเอ็น"
+  if profile.quantity(String(profile.equipped("bait").id)) <= 0:
+   return "เหยื่อหมด — เปิดกระเป๋าเพื่อเปลี่ยนหรือซื้อเหยื่อ"
+ if player is AnglerPlayer and not player.can_fish():
+  return "กดตกปลาเพื่อหยุดเรือและยืนก่อนเหวี่ยงเบ็ด" if player.boat_driving() else "ขึ้นฝั่งและยืนให้มั่นก่อนเหวี่ยงเบ็ด"
+ if is_instance_valid(player) and is_instance_valid(ecosystem):
+  var target := get_aim_position()
+  if not ecosystem.definition.is_castable(target):
+   return "เหวี่ยงไม่ได้: หันไปทางน้ำ แล้วเลือกจุดเหวี่ยงใหม่"
+ return ""
+
 func get_aim_position() -> Vector3:
  var offset := aim_offset
  if profile != null:
   var available := minf(profile.data.line_remaining, profile.equipped("reel").length)
-  offset = offset.limit_length(sqrt(maxf(0.0, available * available - selected_depth * selected_depth)) * 0.98)
+  # Reserve line for depth after finding the water depth at the aimed point.
+  # Selected depth can exceed the remaining line after several breaks.
+  # Never collapse the preview onto the angler when equipment needs replacing.
+  if available >= 1.0:
+   offset = offset.limit_length(available * 0.9)
  var target: Vector3 = player.global_position + offset.rotated(Vector3.UP, aim_yaw)
  target.y = selected_depth
  if is_instance_valid(ecosystem):
   var available: float = ecosystem.definition.water_depth_at(Vector2(target.x, target.z))
   target.y = minf(target.y, maxf(0.1, available - 0.14))
+ if profile != null:
+  var available := minf(profile.data.line_remaining, profile.equipped("reel").length)
+  var planar := _planar_distance(player.global_position, target)
+  if available >= 1.0:
+   target.y = minf(target.y, sqrt(maxf(0.01, available * available - planar * planar)) * 0.98)
  return target
 
 func _on_fish_biting(record: RefCounted) -> void:
  if state != State.WAITING:
   return
  active_fish = record
+ catch_event_id = Crypto.new().generate_random_bytes(16).hex_encode()
+ bite_depth = cast_position.y
  feedback = "ปลากินเบ็ด! ดึงรอกลงเพื่อวัดเบ็ด"
  _change_state(State.BITE)
  _request_haptic(180)
@@ -223,17 +261,16 @@ func _fight_step(delta: float, angler_position: Vector3) -> void:
  fight.advance(delta, angler_position, active_fish, rod_input, tuning)
  active_fish.position = ecosystem.constrain_to_water(active_fish.position)
  fish_distance = _planar_distance(angler_position, active_fish.position)
- if profile != null and fish_distance >= tuning.spool_capacity - 0.2:
-  # Reaching the end raises real load; it is not an instant/random loss.
-  tension = maxf(tension, red_start + 0.05)
- overload_time = overload_time + delta if tension >= red_start else maxf(0, overload_time - delta * 2.0)
+ # End-of-spool load is included in the simulation before payout input.
+ # Never overwrite the player's recovered tension after simulating controls.
+ # Red is a control cue, not a breaking-strength measurement. A strong line
+ # must never snap under a light fish solely because the UI stayed in red.
+ overload_time = overload_time + delta if fight.line_load_kgf >= fight.line_strength else maxf(0, overload_time - delta * 2.0)
  slack_time = slack_time + delta if tension < 0.12 else maxf(0, slack_time - delta * 2.0)
  if overload_time >= tuning.break_grace:
-  lose("สายขาด! ครั้งหน้าผ่อนสายเมื่อแรงตึงขึ้นสีแดง", true)
+  lose("สายขาด! แรงดึงเกินสเปคเอ็น — ผ่อนสายหรือใช้เอ็นที่รับแรงได้มากขึ้น", true)
  elif slack_time >= tuning.slack_grace:
   lose("สายหย่อนเกินไป ปลาสะบัดเบ็ดหลุด")
- elif profile == null and fish_distance >= tuning.spool_capacity - 0.2:
-  lose("สายหมดรอกและขาด!", true)
  elif _within_landing_reach(angler_position) and stamina < 0.4 and tension >= yellow_start and tension < red_start:
   active_fish.state = &"landed"
   ecosystem.bait_active = false
@@ -273,6 +310,8 @@ func lose(reason: String, line_broken: bool = false) -> void:
 func reset_cast() -> void:
  ecosystem.cancel_bait()
  active_fish = null
+ catch_event_id = ""
+ catch_record = {}
  rod_input = Vector2.ZERO
  tension = 0.0
  line_length = 0.0
@@ -293,13 +332,18 @@ func cancel() -> void:
 func resolve_catch(keep_fish: bool) -> void:
  if state != State.RESULT:
   return
+ # Retry the same immutable landed event after a save failure, before allowing
+ # the result screen to discard it. Successful events are idempotent.
+ if profile != null and catch_record.has("catch_id") and not profile.record_catch(catch_record, bool(catch_record.get("boss", false))):
+  feedback = profile.save_error
+  return
  if keep_fish:
   if profile != null:
    var population := ecosystem.snapshot()
    for index in range(population.size() - 1, -1, -1):
     if population[index].id == active_fish.id:
      population.remove_at(index)
-   if not profile.keep_catch(catch_record, "river", population):
+   if not profile.keep_catch(catch_record, map_id, population):
     feedback = profile.save_error if not profile.save_error.is_empty() else "กล่องปลาเต็ม — ขายปลาในกระเป๋าหรือปล่อยตัวนี้"
     return
   ecosystem.keep(active_fish)

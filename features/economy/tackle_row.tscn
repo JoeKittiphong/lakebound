@@ -16,6 +16,7 @@ text = "มี 0"
 layout_mode = 2
 custom_minimum_size = Vector2(130, 48)
 text = "ซื้อ"
+disabled = true
 [node name="Equip" type="Button" parent="."]
 layout_mode = 2
 custom_minimum_size = Vector2(110, 48)

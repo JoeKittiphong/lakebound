@@ -1,0 +1,1522 @@
+[
+  {
+    "asset": "res://world/river/props/rock_mobile.tscn",
+    "depth": 0.0,
+    "name": "Land_00",
+    "radius": 1.56207856135541,
+    "x": -84.333625793457,
+    "y": 1.23284982442856,
+    "z": -89.6501617431641,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_01.tscn",
+    "depth": 0.0,
+    "name": "Land_01",
+    "radius": 1.0327910320513,
+    "x": 75.0914077758789,
+    "y": 1.16211313903332,
+    "z": -63.1820220947266,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_02.tscn",
+    "depth": 0.0,
+    "name": "Land_02",
+    "radius": 1.18656566387305,
+    "x": -66.3498916625977,
+    "y": 1.6966109842062,
+    "z": -140.581665039063,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_03.tscn",
+    "depth": 0.0,
+    "name": "Land_03",
+    "radius": 1.20028036053036,
+    "x": 102.230766296387,
+    "y": 1.29448684751987,
+    "z": -23.2347869873047,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_04.tscn",
+    "depth": 0.0,
+    "name": "Land_04",
+    "radius": 1.21427281456587,
+    "x": -61.6694526672363,
+    "y": 1.38456510305405,
+    "z": 133.677490234375,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_05.tscn",
+    "depth": 0.0,
+    "name": "Land_05",
+    "radius": 2.07484761071758,
+    "x": 106.664482116699,
+    "y": 1.05014830231667,
+    "z": 2.53517150878906,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_06.tscn",
+    "depth": 0.0,
+    "name": "Land_06",
+    "radius": 1.38402287671829,
+    "x": -100.791549682617,
+    "y": 1.47984149456024,
+    "z": 18.2587738037109,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_07.tscn",
+    "depth": 0.0,
+    "name": "Land_07",
+    "radius": 1.33663867928846,
+    "x": 102.178535461426,
+    "y": 1.54639875888824,
+    "z": 75.582275390625,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_01.tscn",
+    "depth": 0.0,
+    "name": "Land_08",
+    "radius": 1.1360212147024,
+    "x": -101.672187805176,
+    "y": 0.990120756626129,
+    "z": -35.5964813232422,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_02.tscn",
+    "depth": 0.0,
+    "name": "Land_09",
+    "radius": 1.99615241239357,
+    "x": 61.3530464172363,
+    "y": 1.47439746260643,
+    "z": -95.6960296630859,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_03.tscn",
+    "depth": 0.0,
+    "name": "Land_10",
+    "radius": 1.20169778001826,
+    "x": -86.4628677368164,
+    "y": 1.65288261175156,
+    "z": -99.6669006347656,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_04.tscn",
+    "depth": 0.0,
+    "name": "Land_11",
+    "radius": 2.18505692061797,
+    "x": 102.5888671875,
+    "y": 1.23900723457336,
+    "z": 59.0998992919922,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_05.tscn",
+    "depth": 0.0,
+    "name": "Land_12",
+    "radius": 1.7937153764301,
+    "x": -54.8265838623047,
+    "y": 1.2003212928772,
+    "z": 140.737091064453,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_06.tscn",
+    "depth": 0.0,
+    "name": "Land_13",
+    "radius": 1.38817445237225,
+    "x": 95.4407653808594,
+    "y": 1.37052966952324,
+    "z": 90.0103912353516,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_20.tscn",
+    "depth": 0.0,
+    "name": "Land_14",
+    "radius": 1.63909540639537,
+    "x": -89.2103805541992,
+    "y": 1.23704540729523,
+    "z": 28.8107452392578,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_21.tscn",
+    "depth": 0.0,
+    "name": "Land_15",
+    "radius": 2.896292554198,
+    "x": 110.367897033691,
+    "y": 1.4642637014389,
+    "z": -17.6371688842773,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_01.tscn",
+    "depth": 0.0,
+    "name": "Land_16",
+    "radius": 0.309983654157065,
+    "x": -56.7772178649902,
+    "y": 1.0642187367163,
+    "z": 126.128112792969,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_02.tscn",
+    "depth": 0.0,
+    "name": "Land_17",
+    "radius": 0.537677891279361,
+    "x": 75.8468246459961,
+    "y": 1.62189798675831,
+    "z": -75.9698028564453,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_03.tscn",
+    "depth": 0.0,
+    "name": "Land_18",
+    "radius": 0.66648670970041,
+    "x": -102.547485351563,
+    "y": 1.44503669291189,
+    "z": 13.9317779541016,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_mobile.tscn",
+    "depth": 0.0,
+    "name": "Land_19",
+    "radius": 1.9598845631873,
+    "x": 46.6829032897949,
+    "y": 1.28763633966446,
+    "z": -137.396942138672,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_01.tscn",
+    "depth": 0.0,
+    "name": "Land_20",
+    "radius": 1.57629823019404,
+    "x": -63.5577812194824,
+    "y": 1.33564079403877,
+    "z": 126.133941650391,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_02.tscn",
+    "depth": 0.0,
+    "name": "Land_21",
+    "radius": 2.30737081373528,
+    "x": 102.870254516602,
+    "y": 1.06795685887337,
+    "z": -13.8713989257813,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_03.tscn",
+    "depth": 0.0,
+    "name": "Land_22",
+    "radius": 1.25673575433922,
+    "x": -106.98461151123,
+    "y": 1.25935443639755,
+    "z": -23.6299667358398,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_04.tscn",
+    "depth": 0.0,
+    "name": "Land_23",
+    "radius": 1.0417504504327,
+    "x": 75.5893707275391,
+    "y": 1.3394720852375,
+    "z": -68.2179718017578,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_05.tscn",
+    "depth": 0.0,
+    "name": "Land_24",
+    "radius": 1.1954120786719,
+    "x": -87.5485763549805,
+    "y": 1.62601618468761,
+    "z": -95.8703231811523,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_06.tscn",
+    "depth": 0.0,
+    "name": "Land_25",
+    "radius": 1.21662588772818,
+    "x": 91.307014465332,
+    "y": 0.938385981321335,
+    "z": 75.1636657714844,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_07.tscn",
+    "depth": 0.0,
+    "name": "Land_26",
+    "radius": 1.82878867411256,
+    "x": -66.2470550537109,
+    "y": 1.0307516336441,
+    "z": 65.0708312988281,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_01.tscn",
+    "depth": 0.0,
+    "name": "Land_27",
+    "radius": 1.59171231079222,
+    "x": 113.578567504883,
+    "y": 1.48511289954185,
+    "z": -0.2613525390625,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_02.tscn",
+    "depth": 0.0,
+    "name": "Land_28",
+    "radius": 2.13745170504822,
+    "x": -111.724235534668,
+    "y": 1.57283802628517,
+    "z": -12.1084747314453,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_03.tscn",
+    "depth": 0.0,
+    "name": "Land_29",
+    "radius": 1.33386823083669,
+    "x": 54.5867958068848,
+    "y": 1.64190071821213,
+    "z": -131.929473876953,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_04.tscn",
+    "depth": 0.0,
+    "name": "Land_30",
+    "radius": 1.81779532313642,
+    "x": -95.9387588500977,
+    "y": 0.991003292798996,
+    "z": -57.7765579223633,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_05.tscn",
+    "depth": 0.0,
+    "name": "Land_31",
+    "radius": 1.51761419943782,
+    "x": 87.1281967163086,
+    "y": 1.45816031098366,
+    "z": -53.2190017700195,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_06.tscn",
+    "depth": 0.0,
+    "name": "Land_32",
+    "radius": 1.53623376448422,
+    "x": -81.6942443847656,
+    "y": 1.55138790607452,
+    "z": 52.5597229003906,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_20.tscn",
+    "depth": 0.0,
+    "name": "Land_33",
+    "radius": 1.22968728962372,
+    "x": 53.8409194946289,
+    "y": 1.03613170087338,
+    "z": -95.8790054321289,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_21.tscn",
+    "depth": 0.0,
+    "name": "Land_34",
+    "radius": 2.56122555154639,
+    "x": -69.8629531860352,
+    "y": 1.45465223789215,
+    "z": 81.3529663085938,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_01.tscn",
+    "depth": 0.0,
+    "name": "Land_35",
+    "radius": 0.308157870336312,
+    "x": 55.4822006225586,
+    "y": 1.28159592278424,
+    "z": -99.7364196777344,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_02.tscn",
+    "depth": 0.0,
+    "name": "Land_36",
+    "radius": 0.476943414564713,
+    "x": -89.2182998657227,
+    "y": 1.03247355200937,
+    "z": 21.8944702148438,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_03.tscn",
+    "depth": 0.0,
+    "name": "Land_37",
+    "radius": 0.717383687253112,
+    "x": 104.197944641113,
+    "y": 1.09286452653452,
+    "z": 40.6858215332031,
+    "zone": "Land"
+  },
+  {
+    "asset": "res://world/river/props/rock_mobile.tscn",
+    "depth": 0.0,
+    "name": "Shore_00",
+    "radius": 2.00534161106521,
+    "x": -94.4807052612305,
+    "y": -0.0643029928207397,
+    "z": -37.5385284423828,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_01.tscn",
+    "depth": 0.0,
+    "name": "Shore_01",
+    "radius": 1.21375356044982,
+    "x": 92.4500045776367,
+    "y": -0.280076277256012,
+    "z": -10.0262908935547,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_02.tscn",
+    "depth": 0.0,
+    "name": "Shore_02",
+    "radius": 1.92541542118852,
+    "x": -67.4498748779297,
+    "y": -0.372114562988281,
+    "z": -94.4363250732422,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_03.tscn",
+    "depth": 0.0,
+    "name": "Shore_03",
+    "radius": 1.42439077763171,
+    "x": 53.3450317382813,
+    "y": -0.0203849521855932,
+    "z": -81.1951599121094,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_04.tscn",
+    "depth": 0.0,
+    "name": "Shore_04",
+    "radius": 0.83303915157709,
+    "x": -90.1160736083984,
+    "y": 0.06929991543293,
+    "z": 3.15238952636719,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_05.tscn",
+    "depth": 0.0,
+    "name": "Shore_05",
+    "radius": 2.12600720776334,
+    "x": 32.3539505004883,
+    "y": -0.439542150497437,
+    "z": -131.847778320313,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_06.tscn",
+    "depth": 0.0,
+    "name": "Shore_06",
+    "radius": 1.72986824444251,
+    "x": -41.8347206115723,
+    "y": -0.264386653900146,
+    "z": 139.28076171875,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_07.tscn",
+    "depth": 0.0,
+    "name": "Shore_07",
+    "radius": 1.19858064846076,
+    "x": 58.9490776062012,
+    "y": 0.0553652971982956,
+    "z": -72.1931915283203,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_01.tscn",
+    "depth": 0.0,
+    "name": "Shore_08",
+    "radius": 2.00300741389492,
+    "x": -76.5058364868164,
+    "y": -0.138178324699402,
+    "z": -80.8309326171875,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_02.tscn",
+    "depth": 0.0,
+    "name": "Shore_09",
+    "radius": 2.01172862333507,
+    "x": 85.7571868896484,
+    "y": -0.151935893297195,
+    "z": 67.8303070068359,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_03.tscn",
+    "depth": 0.0,
+    "name": "Shore_10",
+    "radius": 0.881142577606298,
+    "x": -58.6520919799805,
+    "y": -0.275496765971184,
+    "z": 56.9769439697266,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_04.tscn",
+    "depth": 0.0,
+    "name": "Shore_11",
+    "radius": 1.97399991021295,
+    "x": 90.3251800537109,
+    "y": -0.235130661725998,
+    "z": -16.855842590332,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_05.tscn",
+    "depth": 0.0,
+    "name": "Shore_12",
+    "radius": 1.99718663795488,
+    "x": -93.7059707641602,
+    "y": -0.281215143203735,
+    "z": -16.6685333251953,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_06.tscn",
+    "depth": 0.0,
+    "name": "Shore_13",
+    "radius": 1.79679757771714,
+    "x": 95.8751831054688,
+    "y": -0.144352400302887,
+    "z": -2.48016357421875,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_20.tscn",
+    "depth": 0.0,
+    "name": "Shore_14",
+    "radius": 1.88421393896088,
+    "x": -47.7608108520508,
+    "y": -0.0774788081645966,
+    "z": -142.267822265625,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_21.tscn",
+    "depth": 0.0,
+    "name": "Shore_15",
+    "radius": 2.86649020860347,
+    "x": 85.4696426391602,
+    "y": -0.326999662771035,
+    "z": -27.1419296264648,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_01.tscn",
+    "depth": 0.0,
+    "name": "Shore_16",
+    "radius": 0.445777573904028,
+    "x": -43.2006912231445,
+    "y": -0.142305696986098,
+    "z": 136.246948242188,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_02.tscn",
+    "depth": 0.0,
+    "name": "Shore_17",
+    "radius": 0.370042293857791,
+    "x": 80.4067993164063,
+    "y": 0.0168681397206392,
+    "z": 93.6094207763672,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_03.tscn",
+    "depth": 0.0,
+    "name": "Shore_18",
+    "radius": 0.945846773603462,
+    "x": -93.9292373657227,
+    "y": -0.300036140397685,
+    "z": -24.8166122436523,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_mobile.tscn",
+    "depth": 0.0,
+    "name": "Shore_19",
+    "radius": 1.10554347073088,
+    "x": 44.6338882446289,
+    "y": -0.304053384065628,
+    "z": -93.7571868896484,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_01.tscn",
+    "depth": 0.0,
+    "name": "Shore_20",
+    "radius": 1.71941435828492,
+    "x": -54.0839424133301,
+    "y": -0.206594977634659,
+    "z": 72.3378601074219,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_02.tscn",
+    "depth": 0.0,
+    "name": "Shore_21",
+    "radius": 1.52479501903662,
+    "x": 59.5693511962891,
+    "y": -0.546794855594635,
+    "z": -67.5676498413086,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_03.tscn",
+    "depth": 0.0,
+    "name": "Shore_22",
+    "radius": 1.06629240094705,
+    "x": -57.0711822509766,
+    "y": -0.0964446542737937,
+    "z": 63.0833587646484,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_04.tscn",
+    "depth": 0.0,
+    "name": "Shore_23",
+    "radius": 1.11128214066463,
+    "x": 80.3399963378906,
+    "y": -0.281091855951809,
+    "z": -35.0919494628906,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_05.tscn",
+    "depth": 0.0,
+    "name": "Shore_24",
+    "radius": 1.6772838182326,
+    "x": -90.5751113891602,
+    "y": -0.272568613290787,
+    "z": -2.27569580078125,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_06.tscn",
+    "depth": 0.0,
+    "name": "Shore_25",
+    "radius": 1.80020539287307,
+    "x": 63.2788124084473,
+    "y": -0.298533554451804,
+    "z": -62.8404541015625,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_07.tscn",
+    "depth": 0.0,
+    "name": "Shore_26",
+    "radius": 1.28945488732893,
+    "x": -80.2116851806641,
+    "y": -0.299357489760115,
+    "z": 19.8352508544922,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_01.tscn",
+    "depth": 0.0,
+    "name": "Shore_27",
+    "radius": 1.91107367301493,
+    "x": 55.7822647094727,
+    "y": -0.278965389728546,
+    "z": 141.885589599609,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_02.tscn",
+    "depth": 0.0,
+    "name": "Shore_28",
+    "radius": 2.36948030626323,
+    "x": -52.8901214599609,
+    "y": -0.212487810019209,
+    "z": 82.3595123291016,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_03.tscn",
+    "depth": 0.0,
+    "name": "Shore_29",
+    "radius": 1.02000044901334,
+    "x": 82.1149215698242,
+    "y": -0.189564579725266,
+    "z": 78.2938995361328,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_04.tscn",
+    "depth": 0.0,
+    "name": "Shore_30",
+    "radius": 1.46209230397004,
+    "x": -93.9740524291992,
+    "y": -0.0401584088802338,
+    "z": -9.92526245117188,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_05.tscn",
+    "depth": 0.0,
+    "name": "Shore_31",
+    "radius": 1.24593576390401,
+    "x": 81.4283447265625,
+    "y": -0.124871957302094,
+    "z": 85.6879577636719,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_06.tscn",
+    "depth": 0.0,
+    "name": "Shore_32",
+    "radius": 1.12311263952461,
+    "x": -88.59375,
+    "y": 0.108366084098816,
+    "z": 8.08291625976563,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_20.tscn",
+    "depth": 0.0,
+    "name": "Shore_33",
+    "radius": 1.22599554865889,
+    "x": 71.1919631958008,
+    "y": -0.0643571138381958,
+    "z": -52.0059127807617,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_21.tscn",
+    "depth": 0.0,
+    "name": "Shore_34",
+    "radius": 3.17414003121775,
+    "x": -80.9664688110352,
+    "y": -0.355766278505325,
+    "z": -71.0431518554688,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_01.tscn",
+    "depth": 0.0,
+    "name": "Shore_35",
+    "radius": 0.541976866649868,
+    "x": 97.7936172485352,
+    "y": 0.109113809820398,
+    "z": 2.40742492675781,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_02.tscn",
+    "depth": 0.0,
+    "name": "Shore_36",
+    "radius": 0.731739141433315,
+    "x": -47.2798194885254,
+    "y": 0.0741439125728448,
+    "z": 130.626007080078,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_03.tscn",
+    "depth": 0.0,
+    "name": "Shore_37",
+    "radius": 0.684909647600451,
+    "x": 41.7564659118652,
+    "y": -0.312979846338263,
+    "z": -100.053405761719,
+    "zone": "Shore"
+  },
+  {
+    "asset": "res://world/river/props/rock_mobile.tscn",
+    "depth": 0.311213099477772,
+    "name": "Shallow_00",
+    "radius": 1.21107713065356,
+    "x": -52.25439453125,
+    "y": -0.900448709726334,
+    "z": 66.5652465820313,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_01.tscn",
+    "depth": 0.962646184367136,
+    "name": "Shallow_01",
+    "radius": 1.18998249794045,
+    "x": 74.7647552490234,
+    "y": -1.67204415202141,
+    "z": 92.2191162109375,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_02.tscn",
+    "depth": 1.01541970260894,
+    "name": "Shallow_02",
+    "radius": 2.05460186185641,
+    "x": -68.1848907470703,
+    "y": -2.0472544491291,
+    "z": -84.4902954101563,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_03.tscn",
+    "depth": 0.692124491512316,
+    "name": "Shallow_03",
+    "radius": 1.0756661827476,
+    "x": 84.9431991577148,
+    "y": -1.23957508206367,
+    "z": 53.3232727050781,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_04.tscn",
+    "depth": 0.88801836946792,
+    "name": "Shallow_04",
+    "radius": 1.72846922151547,
+    "x": -48.6849937438965,
+    "y": -1.72083933353424,
+    "z": 72.9852600097656,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_05.tscn",
+    "depth": 0.473302812459967,
+    "name": "Shallow_05",
+    "radius": 2.29787309764717,
+    "x": 44.4425735473633,
+    "y": -1.48715847730637,
+    "z": -88.4041137695313,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_06.tscn",
+    "depth": 1.08294706755564,
+    "name": "Shallow_06",
+    "radius": 1.67378804972276,
+    "x": -60.6097602844238,
+    "y": -1.94586415886879,
+    "z": -98.0731658935547,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_07.tscn",
+    "depth": 0.65148054341685,
+    "name": "Shallow_07",
+    "radius": 0.972318018475669,
+    "x": 86.3826446533203,
+    "y": -1.3164092451334,
+    "z": -15.4254989624023,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_01.tscn",
+    "depth": 0.335562885478835,
+    "name": "Shallow_08",
+    "radius": 1.88297471024612,
+    "x": -47.7313804626465,
+    "y": -0.699730485677719,
+    "z": 92.7286529541016,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_02.tscn",
+    "depth": 0.23349270574666,
+    "name": "Shallow_09",
+    "radius": 1.54491256985381,
+    "x": 41.3788414001465,
+    "y": -0.817717683315277,
+    "z": -96.7401657104492,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_03.tscn",
+    "depth": 0.191204610372168,
+    "name": "Shallow_10",
+    "radius": 0.992756324007686,
+    "x": -42.4851493835449,
+    "y": -0.808081105351448,
+    "z": 131.950958251953,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_04.tscn",
+    "depth": 0.638631375949383,
+    "name": "Shallow_11",
+    "radius": 1.54911949772071,
+    "x": 59.912483215332,
+    "y": -1.22656953334808,
+    "z": 129.624359130859,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_05.tscn",
+    "depth": 0.906255851369115,
+    "name": "Shallow_12",
+    "radius": 1.18634000709953,
+    "x": -74.6470031738281,
+    "y": -1.82885734736919,
+    "z": 22.1232299804688,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_06.tscn",
+    "depth": 1.04670661646474,
+    "name": "Shallow_13",
+    "radius": 1.31205717248741,
+    "x": 89.3610153198242,
+    "y": -1.76659741103649,
+    "z": -4.21421813964844,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_20.tscn",
+    "depth": 0.486694435479181,
+    "name": "Shallow_14",
+    "radius": 1.1647770724489,
+    "x": -89.5191040039063,
+    "y": -1.08296194672585,
+    "z": -35.9777679443359,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_21.tscn",
+    "depth": 0.882773524778717,
+    "name": "Shallow_15",
+    "radius": 2.82556881067399,
+    "x": 81.4363861083984,
+    "y": -2.04664714336395,
+    "z": 62.9201049804688,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_01.tscn",
+    "depth": 1.01085085643668,
+    "name": "Shallow_16",
+    "radius": 0.537360172448856,
+    "x": -46.9062156677246,
+    "y": -1.60165555211379,
+    "z": 82.8280487060547,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_02.tscn",
+    "depth": 0.771457684022751,
+    "name": "Shallow_17",
+    "radius": 0.644055312194897,
+    "x": 69.380989074707,
+    "y": -1.57828374623881,
+    "z": -46.0819244384766,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_03.tscn",
+    "depth": 0.675347646955297,
+    "name": "Shallow_18",
+    "radius": 0.629904741873258,
+    "x": -44.1728248596191,
+    "y": -1.11187488139278,
+    "z": -136.366714477539,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_mobile.tscn",
+    "depth": 0.1697190943268,
+    "name": "Shallow_19",
+    "radius": 1.22510766297532,
+    "x": 65.2113571166992,
+    "y": -0.722962787747383,
+    "z": -55.881462097168,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_01.tscn",
+    "depth": 0.527696489576359,
+    "name": "Shallow_20",
+    "radius": 1.63332591391071,
+    "x": -83.7516174316406,
+    "y": -1.41231186389923,
+    "z": 6.19898986816406,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_02.tscn",
+    "depth": 0.880166671158372,
+    "name": "Shallow_21",
+    "radius": 1.52284349333598,
+    "x": 77.0627136230469,
+    "y": -1.56526213884354,
+    "z": 80.7595672607422,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_03.tscn",
+    "depth": 0.204107121595989,
+    "name": "Shallow_22",
+    "radius": 1.78640707449361,
+    "x": -81.1959838867188,
+    "y": -0.773972707986832,
+    "z": -64.2757949829102,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_04.tscn",
+    "depth": 0.943530644216686,
+    "name": "Shallow_23",
+    "radius": 1.2991394651588,
+    "x": 79.3700103759766,
+    "y": -1.65053768754005,
+    "z": 69.7966156005859,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_05.tscn",
+    "depth": 0.32633358829263,
+    "name": "Shallow_24",
+    "radius": 1.70767416807749,
+    "x": -44.3045997619629,
+    "y": -1.04893642663956,
+    "z": 125.469909667969,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_06.tscn",
+    "depth": 1.01780874326877,
+    "name": "Shallow_25",
+    "radius": 1.82973334010723,
+    "x": 71.0534210205078,
+    "y": -2.22840837836266,
+    "z": -42.4838409423828,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_07.tscn",
+    "depth": 1.03471772256195,
+    "name": "Shallow_26",
+    "radius": 1.45981946506588,
+    "x": -65.095817565918,
+    "y": -1.8370021879673,
+    "z": -90.0430297851563,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_01.tscn",
+    "depth": 0.294918327472146,
+    "name": "Shallow_27",
+    "radius": 1.29012613376767,
+    "x": 77.759651184082,
+    "y": -0.853027230501175,
+    "z": 86.8370819091797,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_02.tscn",
+    "depth": 0.761389559238831,
+    "name": "Shallow_28",
+    "radius": 1.40149259849274,
+    "x": -89.5274124145508,
+    "y": -1.45765868127346,
+    "z": -18.6294860839844,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_03.tscn",
+    "depth": 0.403284827696031,
+    "name": "Shallow_29",
+    "radius": 0.969283136905219,
+    "x": 76.7025604248047,
+    "y": -0.876275518536568,
+    "z": -36.0727233886719,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_04.tscn",
+    "depth": 0.93696131767828,
+    "name": "Shallow_30",
+    "radius": 1.67793932412499,
+    "x": -53.1169281005859,
+    "y": -1.7952819943428,
+    "z": 59.4979705810547,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_05.tscn",
+    "depth": 0.810601661111633,
+    "name": "Shallow_31",
+    "radius": 1.21046116773837,
+    "x": 53.4175567626953,
+    "y": -1.53752041459084,
+    "z": 138.251495361328,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_06.tscn",
+    "depth": 0.408174047322062,
+    "name": "Shallow_32",
+    "radius": 1.24529254050714,
+    "x": -86.0146255493164,
+    "y": -1.1384035795927,
+    "z": 1.50917053222656,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_20.tscn",
+    "depth": 0.242766661443039,
+    "name": "Shallow_33",
+    "radius": 1.88367124123003,
+    "x": 28.1446876525879,
+    "y": -0.982775443792343,
+    "z": -141.265853881836,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_21.tscn",
+    "depth": 0.629111693916564,
+    "name": "Shallow_34",
+    "radius": 1.71774387767289,
+    "x": -74.7748413085938,
+    "y": -1.41007725000381,
+    "z": -74.0400619506836,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_01.tscn",
+    "depth": 0.361039793794213,
+    "name": "Shallow_35",
+    "radius": 0.772555368607207,
+    "x": 85.4915084838867,
+    "y": -0.76063608266517,
+    "z": -19.5083847045898,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_02.tscn",
+    "depth": 0.297564919033325,
+    "name": "Shallow_36",
+    "radius": 0.377707034241602,
+    "x": -48.9086647033691,
+    "y": -0.682045320882048,
+    "z": 84.4511871337891,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_03.tscn",
+    "depth": 0.883758386963062,
+    "name": "Shallow_37",
+    "radius": 0.695511272862265,
+    "x": 52.7509498596191,
+    "y": -1.49375136197701,
+    "z": -71.6293792724609,
+    "zone": "Shallow"
+  },
+  {
+    "asset": "res://world/river/props/rock_mobile.tscn",
+    "depth": 6.12611879048284,
+    "name": "Deep_00",
+    "radius": 3.36724617683014,
+    "x": -54.6593246459961,
+    "y": -8.16611295759678,
+    "z": -94.7215194702148,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_01.tscn",
+    "depth": 9.41331871032715,
+    "name": "Deep_01",
+    "radius": 2.92723019983202,
+    "x": 32.3474464416504,
+    "y": -10.9996472203732,
+    "z": -82.4158477783203,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_02.tscn",
+    "depth": 12.05,
+    "name": "Deep_02",
+    "radius": 3.7923285131173,
+    "x": -23.1727466583252,
+    "y": -12.3479621094465,
+    "z": 64.604248046875,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_03.tscn",
+    "depth": 6.64244453462674,
+    "name": "Deep_03",
+    "radius": 3.46532069852144,
+    "x": 79.1042404174805,
+    "y": -8.51767068326473,
+    "z": -9.80711364746094,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_04.tscn",
+    "depth": 11.8808563921484,
+    "name": "Deep_04",
+    "radius": 1.38870839467947,
+    "x": -70.3653182983398,
+    "y": -12.0817982566357,
+    "z": -33.2700881958008,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_05.tscn",
+    "depth": 10.5281945628212,
+    "name": "Deep_05",
+    "radius": 2.67901408060787,
+    "x": 36.2650108337402,
+    "y": -11.5837665498257,
+    "z": 141.318756103516,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_06.tscn",
+    "depth": 9.17645363571448,
+    "name": "Deep_06",
+    "radius": 2.22338663957876,
+    "x": -36.7902412414551,
+    "y": -10.2220924109221,
+    "z": 70.59716796875,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_07.tscn",
+    "depth": 10.5878847468966,
+    "name": "Deep_07",
+    "radius": 3.2439820136305,
+    "x": 76.4482421875,
+    "y": -11.575365074873,
+    "z": 3.06977844238281,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_01.tscn",
+    "depth": 7.2005644647559,
+    "name": "Deep_08",
+    "radius": 2.92626998960634,
+    "x": -34.7407646179199,
+    "y": -8.72464022934437,
+    "z": 87.3596649169922,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_02.tscn",
+    "depth": 12.05,
+    "name": "Deep_09",
+    "radius": 4.2163723143409,
+    "x": 64.6082916259766,
+    "y": -12.3544653844833,
+    "z": 38.7775268554688,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_03.tscn",
+    "depth": 6.27433117426764,
+    "name": "Deep_10",
+    "radius": 2.61049506776824,
+    "x": -74.3247680664063,
+    "y": -7.8188751077652,
+    "z": -55.4516754150391,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_04.tscn",
+    "depth": 12.05,
+    "name": "Deep_11",
+    "radius": 3.61527284850436,
+    "x": 65.5101547241211,
+    "y": -12.3524303454161,
+    "z": 48.6038818359375,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_05.tscn",
+    "depth": 7.45063414578678,
+    "name": "Deep_12",
+    "radius": 3.89985800362679,
+    "x": -62.4255981445313,
+    "y": -9.6365634059906,
+    "z": -77.1879730224609,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_06.tscn",
+    "depth": 5.33726475652658,
+    "name": "Deep_13",
+    "radius": 3.49711612561566,
+    "x": 46.5801734924316,
+    "y": -7.67845283150673,
+    "z": 137.512634277344,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_20.tscn",
+    "depth": 11.8556172393285,
+    "name": "Deep_14",
+    "radius": 3.15510422636214,
+    "x": -66.0577087402344,
+    "y": -12.3302777868509,
+    "z": 2.17462158203125,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_21.tscn",
+    "depth": 6.74695577025831,
+    "name": "Deep_15",
+    "radius": 5.7716290542488,
+    "x": 69.8925323486328,
+    "y": -9.59031643390655,
+    "z": 72.0139007568359,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_01.tscn",
+    "depth": 4.81341691716954,
+    "name": "Deep_16",
+    "radius": 0.854730718264028,
+    "x": -79.4307174682617,
+    "y": -5.53996264111751,
+    "z": -2.20744323730469,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_02.tscn",
+    "depth": 8.48142252452115,
+    "name": "Deep_17",
+    "radius": 0.528728144675198,
+    "x": 16.0243301391602,
+    "y": -8.95458332522524,
+    "z": -133.719223022461,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_03.tscn",
+    "depth": 12.05,
+    "name": "Deep_18",
+    "radius": 0.708358875818817,
+    "x": -38.4269218444824,
+    "y": -12.3221864526163,
+    "z": -93.0838165283203,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_mobile.tscn",
+    "depth": 12.05,
+    "name": "Deep_19",
+    "radius": 3.39574529444117,
+    "x": 51.453498840332,
+    "y": -12.3566095638275,
+    "z": 78.7821807861328,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_01.tscn",
+    "depth": 12.05,
+    "name": "Deep_20",
+    "radius": 1.57300660872564,
+    "x": -61.2075653076172,
+    "y": -12.2915782785416,
+    "z": -55.2428970336914,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_02.tscn",
+    "depth": 11.0690921069094,
+    "name": "Deep_21",
+    "radius": 2.27708730848966,
+    "x": 76.3614654541016,
+    "y": -11.6973575180769,
+    "z": 11.6216278076172,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_03.tscn",
+    "depth": 12.05,
+    "name": "Deep_22",
+    "radius": 3.25284362555766,
+    "x": -51.297176361084,
+    "y": -12.344901368618,
+    "z": 21.1482391357422,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_04.tscn",
+    "depth": 11.8517497169316,
+    "name": "Deep_23",
+    "radius": 1.38671590407493,
+    "x": 58.7165222167969,
+    "y": -12.0661670744419,
+    "z": 80.9206237792969,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_05.tscn",
+    "depth": 6.17146714969418,
+    "name": "Deep_24",
+    "radius": 3.58711778420192,
+    "x": -72.1638412475586,
+    "y": -8.14201850712299,
+    "z": 11.2817993164063,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_06.tscn",
+    "depth": 7.00718533009027,
+    "name": "Deep_25",
+    "radius": 3.31691071503519,
+    "x": 76.3103790283203,
+    "y": -8.80950889587402,
+    "z": 49.3339996337891,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/reference_rocks/rock_07.tscn",
+    "depth": 11.9003038257187,
+    "name": "Deep_26",
+    "radius": 2.12559702175632,
+    "x": -42.6140327453613,
+    "y": -12.1419376626611,
+    "z": 44.4980316162109,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_01.tscn",
+    "depth": 12.05,
+    "name": "Deep_27",
+    "radius": 3.51331962830854,
+    "x": 7.1562933921814,
+    "y": -12.3519940114021,
+    "z": -132.561492919922,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_02.tscn",
+    "depth": 12.05,
+    "name": "Deep_28",
+    "radius": 2.15608810432901,
+    "x": -64.7609634399414,
+    "y": -12.2936445614696,
+    "z": -12.8551788330078,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_03.tscn",
+    "depth": 11.7306814736965,
+    "name": "Deep_29",
+    "radius": 2.46501305707669,
+    "x": 63.720817565918,
+    "y": -12.2078952813148,
+    "z": 62.6401824951172,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_04.tscn",
+    "depth": 11.9595807584273,
+    "name": "Deep_30",
+    "radius": 3.16080640764913,
+    "x": -67.7272262573242,
+    "y": -12.3049396932125,
+    "z": -43.9269180297852,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_05.tscn",
+    "depth": 10.4578893083234,
+    "name": "Deep_31",
+    "radius": 2.32498665146306,
+    "x": 60.8867530822754,
+    "y": -11.3571054697037,
+    "z": 89.0320281982422,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/concept_rocks_01_06/rock_06.tscn",
+    "depth": 12.05,
+    "name": "Deep_32",
+    "radius": 3.11335419883929,
+    "x": -35.3386039733887,
+    "y": -12.3375788980722,
+    "z": -96.8374710083008,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_20.tscn",
+    "depth": 12.05,
+    "name": "Deep_33",
+    "radius": 3.17945399435613,
+    "x": 26.4343338012695,
+    "y": -12.3399125468731,
+    "z": -78.0781860351563,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/rock_21.tscn",
+    "depth": 12.05,
+    "name": "Deep_34",
+    "radius": 4.47522954806884,
+    "x": -55.0157890319824,
+    "y": -12.3271094971895,
+    "z": 6.45541381835938,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_01.tscn",
+    "depth": 3.82401649055321,
+    "name": "Deep_35",
+    "radius": 0.626221282225795,
+    "x": 86.368408203125,
+    "y": -4.44987838402174,
+    "z": 3.79757690429688,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_02.tscn",
+    "depth": 7.54495544208483,
+    "name": "Deep_36",
+    "radius": 0.90231773028484,
+    "x": -76.5210800170898,
+    "y": -8.29256637044964,
+    "z": -43.8173294067383,
+    "zone": "Deep"
+  },
+  {
+    "asset": "res://world/river/props/rock_clusters_20_21/pebble_03.tscn",
+    "depth": 9.48665435791016,
+    "name": "Deep_37",
+    "radius": 0.861534616842962,
+    "x": 64.8243713378906,
+    "y": -10.2010106870068,
+    "z": 1.09715270996094,
+    "zone": "Deep"
+  }
+]

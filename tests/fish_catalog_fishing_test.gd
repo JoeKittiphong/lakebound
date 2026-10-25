@@ -12,6 +12,8 @@ func run() -> void:
  for definition in Catalog.SPECIES:
   var scene := Gameplay.instantiate()
   root.add_child(scene)
+  for frame in 12:
+   await physics_frame
   scene.set_process(false)
   var player: Node3D = scene.get_node("Player")
   player.set_physics_process(false)

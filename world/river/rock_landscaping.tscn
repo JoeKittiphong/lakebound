@@ -1,0 +1,1089 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://world/river/props/rock_mobile.tscn" id="r0"]
+[ext_resource type="PackedScene" path="res://world/river/props/reference_rocks/rock_01.tscn" id="r1"]
+[ext_resource type="PackedScene" path="res://world/river/props/reference_rocks/rock_02.tscn" id="r2"]
+[ext_resource type="PackedScene" path="res://world/river/props/reference_rocks/rock_03.tscn" id="r3"]
+[ext_resource type="PackedScene" path="res://world/river/props/reference_rocks/rock_04.tscn" id="r4"]
+[ext_resource type="PackedScene" path="res://world/river/props/reference_rocks/rock_05.tscn" id="r5"]
+[ext_resource type="PackedScene" path="res://world/river/props/reference_rocks/rock_06.tscn" id="r6"]
+[ext_resource type="PackedScene" path="res://world/river/props/reference_rocks/rock_07.tscn" id="r7"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_01.tscn" id="r8"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_02.tscn" id="r9"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_03.tscn" id="r10"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_04.tscn" id="r11"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_05.tscn" id="r12"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_06.tscn" id="r13"]
+[ext_resource type="PackedScene" path="res://world/river/props/rock_clusters_20_21/rock_20.tscn" id="r14"]
+[ext_resource type="PackedScene" path="res://world/river/props/rock_clusters_20_21/rock_21.tscn" id="r15"]
+[ext_resource type="PackedScene" path="res://world/river/props/rock_clusters_20_21/pebble_01.tscn" id="r16"]
+[ext_resource type="PackedScene" path="res://world/river/props/rock_clusters_20_21/pebble_02.tscn" id="r17"]
+[ext_resource type="PackedScene" path="res://world/river/props/rock_clusters_20_21/pebble_03.tscn" id="r18"]
+[node name="RockLandscaping" type="Node3D"]
+[node name="Land" type="Node3D" parent="."]
+[node name="Land_00" parent="Land" instance=ExtResource("r0")]
+position = Vector3(-84.33363,1.23285,-89.65016)
+rotation = Vector3(0,2.51977,0)
+scale = Vector3(1.16480,1.16480,1.16480)
+metadata/habitat = "Land"
+metadata/asset_index = 0
+metadata/footprint_radius = 1.56208
+[node name="Land_01" parent="Land" instance=ExtResource("r1")]
+position = Vector3(75.09141,1.16211,-63.18202)
+rotation = Vector3(0,-1.19929,0)
+scale = Vector3(0.80872,0.80872,0.80872)
+metadata/habitat = "Land"
+metadata/asset_index = 1
+metadata/footprint_radius = 1.03279
+[node name="Land_02" parent="Land" instance=ExtResource("r2")]
+position = Vector3(-66.34989,1.69661,-140.58167)
+rotation = Vector3(0,2.85085,0)
+scale = Vector3(0.73815,0.73815,0.73815)
+metadata/habitat = "Land"
+metadata/asset_index = 2
+metadata/footprint_radius = 1.18657
+[node name="Land_03" parent="Land" instance=ExtResource("r3")]
+position = Vector3(102.23077,1.29449,-23.23479)
+rotation = Vector3(0,-2.90078,0)
+scale = Vector3(0.84793,0.84793,0.84793)
+metadata/habitat = "Land"
+metadata/asset_index = 3
+metadata/footprint_radius = 1.20028
+[node name="Land_04" parent="Land" instance=ExtResource("r4")]
+position = Vector3(-61.66945,1.38457,133.67749)
+rotation = Vector3(0,2.44069,0)
+scale = Vector3(1.05176,1.05176,1.05176)
+metadata/habitat = "Land"
+metadata/asset_index = 4
+metadata/footprint_radius = 1.21427
+[node name="Land_05" parent="Land" instance=ExtResource("r5")]
+position = Vector3(106.66448,1.05015,2.53517)
+rotation = Vector3(0,2.65866,0)
+scale = Vector3(1.33953,1.33953,1.33953)
+metadata/habitat = "Land"
+metadata/asset_index = 5
+metadata/footprint_radius = 2.07485
+[node name="Land_06" parent="Land" instance=ExtResource("r6")]
+position = Vector3(-100.79155,1.47984,18.25877)
+rotation = Vector3(0,3.12227,0)
+scale = Vector3(1.01348,1.01348,1.01348)
+metadata/habitat = "Land"
+metadata/asset_index = 6
+metadata/footprint_radius = 1.38402
+[node name="Land_07" parent="Land" instance=ExtResource("r7")]
+position = Vector3(102.17854,1.54640,75.58228)
+rotation = Vector3(0,-0.15985,0)
+scale = Vector3(1.01973,1.01973,1.01973)
+metadata/habitat = "Land"
+metadata/asset_index = 7
+metadata/footprint_radius = 1.33664
+[node name="Land_08" parent="Land" instance=ExtResource("r8")]
+position = Vector3(-101.67219,0.99012,-35.59648)
+rotation = Vector3(0,-2.28936,0)
+scale = Vector3(0.80183,0.80183,0.80183)
+metadata/habitat = "Land"
+metadata/asset_index = 8
+metadata/footprint_radius = 1.13602
+[node name="Land_09" parent="Land" instance=ExtResource("r9")]
+position = Vector3(61.35305,1.47440,-95.69603)
+rotation = Vector3(0,-0.60472,0)
+scale = Vector3(1.17848,1.17848,1.17848)
+metadata/habitat = "Land"
+metadata/asset_index = 9
+metadata/footprint_radius = 1.99615
+[node name="Land_10" parent="Land" instance=ExtResource("r10")]
+position = Vector3(-86.46287,1.65288,-99.66690)
+rotation = Vector3(0,0.99754,0)
+scale = Vector3(1.09068,1.09068,1.09068)
+metadata/habitat = "Land"
+metadata/asset_index = 10
+metadata/footprint_radius = 1.20170
+[node name="Land_11" parent="Land" instance=ExtResource("r11")]
+position = Vector3(102.58887,1.23901,59.09990)
+rotation = Vector3(0,0.17618,0)
+scale = Vector3(1.47989,1.47989,1.47989)
+metadata/habitat = "Land"
+metadata/asset_index = 11
+metadata/footprint_radius = 2.18506
+[node name="Land_12" parent="Land" instance=ExtResource("r12")]
+position = Vector3(-54.82658,1.20032,140.73709)
+rotation = Vector3(0,2.70176,0)
+scale = Vector3(1.15608,1.15608,1.15608)
+metadata/habitat = "Land"
+metadata/asset_index = 12
+metadata/footprint_radius = 1.79372
+[node name="Land_13" parent="Land" instance=ExtResource("r13")]
+position = Vector3(95.44077,1.37053,90.01039)
+rotation = Vector3(0,0.25804,0)
+scale = Vector3(0.95931,0.95931,0.95931)
+metadata/habitat = "Land"
+metadata/asset_index = 13
+metadata/footprint_radius = 1.38817
+[node name="Land_14" parent="Land" instance=ExtResource("r14")]
+position = Vector3(-89.21038,1.23705,28.81075)
+rotation = Vector3(0,-2.41134,0)
+scale = Vector3(1.13342,1.13342,1.13342)
+metadata/habitat = "Land"
+metadata/asset_index = 14
+metadata/footprint_radius = 1.63910
+[node name="Land_15" parent="Land" instance=ExtResource("r15")]
+position = Vector3(110.36790,1.46426,-17.63717)
+rotation = Vector3(0,3.05488,0)
+scale = Vector3(1.25691,1.25691,1.25691)
+metadata/habitat = "Land"
+metadata/asset_index = 15
+metadata/footprint_radius = 2.89629
+[node name="Land_16" parent="Land" instance=ExtResource("r16")]
+position = Vector3(-56.77722,1.06422,126.12811)
+rotation = Vector3(0,-1.86911,0)
+scale = Vector3(1.02493,1.02493,1.02493)
+metadata/habitat = "Land"
+metadata/asset_index = 16
+metadata/footprint_radius = 0.30998
+[node name="Land_17" parent="Land" instance=ExtResource("r17")]
+position = Vector3(75.84682,1.62190,-75.96980)
+rotation = Vector3(0,-2.38183,0)
+scale = Vector3(1.81684,1.81684,1.81684)
+metadata/habitat = "Land"
+metadata/asset_index = 17
+metadata/footprint_radius = 0.53768
+[node name="Land_18" parent="Land" instance=ExtResource("r18")]
+position = Vector3(-102.54749,1.44504,13.93178)
+rotation = Vector3(0,2.18125,0)
+scale = Vector3(1.73468,1.73468,1.73468)
+metadata/habitat = "Land"
+metadata/asset_index = 18
+metadata/footprint_radius = 0.66649
+[node name="Land_19" parent="Land" instance=ExtResource("r0")]
+position = Vector3(46.68290,1.28764,-137.39694)
+rotation = Vector3(0,-0.17640,0)
+scale = Vector3(1.46144,1.46144,1.46144)
+metadata/habitat = "Land"
+metadata/asset_index = 0
+metadata/footprint_radius = 1.95988
+[node name="Land_20" parent="Land" instance=ExtResource("r1")]
+position = Vector3(-63.55778,1.33564,126.13394)
+rotation = Vector3(0,3.03425,0)
+scale = Vector3(1.23430,1.23430,1.23430)
+metadata/habitat = "Land"
+metadata/asset_index = 1
+metadata/footprint_radius = 1.57630
+[node name="Land_21" parent="Land" instance=ExtResource("r2")]
+position = Vector3(102.87025,1.06796,-13.87140)
+rotation = Vector3(0,0.47530,0)
+scale = Vector3(1.43540,1.43540,1.43540)
+metadata/habitat = "Land"
+metadata/asset_index = 2
+metadata/footprint_radius = 2.30737
+[node name="Land_22" parent="Land" instance=ExtResource("r3")]
+position = Vector3(-106.98461,1.25935,-23.62997)
+rotation = Vector3(0,-1.36238,0)
+scale = Vector3(0.88782,0.88782,0.88782)
+metadata/habitat = "Land"
+metadata/asset_index = 3
+metadata/footprint_radius = 1.25674
+[node name="Land_23" parent="Land" instance=ExtResource("r4")]
+position = Vector3(75.58937,1.33947,-68.21797)
+rotation = Vector3(0,-0.92720,0)
+scale = Vector3(0.90232,0.90232,0.90232)
+metadata/habitat = "Land"
+metadata/asset_index = 4
+metadata/footprint_radius = 1.04175
+[node name="Land_24" parent="Land" instance=ExtResource("r5")]
+position = Vector3(-87.54858,1.62602,-95.87032)
+rotation = Vector3(0,-0.12518,0)
+scale = Vector3(0.77176,0.77176,0.77176)
+metadata/habitat = "Land"
+metadata/asset_index = 5
+metadata/footprint_radius = 1.19541
+[node name="Land_25" parent="Land" instance=ExtResource("r6")]
+position = Vector3(91.30701,0.93839,75.16367)
+rotation = Vector3(0,-0.17951,0)
+scale = Vector3(0.89090,0.89090,0.89090)
+metadata/habitat = "Land"
+metadata/asset_index = 6
+metadata/footprint_radius = 1.21663
+[node name="Land_26" parent="Land" instance=ExtResource("r7")]
+position = Vector3(-66.24706,1.03075,65.07083)
+rotation = Vector3(0,1.56903,0)
+scale = Vector3(1.39520,1.39520,1.39520)
+metadata/habitat = "Land"
+metadata/asset_index = 7
+metadata/footprint_radius = 1.82879
+[node name="Land_27" parent="Land" instance=ExtResource("r8")]
+position = Vector3(113.57857,1.48511,-0.26135)
+rotation = Vector3(0,2.36355,0)
+scale = Vector3(1.12347,1.12347,1.12347)
+metadata/habitat = "Land"
+metadata/asset_index = 8
+metadata/footprint_radius = 1.59171
+[node name="Land_28" parent="Land" instance=ExtResource("r9")]
+position = Vector3(-111.72424,1.57284,-12.10847)
+rotation = Vector3(0,2.63911,0)
+scale = Vector3(1.26190,1.26190,1.26190)
+metadata/habitat = "Land"
+metadata/asset_index = 9
+metadata/footprint_radius = 2.13745
+[node name="Land_29" parent="Land" instance=ExtResource("r10")]
+position = Vector3(54.58680,1.64190,-131.92947)
+rotation = Vector3(0,2.20460,0)
+scale = Vector3(1.21064,1.21064,1.21064)
+metadata/habitat = "Land"
+metadata/asset_index = 10
+metadata/footprint_radius = 1.33387
+[node name="Land_30" parent="Land" instance=ExtResource("r11")]
+position = Vector3(-95.93876,0.99100,-57.77656)
+rotation = Vector3(0,1.95585,0)
+scale = Vector3(1.23115,1.23115,1.23115)
+metadata/habitat = "Land"
+metadata/asset_index = 11
+metadata/footprint_radius = 1.81780
+[node name="Land_31" parent="Land" instance=ExtResource("r12")]
+position = Vector3(87.12820,1.45816,-53.21900)
+rotation = Vector3(0,-1.73049,0)
+scale = Vector3(0.97813,0.97813,0.97813)
+metadata/habitat = "Land"
+metadata/asset_index = 12
+metadata/footprint_radius = 1.51761
+[node name="Land_32" parent="Land" instance=ExtResource("r13")]
+position = Vector3(-81.69424,1.55139,52.55972)
+rotation = Vector3(0,-2.33592,0)
+scale = Vector3(1.06163,1.06163,1.06163)
+metadata/habitat = "Land"
+metadata/asset_index = 13
+metadata/footprint_radius = 1.53623
+[node name="Land_33" parent="Land" instance=ExtResource("r14")]
+position = Vector3(53.84092,1.03613,-95.87901)
+rotation = Vector3(0,-0.39282,0)
+scale = Vector3(0.85032,0.85032,0.85032)
+metadata/habitat = "Land"
+metadata/asset_index = 14
+metadata/footprint_radius = 1.22969
+[node name="Land_34" parent="Land" instance=ExtResource("r15")]
+position = Vector3(-69.86295,1.45465,81.35297)
+rotation = Vector3(0,-2.59299,0)
+scale = Vector3(1.11150,1.11150,1.11150)
+metadata/habitat = "Land"
+metadata/asset_index = 15
+metadata/footprint_radius = 2.56123
+[node name="Land_35" parent="Land" instance=ExtResource("r16")]
+position = Vector3(55.48220,1.28160,-99.73642)
+rotation = Vector3(0,-0.26019,0)
+scale = Vector3(1.01889,1.01889,1.01889)
+metadata/habitat = "Land"
+metadata/asset_index = 16
+metadata/footprint_radius = 0.30816
+[node name="Land_36" parent="Land" instance=ExtResource("r17")]
+position = Vector3(-89.21830,1.03247,21.89447)
+rotation = Vector3(0,-2.70649,0)
+scale = Vector3(1.61161,1.61161,1.61161)
+metadata/habitat = "Land"
+metadata/asset_index = 17
+metadata/footprint_radius = 0.47694
+[node name="Land_37" parent="Land" instance=ExtResource("r18")]
+position = Vector3(104.19794,1.09286,40.68582)
+rotation = Vector3(0,-2.92674,0)
+scale = Vector3(1.86715,1.86715,1.86715)
+metadata/habitat = "Land"
+metadata/asset_index = 18
+metadata/footprint_radius = 0.71738
+[node name="Shore" type="Node3D" parent="."]
+[node name="Shore_00" parent="Shore" instance=ExtResource("r0")]
+position = Vector3(-94.48071,-0.06430,-37.53853)
+rotation = Vector3(0,-1.86968,0)
+scale = Vector3(1.49533,1.49533,1.49533)
+metadata/habitat = "Shore"
+metadata/asset_index = 0
+metadata/footprint_radius = 2.00534
+[node name="Shore_01" parent="Shore" instance=ExtResource("r1")]
+position = Vector3(92.45000,-0.28008,-10.02629)
+rotation = Vector3(0,-3.13124,0)
+scale = Vector3(0.95042,0.95042,0.95042)
+metadata/habitat = "Shore"
+metadata/asset_index = 1
+metadata/footprint_radius = 1.21375
+[node name="Shore_02" parent="Shore" instance=ExtResource("r2")]
+position = Vector3(-67.44987,-0.37211,-94.43633)
+rotation = Vector3(0,0.56653,0)
+scale = Vector3(1.19778,1.19778,1.19778)
+metadata/habitat = "Shore"
+metadata/asset_index = 2
+metadata/footprint_radius = 1.92542
+[node name="Shore_03" parent="Shore" instance=ExtResource("r3")]
+position = Vector3(53.34503,-0.02038,-81.19516)
+rotation = Vector3(0,-1.42721,0)
+scale = Vector3(1.00626,1.00626,1.00626)
+metadata/habitat = "Shore"
+metadata/asset_index = 3
+metadata/footprint_radius = 1.42439
+[node name="Shore_04" parent="Shore" instance=ExtResource("r4")]
+position = Vector3(-90.11607,0.06930,3.15239)
+rotation = Vector3(0,1.70567,0)
+scale = Vector3(0.72155,0.72155,0.72155)
+metadata/habitat = "Shore"
+metadata/asset_index = 4
+metadata/footprint_radius = 0.83304
+[node name="Shore_05" parent="Shore" instance=ExtResource("r5")]
+position = Vector3(32.35395,-0.43954,-131.84778)
+rotation = Vector3(0,2.24408,0)
+scale = Vector3(1.37255,1.37255,1.37255)
+metadata/habitat = "Shore"
+metadata/asset_index = 5
+metadata/footprint_radius = 2.12601
+[node name="Shore_06" parent="Shore" instance=ExtResource("r6")]
+position = Vector3(-41.83472,-0.26439,139.28076)
+rotation = Vector3(0,-0.47079,0)
+scale = Vector3(1.26674,1.26674,1.26674)
+metadata/habitat = "Shore"
+metadata/asset_index = 6
+metadata/footprint_radius = 1.72987
+[node name="Shore_07" parent="Shore" instance=ExtResource("r7")]
+position = Vector3(58.94908,0.05537,-72.19319)
+rotation = Vector3(0,-0.51211,0)
+scale = Vector3(0.91441,0.91441,0.91441)
+metadata/habitat = "Shore"
+metadata/asset_index = 7
+metadata/footprint_radius = 1.19858
+[node name="Shore_08" parent="Shore" instance=ExtResource("r8")]
+position = Vector3(-76.50584,-0.13818,-80.83093)
+rotation = Vector3(0,0.92361,0)
+scale = Vector3(1.41377,1.41377,1.41377)
+metadata/habitat = "Shore"
+metadata/asset_index = 8
+metadata/footprint_radius = 2.00301
+[node name="Shore_09" parent="Shore" instance=ExtResource("r9")]
+position = Vector3(85.75719,-0.15194,67.83031)
+rotation = Vector3(0,2.05186,0)
+scale = Vector3(1.18767,1.18767,1.18767)
+metadata/habitat = "Shore"
+metadata/asset_index = 9
+metadata/footprint_radius = 2.01173
+[node name="Shore_10" parent="Shore" instance=ExtResource("r10")]
+position = Vector3(-58.65209,-0.27550,56.97694)
+rotation = Vector3(0,-0.87198,0)
+scale = Vector3(0.79974,0.79974,0.79974)
+metadata/habitat = "Shore"
+metadata/asset_index = 10
+metadata/footprint_radius = 0.88114
+[node name="Shore_11" parent="Shore" instance=ExtResource("r11")]
+position = Vector3(90.32518,-0.23513,-16.85584)
+rotation = Vector3(0,2.24862,0)
+scale = Vector3(1.33694,1.33694,1.33694)
+metadata/habitat = "Shore"
+metadata/asset_index = 11
+metadata/footprint_radius = 1.97400
+[node name="Shore_12" parent="Shore" instance=ExtResource("r12")]
+position = Vector3(-93.70597,-0.28122,-16.66853)
+rotation = Vector3(0,-0.88000,0)
+scale = Vector3(1.28722,1.28722,1.28722)
+metadata/habitat = "Shore"
+metadata/asset_index = 12
+metadata/footprint_radius = 1.99719
+[node name="Shore_13" parent="Shore" instance=ExtResource("r13")]
+position = Vector3(95.87518,-0.14435,-2.48016)
+rotation = Vector3(0,2.79046,0)
+scale = Vector3(1.24169,1.24169,1.24169)
+metadata/habitat = "Shore"
+metadata/asset_index = 13
+metadata/footprint_radius = 1.79680
+[node name="Shore_14" parent="Shore" instance=ExtResource("r14")]
+position = Vector3(-47.76081,-0.07748,-142.26782)
+rotation = Vector3(0,-2.80207,0)
+scale = Vector3(1.30292,1.30292,1.30292)
+metadata/habitat = "Shore"
+metadata/asset_index = 14
+metadata/footprint_radius = 1.88421
+[node name="Shore_15" parent="Shore" instance=ExtResource("r15")]
+position = Vector3(85.46964,-0.32700,-27.14193)
+rotation = Vector3(0,2.79944,0)
+scale = Vector3(1.24398,1.24398,1.24398)
+metadata/habitat = "Shore"
+metadata/asset_index = 15
+metadata/footprint_radius = 2.86649
+[node name="Shore_16" parent="Shore" instance=ExtResource("r16")]
+position = Vector3(-43.20069,-0.14231,136.24695)
+rotation = Vector3(0,-1.71981,0)
+scale = Vector3(1.47392,1.47392,1.47392)
+metadata/habitat = "Shore"
+metadata/asset_index = 16
+metadata/footprint_radius = 0.44578
+[node name="Shore_17" parent="Shore" instance=ExtResource("r17")]
+position = Vector3(80.40680,0.01687,93.60942)
+rotation = Vector3(0,0.59675,0)
+scale = Vector3(1.25039,1.25039,1.25039)
+metadata/habitat = "Shore"
+metadata/asset_index = 17
+metadata/footprint_radius = 0.37004
+[node name="Shore_18" parent="Shore" instance=ExtResource("r18")]
+position = Vector3(-93.92924,-0.30004,-24.81661)
+rotation = Vector3(0,0.71696,0)
+scale = Vector3(2.46178,2.46178,2.46178)
+metadata/habitat = "Shore"
+metadata/asset_index = 18
+metadata/footprint_radius = 0.94585
+[node name="Shore_19" parent="Shore" instance=ExtResource("r0")]
+position = Vector3(44.63389,-0.30405,-93.75719)
+rotation = Vector3(0,-1.52563,0)
+scale = Vector3(0.82438,0.82438,0.82438)
+metadata/habitat = "Shore"
+metadata/asset_index = 0
+metadata/footprint_radius = 1.10554
+[node name="Shore_20" parent="Shore" instance=ExtResource("r1")]
+position = Vector3(-54.08394,-0.20659,72.33786)
+rotation = Vector3(0,2.90652,0)
+scale = Vector3(1.34637,1.34637,1.34637)
+metadata/habitat = "Shore"
+metadata/asset_index = 1
+metadata/footprint_radius = 1.71941
+[node name="Shore_21" parent="Shore" instance=ExtResource("r2")]
+position = Vector3(59.56935,-0.54679,-67.56765)
+rotation = Vector3(0,3.09286,0)
+scale = Vector3(0.94856,0.94856,0.94856)
+metadata/habitat = "Shore"
+metadata/asset_index = 2
+metadata/footprint_radius = 1.52480
+[node name="Shore_22" parent="Shore" instance=ExtResource("r3")]
+position = Vector3(-57.07118,-0.09644,63.08336)
+rotation = Vector3(0,-2.76689,0)
+scale = Vector3(0.75328,0.75328,0.75328)
+metadata/habitat = "Shore"
+metadata/asset_index = 3
+metadata/footprint_radius = 1.06629
+[node name="Shore_23" parent="Shore" instance=ExtResource("r4")]
+position = Vector3(80.34000,-0.28109,-35.09195)
+rotation = Vector3(0,2.13750,0)
+scale = Vector3(0.96255,0.96255,0.96255)
+metadata/habitat = "Shore"
+metadata/asset_index = 4
+metadata/footprint_radius = 1.11128
+[node name="Shore_24" parent="Shore" instance=ExtResource("r5")]
+position = Vector3(-90.57511,-0.27257,-2.27570)
+rotation = Vector3(0,-1.05435,0)
+scale = Vector3(1.08286,1.08286,1.08286)
+metadata/habitat = "Shore"
+metadata/asset_index = 5
+metadata/footprint_radius = 1.67728
+[node name="Shore_25" parent="Shore" instance=ExtResource("r6")]
+position = Vector3(63.27881,-0.29853,-62.84045)
+rotation = Vector3(0,-1.30591,0)
+scale = Vector3(1.31824,1.31824,1.31824)
+metadata/habitat = "Shore"
+metadata/asset_index = 6
+metadata/footprint_radius = 1.80021
+[node name="Shore_26" parent="Shore" instance=ExtResource("r7")]
+position = Vector3(-80.21169,-0.29936,19.83525)
+rotation = Vector3(0,-2.57331,0)
+scale = Vector3(0.98374,0.98374,0.98374)
+metadata/habitat = "Shore"
+metadata/asset_index = 7
+metadata/footprint_radius = 1.28945
+[node name="Shore_27" parent="Shore" instance=ExtResource("r8")]
+position = Vector3(55.78226,-0.27897,141.88559)
+rotation = Vector3(0,-2.05736,0)
+scale = Vector3(1.34888,1.34888,1.34888)
+metadata/habitat = "Shore"
+metadata/asset_index = 8
+metadata/footprint_radius = 1.91107
+[node name="Shore_28" parent="Shore" instance=ExtResource("r9")]
+position = Vector3(-52.89012,-0.21249,82.35951)
+rotation = Vector3(0,1.78696,0)
+scale = Vector3(1.39888,1.39888,1.39888)
+metadata/habitat = "Shore"
+metadata/asset_index = 9
+metadata/footprint_radius = 2.36948
+[node name="Shore_29" parent="Shore" instance=ExtResource("r10")]
+position = Vector3(82.11492,-0.18956,78.29390)
+rotation = Vector3(0,-1.83041,0)
+scale = Vector3(0.92577,0.92577,0.92577)
+metadata/habitat = "Shore"
+metadata/asset_index = 10
+metadata/footprint_radius = 1.02000
+[node name="Shore_30" parent="Shore" instance=ExtResource("r11")]
+position = Vector3(-93.97405,-0.04016,-9.92526)
+rotation = Vector3(0,-1.46780,0)
+scale = Vector3(0.99024,0.99024,0.99024)
+metadata/habitat = "Shore"
+metadata/asset_index = 11
+metadata/footprint_radius = 1.46209
+[node name="Shore_31" parent="Shore" instance=ExtResource("r12")]
+position = Vector3(81.42834,-0.12487,85.68796)
+rotation = Vector3(0,-2.09309,0)
+scale = Vector3(0.80303,0.80303,0.80303)
+metadata/habitat = "Shore"
+metadata/asset_index = 12
+metadata/footprint_radius = 1.24594
+[node name="Shore_32" parent="Shore" instance=ExtResource("r13")]
+position = Vector3(-88.59375,0.10837,8.08292)
+rotation = Vector3(0,-1.82358,0)
+scale = Vector3(0.77614,0.77614,0.77614)
+metadata/habitat = "Shore"
+metadata/asset_index = 13
+metadata/footprint_radius = 1.12311
+[node name="Shore_33" parent="Shore" instance=ExtResource("r14")]
+position = Vector3(71.19196,-0.06436,-52.00591)
+rotation = Vector3(0,-2.22532,0)
+scale = Vector3(0.84777,0.84777,0.84777)
+metadata/habitat = "Shore"
+metadata/asset_index = 14
+metadata/footprint_radius = 1.22600
+[node name="Shore_34" parent="Shore" instance=ExtResource("r15")]
+position = Vector3(-80.96647,-0.35577,-71.04315)
+rotation = Vector3(0,2.35929,0)
+scale = Vector3(1.37749,1.37749,1.37749)
+metadata/habitat = "Shore"
+metadata/asset_index = 15
+metadata/footprint_radius = 3.17414
+[node name="Shore_35" parent="Shore" instance=ExtResource("r16")]
+position = Vector3(97.79362,0.10911,2.40742)
+rotation = Vector3(0,-1.01491,0)
+scale = Vector3(1.79199,1.79199,1.79199)
+metadata/habitat = "Shore"
+metadata/asset_index = 16
+metadata/footprint_radius = 0.54198
+[node name="Shore_36" parent="Shore" instance=ExtResource("r17")]
+position = Vector3(-47.27982,0.07414,130.62601)
+rotation = Vector3(0,-0.92726,0)
+scale = Vector3(2.47258,2.47258,2.47258)
+metadata/habitat = "Shore"
+metadata/asset_index = 17
+metadata/footprint_radius = 0.73174
+[node name="Shore_37" parent="Shore" instance=ExtResource("r18")]
+position = Vector3(41.75647,-0.31298,-100.05341)
+rotation = Vector3(0,0.37644,0)
+scale = Vector3(1.78263,1.78263,1.78263)
+metadata/habitat = "Shore"
+metadata/asset_index = 18
+metadata/footprint_radius = 0.68491
+[node name="Shallow" type="Node3D" parent="."]
+[node name="Shallow_00" parent="Shallow" instance=ExtResource("r0")]
+position = Vector3(-52.25439,-0.90045,66.56525)
+rotation = Vector3(0,2.51451,0)
+scale = Vector3(0.90307,0.90307,0.90307)
+metadata/habitat = "Shallow"
+metadata/asset_index = 0
+metadata/footprint_radius = 1.21108
+[node name="Shallow_01" parent="Shallow" instance=ExtResource("r1")]
+position = Vector3(74.76476,-1.67204,92.21912)
+rotation = Vector3(0,2.23871,0)
+scale = Vector3(0.93180,0.93180,0.93180)
+metadata/habitat = "Shallow"
+metadata/asset_index = 1
+metadata/footprint_radius = 1.18998
+[node name="Shallow_02" parent="Shallow" instance=ExtResource("r2")]
+position = Vector3(-68.18489,-2.04725,-84.49030)
+rotation = Vector3(0,0.00030,0)
+scale = Vector3(1.27815,1.27815,1.27815)
+metadata/habitat = "Shallow"
+metadata/asset_index = 2
+metadata/footprint_radius = 2.05460
+[node name="Shallow_03" parent="Shallow" instance=ExtResource("r3")]
+position = Vector3(84.94320,-1.23958,53.32327)
+rotation = Vector3(0,2.41095,0)
+scale = Vector3(0.75990,0.75990,0.75990)
+metadata/habitat = "Shallow"
+metadata/asset_index = 3
+metadata/footprint_radius = 1.07567
+[node name="Shallow_04" parent="Shallow" instance=ExtResource("r4")]
+position = Vector3(-48.68499,-1.72084,72.98526)
+rotation = Vector3(0,-2.91629,0)
+scale = Vector3(1.49713,1.49713,1.49713)
+metadata/habitat = "Shallow"
+metadata/asset_index = 4
+metadata/footprint_radius = 1.72847
+[node name="Shallow_05" parent="Shallow" instance=ExtResource("r5")]
+position = Vector3(44.44257,-1.48716,-88.40411)
+rotation = Vector3(0,-0.41657,0)
+scale = Vector3(1.48351,1.48351,1.48351)
+metadata/habitat = "Shallow"
+metadata/asset_index = 5
+metadata/footprint_radius = 2.29787
+[node name="Shallow_06" parent="Shallow" instance=ExtResource("r6")]
+position = Vector3(-60.60976,-1.94586,-98.07317)
+rotation = Vector3(0,-2.95581,0)
+scale = Vector3(1.22567,1.22567,1.22567)
+metadata/habitat = "Shallow"
+metadata/asset_index = 6
+metadata/footprint_radius = 1.67379
+[node name="Shallow_07" parent="Shallow" instance=ExtResource("r7")]
+position = Vector3(86.38264,-1.31641,-15.42550)
+rotation = Vector3(0,-1.48248,0)
+scale = Vector3(0.74179,0.74179,0.74179)
+metadata/habitat = "Shallow"
+metadata/asset_index = 7
+metadata/footprint_radius = 0.97232
+[node name="Shallow_08" parent="Shallow" instance=ExtResource("r8")]
+position = Vector3(-47.73138,-0.69973,92.72865)
+rotation = Vector3(0,-2.94288,0)
+scale = Vector3(1.32905,1.32905,1.32905)
+metadata/habitat = "Shallow"
+metadata/asset_index = 8
+metadata/footprint_radius = 1.88297
+[node name="Shallow_09" parent="Shallow" instance=ExtResource("r9")]
+position = Vector3(41.37884,-0.81772,-96.74017)
+rotation = Vector3(0,-1.58514,0)
+scale = Vector3(0.91208,0.91208,0.91208)
+metadata/habitat = "Shallow"
+metadata/asset_index = 9
+metadata/footprint_radius = 1.54491
+[node name="Shallow_10" parent="Shallow" instance=ExtResource("r10")]
+position = Vector3(-42.48515,-0.80808,131.95096)
+rotation = Vector3(0,2.05240,0)
+scale = Vector3(0.90104,0.90104,0.90104)
+metadata/habitat = "Shallow"
+metadata/asset_index = 10
+metadata/footprint_radius = 0.99276
+[node name="Shallow_11" parent="Shallow" instance=ExtResource("r11")]
+position = Vector3(59.91248,-1.22657,129.62436)
+rotation = Vector3(0,-0.85082,0)
+scale = Vector3(1.04918,1.04918,1.04918)
+metadata/habitat = "Shallow"
+metadata/asset_index = 11
+metadata/footprint_radius = 1.54912
+[node name="Shallow_12" parent="Shallow" instance=ExtResource("r12")]
+position = Vector3(-74.64700,-1.82886,22.12323)
+rotation = Vector3(0,1.95011,0)
+scale = Vector3(0.76462,0.76462,0.76462)
+metadata/habitat = "Shallow"
+metadata/asset_index = 12
+metadata/footprint_radius = 1.18634
+[node name="Shallow_13" parent="Shallow" instance=ExtResource("r13")]
+position = Vector3(89.36102,-1.76660,-4.21422)
+rotation = Vector3(0,0.72307,0)
+scale = Vector3(0.90671,0.90671,0.90671)
+metadata/habitat = "Shallow"
+metadata/asset_index = 13
+metadata/footprint_radius = 1.31206
+[node name="Shallow_14" parent="Shallow" instance=ExtResource("r14")]
+position = Vector3(-89.51910,-1.08296,-35.97777)
+rotation = Vector3(0,2.91655,0)
+scale = Vector3(0.80543,0.80543,0.80543)
+metadata/habitat = "Shallow"
+metadata/asset_index = 14
+metadata/footprint_radius = 1.16478
+[node name="Shallow_15" parent="Shallow" instance=ExtResource("r15")]
+position = Vector3(81.43639,-2.04665,62.92010)
+rotation = Vector3(0,2.70505,0)
+scale = Vector3(1.22622,1.22622,1.22622)
+metadata/habitat = "Shallow"
+metadata/asset_index = 15
+metadata/footprint_radius = 2.82557
+[node name="Shallow_16" parent="Shallow" instance=ExtResource("r16")]
+position = Vector3(-46.90622,-1.60166,82.82805)
+rotation = Vector3(0,-1.54471,0)
+scale = Vector3(1.77673,1.77673,1.77673)
+metadata/habitat = "Shallow"
+metadata/asset_index = 16
+metadata/footprint_radius = 0.53736
+[node name="Shallow_17" parent="Shallow" instance=ExtResource("r17")]
+position = Vector3(69.38099,-1.57828,-46.08192)
+rotation = Vector3(0,1.47147,0)
+scale = Vector3(2.17629,2.17629,2.17629)
+metadata/habitat = "Shallow"
+metadata/asset_index = 17
+metadata/footprint_radius = 0.64406
+[node name="Shallow_18" parent="Shallow" instance=ExtResource("r18")]
+position = Vector3(-44.17282,-1.11187,-136.36671)
+rotation = Vector3(0,1.10276,0)
+scale = Vector3(1.63947,1.63947,1.63947)
+metadata/habitat = "Shallow"
+metadata/asset_index = 18
+metadata/footprint_radius = 0.62990
+[node name="Shallow_19" parent="Shallow" instance=ExtResource("r0")]
+position = Vector3(65.21136,-0.72296,-55.88146)
+rotation = Vector3(0,-1.22839,0)
+scale = Vector3(0.91353,0.91353,0.91353)
+metadata/habitat = "Shallow"
+metadata/asset_index = 0
+metadata/footprint_radius = 1.22511
+[node name="Shallow_20" parent="Shallow" instance=ExtResource("r1")]
+position = Vector3(-83.75162,-1.41231,6.19899)
+rotation = Vector3(0,2.70047,0)
+scale = Vector3(1.27896,1.27896,1.27896)
+metadata/habitat = "Shallow"
+metadata/asset_index = 1
+metadata/footprint_radius = 1.63333
+[node name="Shallow_21" parent="Shallow" instance=ExtResource("r2")]
+position = Vector3(77.06271,-1.56526,80.75957)
+rotation = Vector3(0,-0.54725,0)
+scale = Vector3(0.94735,0.94735,0.94735)
+metadata/habitat = "Shallow"
+metadata/asset_index = 2
+metadata/footprint_radius = 1.52284
+[node name="Shallow_22" parent="Shallow" instance=ExtResource("r3")]
+position = Vector3(-81.19598,-0.77397,-64.27579)
+rotation = Vector3(0,-1.66729,0)
+scale = Vector3(1.26200,1.26200,1.26200)
+metadata/habitat = "Shallow"
+metadata/asset_index = 3
+metadata/footprint_radius = 1.78641
+[node name="Shallow_23" parent="Shallow" instance=ExtResource("r4")]
+position = Vector3(79.37001,-1.65054,69.79662)
+rotation = Vector3(0,1.15893,0)
+scale = Vector3(1.12526,1.12526,1.12526)
+metadata/habitat = "Shallow"
+metadata/asset_index = 4
+metadata/footprint_radius = 1.29914
+[node name="Shallow_24" parent="Shallow" instance=ExtResource("r5")]
+position = Vector3(-44.30460,-1.04894,125.46991)
+rotation = Vector3(0,-2.80675,0)
+scale = Vector3(1.10248,1.10248,1.10248)
+metadata/habitat = "Shallow"
+metadata/asset_index = 5
+metadata/footprint_radius = 1.70767
+[node name="Shallow_25" parent="Shallow" instance=ExtResource("r6")]
+position = Vector3(71.05342,-2.22841,-42.48384)
+rotation = Vector3(0,-2.82184,0)
+scale = Vector3(1.33987,1.33987,1.33987)
+metadata/habitat = "Shallow"
+metadata/asset_index = 6
+metadata/footprint_radius = 1.82973
+[node name="Shallow_26" parent="Shallow" instance=ExtResource("r7")]
+position = Vector3(-65.09582,-1.83700,-90.04303)
+rotation = Vector3(0,-0.15967,0)
+scale = Vector3(1.11371,1.11371,1.11371)
+metadata/habitat = "Shallow"
+metadata/asset_index = 7
+metadata/footprint_radius = 1.45982
+[node name="Shallow_27" parent="Shallow" instance=ExtResource("r8")]
+position = Vector3(77.75965,-0.85303,86.83708)
+rotation = Vector3(0,-1.82849,0)
+scale = Vector3(0.91060,0.91060,0.91060)
+metadata/habitat = "Shallow"
+metadata/asset_index = 8
+metadata/footprint_radius = 1.29013
+[node name="Shallow_28" parent="Shallow" instance=ExtResource("r9")]
+position = Vector3(-89.52741,-1.45766,-18.62949)
+rotation = Vector3(0,-2.82426,0)
+scale = Vector3(0.82741,0.82741,0.82741)
+metadata/habitat = "Shallow"
+metadata/asset_index = 9
+metadata/footprint_radius = 1.40149
+[node name="Shallow_29" parent="Shallow" instance=ExtResource("r10")]
+position = Vector3(76.70256,-0.87628,-36.07272)
+rotation = Vector3(0,0.71672,0)
+scale = Vector3(0.87974,0.87974,0.87974)
+metadata/habitat = "Shallow"
+metadata/asset_index = 10
+metadata/footprint_radius = 0.96928
+[node name="Shallow_30" parent="Shallow" instance=ExtResource("r11")]
+position = Vector3(-53.11693,-1.79528,59.49797)
+rotation = Vector3(0,2.37817,0)
+scale = Vector3(1.13643,1.13643,1.13643)
+metadata/habitat = "Shallow"
+metadata/asset_index = 11
+metadata/footprint_radius = 1.67794
+[node name="Shallow_31" parent="Shallow" instance=ExtResource("r12")]
+position = Vector3(53.41756,-1.53752,138.25150)
+rotation = Vector3(0,1.16108,0)
+scale = Vector3(0.78016,0.78016,0.78016)
+metadata/habitat = "Shallow"
+metadata/asset_index = 12
+metadata/footprint_radius = 1.21046
+[node name="Shallow_32" parent="Shallow" instance=ExtResource("r13")]
+position = Vector3(-86.01463,-1.13840,1.50917)
+rotation = Vector3(0,2.12292,0)
+scale = Vector3(0.86057,0.86057,0.86057)
+metadata/habitat = "Shallow"
+metadata/asset_index = 13
+metadata/footprint_radius = 1.24529
+[node name="Shallow_33" parent="Shallow" instance=ExtResource("r14")]
+position = Vector3(28.14469,-0.98278,-141.26585)
+rotation = Vector3(0,-1.15915,0)
+scale = Vector3(1.30254,1.30254,1.30254)
+metadata/habitat = "Shallow"
+metadata/asset_index = 14
+metadata/footprint_radius = 1.88367
+[node name="Shallow_34" parent="Shallow" instance=ExtResource("r15")]
+position = Vector3(-74.77484,-1.41008,-74.04006)
+rotation = Vector3(0,2.92853,0)
+scale = Vector3(0.74545,0.74545,0.74545)
+metadata/habitat = "Shallow"
+metadata/asset_index = 15
+metadata/footprint_radius = 1.71774
+[node name="Shallow_35" parent="Shallow" instance=ExtResource("r16")]
+position = Vector3(85.49151,-0.76064,-19.50838)
+rotation = Vector3(0,-2.98579,0)
+scale = Vector3(2.55437,2.55437,2.55437)
+metadata/habitat = "Shallow"
+metadata/asset_index = 16
+metadata/footprint_radius = 0.77256
+[node name="Shallow_36" parent="Shallow" instance=ExtResource("r17")]
+position = Vector3(-48.90866,-0.68205,84.45119)
+rotation = Vector3(0,-2.32549,0)
+scale = Vector3(1.27629,1.27629,1.27629)
+metadata/habitat = "Shallow"
+metadata/asset_index = 17
+metadata/footprint_radius = 0.37771
+[node name="Shallow_37" parent="Shallow" instance=ExtResource("r18")]
+position = Vector3(52.75095,-1.49375,-71.62938)
+rotation = Vector3(0,-0.59211,0)
+scale = Vector3(1.81022,1.81022,1.81022)
+metadata/habitat = "Shallow"
+metadata/asset_index = 18
+metadata/footprint_radius = 0.69551
+[node name="Deep" type="Node3D" parent="."]
+[node name="Deep_00" parent="Deep" instance=ExtResource("r0")]
+position = Vector3(-54.65932,-8.16611,-94.72152)
+rotation = Vector3(0,1.61592,0)
+scale = Vector3(2.51087,2.51087,2.51087)
+metadata/habitat = "Deep"
+metadata/asset_index = 0
+metadata/footprint_radius = 3.36725
+[node name="Deep_01" parent="Deep" instance=ExtResource("r1")]
+position = Vector3(32.34745,-10.99965,-82.41585)
+rotation = Vector3(0,1.30928,0)
+scale = Vector3(2.29214,2.29214,2.29214)
+metadata/habitat = "Deep"
+metadata/asset_index = 1
+metadata/footprint_radius = 2.92723
+[node name="Deep_02" parent="Deep" instance=ExtResource("r2")]
+position = Vector3(-23.17275,-12.34796,64.60425)
+rotation = Vector3(0,0.50952,0)
+scale = Vector3(2.35918,2.35918,2.35918)
+metadata/habitat = "Deep"
+metadata/asset_index = 2
+metadata/footprint_radius = 3.79233
+[node name="Deep_03" parent="Deep" instance=ExtResource("r3")]
+position = Vector3(79.10424,-8.51767,-9.80711)
+rotation = Vector3(0,1.63858,0)
+scale = Vector3(2.44806,2.44806,2.44806)
+metadata/habitat = "Deep"
+metadata/asset_index = 3
+metadata/footprint_radius = 3.46532
+[node name="Deep_04" parent="Deep" instance=ExtResource("r4")]
+position = Vector3(-70.36532,-12.08180,-33.27009)
+rotation = Vector3(0,-1.04016,0)
+scale = Vector3(1.20284,1.20284,1.20284)
+metadata/habitat = "Deep"
+metadata/asset_index = 4
+metadata/footprint_radius = 1.38871
+[node name="Deep_05" parent="Deep" instance=ExtResource("r5")]
+position = Vector3(36.26501,-11.58377,141.31876)
+rotation = Vector3(0,-1.11094,0)
+scale = Vector3(1.72958,1.72958,1.72958)
+metadata/habitat = "Deep"
+metadata/asset_index = 5
+metadata/footprint_radius = 2.67901
+[node name="Deep_06" parent="Deep" instance=ExtResource("r6")]
+position = Vector3(-36.79024,-10.22209,70.59717)
+rotation = Vector3(0,0.25260,0)
+scale = Vector3(1.62813,1.62813,1.62813)
+metadata/habitat = "Deep"
+metadata/asset_index = 6
+metadata/footprint_radius = 2.22339
+[node name="Deep_07" parent="Deep" instance=ExtResource("r7")]
+position = Vector3(76.44824,-11.57537,3.06978)
+rotation = Vector3(0,-0.95318,0)
+scale = Vector3(2.47486,2.47486,2.47486)
+metadata/habitat = "Deep"
+metadata/asset_index = 7
+metadata/footprint_radius = 3.24398
+[node name="Deep_08" parent="Deep" instance=ExtResource("r8")]
+position = Vector3(-34.74076,-8.72464,87.35966)
+rotation = Vector3(0,2.77967,0)
+scale = Vector3(2.06544,2.06544,2.06544)
+metadata/habitat = "Deep"
+metadata/asset_index = 8
+metadata/footprint_radius = 2.92627
+[node name="Deep_09" parent="Deep" instance=ExtResource("r9")]
+position = Vector3(64.60829,-12.35447,38.77753)
+rotation = Vector3(0,2.22511,0)
+scale = Vector3(2.48924,2.48924,2.48924)
+metadata/habitat = "Deep"
+metadata/asset_index = 9
+metadata/footprint_radius = 4.21637
+[node name="Deep_10" parent="Deep" instance=ExtResource("r10")]
+position = Vector3(-74.32477,-7.81888,-55.45168)
+rotation = Vector3(0,-2.37335,0)
+scale = Vector3(2.36932,2.36932,2.36932)
+metadata/habitat = "Deep"
+metadata/asset_index = 10
+metadata/footprint_radius = 2.61050
+[node name="Deep_11" parent="Deep" instance=ExtResource("r11")]
+position = Vector3(65.51015,-12.35243,48.60388)
+rotation = Vector3(0,-1.01458,0)
+scale = Vector3(2.44854,2.44854,2.44854)
+metadata/habitat = "Deep"
+metadata/asset_index = 11
+metadata/footprint_radius = 3.61527
+[node name="Deep_12" parent="Deep" instance=ExtResource("r12")]
+position = Vector3(-62.42560,-9.63656,-77.18797)
+rotation = Vector3(0,-3.07271,0)
+scale = Vector3(2.51353,2.51353,2.51353)
+metadata/habitat = "Deep"
+metadata/asset_index = 12
+metadata/footprint_radius = 3.89986
+[node name="Deep_13" parent="Deep" instance=ExtResource("r13")]
+position = Vector3(46.58017,-7.67845,137.51263)
+rotation = Vector3(0,0.59989,0)
+scale = Vector3(2.41671,2.41671,2.41671)
+metadata/habitat = "Deep"
+metadata/asset_index = 13
+metadata/footprint_radius = 3.49712
+[node name="Deep_14" parent="Deep" instance=ExtResource("r14")]
+position = Vector3(-66.05771,-12.33028,2.17462)
+rotation = Vector3(0,1.40318,0)
+scale = Vector3(2.18173,2.18173,2.18173)
+metadata/habitat = "Deep"
+metadata/asset_index = 14
+metadata/footprint_radius = 3.15510
+[node name="Deep_15" parent="Deep" instance=ExtResource("r15")]
+position = Vector3(69.89253,-9.59032,72.01390)
+rotation = Vector3(0,-1.39466,0)
+scale = Vector3(2.50472,2.50472,2.50472)
+metadata/habitat = "Deep"
+metadata/asset_index = 15
+metadata/footprint_radius = 5.77163
+[node name="Deep_16" parent="Deep" instance=ExtResource("r16")]
+position = Vector3(-79.43072,-5.53996,-2.20744)
+rotation = Vector3(0,-0.79392,0)
+scale = Vector3(2.82608,2.82608,2.82608)
+metadata/habitat = "Deep"
+metadata/asset_index = 16
+metadata/footprint_radius = 0.85473
+[node name="Deep_17" parent="Deep" instance=ExtResource("r17")]
+position = Vector3(16.02433,-8.95458,-133.71922)
+rotation = Vector3(0,2.51065,0)
+scale = Vector3(1.78660,1.78660,1.78660)
+metadata/habitat = "Deep"
+metadata/asset_index = 17
+metadata/footprint_radius = 0.52873
+[node name="Deep_18" parent="Deep" instance=ExtResource("r18")]
+position = Vector3(-38.42692,-12.32219,-93.08382)
+rotation = Vector3(0,-1.55285,0)
+scale = Vector3(1.84366,1.84366,1.84366)
+metadata/habitat = "Deep"
+metadata/asset_index = 18
+metadata/footprint_radius = 0.70836
+[node name="Deep_19" parent="Deep" instance=ExtResource("r0")]
+position = Vector3(51.45350,-12.35661,78.78218)
+rotation = Vector3(0,-0.18849,0)
+scale = Vector3(2.53212,2.53212,2.53212)
+metadata/habitat = "Deep"
+metadata/asset_index = 0
+metadata/footprint_radius = 3.39575
+[node name="Deep_20" parent="Deep" instance=ExtResource("r1")]
+position = Vector3(-61.20757,-12.29158,-55.24290)
+rotation = Vector3(0,0.77426,0)
+scale = Vector3(1.23173,1.23173,1.23173)
+metadata/habitat = "Deep"
+metadata/asset_index = 1
+metadata/footprint_radius = 1.57301
+[node name="Deep_21" parent="Deep" instance=ExtResource("r2")]
+position = Vector3(76.36147,-11.69736,11.62163)
+rotation = Vector3(0,-1.16428,0)
+scale = Vector3(1.41656,1.41656,1.41656)
+metadata/habitat = "Deep"
+metadata/asset_index = 2
+metadata/footprint_radius = 2.27709
+[node name="Deep_22" parent="Deep" instance=ExtResource("r3")]
+position = Vector3(-51.29718,-12.34490,21.14824)
+rotation = Vector3(0,-2.31444,0)
+scale = Vector3(2.29796,2.29796,2.29796)
+metadata/habitat = "Deep"
+metadata/asset_index = 3
+metadata/footprint_radius = 3.25284
+[node name="Deep_23" parent="Deep" instance=ExtResource("r4")]
+position = Vector3(58.71652,-12.06617,80.92062)
+rotation = Vector3(0,-2.91850,0)
+scale = Vector3(1.20112,1.20112,1.20112)
+metadata/habitat = "Deep"
+metadata/asset_index = 4
+metadata/footprint_radius = 1.38672
+[node name="Deep_24" parent="Deep" instance=ExtResource("r5")]
+position = Vector3(-72.16384,-8.14202,11.28180)
+rotation = Vector3(0,-1.32218,0)
+scale = Vector3(2.31585,2.31585,2.31585)
+metadata/habitat = "Deep"
+metadata/asset_index = 5
+metadata/footprint_radius = 3.58712
+[node name="Deep_25" parent="Deep" instance=ExtResource("r6")]
+position = Vector3(76.31038,-8.80951,49.33400)
+rotation = Vector3(0,0.44725,0)
+scale = Vector3(2.42889,2.42889,2.42889)
+metadata/habitat = "Deep"
+metadata/asset_index = 6
+metadata/footprint_radius = 3.31691
+[node name="Deep_26" parent="Deep" instance=ExtResource("r7")]
+position = Vector3(-42.61403,-12.14194,44.49803)
+rotation = Vector3(0,-2.76009,0)
+scale = Vector3(1.62164,1.62164,1.62164)
+metadata/habitat = "Deep"
+metadata/asset_index = 7
+metadata/footprint_radius = 2.12560
+[node name="Deep_27" parent="Deep" instance=ExtResource("r8")]
+position = Vector3(7.15629,-12.35199,-132.56149)
+rotation = Vector3(0,-0.71762,0)
+scale = Vector3(2.47979,2.47979,2.47979)
+metadata/habitat = "Deep"
+metadata/asset_index = 8
+metadata/footprint_radius = 3.51332
+[node name="Deep_28" parent="Deep" instance=ExtResource("r9")]
+position = Vector3(-64.76096,-12.29364,-12.85518)
+rotation = Vector3(0,1.88852,0)
+scale = Vector3(1.27290,1.27290,1.27290)
+metadata/habitat = "Deep"
+metadata/asset_index = 9
+metadata/footprint_radius = 2.15609
+[node name="Deep_29" parent="Deep" instance=ExtResource("r10")]
+position = Vector3(63.72082,-12.20790,62.64018)
+rotation = Vector3(0,-1.92864,0)
+scale = Vector3(2.23728,2.23728,2.23728)
+metadata/habitat = "Deep"
+metadata/asset_index = 10
+metadata/footprint_radius = 2.46501
+[node name="Deep_30" parent="Deep" instance=ExtResource("r11")]
+position = Vector3(-67.72723,-12.30494,-43.92692)
+rotation = Vector3(0,-2.17146,0)
+scale = Vector3(2.14074,2.14074,2.14074)
+metadata/habitat = "Deep"
+metadata/asset_index = 11
+metadata/footprint_radius = 3.16081
+[node name="Deep_31" parent="Deep" instance=ExtResource("r12")]
+position = Vector3(60.88675,-11.35711,89.03203)
+rotation = Vector3(0,-2.43686,0)
+scale = Vector3(1.49849,1.49849,1.49849)
+metadata/habitat = "Deep"
+metadata/asset_index = 12
+metadata/footprint_radius = 2.32499
+[node name="Deep_32" parent="Deep" instance=ExtResource("r13")]
+position = Vector3(-35.33860,-12.33758,-96.83747)
+rotation = Vector3(0,1.06875,0)
+scale = Vector3(2.15151,2.15151,2.15151)
+metadata/habitat = "Deep"
+metadata/asset_index = 13
+metadata/footprint_radius = 3.11335
+[node name="Deep_33" parent="Deep" instance=ExtResource("r14")]
+position = Vector3(26.43433,-12.33991,-78.07819)
+rotation = Vector3(0,-2.74471,0)
+scale = Vector3(2.19857,2.19857,2.19857)
+metadata/habitat = "Deep"
+metadata/asset_index = 14
+metadata/footprint_radius = 3.17945
+[node name="Deep_34" parent="Deep" instance=ExtResource("r15")]
+position = Vector3(-55.01579,-12.32711,6.45541)
+rotation = Vector3(0,2.03508,0)
+scale = Vector3(1.94212,1.94212,1.94212)
+metadata/habitat = "Deep"
+metadata/asset_index = 15
+metadata/footprint_radius = 4.47523
+[node name="Deep_35" parent="Deep" instance=ExtResource("r16")]
+position = Vector3(86.36841,-4.44988,3.79758)
+rotation = Vector3(0,-2.98399,0)
+scale = Vector3(2.07054,2.07054,2.07054)
+metadata/habitat = "Deep"
+metadata/asset_index = 16
+metadata/footprint_radius = 0.62622
+[node name="Deep_36" parent="Deep" instance=ExtResource("r17")]
+position = Vector3(-76.52108,-8.29257,-43.81733)
+rotation = Vector3(0,-1.22252,0)
+scale = Vector3(3.04897,3.04897,3.04897)
+metadata/habitat = "Deep"
+metadata/asset_index = 17
+metadata/footprint_radius = 0.90232
+[node name="Deep_37" parent="Deep" instance=ExtResource("r18")]
+position = Vector3(64.82437,-10.20101,1.09715)
+rotation = Vector3(0,-1.29237,0)
+scale = Vector3(2.24234,2.24234,2.24234)
+metadata/habitat = "Deep"
+metadata/asset_index = 18
+metadata/footprint_radius = 0.86153

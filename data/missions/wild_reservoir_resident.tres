@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionDefinition" format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+id = "wild_reservoir_resident"
+tier = 1
+title = "ทำความรู้จักปลาชะโด"
+description = "ตกปลาชะโด 2 ตัว"
+metric = "count"
+target = 2.0
+map_id = "wild_reservoir"
+species_id = "giant_snakehead"
+depth_range = Vector2(0,100)
+reward_coins = 130

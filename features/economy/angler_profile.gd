@@ -2,6 +2,7 @@ class_name AnglerProfile
 extends Node
 
 signal changed
+signal missions_completed(ids: Array[String])
 const Catalog = preload("res://data/equipment/tackle_catalog.gd")
 var save_path := "user://angler_profile_v1.cfg"
 var data: Dictionary = {}
@@ -14,7 +15,7 @@ func _ready() -> void:
 func defaults() -> Dictionary:
  return {"coins": 350, "diamonds": 0, "stock": {"worm": 20, "dough": 10, "minnow": 1, "light_rod": 1, "basic_reel": 1, "small_box": 1},
   "equipped": {"bait": "worm", "lure": "minnow", "rod": "light_rod", "reel": "basic_reel", "box": "small_box", "line": "nylon"},
-  "line_remaining": 65.0, "spares": {}, "catches": [], "journal": [], "boss_history": [], "ponds": {}, "pending": {}, "receipts": []}
+  "line_remaining": 65.0, "spares": {}, "catches": [], "journal": [], "boss_history": [], "ponds": {}, "pending": {}, "receipts": [], "missions": MissionProgress.defaults()}
 
 func load_profile() -> void:
  data = defaults()
@@ -27,6 +28,9 @@ func load_profile() -> void:
   save_error = "อ่านข้อมูลผู้เล่นไม่ได้ — เก็บไฟล์เดิมไว้"
   return
  var saved = config.get_value("profile", "data", {})
+ # Additive migration: old v1 profiles keep every existing balance and record.
+ if saved is Dictionary and not saved.has("missions"):
+  saved["missions"] = MissionProgress.defaults()
  if not _valid(saved):
   incompatible = true
   save_error = "ข้อมูลผู้เล่นไม่ถูกต้อง — เก็บไฟล์เดิมไว้"
@@ -41,6 +45,8 @@ func _valid(value: Variant) -> bool:
   if not value.has(key) or typeof(value[key]) != typeof(expected[key]):
    return false
  if value.coins < 0 or value.diamonds < 0 or not is_finite(value.line_remaining) or value.line_remaining < 0:
+  return false
+ if not MissionProgress.valid(value.missions):
   return false
  for slot in expected.equipped:
   var entry := Catalog.item(str(value.equipped.get(slot, "")))
@@ -222,10 +228,54 @@ func sell_catches() -> bool:
  return _commit(before)
 
 func record_catch(record: Dictionary, boss: bool) -> bool:
+ # Gameplay supplies a stable event token; repeated delivery is a no-op.
+ if not str(record.get("catch_id", "")).is_empty():
+  for previous in data.journal:
+   if previous.get("catch_id", "") == record.catch_id:
+    return true
  var before := data.duplicate(true)
  data.journal.append(record.duplicate(true))
  if boss:
   data.boss_history.append(record.duplicate(true))
+ var event := record.duplicate(true)
+ event["boss"] = boss
+ var completed: Array[String] = []
+ if event.get("mission_eligible", true):
+  completed = MissionProgress.apply_catch(data.missions, event)
+ if not _commit(before):
+  return false
+ if not completed.is_empty():
+  missions_completed.emit(completed)
+ return true
+
+func start_missions() -> bool:
+ if data.missions.started:
+  return true
+ var before := data.duplicate(true)
+ data.missions.started = true
+ data.missions.tracked = "first_three"
+ return _commit(before)
+
+func track_mission(id: String) -> bool:
+ if not data.missions.started or (not id.is_empty() and MissionCatalog.find(id) == null):
+  return false
+ var before := data.duplicate(true)
+ data.missions.tracked = id
+ return _commit(before)
+
+func claim_mission(id: String) -> bool:
+ var definition := MissionCatalog.find(id)
+ if definition == null or not data.missions.started:
+  return false
+ var value := MissionProgress.entry(data.missions, definition)
+ if value.claimed or value.progress < definition.target:
+  return false
+ var before := data.duplicate(true)
+ value.claimed = true
+ data.missions.entries[id] = value
+ data.coins += definition.reward_coins
+ if data.missions.tracked == id:
+  data.missions.tracked = ""
  return _commit(before)
 
 func store_pond(map_id: String, records: Array) -> bool:

@@ -113,6 +113,33 @@ func run() -> void:
   touch(0, false, move_point, true)
   expect(move.touch_index == -1 and camera.look_finger == 1, "canceling walking preserves camera")
   touch(1, false, camera_point)
+ # Full viewport dispatch: inspect with one finger and walk with another,
+ # in either order. This catches input consumption that direct calls miss.
+ var eye: Button = scene.get_node("HUD/FishingHUD/SafeArea/OrbitButton")
+ for eye_first in [false, true]:
+  scene.propagate_notification(NOTIFICATION_APPLICATION_FOCUS_OUT)
+  var eye_point := eye.get_global_rect().get_center()
+  var walking_point := move.get_global_rect().get_center() + Vector2(0, -45)
+  if eye_first:
+   touch(10, true, eye_point)
+   touch(11, true, walking_point)
+  else:
+   touch(11, true, walking_point)
+   touch(10, true, eye_point)
+  expect(camera.orbiting and move.touch_index == 11 and move.direction.length() > 0.3, "eye and walking have independent fingers in either press order")
+  var yaw := camera.rotation.y
+  drag(10, eye_point + Vector2(-80, 0), Vector2(-80, 0))
+  expect(absf(angle_difference(yaw, camera.rotation.y)) > 0.1 and move.touch_index == 11, "eye drag turns camera without stealing walking finger")
+  var player: AnglerPlayer = scene.get_node("Player")
+  var start := player.global_position
+  for frame in 8:
+   await physics_frame
+  var traveled := Vector2(player.global_position.x - start.x, player.global_position.z - start.z).length()
+  expect(traveled > 0.02, "player actually moves while eye orbit is held")
+  touch(10, false, eye_point + Vector2(-80, 0))
+  expect(not camera.orbiting and move.touch_index == 11, "releasing eye preserves walking")
+  touch(11, false, walking_point)
+  expect(move.direction == Vector2.ZERO, "walking releases normally after inspection")
  scene.queue_free()
  await process_frame
  print("MOBILE MULTITOUCH RESULT: ", checks, " checks, ", errors, " failures")

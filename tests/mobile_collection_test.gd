@@ -37,7 +37,7 @@ func run() -> void:
    var card: Control = panel.get_node("Card")
    expect(panel.size.is_equal_approx(screen.size), "journal covers the viewport after binary scene export")
    expect(card.size.x >= screen.size.x * 0.85 and card.size.y >= screen.size.y * 0.85, "journal card uses the full mobile display")
-   expect(rows.get_child_count() == 16, "exported catalog contains all sixteen fish")
+   expect(rows.get_child_count() == FishCatalog.ALL_SPECIES.size(), "exported catalog contains the expanded fish catalog")
    expect(scroll.size.y >= 160 and rows.size.y >= 400, "grid has visible height on mobile aspect ratios")
    var clip := scroll.get_global_rect()
    var visible_cards := 0
@@ -51,7 +51,7 @@ func run() -> void:
    scroll.scroll_vertical = 100000
    for frame in 3:
     await process_frame
-   expect(clip.intersects(rows.get_child(15).get_global_rect()), "last fish can be reached by scrolling")
+   expect(clip.intersects(rows.get_child(rows.get_child_count()-1).get_global_rect()), "last fish can be reached by scrolling")
    scroll.scroll_vertical = 0
    if repeat == 0 and not output.is_empty():
     DirAccess.make_dir_recursive_absolute(output)

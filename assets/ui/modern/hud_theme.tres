@@ -1,65 +1,68 @@
 [gd_resource type="Theme" format=3 uid="uid://dhdsjf35401mk"]
-
-[ext_resource type="FontFile" uid="uid://b3efl8x6kac7t" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
-
-[sub_resource type="StyleBoxFlat" id="hover"]
-bg_color = Color(0.14, 0.28, 0.34, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-
-[sub_resource type="StyleBoxFlat" id="button"]
-content_margin_left = 24.0
-content_margin_top = 12.0
-content_margin_right = 24.0
-content_margin_bottom = 12.0
-bg_color = Color(0.08, 0.15, 0.21, 0.94)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-
-[sub_resource type="StyleBoxFlat" id="panel"]
-content_margin_left = 22.0
-content_margin_top = 16.0
-content_margin_right = 22.0
-content_margin_bottom = 16.0
-bg_color = Color(0.04, 0.08, 0.12, 0.94)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.55, 0.85, 0.8, 0.22)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
-
-[sub_resource type="StyleBoxFlat" id="track"]
-bg_color = Color(0.08, 0.18, 0.2, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="fill"]
-bg_color = Color(0.4, 0.94, 0.77, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[ext_resource type="FontFile" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_button.tres" id="normal"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_hover.tres" id="hover"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_accent.tres" id="pressed"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_disabled.tres" id="disabled"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_panel.tres" id="panel"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_inset.tres" id="inset"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_track.tres" id="track"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_fill.tres" id="fill"]
+[ext_resource type="StyleBox" path="res://assets/ui/atlas/style_grabber.tres" id="grabber"]
 
 [resource]
 default_font = ExtResource("font")
 default_font_size = 18
-Button/colors/font_color = Color(0.92, 0.97, 1, 1)
-Button/colors/font_hover_color = Color(0.92, 0.97, 1, 1)
-Button/colors/font_pressed_color = Color(0.92, 0.97, 1, 1)
+Button/colors/font_color = Color(0.95, 0.98, 0.97, 1)
+Button/colors/font_hover_color = Color(0.95, 0.98, 0.97, 1)
+Button/colors/icon_normal_color = Color(0.95, 0.98, 0.97, 1)
+Button/colors/icon_hover_color = Color(0.95, 0.98, 0.97, 1)
+Button/colors/font_pressed_color = Color(0.045, 0.12, 0.16, 1)
+Button/colors/font_hover_pressed_color = Color(0.045, 0.12, 0.16, 1)
+Button/colors/icon_pressed_color = Color(0.045, 0.12, 0.16, 1)
+Button/colors/font_disabled_color = Color(0.67, 0.73, 0.76, 1)
+Button/colors/icon_disabled_color = Color(0.6, 0.68, 0.7, 1)
 Button/font_sizes/font_size = 18
-Button/styles/hover = SubResource("hover")
-Button/styles/normal = SubResource("button")
-Button/styles/pressed = SubResource("hover")
-PanelContainer/styles/panel = SubResource("panel")
-ProgressBar/styles/background = SubResource("track")
-ProgressBar/styles/fill = SubResource("fill")
+Button/styles/normal = ExtResource("normal")
+Button/styles/hover = ExtResource("hover")
+Button/styles/pressed = ExtResource("pressed")
+Button/styles/disabled = ExtResource("disabled")
+Button/styles/focus = ExtResource("hover")
+Panel/styles/panel = ExtResource("panel")
+PanelContainer/styles/panel = ExtResource("panel")
+ProgressBar/styles/background = ExtResource("track")
+ProgressBar/styles/fill = ExtResource("fill")
+TabBar/styles/tab_selected = ExtResource("pressed")
+TabBar/styles/tab_unselected = ExtResource("inset")
+TabBar/styles/tab_hovered = ExtResource("hover")
+TabBar/styles/tab_disabled = ExtResource("disabled")
+TabBar/colors/font_selected_color = Color(0.045, 0.12, 0.16, 1)
+TabBar/colors/font_unselected_color = Color(0.95, 0.98, 0.97, 1)
+TabBar/colors/font_hovered_color = Color(0.95, 0.98, 0.97, 1)
+TabContainer/styles/tab_selected = ExtResource("pressed")
+TabContainer/styles/tab_unselected = ExtResource("inset")
+TabContainer/styles/tab_hovered = ExtResource("hover")
+TabContainer/styles/tab_disabled = ExtResource("disabled")
+TabContainer/colors/font_selected_color = Color(0.045, 0.12, 0.16, 1)
+TabContainer/colors/font_unselected_color = Color(0.95, 0.98, 0.97, 1)
+TabContainer/colors/font_hovered_color = Color(0.95, 0.98, 0.97, 1)
+TabContainer/styles/panel = ExtResource("inset")
+VScrollBar/styles/scroll = ExtResource("track")
+VScrollBar/styles/grabber = ExtResource("grabber")
+VScrollBar/styles/grabber_highlight = ExtResource("grabber")
+VScrollBar/styles/grabber_pressed = ExtResource("grabber")
+HScrollBar/styles/scroll = ExtResource("track")
+HScrollBar/styles/grabber = ExtResource("grabber")
+HScrollBar/styles/grabber_highlight = ExtResource("grabber")
+HScrollBar/styles/grabber_pressed = ExtResource("grabber")
+OptionButton/styles/normal = ExtResource("normal")
+OptionButton/styles/hover = ExtResource("hover")
+OptionButton/styles/pressed = ExtResource("pressed")
+OptionButton/styles/disabled = ExtResource("disabled")
+OptionButton/styles/focus = ExtResource("hover")
+OptionButton/colors/font_color = Color(0.95, 0.98, 0.97, 1)
+OptionButton/colors/font_pressed_color = Color(0.045, 0.12, 0.16, 1)
+PopupMenu/styles/panel = ExtResource("panel")
+PopupMenu/styles/hover = ExtResource("hover")
+HSlider/styles/slider = ExtResource("track")
+HSlider/styles/grabber_area = ExtResource("fill")

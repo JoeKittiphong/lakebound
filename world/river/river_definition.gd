@@ -59,7 +59,7 @@ func on_bridge(point: Vector3) -> bool:
 
 func on_jetty(point: Vector3) -> bool:
  var edge := center_at(24) + half_width_at(24)
- return absf(point.z - 24.0) < 0.95 and point.x > edge - 9.2 and point.x < edge + 1.0 and point.y > 0.2
+ return absf(point.z - 24.0) < 1.48 and point.x > edge - 8.6 and point.x < edge + 5.0 and point.y > 0.2
 
 func constrain_to_water(point: Vector3) -> Vector3:
  point.z = clampf(point.z, -150.0, 150.0)
@@ -79,12 +79,24 @@ func constrain_to_water(point: Vector3) -> Vector3:
  point.y = clampf(point.y, 0.10, maxf(0.10, depth - 0.12))
  return point
 
-func constrain_walking(point: Vector3) -> Vector3:
+func surface_height() -> float:
+ return water_height
+
+func can_swim_at(point: Vector3) -> bool:
+ return water_bounds.has_point(Vector2(point.x, point.z)) and water_depth_at(Vector2(point.x, point.z)) > 0.85 and not on_bridge(point) and not on_jetty(point)
+
+func constrain_travel(point: Vector3) -> Vector3:
  point.x = clampf(point.x, walking_bounds.position.x, walking_bounds.end.x)
  point.z = clampf(point.z, walking_bounds.position.y, walking_bounds.end.y)
  var c := center_at(point.z)
  var w := half_width_at(point.z)
  point.x = clampf(point.x, c - w - 28.0, c + w + 28.0)
+ return point
+
+func constrain_walking(point: Vector3) -> Vector3:
+ point = constrain_travel(point)
+ var c := center_at(point.z)
+ var w := half_width_at(point.z)
  if not on_bridge(point) and not on_jetty(point) and water_depth_at(Vector2(point.x, point.z)) > max_wading_depth:
   # Movement is constrained at the nearest bank; physics still owns height.
   var side := 1.0 if point.x >= c else -1.0

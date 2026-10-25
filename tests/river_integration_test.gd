@@ -55,7 +55,7 @@ func run() -> void:
  expect(is_equal_approx(player.scale.y, 1.0) and is_equal_approx(player.move_speed, 3.8), "human scale and normal walking speed remain unchanged")
  expect(definition.water_depth_at(Vector2(definition.center_at(0), 0)) > 11, "main pool is more than eleven meters deep")
  expect(scene.get_node("World/TerrainTiles").get_child_count() == 225, "225 editable terrain tiles are serialized before Play")
- expect(scene.get_node("World/Bridge").get_child_count() > 10 and scene.get_node("World/Jetty").get_child_count() == 3, "bridge, approach ramps, supports and jetty are authored")
+ expect(scene.get_node("World/Bridge").get_child_count() > 10 and scene.get_node("World/Jetty").has_node("Visual") and scene.get_node("World/Jetty").has_node("Approach/Shape"), "bridge, approach ramps, supports and jetty are authored")
  expect(pond.fish.size() == 112, "seven persistent schools exist before casting")
  var water: MeshInstance3D = scene.get_node("World/RiverWater")
  expect(water.mesh.surface_get_material(0).shader.resource_path == "res://world/water.gdshader", "existing Godot water shader is reused")

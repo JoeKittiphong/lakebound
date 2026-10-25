@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://features/missions/mission_panel.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
+
+[ext_resource type="Script" path="res://shared/ui/swipe_scroll.gd" id="swipe"]
+
+[node name="MissionPanel" type="Control"]
+visible = false
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.015, 0.035, 0.045, 0.97)
+
+[node name="Card" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("safe")
+minimum_margin = 28.0
+
+[node name="Content" type="VBoxContainer" parent="Card"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="Card/Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Card/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+text = "ภารกิจตกปลา"
+
+[node name="Close" type="Button" parent="Card/Content/Header"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 52)
+text = "กลับ"
+
+[node name="Guide" type="Label" parent="Card/Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "เลือกทำได้อิสระ · ไม่หมดอายุ · นับทั้งเก็บและปล่อย · ปลาแต่ละตัวนับได้ครั้งเดียวต่อข้อ"
+
+[node name="Summary" type="Label" parent="Card/Content"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_colors/font_color = Color(0.55, 0.91, 0.76, 1)
+text = "สำเร็จ 0 / 12   ·   รับรางวัลแล้ว 0 / 12   ·   350 เหรียญ"
+
+[node name="Tiers" type="TabBar" parent="Card/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 52)
+tab_count = 4
+current_tab = 0
+tab_0/title = "Easy · เริ่มต้น"
+tab_1/title = "Normal · เรียนรู้"
+tab_2/title = "Hard · ท้าทาย"
+tab_3/title = "Pro · ชำนาญ"
+
+[node name="Scroll" type="ScrollContainer" parent="Card/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+script = ExtResource("swipe")
+
+[node name="Rows" type="VBoxContainer" parent="Card/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Message" type="Label" parent="Card/Content"]
+visible = false
+layout_mode = 2
+autowrap_mode = 3
+text = ""
+
+[node name="Retry" type="Button" parent="Card/Content"]
+visible = false
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+text = "ลองเปิดระบบภารกิจอีกครั้ง"
+
+[connection signal="pressed" from="Card/Content/Header/Close" to="." method="close"]
+[connection signal="tab_changed" from="Card/Content/Tiers" to="." method="_select_tier"]
+[connection signal="pressed" from="Card/Content/Retry" to="." method="_retry"]

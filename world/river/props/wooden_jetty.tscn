@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://assets/environment/bridge/wooden_bridge_joined.glb" id="model"]
+[sub_resource type="BoxShape3D" id="deck"]
+size = Vector3(2.8, 0.14, 9.5)
+[sub_resource type="CylinderShape3D" id="post"]
+height = 3.35
+radius = 0.18
+[node name="WoodenJetty" type="Node3D"]
+metadata/deck_width = 2.8
+metadata/deck_length = 9.56
+[node name="Visual" parent="." instance=ExtResource("model")]
+position = Vector3(-0.00293, -0.124693, 0.480907)
+scale = Vector3(0.2575, 0.18, 0.25)
+[node name="Collision" type="StaticBody3D" parent="."]
+[node name="Deck" type="CollisionShape3D" parent="Collision"]
+position = Vector3(0, -0.08, 4.78)
+shape = SubResource("deck")
+[node name="PostLeftFront" type="CollisionShape3D" parent="Collision"]
+position = Vector3(-1.214, -1.78, 0.481)
+shape = SubResource("post")
+[node name="PostRightFront" type="CollisionShape3D" parent="Collision"]
+position = Vector3(1.14, -1.78, 0.481)
+shape = SubResource("post")
+[node name="PostLeftMiddle" type="CollisionShape3D" parent="Collision"]
+position = Vector3(-1.214, -1.78, 4.957)
+shape = SubResource("post")
+[node name="PostRightMiddle" type="CollisionShape3D" parent="Collision"]
+position = Vector3(1.14, -1.78, 4.957)
+shape = SubResource("post")
+[node name="PostLeftEnd" type="CollisionShape3D" parent="Collision"]
+position = Vector3(-1.214, -1.78, 8.662)
+shape = SubResource("post")
+[node name="PostRightEnd" type="CollisionShape3D" parent="Collision"]
+position = Vector3(1.14, -1.78, 8.662)
+shape = SubResource("post")

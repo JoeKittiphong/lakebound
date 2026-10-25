@@ -1,0 +1,36 @@
+[gd_scene format=3]
+[ext_resource type="ArrayMesh" path="res://features/loading/cinematic/pine_crown.obj" id="crown_mesh"]
+[sub_resource type="StandardMaterial3D" id="bark"]
+albedo_color = Color(0.27, 0.23, 0.16, 1)
+roughness = 1.0
+[sub_resource type="StandardMaterial3D" id="leaves"]
+albedo_color = Color(0.21, 0.39, 0.31, 1)
+roughness = 0.95
+[sub_resource type="StandardMaterial3D" id="tips"]
+albedo_color = Color(0.31, 0.48, 0.35, 1)
+roughness = 0.95
+[sub_resource type="CylinderMesh" id="trunk"]
+material = SubResource("bark")
+top_radius = 0.10
+bottom_radius = 0.20
+height = 2.0
+radial_segments = 7
+[sub_resource type="CylinderMesh" id="crown"]
+material = SubResource("leaves")
+top_radius = 0.04
+bottom_radius = 1.35
+height = 2.8
+radial_segments = 7
+[sub_resource type="CylinderMesh" id="tip"]
+material = SubResource("tips")
+top_radius = 0.0
+bottom_radius = 0.8
+height = 2.4
+radial_segments = 7
+[node name="Pine" type="Node3D"]
+[node name="Trunk" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1, 0)
+mesh = SubResource("trunk")
+[node name="LowerCrown" type="MeshInstance3D" parent="."]
+mesh = ExtResource("crown_mesh")
+material_override = SubResource("leaves")

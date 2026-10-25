@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="PackedScene" path="res://assets/environment/rocks/rock_mobile.glb" id="model"]
+[ext_resource type="Shape3D" path="res://world/river/props/rock_mobile_collision.tres" id="shape"]
+[sub_resource type="PhysicsMaterial" id="stone"]
+friction = 0.85
+[node name="RockMobile" type="StaticBody3D"]
+physics_material_override = SubResource("stone")
+[node name="Visual" parent="." instance=ExtResource("model")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = ExtResource("shape")

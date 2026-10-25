@@ -1,0 +1,209 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://world/pond/models/arowana.tscn" id="f58"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/silver_arowana.tscn" id="f59"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/alligator_gar.tscn" id="f60"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/emperor_snakehead.tscn" id="f61"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/cobra_snakehead.tscn" id="f62"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/wild_betta.tscn" id="f63"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/torrent_catfish.tscn" id="f64"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/giant_luciosoma.tscn" id="f65"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/black_swamp_spiny_eel.tscn" id="f66"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/marbled_sleeper.tscn" id="f67"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/pearl_gourami.tscn" id="f68"]
+[ext_resource type="PackedScene" path="res://world/pond/models/tigerfish.tscn" id="f69"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/ghost_glass_catfish.tscn" id="f70"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/mythic_golden_dragon.tscn" id="f71"]
+[ext_resource type="FontFile" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.035,0.065,0.085,1)
+ambient_light_source = 2
+ambient_light_color = Color(0.82,0.89,1,1)
+ambient_light_energy = 0.9
+tonemap_mode = 2
+[node name="EncyclopediaPage" type="Node3D"]
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+[node name="Light" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-25,-25,0)
+light_energy = 1.1
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0,0.2,10)
+projection = 1
+size = 7.5
+current = true
+[node name="Fish" type="Node3D" parent="."]
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(0,3.25,0.1)
+text = "LAKEBOUND / 05 Deep Rainforest"
+font_size = 36
+pixel_size = 0.004
+outline_size = 0
+[node name="Fish058" parent="Fish" instance=ExtResource("f58")]
+position = Vector3(-3.9000000000000004,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 58
+[node name="Label058" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,1.7,0.1)
+font = ExtResource("font")
+text = "058 ปลามังกรทอง (อโรวาน่าป่า)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish059" parent="Fish" instance=ExtResource("f59")]
+position = Vector3(-1.3,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 59
+[node name="Label059" type="Label3D" parent="."]
+position = Vector3(-1.3,1.7,0.1)
+font = ExtResource("font")
+text = "059 ปลามังกรเงิน"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish060" parent="Fish" instance=ExtResource("f60")]
+position = Vector3(1.3,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 60
+[node name="Label060" type="Label3D" parent="."]
+position = Vector3(1.3,1.7,0.1)
+font = ExtResource("font")
+text = "060 ปลาอัลลิเกเตอร์การ์"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish061" parent="Fish" instance=ExtResource("f61")]
+position = Vector3(3.9000000000000004,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 61
+[node name="Label061" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,1.7,0.1)
+font = ExtResource("font")
+text = "061 ปลาช่อนข้าหลวง"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish062" parent="Fish" instance=ExtResource("f62")]
+position = Vector3(-3.9000000000000004,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 62
+[node name="Label062" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "062 ปลาช่อนงูเห่า"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish063" parent="Fish" instance=ExtResource("f63")]
+position = Vector3(-1.3,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 63
+[node name="Label063" type="Label3D" parent="."]
+position = Vector3(-1.3,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "063 ปลากัดป่าโบราณ"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish064" parent="Fish" instance=ExtResource("f64")]
+position = Vector3(1.3,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 64
+[node name="Label064" type="Label3D" parent="."]
+position = Vector3(1.3,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "064 ปลาดุกด่านน้ำตก"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish065" parent="Fish" instance=ExtResource("f65")]
+position = Vector3(3.9000000000000004,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 65
+[node name="Label065" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "065 ปลาสะนากยักษ์"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish066" parent="Fish" instance=ExtResource("f66")]
+position = Vector3(-3.9000000000000004,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 66
+[node name="Label066" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,-1.3,0.1)
+font = ExtResource("font")
+text = "066 ปลากระทิงดำป่าพรุ"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish067" parent="Fish" instance=ExtResource("f67")]
+position = Vector3(-1.3,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 67
+[node name="Label067" type="Label3D" parent="."]
+position = Vector3(-1.3,-1.3,0.1)
+font = ExtResource("font")
+text = "067 ปลาบู่ทราย"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish068" parent="Fish" instance=ExtResource("f68")]
+position = Vector3(1.3,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 68
+[node name="Label068" type="Label3D" parent="."]
+position = Vector3(1.3,-1.3,0.1)
+font = ExtResource("font")
+text = "068 ปลากระดี่มุก"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish069" parent="Fish" instance=ExtResource("f69")]
+position = Vector3(3.9000000000000004,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 69
+[node name="Label069" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,-1.3,0.1)
+font = ExtResource("font")
+text = "069 ปลาเสือตอไทย"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish070" parent="Fish" instance=ExtResource("f70")]
+position = Vector3(-3.9000000000000004,-2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 70
+[node name="Label070" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,-2.8,0.1)
+font = ExtResource("font")
+text = "070 ปลาก้างพระร่วงแก้ว"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish071" parent="Fish" instance=ExtResource("f71")]
+position = Vector3(-1.3,-2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 71
+[node name="Label071" type="Label3D" parent="."]
+position = Vector3(-1.3,-2.8,0.1)
+font = ExtResource("font")
+text = "071 พญามังกรทองแห่งป่าลึก"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2

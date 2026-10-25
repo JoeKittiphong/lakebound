@@ -34,9 +34,11 @@ func fight_zones(weight: float, stamina: float, activity: float) -> Vector2:
  var surge := clampf((activity - 0.42) / 0.93, 0.0, 1.0)
  var red := clampf(lerpf(0.90, 0.54, fresh) - fresh * (surge * 0.06 + fight_pressure(weight) * 0.16), 0.42, 0.90)
  var difficulty := clampf(fight_pressure(weight) / 0.24, 0.0, 1.0)
- var width := lerpf(0.14, 0.055, difficulty) + (1.0 - fresh) * 0.025
+ var width := (lerpf(0.14, 0.055, difficulty) + (1.0 - fresh) * 0.025) * 2.0
  if activity >= 1.5:
-  red = lerpf(0.30, 0.20, clampf((activity - 1.5) / 1.2, 0.0, 1.0))
+  # Leave room for a mobile-sized yellow band even during a hard surge.
+  red = lerpf(0.40, 0.34, clampf((activity - 1.5) / 1.2, 0.0, 1.0))
   width *= 0.7
+ width = maxf(0.18, width)
  var yellow := maxf(0.16, red - width)
  return Vector2(yellow, red)

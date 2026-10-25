@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionDefinition" format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+id = "forest_stream_diversity"
+tier = 0
+title = "สำรวจสายพันธุ์ท้องถิ่น"
+description = "ตกปลาท้องถิ่นต่างชนิดกัน 3 ชนิด"
+metric = "species"
+target = 3.0
+map_id = "forest_stream"
+species_id = ""
+depth_range = Vector2(0,100)
+reward_coins = 100

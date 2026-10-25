@@ -1,5 +1,25 @@
 # Lakebound internal release preparation
 
+## Current status — 25 October 2026, 0.1.12
+
+Original-key bundle 13 (0.1.12) accepted and submitted as closed Alpha release 12. Publishing overview confirms Changes in review; managed publishing enabled. AAB 94.51 MB (+54.23% vs 0.1.11), Play new-install estimate 68 MB (+32.8 MB). Regions integration passed 854 checks; exact packed startup reached menu and gameplay. No physical Android test. Shutdown resource leaks remain. See release-0.1.12.md and exports/play-store/0.1.12-submitted.png.
+
+## Current status — 24 October 2026, 0.1.11
+
+Original-key bundle 12 (0.1.11) accepted and submitted as closed Alpha release 11. Publishing overview confirms Changes in review; managed publishing enabled. AAB 61.28 MB; estimated Play new-install download 35.2 MB. Missions 76/economy 40 checks passed; exact packed startup reached gameplay on desktop. No physical Android test; 11 shutdown ObjectDB leaks remain. See release-0.1.11.md and exports/play-store/0.1.11-submitted.png.
+
+## Current status — 24 October 2026, 0.1.10
+
+Exported original-key bundle 11 (0.1.10), verified loading → menu → gameplay from exact extracted AAB assets on desktop, and submitted Alpha release 10 to Google review. AAB 61.28 MB, estimated Play download 35.2 MB. No physical Android test. See release-0.1.10.md and exports/play-store/0.1.10-submitted.png.
+
+## Current status — 24 October 2026, 0.1.9
+
+Bundle 10 (0.1.9), original upload certificate, accepted and submitted as Alpha release 9 with two new actual gameplay screenshots. AAB 60.59 MB; Play estimated download 34.5 MB (6.29 MB smaller than prior). Managed publishing enabled. See release-0.1.9.md for verification limitations and exports/play-store/0.1.9-submitted.png.
+
+## Current status — 21 October 2026, 0.1.8
+
+Disabled all tackle purchase buttons temporarily. Exported signed bundle 9 (0.1.8), Google Play accepted it and Alpha release 8 was submitted for review. Economy suite: 40 checks, zero failures. Managed publishing remains enabled. See release-0.1.8.md and exports/play-store/0.1.8-submitted.png.
+
 ## Current status — 21 October 2026, 0.1.7
 
 Bundle 8 (0.1.7) exported with original upload certificate, accepted by Google Play and submitted as Alpha release 7. Includes the owner-requested one-time tester collection/tutorial reset. Managed publishing remains enabled. See release-0.1.7.md and exports/play-store/0.1.7-submitted.png.

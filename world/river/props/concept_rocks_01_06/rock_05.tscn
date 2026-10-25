@@ -1,0 +1,8 @@
+[gd_scene format=3]
+[ext_resource type="ArrayMesh" path="res://world/river/props/concept_rocks_01_06/rock_05_mesh.tres" id="mesh"]
+[ext_resource type="Shape3D" path="res://world/river/props/concept_rocks_01_06/rock_05_collision.tres" id="shape"]
+[node name="Rock_05" type="StaticBody3D"]
+[node name="Visual" type="MeshInstance3D" parent="."]
+mesh = ExtResource("mesh")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = ExtResource("shape")

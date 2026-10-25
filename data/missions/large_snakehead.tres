@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "large_snakehead"
+tier = 3
+title = "ช่อนใหญ่ประจำบ่อ"
+description = "จับปลาช่อนหนักอย่างน้อย 2.5 กก."
+metric = "count"
+target = 1.0
+reward_coins = 100
+species_id = "snakehead"
+minimum_weight = 2.5

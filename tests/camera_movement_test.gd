@@ -64,6 +64,19 @@ func run() -> void:
   var expected := Vector3.FORWARD.rotated(Vector3.UP, yaw)
   expect(flat_velocity.normalized().dot(expected) > 0.995 and is_equal_approx(flat_velocity.length(), player.move_speed), "held joystick follows pan at yaw %.0f without pitch reducing speed" % rad_to_deg(yaw))
  joystick.direction = Vector2.ZERO
+ # Turning the model must not change screen-relative travel, including while
+ # the camera yaw differs and while the fishing leg layer is active.
+ for in_fight in [false, true]:
+  player.set_fighting(in_fight)
+  for yaw in [0.0, PI * 0.5, -PI * 0.5]:
+   camera.rotation = Vector3(0, yaw, 0)
+   for direction in [Vector2.LEFT, Vector2.RIGHT, Vector2(-0.7, -0.7), Vector2.DOWN]:
+    joystick.direction = direction
+    await frames(45)
+    var desired := Vector3(direction.x, 0, direction.y).rotated(Vector3.UP, yaw).normalized()
+    var facing := -player.visual.global_basis.z
+    expect(facing.dot(desired) > 0.995, "model turns with joystick %s at camera yaw %.0f, fighting=%s" % [direction, rad_to_deg(yaw), in_fight])
+ joystick.direction = Vector2.ZERO
  player.input_enabled = false
  Input.action_press("move_forward")
  await frames()

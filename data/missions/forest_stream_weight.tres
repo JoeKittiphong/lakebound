@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionDefinition" format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+id = "forest_stream_weight"
+tier = 1
+title = "ผลผลิตแห่งลำธารป่าภูเขา"
+description = "สะสมน้ำหนักปลาที่ตกได้ในพื้นที่"
+metric = "weight"
+target = 9.0
+map_id = "forest_stream"
+species_id = ""
+depth_range = Vector2(0,100)
+reward_coins = 170

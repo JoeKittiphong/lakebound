@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://features/missions/mission_row.gd" id="script"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/panel.tres" id="panel"]
+
+[node name="MissionRow" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 190)
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("panel")
+script = ExtResource("script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 23
+text = "เริ่มคุ้นมือ"
+
+[node name="Badge" type="Label" parent="Content/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.91, 0.76, 1)
+text = "กำลังทำ"
+
+[node name="Description" type="Label" parent="Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "จับปลาใดก็ได้ 3 ตัวที่ไม่ซ้ำกัน"
+
+[node name="Progress" type="ProgressBar" parent="Content"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+max_value = 3.0
+show_percentage = false
+
+[node name="Footer" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Status" type="Label" parent="Content/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 / 3   ·   20 เหรียญ"
+
+[node name="Track" type="Button" parent="Content/Footer"]
+layout_mode = 2
+custom_minimum_size = Vector2(144, 48)
+text = "ติดตาม"
+
+[node name="Claim" type="Button" parent="Content/Footer"]
+layout_mode = 2
+custom_minimum_size = Vector2(152, 48)
+disabled = true
+text = "รับรางวัล"
+
+[connection signal="pressed" from="Content/Footer/Claim" to="." method="_on_claim"]
+[connection signal="pressed" from="Content/Footer/Track" to="." method="_on_track"]

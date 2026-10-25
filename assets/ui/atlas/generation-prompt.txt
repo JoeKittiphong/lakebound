@@ -1,0 +1,13 @@
+Mode: built-in image_gen, transparent_background=true, edit of first generated atlas.
+Selected output: exec-2b04257c-0e08-4bbf-a968-4230851393e7.png
+Runtime source: modern_flat.png (single PNG; other generation attempts are not in the project).
+
+Prompt:
+Repair this technical UI atlas for actual production use. Keep the 4x4 grid arrangement. Critical fixes: REMOVE ALL stray pixels, white speckles, distressed edges, glow, shadows, gradients and surface texture. Make EXACT flat uniform solid-color panels, razor clean vector-style outlines and pristine transparent background with NO debris whatsoever. This should look like exported Figma flat vector shapes, not a painting. Each of the 16 sprites must be contained within its own grid cell with clear empty transparent padding. Row1 dark navy rounded-square, slate rounded-square, mint rounded-square, disabled gray rounded-square. Row2 dark navy panel with thin slate outline, darker navy inset rounded-square, solid ivory CIRCLE, solid mint CIRCLE. Row3 ivory line book, question-circle, left arrow, fishing hook. Row4 ivory line earthworm, water droplet, fish with check, fish with release arrow. No bevels no shadows no shine no texture. Solid flat colors only. Transparent empty space between and inside icons, clean smooth antialiasing. Keep no text. Final square image.
+
+Integration:
+Godot imports the original 1254-square source to 512-square, lossless, mipmaps off.
+AtlasTexture regions are scaled from atlas_manifest.json. Nine-slice styles point
+directly at the shared PNG with region_rect to avoid nested-atlas clipping.
+Panels use the simple borderless generated surface. Thin bars use only the opaque
+centre. Thai text remains editable labels and buttons, never baked into the PNG.

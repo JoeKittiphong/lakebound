@@ -35,7 +35,8 @@ func run() -> void:
  controller._change_state(controller.State.FIGHT)
  # No simulation step: this fixture has no hooked fish.
  controller.set_physics_process(false)
- await process_frame
+ for frame in 25:
+  await physics_frame
  expect(is_equal_approx(player.move_speed, 7.25) and player.fighting, "session changes movement mode without overwriting Inspector speed")
  controller.reset_cast()
  expect(not player.fighting, "leaving fight restores walking mode")

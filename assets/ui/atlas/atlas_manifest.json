@@ -1,0 +1,108 @@
+{
+  "source": "modern_flat.png",
+  "size": [
+    1254,
+    1254
+  ],
+  "generator": "built-in image_gen",
+  "regions": {
+    "surface_normal": [
+      56,
+      67,
+      259,
+      253
+    ],
+    "surface_hover": [
+      348,
+      66,
+      264,
+      254
+    ],
+    "surface_accent": [
+      642,
+      67,
+      263,
+      253
+    ],
+    "surface_disabled": [
+      939,
+      66,
+      261,
+      254
+    ],
+    "surface_panel": [
+      55,
+      362,
+      263,
+      262
+    ],
+    "surface_inset": [
+      348,
+      362,
+      266,
+      261
+    ],
+    "circle_light": [
+      645,
+      369,
+      255,
+      256
+    ],
+    "circle_mint": [
+      938,
+      367,
+      261,
+      260
+    ],
+    "icon_book": [
+      61,
+      691,
+      251,
+      197
+    ],
+    "icon_help": [
+      359,
+      661,
+      242,
+      240
+    ],
+    "icon_back": [
+      671,
+      712,
+      221,
+      152
+    ],
+    "icon_hook": [
+      1009,
+      659,
+      159,
+      240
+    ],
+    "icon_worm": [
+      58,
+      992,
+      255,
+      171
+    ],
+    "icon_depth": [
+      390,
+      953,
+      174,
+      238
+    ],
+    "icon_keep": [
+      638,
+      953,
+      255,
+      220
+    ],
+    "icon_release": [
+      950,
+      950,
+      253,
+      224
+    ]
+  },
+  "notes": "Rects reviewed against generated alpha coverage; all regions share this one PNG. Near-zero alpha RGB fringes are transparent in engine; no raster crops.",
+  "import_size": 512
+}

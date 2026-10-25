@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
   $ReelAudio.stop()
  var ready_state: bool = state == controller.State.READY
  var line_visible: bool = state in [controller.State.WAITING, controller.State.BITE, controller.State.FIGHT, controller.State.CASTING]
- $AimMarker.visible = ready_state
+ $AimMarker.visible = ready_state and (not player is AnglerPlayer or player.can_fish())
  $Bobber.visible = state in [controller.State.WAITING, controller.State.BITE, controller.State.CASTING]
  $Ripple.visible = line_visible
  var target: Vector3 = controller.get_aim_position()

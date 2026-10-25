@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Texture2D" path="res://features/fishing/ui/fish_box.svg" id="icon"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/panel.tres" id="panel"]
+[node name="FishBox" type="PanelContainer"]
+custom_minimum_size = Vector2(240, 86)
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("panel")
+[node name="Row" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+[node name="Icon" type="TextureRect" parent="Row"]
+custom_minimum_size = Vector2(62, 60)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("icon")
+expand_mode = 1
+stretch_mode = 5
+[node name="Info" type="VBoxContainer" parent="Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+[node name="Count" type="Label" parent="Row/Info"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "กล่องปลา · 0 ตัว"
+[node name="Weight" type="Label" parent="Row/Info"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+text = "0.0 / 15.0 กก."
+[node name="Fill" type="ProgressBar" parent="Row/Info"]
+custom_minimum_size = Vector2(140, 10)
+layout_mode = 2
+mouse_filter = 2
+show_percentage = false
+[node name="State" type="Label" parent="Row/Info"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 15
+text = "ยังว่าง · เหลือ 15.0 กก."

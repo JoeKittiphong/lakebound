@@ -19,6 +19,9 @@ func expect(condition: bool, message: String) -> void:
 func session(seed_value: int = 4207) -> Node:
  var scene := Gameplay.instantiate()
  root.add_child(scene)
+ # Establish floor contact before freezing physics for deterministic simulation.
+ for frame in 12:
+  await physics_frame
  scene.set_process(false)
  scene.get_node("PondEcosystem").set_physics_process(false)
  # Keep the original bait/depth regression deterministic; the full catalog is
@@ -39,7 +42,9 @@ func wait_for_bite(scene: Node, bait: StringName, depth: float) -> bool:
  var pond := scene.get_node("PondEcosystem")
  fishing.selected_bait = bait
  fishing.selected_depth = depth
- fishing.cast()
+ var accepted: bool = fishing.cast()
+ if not accepted:
+  print("CAST BLOCKED: ", fishing.feedback, " floor=", scene.get_node("Player").is_on_floor(), " position=", scene.get_node("Player").position)
  for tick in 600:
   pond.step(0.15)
   fishing.advance(0.15, scene.get_node("Player").position)
@@ -67,7 +72,7 @@ func fight_with_feedback(scene: Node, delta: float = 1.0 / 60.0) -> bool:
 func run_tests() -> void:
  root.get_node("FishCollection").recording_enabled = false
  Gameplay = load("res://tests/legacy_gameplay.tscn")
- var scene := session()
+ var scene := await session()
  var pond := scene.get_node("PondEcosystem")
  expect(pond.fish.size() == 30, "population exists before casting")
  for point in [Vector3(0, 1, -5), Vector3(1, 1, 0), Vector3(-1, 1, -8), Vector3(200, 1, -200), Vector3(10, 1, 20)]:
@@ -87,7 +92,7 @@ func run_tests() -> void:
 
  var cases := [[&"dough", 1.5, &"tilapia"], [&"lure", 1.5, &"snakehead"], [&"worm", 4.5, &"catfish"]]
  for index in cases.size():
-  scene = session(4207 + index)
+  scene = await session(4207 + index)
   pond = scene.get_node("PondEcosystem")
   var fishing := scene.get_node("FishingController")
   var bite := wait_for_bite(scene, cases[index][0], cases[index][1])
@@ -118,7 +123,7 @@ func run_tests() -> void:
     expect(pond.fish.size() == 30 and not pond.fish.has(record), "timed population replacement creates a new individual")
   scene.free()
 
- scene = session()
+ scene = await session()
  var fishing := scene.get_node("FishingController")
  expect(wait_for_bite(scene, &"dough", 1.5), "bite-window test setup")
  fishing.advance(6.0, scene.get_node("Player").position)
@@ -126,11 +131,15 @@ func run_tests() -> void:
  scene.free()
 
  for release_line in [false, true]:
-  scene = session()
+  scene = await session()
   fishing = scene.get_node("FishingController")
   wait_for_bite(scene, &"lure", 1.5)
   fishing.strike()
   fishing.drag_strength = 1.0
+  # A break now requires force beyond the line's actual kgf rating. Use an
+  # undersized line here; merely holding red on adequate line is not failure.
+  if not release_line:
+   fishing.fight.line_strength = 0.4
   for tick in 3600:
    fishing.rod_input = Vector2(0, -1 if release_line else 1)
    fishing.advance(1.0 / 60.0, scene.get_node("Player").position)
@@ -140,7 +149,7 @@ func run_tests() -> void:
   expect(fishing.active_fish == null, "failed fight releases the reserved fish")
   scene.free()
 
- scene = session()
+ scene = await session()
  fishing = scene.get_node("FishingController")
  fishing.cast()
  fishing.cancel()
@@ -152,7 +161,7 @@ func run_tests() -> void:
  # Vary population seed and frame rate; do not tune only to one fixed fish.
  for seed_value in [7, 19, 441]:
   for index in cases.size():
-   scene = session(seed_value)
+   scene = await session(seed_value)
    fishing = scene.get_node("FishingController")
    var did_bite := wait_for_bite(scene, cases[index][0], cases[index][1])
    expect(did_bite, "species approach under population seed %d, case %d" % [seed_value, index])

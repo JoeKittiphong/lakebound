@@ -3,7 +3,7 @@ extends Resource
 
 @export_range(0.01, 10.0) var cast_duration: float = 0.6
 @export var reel_speed: float = 2.6
-@export_range(0.5, 4.0) var yellow_retrieve_multiplier: float = 1.8
+@export_range(0.5, 6.0) var yellow_retrieve_multiplier: float = 3.6
 @export var release_speed: float = 3.6
 @export var spool_capacity: float = 65.0
 @export var break_grace: float = 1.4

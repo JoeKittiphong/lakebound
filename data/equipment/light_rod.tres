@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="TackleItem" load_steps=3 format=3]
 [ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/equipment/rods/light_rod.tscn" id="model"]
 [resource]
 script = ExtResource("1")
 id = &"light_rod"
@@ -7,3 +8,4 @@ display_name = "คันเบา · คุมไว"
 kind = "rod"
 price = 80
 strength = 5.0
+model_scene = ExtResource("model")

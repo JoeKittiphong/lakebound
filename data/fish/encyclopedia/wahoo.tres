@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/wahoo.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/wahoo.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"wahoo"
+display_name = "ปลาวาฮู (Wahoo)"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 1.039
+preview_tilt_degrees = 12.0
+min_weight = 5.0
+max_weight = 30.0
+preferred_depth = Vector2(1.0,10.0)
+bait_preferences = PackedStringArray("lure")
+swim_speed = 2.2
+pull_strength = 1.55
+struggle_frequency = 2.5
+detection_radius = 10.0
+tension_pressure = 0.1203

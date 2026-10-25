@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RegionDefinition" format=3]
+
+[ext_resource type="Script" path="res://world/regions/region_definition.gd" id="1_op07x"]
+
+[resource]
+script = ExtResource("1_op07x")
+basin_radii = Vector2(64, 54)
+maximum_depth = 2.6
+dock_origin = Vector2(-63.448586, 20)
+islands = Array[Vector4]([])
+walking_bounds = Rect2(-90, -88, 180, 176)
+water_bounds = Rect2(-88, -86, 176, 172)

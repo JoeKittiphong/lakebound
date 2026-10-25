@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://actors/boat/fishing_boat.tscn" id="boat"]
+
+[ext_resource type="Script" path="res://features/economy/commerce_gateway.gd" id="commerce"]
+
+[ext_resource type="Script" path="res://features/gameplay/gameplay.gd" id="script"]
+
+[ext_resource type="PackedScene" path="res://actors/player/player.tscn" id="player"]
+
+[ext_resource type="PackedScene" path="res://features/fishing/fishing_hud.tscn" id="fishing_hud"]
+[ext_resource type="Script" path="res://world/pond/pond_ecosystem.gd" id="ecosystem"]
+[ext_resource type="Script" path="res://features/fishing/fishing_controller.gd" id="controller"]
+[ext_resource type="PackedScene" path="res://world/regions/forest_stream/world.tscn" id="pond_scene"]
+[ext_resource type="Resource" path="res://world/regions/forest_stream/definition.tres" id="river_definition"]
+[ext_resource type="PackedScene" path="res://features/gameplay/camera_rig.tscn" id="camera_scene"]
+[ext_resource type="PackedScene" path="res://features/fishing/fishing_effects.tscn" id="effects_scene"]
+[ext_resource type="PackedScene" path="res://world/pond/water_interactions.tscn" id="water_interactions"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/blue_mahseer.tres" id="region_fish_30"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/red_mahseer.tres" id="region_fish_31"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/thai_mahseer.tres" id="region_fish_32"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/hampala_barb.tres" id="region_fish_33"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/burmese_trout.tres" id="region_fish_34"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/giant_danio.tres" id="region_fish_35"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/fire_eel.tres" id="region_fish_36"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/tire_track_eel.tres" id="region_fish_37"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/freshwater_garfish.tres" id="region_fish_38"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/dwarf_snakehead.tres" id="region_fish_39"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/mountain_barb.tres" id="region_fish_40"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/boeseman_croaker.tres" id="region_fish_41"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/goonch.tres" id="region_fish_42"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/golden_tor.tres" id="region_fish_43"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/asian_arowana.tres" id="region_fish_58"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/silver_arowana.tres" id="region_fish_59"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/alligator_gar.tres" id="region_fish_60"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/emperor_snakehead.tres" id="region_fish_61"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/cobra_snakehead.tres" id="region_fish_62"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/wild_betta.tres" id="region_fish_63"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/torrent_catfish.tres" id="region_fish_64"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/giant_luciosoma.tres" id="region_fish_65"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/black_swamp_spiny_eel.tres" id="region_fish_66"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/marbled_sleeper.tres" id="region_fish_67"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/pearl_gourami.tres" id="region_fish_68"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/siamese_tigerfish.tres" id="region_fish_69"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/ghost_glass_catfish.tres" id="region_fish_70"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/mythic_golden_dragon.tres" id="region_fish_71"]
+
+[node name="Gameplay" type="Node3D"]
+script = ExtResource("script")
+economy_enabled = true
+map_id = "forest_stream"
+maximum_fishing_depth = 3.7
+
+[node name="CommerceGateway" type="Node" parent="."]
+script = ExtResource("commerce")
+
+[node name="World" parent="." instance=ExtResource("pond_scene")]
+
+[node name="FishingBoat" parent="." node_paths=PackedStringArray("pond") instance=ExtResource("boat")]
+position = Vector3(-1.377013,-0.180000,23.000000)
+rotation = Vector3(0, -1.5707963, 0)
+pond = NodePath("../World")
+
+[node name="Player" parent="." node_paths=PackedStringArray("pond", "movement_reference") instance=ExtResource("player")]
+position = Vector3(-13.877013,0.670000,20.000000)
+pond = NodePath("../World")
+movement_reference = NodePath("../CameraRig")
+
+[node name="CameraRig" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera_scene")]
+position = Vector3(-13.877013,0.670000,20.000000)
+rotation_degrees = Vector3(0, -90, 0)
+target = NodePath("../Player")
+
+[node name="PondEcosystem" type="Node" parent="."]
+script = ExtResource("ecosystem")
+definition = ExtResource("river_definition")
+population_limit = 84
+species = Array[Resource]([ExtResource("region_fish_30"), ExtResource("region_fish_31"), ExtResource("region_fish_32"), ExtResource("region_fish_33"), ExtResource("region_fish_34"), ExtResource("region_fish_35"), ExtResource("region_fish_36"), ExtResource("region_fish_37"), ExtResource("region_fish_38"), ExtResource("region_fish_39"), ExtResource("region_fish_40"), ExtResource("region_fish_41"), ExtResource("region_fish_42"), ExtResource("region_fish_43"), ExtResource("region_fish_58"), ExtResource("region_fish_59"), ExtResource("region_fish_60"), ExtResource("region_fish_61"), ExtResource("region_fish_62"), ExtResource("region_fish_63"), ExtResource("region_fish_64"), ExtResource("region_fish_65"), ExtResource("region_fish_66"), ExtResource("region_fish_67"), ExtResource("region_fish_68"), ExtResource("region_fish_69"), ExtResource("region_fish_70"), ExtResource("region_fish_71")])
+
+[node name="FishingController" type="Node" parent="." node_paths=PackedStringArray("ecosystem", "player")]
+script = ExtResource("controller")
+ecosystem = NodePath("../PondEcosystem")
+player = NodePath("../Player")
+
+[node name="FishingEffects" parent="." node_paths=PackedStringArray("controller", "player", "ecosystem", "rod_tip") instance=ExtResource("effects_scene")]
+controller = NodePath("../FishingController")
+player = NodePath("../Player")
+ecosystem = NodePath("../PondEcosystem")
+rod_tip = NodePath("../Player/Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5/Tip")
+
+[node name="WaterInteractions" parent="." node_paths=PackedStringArray("player", "pond", "ecosystem", "water_surface") instance=ExtResource("water_interactions")]
+player = NodePath("../Player")
+pond = NodePath("../World")
+ecosystem = NodePath("../PondEcosystem")
+water_surface = NodePath("../World/RiverWater")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="FishingHUD" parent="HUD" instance=ExtResource("fishing_hud")]

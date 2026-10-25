@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MissionDefinition" format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+id = "mangrove_estuary_depth"
+tier = 2
+title = "กะพงใต้เงาโกงกาง"
+description = "ใช้เหยื่อปลอมตกกะพงขาวในปากอ่าว"
+metric = "count"
+target = 2.0
+map_id = "mangrove_estuary"
+species_id = "barramundi"
+depth_range = Vector2(0.5,6.0)
+reward_coins = 220
+bait_kind = "lure"

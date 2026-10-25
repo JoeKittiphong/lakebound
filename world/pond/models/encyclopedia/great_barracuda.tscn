@@ -1,0 +1,7 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://world/pond/models/fish_model.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/glb/great_barracuda.glb" id="model"]
+[node name="FishModel" type="Node3D"]
+script = ExtResource("script")
+metadata/encyclopedia_number = 96
+[node name="Model" parent="." instance=ExtResource("model")]

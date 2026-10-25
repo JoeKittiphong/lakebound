@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://actors/player/angler_model.gd" id="script"]
+[ext_resource type="PackedScene" path="res://actors/player/models/fisherman_rigged.glb" id="model"]
+
+[sub_resource type="AnimationNodeAnimation" id="Body"]
+animation = &"Fishing_Reel"
+[sub_resource type="AnimationNodeAnimation" id="Legs"]
+animation = &"Walk"
+[sub_resource type="AnimationNodeBlend2" id="Mix"]
+filter_enabled = true
+[sub_resource type="AnimationNodeTimeScale" id="LegSpeed"]
+[sub_resource type="AnimationNodeTimeScale" id="BodySpeed"]
+[sub_resource type="AnimationNodeBlendTree" id="Tree"]
+resource_local_to_scene = true
+nodes/Body/node = SubResource("Body")
+nodes/Body/position = Vector2(0, 0)
+nodes/Legs/node = SubResource("Legs")
+nodes/Legs/position = Vector2(0, 180)
+nodes/Mix/node = SubResource("Mix")
+nodes/Mix/position = Vector2(240, 0)
+nodes/LegSpeed/node = SubResource("LegSpeed")
+nodes/LegSpeed/position = Vector2(200, 180)
+nodes/BodySpeed/node = SubResource("BodySpeed")
+nodes/BodySpeed/position = Vector2(200, -120)
+node_connections = [&"output", 0, &"Mix", &"Mix", 0, &"BodySpeed", &"BodySpeed", 0, &"Body", &"Mix", 1, &"LegSpeed", &"LegSpeed", 0, &"Legs"]
+
+[node name="AnglerModel" type="Node3D"]
+scale = Vector3(0.7729, 0.7729, 0.7729)
+script = ExtResource("script")
+
+[node name="Asset" parent="." instance=ExtResource("model")]
+position = Vector3(0, 0.025895, 0)
+rotation = Vector3(0, 3.14159265, 0)
+
+[node name="RodHand" type="BoneAttachment3D" parent="."]
+bone_name = "hand_r"
+use_external_skeleton = true
+external_skeleton = NodePath("../Asset/Scene/M2M_TPose_Rig/Skeleton3D")
+
+[node name="Grip" type="Marker3D" parent="RodHand"]
+position = Vector3(0, 5, 0)
+scale = Vector3(100, 100, 100)
+rotation_degrees = Vector3(-24.6208, -1.484586, 6.795397)
+
+[node name="FishingLocomotion" type="AnimationTree" parent="."]
+tree_root = SubResource("Tree")
+active = false

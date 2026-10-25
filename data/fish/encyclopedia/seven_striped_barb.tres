@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/seven_striped_barb.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/seven_striped_barb.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"seven_striped_barb"
+display_name = "ปลายี่สกไทย"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.913
+preview_tilt_degrees = 12.0
+min_weight = 3.0
+max_weight = 20.0
+preferred_depth = Vector2(2.5,5.5)
+bait_preferences = PackedStringArray("worm","dough")
+swim_speed = 1.3
+pull_strength = 1.2
+struggle_frequency = 1.6
+detection_radius = 10.0
+tension_pressure = 0.1010

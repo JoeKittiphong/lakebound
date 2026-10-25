@@ -4,8 +4,11 @@ extends Node3D
 signal view_changed(yaw: float)
 @export var look_sensitivity: float = 0.003
 @export_range(-15.0, 0.0) var min_pitch: float = -10.0
-@export_range(0.0, 55.0) var max_pitch: float = 40.0
+@export_range(0.0, 20.0) var max_pitch: float = 15.0
 @export var follow_speed: float = 5.0
+var orbiting := false
+var _return_rotation := Vector3.ZERO
+var _return_camera_position := Vector3.ZERO
 var look_finger := -1
 var look_mouse := false
 var touch_controls: Array[TouchJoystick] = []
@@ -17,15 +20,38 @@ var enabled := true:
    reset_input()
 
 func _process(delta: float) -> void:
+ if orbiting and enabled:
+  $Camera3D.position = $Camera3D.position.lerp(_return_camera_position * 0.65, 1.0 - exp(-6.0 * delta))
+ rotation.x = clampf(rotation.x, deg_to_rad(min_pitch), deg_to_rad(max_pitch))
  if is_instance_valid(target):
   global_position = global_position.lerp(target.global_position, 1.0 - exp(-follow_speed * delta))
 
 func reset_input() -> void:
+ set_orbiting(false)
  look_finger = -1
  look_mouse = false
 
+func set_orbiting(held: bool) -> void:
+ if held == orbiting or (held and not enabled):
+  return
+ if held:
+  _return_rotation = rotation
+  _return_camera_position = $Camera3D.position
+  look_finger = -1
+  look_mouse = false
+  orbiting = true
+ else:
+  rotation = _return_rotation
+  $Camera3D.position = _return_camera_position
+  orbiting = false
+  view_changed.emit(rotation.y)
+
 func bind_touch_controls(movement: TouchJoystick, rod: TouchJoystick) -> void:
  touch_controls = [movement, rod]
+
+func drag_orbit(horizontal_motion: float) -> void:
+ if orbiting and enabled:
+  rotation.y = wrapf(rotation.y - horizontal_motion * look_sensitivity, -PI, PI)
 
 func _is_touch_mouse_duplicate(event: InputEvent) -> bool:
  if not (event is InputEventMouseButton or event is InputEventMouseMotion):
@@ -64,6 +90,8 @@ func _input(event: InputEvent) -> void:
   get_viewport().set_input_as_handled()
 
 func rotate_view(motion: Vector2) -> void:
+ if orbiting:
+  return
  rotation.y = wrapf(rotation.y - motion.x * look_sensitivity, -PI, PI)
  rotation.x = clampf(rotation.x - motion.y * look_sensitivity, deg_to_rad(min_pitch), deg_to_rad(max_pitch))
  view_changed.emit(rotation.y)

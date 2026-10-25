@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/pearl_gourami.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/pearl_gourami.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"pearl_gourami"
+display_name = "ปลากระดี่มุก"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.238
+preview_tilt_degrees = 12.0
+min_weight = 0.08
+max_weight = 0.3
+preferred_depth = Vector2(0.2,1.0)
+bait_preferences = PackedStringArray("worm","dough")
+swim_speed = 0.6
+pull_strength = 0.32
+struggle_frequency = 1.1
+detection_radius = 10.0
+tension_pressure = 0.0526

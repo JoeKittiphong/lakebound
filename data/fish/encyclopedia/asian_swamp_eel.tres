@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/asian_swamp_eel.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/asian_swamp_eel.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"asian_swamp_eel"
+display_name = "ปลาไหลนา"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.422
+preview_tilt_degrees = 12.0
+min_weight = 0.3
+max_weight = 1.8
+preferred_depth = Vector2(1.0,2.5)
+bait_preferences = PackedStringArray("worm","lure")
+swim_speed = 0.5
+pull_strength = 0.9
+struggle_frequency = 2.4
+detection_radius = 10.0
+tension_pressure = 0.0845

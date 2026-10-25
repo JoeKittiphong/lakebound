@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MissionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "natural_pair"
+tier = 1
+title = "เหยื่อธรรมชาติสองแบบ"
+description = "จับปลาด้วยเหยื่อธรรมชาติ 2 แบบ โดยใช้ปลาคนละตัว"
+metric = "baits"
+target = 2.0
+reward_coins = 40
+bait_kind = "bait"

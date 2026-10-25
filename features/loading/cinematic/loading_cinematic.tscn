@@ -1,0 +1,1079 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://world/river/props/wooden_jetty.tscn" id="jetty"]
+
+[ext_resource type="Script" path="res://features/loading/cinematic/loading_cinematic.gd" id="script"]
+
+[ext_resource type="PackedScene" path="res://actors/player/angler_model.tscn" id="angler"]
+
+[ext_resource type="PackedScene" path="res://features/loading/cinematic/pine.tscn" id="pine"]
+
+[ext_resource type="PackedScene" path="res://world/river/props/v02_cattail_clump.tscn" id="reeds"]
+
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_01.tscn" id="rock1"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_02.tscn" id="rock2"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_03.tscn" id="rock3"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_04.tscn" id="rock4"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_05.tscn" id="rock5"]
+[ext_resource type="PackedScene" path="res://world/river/props/concept_rocks_01_06/rock_06.tscn" id="rock6"]
+[ext_resource type="PackedScene" path="res://world/river/props/rock_clusters_20_21/rock_20.tscn" id="rock20"]
+[ext_resource type="PackedScene" path="res://world/river/props/rock_clusters_20_21/rock_21.tscn" id="rock21"]
+
+
+[ext_resource type="Shader" path="res://features/loading/cinematic/lake_water.gdshader" id="water_shader"]
+
+[ext_resource type="ArrayMesh" path="res://features/loading/cinematic/mountain_ridge.obj" id="ridge"]
+
+[ext_resource type="AudioStream" path="res://features/loading/cinematic/water_ambience.wav" id="water_ambience"]
+
+[ext_resource type="AudioStream" path="res://features/loading/cinematic/wood_step.wav" id="wood_step"]
+
+[ext_resource type="AudioStream" path="res://features/loading/cinematic/cast_swish.wav" id="cast_swish"]
+
+[ext_resource type="AudioStream" path="res://features/loading/cinematic/small_splash.wav" id="small_splash"]
+
+[sub_resource type="ProceduralSkyMaterial" id="sky_material"]
+sky_top_color = Color(0.31, 0.64, 0.86, 1)
+sky_horizon_color = Color(0.76, 0.87, 0.89, 1)
+ground_bottom_color = Color(0.19, 0.34, 0.36, 1)
+ground_horizon_color = Color(0.76, 0.87, 0.89, 1)
+sun_angle_max = 8.0
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_material")
+
+[sub_resource type="Environment" id="environment"]
+background_mode = 2
+sky = SubResource("sky")
+ambient_light_source = 3
+ambient_light_color = Color(0.77, 0.86, 0.9, 1)
+ambient_light_energy = 0.65
+reflected_light_source = 2
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.65, 0.81, 0.86, 1)
+fog_density = 0.0025
+fog_sky_affect = 0.1
+
+[sub_resource type="StandardMaterial3D" id="wood"]
+albedo_color = Color(0.52, 0.39, 0.24, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="wood_light"]
+albedo_color = Color(0.6, 0.47, 0.3, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="bark"]
+albedo_color = Color(0.34, 0.26, 0.17, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="grass"]
+albedo_color = Color(0.43, 0.53, 0.32, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="shore"]
+albedo_color = Color(0.46, 0.45, 0.31, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mountain"]
+albedo_color = Color(0.43, 0.58, 0.64, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mountain_far"]
+albedo_color = Color(0.57, 0.69, 0.75, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="snow"]
+albedo_color = Color(0.84, 0.9, 0.92, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="white"]
+albedo_color = Color(0.9, 0.96, 0.95, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="red"]
+albedo_color = Color(0.92, 0.37, 0.2, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="box"]
+albedo_color = Color(0.23, 0.38, 0.33, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="line"]
+shading_mode = 0
+albedo_color = Color(0.88, 0.95, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="ring_material"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.74, 0.92, 0.93, 0.42)
+
+[sub_resource type="ShaderMaterial" id="water"]
+shader = ExtResource("water_shader")
+
+[sub_resource type="PlaneMesh" id="lake"]
+material = SubResource("water")
+size = Vector2(260, 260)
+subdivide_width = 80
+subdivide_depth = 80
+
+[sub_resource type="SphereMesh" id="island"]
+material = SubResource("grass")
+radius = 1.0
+height = 2.0
+radial_segments = 14
+rings = 5
+
+[sub_resource type="SphereMesh" id="bank"]
+material = SubResource("shore")
+radius = 1.0
+height = 2.0
+radial_segments = 14
+rings = 5
+
+[sub_resource type="CylinderMesh" id="peak"]
+material = SubResource("mountain")
+top_radius = 0.0
+bottom_radius = 1.0
+height = 1.0
+radial_segments = 7
+
+[sub_resource type="CylinderMesh" id="far_peak"]
+material = SubResource("mountain_far")
+top_radius = 0.0
+bottom_radius = 1.0
+height = 1.0
+radial_segments = 7
+
+[sub_resource type="CylinderMesh" id="snowcap"]
+material = SubResource("snow")
+top_radius = 0.0
+bottom_radius = 1.0
+height = 1.0
+radial_segments = 7
+
+[sub_resource type="BoxMesh" id="plank"]
+material = SubResource("wood")
+size = Vector3(2.7, 0.16, 0.36)
+
+[sub_resource type="BoxMesh" id="plank_light"]
+material = SubResource("wood_light")
+size = Vector3(2.7, 0.16, 0.36)
+
+[sub_resource type="BoxMesh" id="beam"]
+material = SubResource("bark")
+size = Vector3(0.18, 0.24, 9.2)
+
+[sub_resource type="CylinderMesh" id="post"]
+material = SubResource("bark")
+top_radius = 0.12
+bottom_radius = 0.16
+height = 1.7
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="rope"]
+material = SubResource("wood_light")
+top_radius = 0.135
+bottom_radius = 0.135
+height = 0.05
+radial_segments = 10
+
+[sub_resource type="BoxMesh" id="tackle_box"]
+material = SubResource("box")
+size = Vector3(0.58, 0.34, 0.38)
+
+[sub_resource type="BoxMesh" id="tackle_lid"]
+material = SubResource("wood_light")
+size = Vector3(0.62, 0.07, 0.42)
+
+[sub_resource type="SphereMesh" id="bobber_mesh"]
+material = SubResource("red")
+radius = 0.065
+height = 0.18
+radial_segments = 12
+rings = 6
+
+[sub_resource type="CylinderMesh" id="bobber_stem"]
+material = SubResource("white")
+top_radius = 0.013
+bottom_radius = 0.013
+height = 0.23
+radial_segments = 6
+
+[sub_resource type="TorusMesh" id="ring"]
+material = SubResource("ring_material")
+inner_radius = 0.48
+outer_radius = 0.50
+rings = 32
+ring_segments = 5
+
+[sub_resource type="SphereMesh" id="drop"]
+material = SubResource("white")
+radius = 0.018
+height = 0.07
+radial_segments = 5
+rings = 3
+
+[sub_resource type="ParticleProcessMaterial" id="splash_material"]
+direction = Vector3(0, 1, 0)
+spread = 45.0
+initial_velocity_min = 0.8
+initial_velocity_max = 1.7
+gravity = Vector3(0, -4.0, 0)
+scale_min = 0.6
+scale_max = 1.3
+
+[sub_resource type="Animation" id="arrival"]
+resource_name = "arrival"
+length = 7.8
+loop_mode = 0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ActorMotion:position")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.8, 5.0, 7.8), "transitions": PackedFloat32Array(1, 1, 1, 1), "update": 0, "values": [Vector3(-2.00000, 0.90000, 5.00000), Vector3(-2.00000, 0.90000, 5.00000), Vector3(-2.00000, 0.90000, 0.20000), Vector3(-2.00000, 0.90000, 0.20000)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0, 7.8), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [Vector3(6.50000, 4.40000, 9.50000), Vector3(4.20000, 3.40000, 6.60000)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Camera3D:rotation")
+tracks/2/interp = 1
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0, 7.8), "transitions": PackedFloat32Array(1, 1), "update": 0, "values": [Vector3(-0.19278, 0.60323, 0.00000), Vector3(-0.17149, 0.58364, 0.00000)]}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0.8, 5.3, 5.72, 6.57, 6.85), "transitions": PackedFloat32Array(1, 1, 1, 1, 1), "update": 0, "values": [{"method": &"begin_walk", "args": []}, {"method": &"begin_cast", "args": []}, {"method": &"release_line", "args": []}, {"method": &"land_bobber", "args": []}, {"method": &"begin_wait", "args": []}]}
+
+[sub_resource type="Animation" id="waiting"]
+resource_name = "waiting"
+length = 4.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("ActorMotion:rotation")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0, 1.2, 2.4, 3.6, 4.8), "transitions": PackedFloat32Array(1, 1, 1, 1, 1), "update": 0, "values": [Vector3(0.00000, 0.00000, 0.00000), Vector3(0.00400, 0.00800, 0.00000), Vector3(0.00000, 0.00000, 0.00000), Vector3(-0.00400, -0.00800, 0.00000), Vector3(0.00000, 0.00000, 0.00000)]}
+
+[sub_resource type="AnimationLibrary" id="animations"]
+_data = {&"arrival": SubResource("arrival"), &"waiting": SubResource("waiting")}
+
+[node name="LoadingCinematic" type="Node3D"]
+script = ExtResource("script")
+
+[node name="WorldEnvironment" parent="." type="WorldEnvironment"]
+environment = SubResource("environment")
+
+[node name="Sun" parent="." type="DirectionalLight3D"]
+rotation_degrees = Vector3(-42, -32, 0)
+light_color = Color(1, 0.96, 0.85, 1)
+light_energy = 1.25
+shadow_enabled = true
+directional_shadow_max_distance = 55.0
+
+[node name="Camera3D" parent="." type="Camera3D"]
+position = Vector3(6.50000, 4.40000, 9.50000)
+rotation = Vector3(-0.19278, 0.60323, 0.00000)
+current = true
+fov = 45.0
+far = 320.0
+
+[node name="Scenery" parent="." type="Node3D"]
+
+
+[node name="Lake" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(0.00000, 0.00000, -30.00000)
+scale = Vector3(1.00000, 1.00000, 1.00000)
+mesh = SubResource("lake")
+
+
+[node name="NearShore" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(-4.00000, -1.60000, 12.00000)
+scale = Vector3(20.00000, 2.40000, 8.00000)
+mesh = SubResource("bank")
+
+
+[node name="NearGrass" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(-6.00000, -1.40000, 13.00000)
+scale = Vector3(20.00000, 2.40000, 8.00000)
+mesh = SubResource("island")
+
+
+[node name="LeftBank" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(-27.00000, -1.30000, -13.00000)
+scale = Vector3(14.00000, 2.50000, 26.00000)
+mesh = SubResource("bank")
+
+
+[node name="LeftForestFloor" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(-28.00000, -0.90000, -14.00000)
+scale = Vector3(13.00000, 2.50000, 26.00000)
+mesh = SubResource("island")
+
+
+[node name="RightIsland" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(33.00000, -1.30000, -33.00000)
+scale = Vector3(19.00000, 3.00000, 16.00000)
+mesh = SubResource("island")
+
+
+[node name="FarBank" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(-5.00000, -2.00000, -66.00000)
+scale = Vector3(90.00000, 5.30000, 16.00000)
+mesh = SubResource("island")
+
+
+[node name="MountainRidge0" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(-60.00000, -1.00000, -130.00000)
+scale = Vector3(55.00000, 35.00000, 26.00000)
+mesh = ExtResource("ridge")
+material_override = SubResource("mountain_far")
+
+[node name="MountainRidge1" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(28.00000, -1.00000, -139.00000)
+scale = Vector3(70.00000, 48.00000, 32.00000)
+mesh = ExtResource("ridge")
+material_override = SubResource("mountain_far")
+
+[node name="MountainRidge2" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(91.00000, -1.00000, -130.00000)
+scale = Vector3(60.00000, 38.00000, 26.00000)
+mesh = ExtResource("ridge")
+material_override = SubResource("mountain_far")
+
+[node name="MountainRidge3" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(-20.00000, -1.00000, -89.00000)
+scale = Vector3(48.00000, 18.00000, 18.00000)
+mesh = ExtResource("ridge")
+material_override = SubResource("mountain")
+
+[node name="MountainRidge4" parent="Scenery" type="MeshInstance3D"]
+position = Vector3(60.00000, -1.00000, -93.00000)
+scale = Vector3(52.00000, 24.00000, 20.00000)
+mesh = ExtResource("ridge")
+material_override = SubResource("mountain")
+
+[node name="FarPine00" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-69.24781, 0.40000, -60.58362)
+scale = Vector3(1.30668, 1.30668, 1.30668)
+rotation_degrees = Vector3(0, 123.7, 0)
+
+[node name="FarPine01" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-66.67099, 0.40000, -59.66075)
+scale = Vector3(1.17613, 1.17613, 1.17613)
+rotation_degrees = Vector3(0, 303.4, 0)
+
+[node name="FarPine02" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-65.79612, 0.40000, -58.14649)
+scale = Vector3(1.47260, 1.47260, 1.47260)
+rotation_degrees = Vector3(0, 245.2, 0)
+
+[node name="FarPine03" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-63.22348, 0.40000, -62.11641)
+scale = Vector3(1.21916, 1.21916, 1.21916)
+rotation_degrees = Vector3(0, 301.6, 0)
+
+[node name="FarPine04" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-60.35180, 0.40000, -58.71749)
+scale = Vector3(1.64921, 1.64921, 1.64921)
+rotation_degrees = Vector3(0, 359.8, 0)
+
+[node name="FarPine05" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-57.69073, 0.40000, -57.48464)
+scale = Vector3(0.97904, 0.97904, 0.97904)
+rotation_degrees = Vector3(0, 84.9, 0)
+
+[node name="FarPine06" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-55.29327, 0.40000, -63.74400)
+scale = Vector3(0.95592, 0.95592, 0.95592)
+rotation_degrees = Vector3(0, 32.2, 0)
+
+[node name="FarPine07" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-53.24909, 0.40000, -63.30897)
+scale = Vector3(1.13495, 1.13495, 1.13495)
+rotation_degrees = Vector3(0, 139.9, 0)
+
+[node name="FarPine08" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-50.90188, 0.40000, -60.34986)
+scale = Vector3(1.11047, 1.11047, 1.11047)
+rotation_degrees = Vector3(0, 8.8, 0)
+
+[node name="FarPine09" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-47.81950, 0.40000, -61.53036)
+scale = Vector3(1.02129, 1.02129, 1.02129)
+rotation_degrees = Vector3(0, 43.1, 0)
+
+[node name="FarPine10" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-44.01491, 0.40000, -58.81236)
+scale = Vector3(0.93005, 0.93005, 0.93005)
+rotation_degrees = Vector3(0, 131.3, 0)
+
+[node name="FarPine11" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-42.99155, 0.40000, -58.81573)
+scale = Vector3(0.91517, 0.91517, 0.91517)
+rotation_degrees = Vector3(0, 202.2, 0)
+
+[node name="FarPine12" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-39.21422, 0.40000, -58.33375)
+scale = Vector3(1.39169, 1.39169, 1.39169)
+rotation_degrees = Vector3(0, 298.4, 0)
+
+[node name="FarPine13" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-37.37229, 0.40000, -61.00576)
+scale = Vector3(1.61780, 1.61780, 1.61780)
+rotation_degrees = Vector3(0, 202.2, 0)
+
+[node name="FarPine14" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-35.70040, 0.40000, -61.15261)
+scale = Vector3(1.23763, 1.23763, 1.23763)
+rotation_degrees = Vector3(0, 26.0, 0)
+
+[node name="FarPine15" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-31.72947, 0.40000, -62.41528)
+scale = Vector3(1.05850, 1.05850, 1.05850)
+rotation_degrees = Vector3(0, 191.5, 0)
+
+[node name="FarPine16" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-29.04452, 0.40000, -59.87102)
+scale = Vector3(1.36678, 1.36678, 1.36678)
+rotation_degrees = Vector3(0, 277.7, 0)
+
+[node name="FarPine17" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-28.30053, 0.40000, -59.53624)
+scale = Vector3(1.10915, 1.10915, 1.10915)
+rotation_degrees = Vector3(0, 86.6, 0)
+
+[node name="FarPine18" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-24.02589, 0.40000, -58.97327)
+scale = Vector3(1.25531, 1.25531, 1.25531)
+rotation_degrees = Vector3(0, 235.4, 0)
+
+[node name="FarPine19" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-23.27364, 0.40000, -60.48598)
+scale = Vector3(0.89041, 0.89041, 0.89041)
+rotation_degrees = Vector3(0, 314.3, 0)
+
+[node name="FarPine20" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-19.87795, 0.40000, -61.34950)
+scale = Vector3(1.30111, 1.30111, 1.30111)
+rotation_degrees = Vector3(0, 119.8, 0)
+
+[node name="FarPine21" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-16.83075, 0.40000, -61.81456)
+scale = Vector3(1.10776, 1.10776, 1.10776)
+rotation_degrees = Vector3(0, 253.6, 0)
+
+[node name="FarPine22" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-15.02962, 0.40000, -61.45335)
+scale = Vector3(1.04357, 1.04357, 1.04357)
+rotation_degrees = Vector3(0, 5.0, 0)
+
+[node name="FarPine23" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-13.42917, 0.40000, -58.27325)
+scale = Vector3(1.45627, 1.45627, 1.45627)
+rotation_degrees = Vector3(0, 39.5, 0)
+
+[node name="FarPine24" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-9.87053, 0.40000, -58.89814)
+scale = Vector3(0.91033, 0.91033, 0.91033)
+rotation_degrees = Vector3(0, 124.5, 0)
+
+[node name="FarPine25" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-8.18983, 0.40000, -59.24772)
+scale = Vector3(1.19316, 1.19316, 1.19316)
+rotation_degrees = Vector3(0, 345.3, 0)
+
+[node name="FarPine26" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-5.23812, 0.40000, -61.10970)
+scale = Vector3(1.31509, 1.31509, 1.31509)
+rotation_degrees = Vector3(0, 96.2, 0)
+
+[node name="FarPine27" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-2.77420, 0.40000, -57.28555)
+scale = Vector3(1.23214, 1.23214, 1.23214)
+rotation_degrees = Vector3(0, 71.3, 0)
+
+[node name="FarPine28" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-0.11766, 0.40000, -61.66830)
+scale = Vector3(1.66149, 1.66149, 1.66149)
+rotation_degrees = Vector3(0, 210.7, 0)
+
+[node name="FarPine29" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(3.47444, 0.40000, -57.10113)
+scale = Vector3(1.30211, 1.30211, 1.30211)
+rotation_degrees = Vector3(0, 231.7, 0)
+
+[node name="FarPine30" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(4.35684, 0.40000, -60.50552)
+scale = Vector3(1.02069, 1.02069, 1.02069)
+rotation_degrees = Vector3(0, 10.9, 0)
+
+[node name="FarPine31" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(7.96962, 0.40000, -57.56714)
+scale = Vector3(1.07827, 1.07827, 1.07827)
+rotation_degrees = Vector3(0, 335.6, 0)
+
+[node name="FarPine32" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(10.66407, 0.40000, -63.53752)
+scale = Vector3(1.63412, 1.63412, 1.63412)
+rotation_degrees = Vector3(0, 181.7, 0)
+
+[node name="FarPine33" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(12.30832, 0.40000, -59.03170)
+scale = Vector3(1.18698, 1.18698, 1.18698)
+rotation_degrees = Vector3(0, 141.0, 0)
+
+[node name="FarPine34" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(14.05691, 0.40000, -59.78427)
+scale = Vector3(0.85756, 0.85756, 0.85756)
+rotation_degrees = Vector3(0, 265.1, 0)
+
+[node name="FarPine35" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(17.43913, 0.40000, -58.78008)
+scale = Vector3(1.33082, 1.33082, 1.33082)
+rotation_degrees = Vector3(0, 339.5, 0)
+
+[node name="FarPine36" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(20.56158, 0.40000, -57.64869)
+scale = Vector3(1.12667, 1.12667, 1.12667)
+rotation_degrees = Vector3(0, 151.0, 0)
+
+[node name="FarPine37" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(21.66750, 0.40000, -58.20991)
+scale = Vector3(0.97236, 0.97236, 0.97236)
+rotation_degrees = Vector3(0, 88.9, 0)
+
+[node name="FarPine38" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(24.57994, 0.40000, -60.43544)
+scale = Vector3(1.17271, 1.17271, 1.17271)
+rotation_degrees = Vector3(0, 154.6, 0)
+
+[node name="FarPine39" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(27.03078, 0.40000, -63.79859)
+scale = Vector3(1.15089, 1.15089, 1.15089)
+rotation_degrees = Vector3(0, 112.3, 0)
+
+[node name="FarPine40" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(29.34600, 0.40000, -57.82096)
+scale = Vector3(1.13912, 1.13912, 1.13912)
+rotation_degrees = Vector3(0, 103.5, 0)
+
+[node name="FarPine41" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(33.28826, 0.40000, -57.91985)
+scale = Vector3(1.10135, 1.10135, 1.10135)
+rotation_degrees = Vector3(0, 312.5, 0)
+
+[node name="FarPine42" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(34.12193, 0.40000, -63.92141)
+scale = Vector3(1.34588, 1.34588, 1.34588)
+rotation_degrees = Vector3(0, 260.1, 0)
+
+[node name="FarPine43" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(36.60019, 0.40000, -63.40460)
+scale = Vector3(0.88565, 0.88565, 0.88565)
+rotation_degrees = Vector3(0, 175.8, 0)
+
+[node name="FarPine44" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(39.70686, 0.40000, -60.69376)
+scale = Vector3(0.85076, 0.85076, 0.85076)
+rotation_degrees = Vector3(0, 45.5, 0)
+
+[node name="FarPine45" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(42.85564, 0.40000, -60.12278)
+scale = Vector3(1.07011, 1.07011, 1.07011)
+rotation_degrees = Vector3(0, 234.9, 0)
+
+[node name="FarPine46" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(44.76670, 0.40000, -59.09070)
+scale = Vector3(1.48187, 1.48187, 1.48187)
+rotation_degrees = Vector3(0, 180.2, 0)
+
+[node name="FarPine47" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(48.01082, 0.40000, -63.58928)
+scale = Vector3(0.90272, 0.90272, 0.90272)
+rotation_degrees = Vector3(0, 86.1, 0)
+
+[node name="FarPine48" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(50.71435, 0.40000, -59.47362)
+scale = Vector3(1.06847, 1.06847, 1.06847)
+rotation_degrees = Vector3(0, 349.7, 0)
+
+[node name="FarPine49" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(52.57962, 0.40000, -58.80494)
+scale = Vector3(1.68046, 1.68046, 1.68046)
+rotation_degrees = Vector3(0, 42.5, 0)
+
+[node name="FarPine50" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(55.66575, 0.40000, -59.01018)
+scale = Vector3(1.60697, 1.60697, 1.60697)
+rotation_degrees = Vector3(0, 177.8, 0)
+
+[node name="FarPine51" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(58.24179, 0.40000, -62.85430)
+scale = Vector3(1.41242, 1.41242, 1.41242)
+rotation_degrees = Vector3(0, 123.5, 0)
+
+[node name="FarPine52" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(59.89578, 0.40000, -58.42855)
+scale = Vector3(0.90390, 0.90390, 0.90390)
+rotation_degrees = Vector3(0, 321.0, 0)
+
+[node name="FarPine53" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(62.30601, 0.40000, -62.55672)
+scale = Vector3(1.62200, 1.62200, 1.62200)
+rotation_degrees = Vector3(0, 225.6, 0)
+
+[node name="FarPine54" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(65.61378, 0.40000, -58.81630)
+scale = Vector3(1.44659, 1.44659, 1.44659)
+rotation_degrees = Vector3(0, 112.9, 0)
+
+[node name="LeftPine00" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-21.94735, 0.70000, 7.00000)
+scale = Vector3(1.56907, 1.56907, 1.56907)
+
+
+[node name="LeftPine01" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-26.35349, 0.70000, 4.40000)
+scale = Vector3(1.61695, 1.61695, 1.61695)
+
+
+[node name="LeftPine02" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-23.27415, 0.70000, 1.80000)
+scale = Vector3(1.29176, 1.29176, 1.29176)
+
+
+[node name="LeftPine03" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-23.34783, 0.70000, -0.80000)
+scale = Vector3(1.80466, 1.80466, 1.80466)
+
+
+[node name="LeftPine04" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-20.35405, 0.70000, -3.40000)
+scale = Vector3(1.88503, 1.88503, 1.88503)
+
+
+[node name="LeftPine05" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-26.42467, 0.70000, -6.00000)
+scale = Vector3(1.30032, 1.30032, 1.30032)
+
+
+[node name="LeftPine06" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-25.69807, 0.70000, -8.60000)
+scale = Vector3(1.38411, 1.38411, 1.38411)
+
+
+[node name="LeftPine07" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-24.11854, 0.70000, -11.20000)
+scale = Vector3(1.27988, 1.27988, 1.27988)
+
+
+[node name="LeftPine08" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-24.33164, 0.70000, -13.80000)
+scale = Vector3(1.18910, 1.18910, 1.18910)
+
+
+[node name="LeftPine09" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-28.03017, 0.70000, -16.40000)
+scale = Vector3(1.40921, 1.40921, 1.40921)
+
+
+[node name="LeftPine10" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-30.02069, 0.70000, -19.00000)
+scale = Vector3(1.73864, 1.73864, 1.73864)
+
+
+[node name="LeftPine11" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-31.73632, 0.70000, -21.60000)
+scale = Vector3(1.94065, 1.94065, 1.94065)
+
+
+[node name="LeftPine12" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-27.61018, 0.70000, -24.20000)
+scale = Vector3(1.44399, 1.44399, 1.44399)
+
+
+[node name="LeftPine13" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-20.54865, 0.70000, -26.80000)
+scale = Vector3(1.71018, 1.71018, 1.71018)
+
+
+[node name="LeftPine14" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-23.10412, 0.70000, -29.40000)
+scale = Vector3(1.35740, 1.35740, 1.35740)
+
+
+[node name="LeftPine15" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-25.72999, 0.70000, -32.00000)
+scale = Vector3(1.27095, 1.27095, 1.27095)
+
+
+[node name="LeftPine16" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-19.96097, 0.70000, -34.60000)
+scale = Vector3(1.65577, 1.65577, 1.65577)
+
+
+[node name="LeftPine17" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-23.96282, 0.70000, -37.20000)
+scale = Vector3(1.23595, 1.23595, 1.23595)
+
+
+[node name="LeftPine18" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-29.08929, 0.70000, -39.80000)
+scale = Vector3(1.35223, 1.35223, 1.35223)
+
+
+[node name="LeftPine19" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-24.26655, 0.70000, -42.40000)
+scale = Vector3(1.48691, 1.48691, 1.48691)
+
+
+[node name="LeftPine20" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-28.69866, 0.70000, -45.00000)
+scale = Vector3(1.16425, 1.16425, 1.16425)
+
+
+[node name="LeftPine21" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-19.58453, 0.70000, -47.60000)
+scale = Vector3(1.86426, 1.86426, 1.86426)
+
+
+[node name="LeftPine22" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-19.40220, 0.70000, -50.20000)
+scale = Vector3(1.99970, 1.99970, 1.99970)
+
+
+[node name="LeftPine23" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-30.37179, 0.70000, -52.80000)
+scale = Vector3(1.46201, 1.46201, 1.46201)
+
+
+[node name="IslandPine00" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(41.58579, 0.60000, -33.33613)
+scale = Vector3(1.76627, 1.76627, 1.76627)
+
+
+[node name="IslandPine01" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(32.71381, 0.60000, -29.74221)
+scale = Vector3(1.12287, 1.12287, 1.12287)
+
+
+[node name="IslandPine02" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(30.50414, 0.60000, -32.73700)
+scale = Vector3(1.65503, 1.65503, 1.65503)
+
+
+[node name="IslandPine03" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(40.31682, 0.60000, -27.44835)
+scale = Vector3(1.79072, 1.79072, 1.79072)
+
+
+[node name="IslandPine04" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(35.84245, 0.60000, -33.23760)
+scale = Vector3(1.35457, 1.35457, 1.35457)
+
+
+[node name="IslandPine05" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(44.05127, 0.60000, -42.65384)
+scale = Vector3(1.44932, 1.44932, 1.44932)
+
+
+[node name="IslandPine06" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(38.71075, 0.60000, -27.38108)
+scale = Vector3(1.56268, 1.56268, 1.56268)
+
+
+[node name="IslandPine07" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(34.41393, 0.60000, -36.78155)
+scale = Vector3(1.20190, 1.20190, 1.20190)
+
+
+[node name="IslandPine08" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(30.86014, 0.60000, -27.32156)
+scale = Vector3(1.44006, 1.44006, 1.44006)
+
+
+[node name="IslandPine09" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(44.92835, 0.60000, -25.18618)
+scale = Vector3(1.28438, 1.28438, 1.28438)
+
+
+[node name="IslandPine10" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(36.62510, 0.60000, -27.32240)
+scale = Vector3(1.44240, 1.44240, 1.44240)
+
+
+[node name="IslandPine11" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(35.91286, 0.60000, -32.00426)
+scale = Vector3(1.63444, 1.63444, 1.63444)
+
+
+[node name="IslandPine12" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(43.73636, 0.60000, -38.85891)
+scale = Vector3(1.77498, 1.77498, 1.77498)
+
+
+[node name="IslandPine13" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(29.89080, 0.60000, -38.73459)
+scale = Vector3(1.00255, 1.00255, 1.00255)
+
+
+[node name="IslandPine14" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(31.81644, 0.60000, -27.91647)
+scale = Vector3(1.23881, 1.23881, 1.23881)
+
+
+[node name="IslandPine15" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(26.60511, 0.60000, -38.78528)
+scale = Vector3(1.62839, 1.62839, 1.62839)
+
+
+[node name="IslandPine16" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(23.55653, 0.60000, -28.41061)
+scale = Vector3(1.35489, 1.35489, 1.35489)
+
+
+[node name="NearPine0" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-14.00000, 0.50000, 8.00000)
+scale = Vector3(1.60000, 1.60000, 1.60000)
+
+
+[node name="NearPine1" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(-18.00000, 0.50000, 5.00000)
+scale = Vector3(1.80000, 1.80000, 1.80000)
+
+
+[node name="NearPine2" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(9.00000, 0.50000, 11.00000)
+scale = Vector3(1.70000, 1.70000, 1.70000)
+
+
+[node name="NearPine3" parent="Scenery" instance=ExtResource("pine")]
+position = Vector3(12.00000, 0.50000, 8.00000)
+scale = Vector3(1.50000, 1.50000, 1.50000)
+
+
+[node name="ShoreRock0" parent="Scenery" instance=ExtResource("rock21")]
+rotation_degrees = Vector3(0, 0, 0)
+position = Vector3(-16.97142, 0.00000, -0.36610)
+scale = Vector3(1.42161, 1.42161, 1.42161)
+
+
+[node name="ShoreRock1" parent="Scenery" instance=ExtResource("rock2")]
+rotation_degrees = Vector3(0, 73, 0)
+position = Vector3(-16.48746, 0.00000, -16.25480)
+scale = Vector3(0.74647, 0.74647, 0.74647)
+
+
+[node name="ShoreRock2" parent="Scenery" instance=ExtResource("rock1")]
+rotation_degrees = Vector3(0, 146, 0)
+position = Vector3(-16.74861, 0.00000, 2.98495)
+scale = Vector3(0.75547, 0.75547, 0.75547)
+
+
+[node name="ShoreRock3" parent="Scenery" instance=ExtResource("rock20")]
+rotation_degrees = Vector3(0, 219, 0)
+position = Vector3(-17.48969, 0.00000, 6.72255)
+scale = Vector3(0.63471, 0.63471, 0.63471)
+
+
+[node name="ShoreRock4" parent="Scenery" instance=ExtResource("rock5")]
+rotation_degrees = Vector3(0, 292, 0)
+position = Vector3(-17.00929, 0.00000, -14.30772)
+scale = Vector3(0.65444, 0.65444, 0.65444)
+
+
+[node name="ShoreRock5" parent="Scenery" instance=ExtResource("rock6")]
+rotation_degrees = Vector3(0, 5, 0)
+position = Vector3(-16.06877, 0.00000, -11.10169)
+scale = Vector3(1.28288, 1.28288, 1.28288)
+
+
+[node name="ShoreRock6" parent="Scenery" instance=ExtResource("rock3")]
+rotation_degrees = Vector3(0, 78, 0)
+position = Vector3(-16.20066, 0.00000, -21.08127)
+scale = Vector3(0.65101, 0.65101, 0.65101)
+
+
+[node name="ShoreRock7" parent="Scenery" instance=ExtResource("rock4")]
+rotation_degrees = Vector3(0, 151, 0)
+position = Vector3(-17.12196, 0.00000, -8.76948)
+scale = Vector3(0.92851, 0.92851, 0.92851)
+
+
+[node name="ShoreRock8" parent="Scenery" instance=ExtResource("rock20")]
+rotation_degrees = Vector3(0, 224, 0)
+position = Vector3(-17.65359, 0.00000, 0.02749)
+scale = Vector3(1.33081, 1.33081, 1.33081)
+
+
+[node name="ShoreRock9" parent="Scenery" instance=ExtResource("rock2")]
+rotation_degrees = Vector3(0, 297, 0)
+position = Vector3(-15.50046, 0.00000, -0.77122)
+scale = Vector3(1.29024, 1.29024, 1.29024)
+
+
+[node name="ShoreRock10" parent="Scenery" instance=ExtResource("rock5")]
+rotation_degrees = Vector3(0, 10, 0)
+position = Vector3(-16.74894, 0.00000, -21.40709)
+scale = Vector3(1.18964, 1.18964, 1.18964)
+
+
+[node name="ShoreRock11" parent="Scenery" instance=ExtResource("rock1")]
+rotation_degrees = Vector3(0, 83, 0)
+position = Vector3(-16.99397, 0.00000, 2.94432)
+scale = Vector3(0.63062, 0.63062, 0.63062)
+
+
+[node name="ShoreRock12" parent="Scenery" instance=ExtResource("rock21")]
+rotation_degrees = Vector3(0, 156, 0)
+position = Vector3(-15.02991, 0.00000, -12.37256)
+scale = Vector3(1.47708, 1.47708, 1.47708)
+
+
+[node name="ShoreRock13" parent="Scenery" instance=ExtResource("rock6")]
+rotation_degrees = Vector3(0, 229, 0)
+position = Vector3(-15.59448, 0.00000, -23.38319)
+scale = Vector3(1.31571, 1.31571, 1.31571)
+
+
+[node name="ShoreRock14" parent="Scenery" instance=ExtResource("rock4")]
+rotation_degrees = Vector3(0, 302, 0)
+position = Vector3(-15.68037, 0.00000, -13.37089)
+scale = Vector3(0.76298, 0.76298, 0.76298)
+
+
+[node name="Reeds0" parent="Scenery" instance=ExtResource("reeds")]
+position = Vector3(-5.00000, -0.05000, 4.00000)
+scale = Vector3(1.10000, 1.10000, 1.10000)
+
+
+[node name="Reeds1" parent="Scenery" instance=ExtResource("reeds")]
+position = Vector3(-5.20000, -0.05000, 6.00000)
+scale = Vector3(1.30000, 1.30000, 1.30000)
+
+
+[node name="Reeds2" parent="Scenery" instance=ExtResource("reeds")]
+position = Vector3(1.00000, -0.05000, 6.00000)
+scale = Vector3(1.20000, 1.20000, 1.20000)
+
+
+[node name="Reeds3" parent="Scenery" instance=ExtResource("reeds")]
+position = Vector3(2.00000, -0.05000, 8.00000)
+scale = Vector3(1.60000, 1.60000, 1.60000)
+
+
+[node name="Reeds4" parent="Scenery" instance=ExtResource("reeds")]
+position = Vector3(-8.00000, -0.05000, 7.00000)
+scale = Vector3(1.50000, 1.50000, 1.50000)
+
+
+[node name="Reeds5" parent="Scenery" instance=ExtResource("reeds")]
+position = Vector3(4.00000, -0.05000, 7.00000)
+scale = Vector3(1.20000, 1.20000, 1.20000)
+
+
+[node name="Dock" parent="." instance=ExtResource("jetty")]
+position = Vector3(-2, 0.9, -1.2)
+
+[node name="TackleBox" parent="Dock" type="MeshInstance3D"]
+position = Vector3(-2.90000, 1.07000, 1.80000)
+scale = Vector3(1.00000, 1.00000, 1.00000)
+mesh = SubResource("tackle_box")
+
+
+[node name="TackleLid" parent="Dock" type="MeshInstance3D"]
+position = Vector3(-2.90000, 1.27000, 1.80000)
+scale = Vector3(1.00000, 1.00000, 1.00000)
+mesh = SubResource("tackle_lid")
+
+
+[node name="ActorMotion" parent="." type="Node3D"]
+position = Vector3(-2, 0.9, 5)
+
+[node name="Angler" parent="ActorMotion" instance=ExtResource("angler")]
+
+
+[node name="BobberLanding" parent="." type="Marker3D"]
+position = Vector3(-2, 0.06, -6)
+
+[node name="Bobber" parent="." type="Node3D"]
+visible = false
+position = Vector3(-2, 0.06, -6)
+
+[node name="Float" parent="Bobber" type="MeshInstance3D"]
+position = Vector3(0.00000, 0.03000, 0.00000)
+scale = Vector3(1.00000, 1.00000, 1.00000)
+mesh = SubResource("bobber_mesh")
+
+
+[node name="Stem" parent="Bobber" type="MeshInstance3D"]
+position = Vector3(0.00000, 0.13000, 0.00000)
+scale = Vector3(1.00000, 1.00000, 1.00000)
+mesh = SubResource("bobber_stem")
+
+
+[node name="FishingLine" parent="." type="MeshInstance3D"]
+visible = false
+cast_shadow = 0
+material_override = SubResource("line")
+
+[node name="Ripples" parent="." type="Node3D"]
+visible = false
+position = Vector3(-2, 0.04, -6)
+
+[node name="Ring0" parent="Ripples" type="MeshInstance3D"]
+position = Vector3(0.00000, 0.00000, 0.00000)
+scale = Vector3(1.00000, 1.00000, 1.00000)
+mesh = SubResource("ring")
+cast_shadow = 0
+
+[node name="Ring1" parent="Ripples" type="MeshInstance3D"]
+position = Vector3(0.00000, 0.00300, 0.00000)
+scale = Vector3(1.00000, 1.00000, 1.00000)
+mesh = SubResource("ring")
+cast_shadow = 0
+
+[node name="Ring2" parent="Ripples" type="MeshInstance3D"]
+position = Vector3(0.00000, 0.00600, 0.00000)
+scale = Vector3(1.00000, 1.00000, 1.00000)
+mesh = SubResource("ring")
+cast_shadow = 0
+
+[node name="Splash" parent="." type="GPUParticles3D"]
+position = Vector3(-2, 0.09, -6)
+emitting = false
+amount = 18
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("splash_material")
+draw_pass_1 = SubResource("drop")
+
+[node name="Timeline" parent="." type="AnimationPlayer"]
+libraries = {&"": SubResource("animations")}
+
+[node name="WaterAmbience" parent="." type="AudioStreamPlayer"]
+stream = ExtResource("water_ambience")
+volume_db = -16
+autoplay = true
+
+[node name="Footstep" parent="." type="AudioStreamPlayer"]
+stream = ExtResource("wood_step")
+volume_db = -14
+autoplay = false
+
+[node name="CastSound" parent="." type="AudioStreamPlayer"]
+stream = ExtResource("cast_swish")
+volume_db = -22
+autoplay = false
+
+[node name="SplashSound" parent="." type="AudioStreamPlayer"]
+stream = ExtResource("small_splash")
+volume_db = -12
+autoplay = false
+
+[connection signal="animation_finished" from="Timeline" to="." method="_on_animation_finished"]

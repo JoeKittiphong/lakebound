@@ -4,8 +4,8 @@
 
 [ext_resource type="PackedScene" path="res://world/pond/fish_visual.tscn" id="preview_fish"]
 
-[ext_resource type="Texture2D" path="res://assets/ui/modern/keep.svg" id="i_keep"]
-[ext_resource type="Texture2D" path="res://assets/ui/modern/release.svg" id="i_release"]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/icon_keep.tres" id="i_keep"]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/icon_release.tres" id="i_release"]
 [ext_resource type="StyleBox" path="res://assets/ui/modern/button.tres" id="m_button"]
 [ext_resource type="StyleBox" path="res://assets/ui/modern/pressed.tres" id="m_pressed"]
 [ext_resource type="Script" path="res://features/fishing/ui/catch_result.gd" id="result_script"]
@@ -128,9 +128,6 @@ tooltip_text = "ปล่อย"
 expand_icon = true
 icon_alignment = 0
 theme_override_constants/icon_max_width = 24
-theme_override_styles/normal = ExtResource("m_button")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
 theme_override_constants/h_separation = 12
 
 [node name="KeepButton" type="Button" parent="Card/Content"]
@@ -144,9 +141,6 @@ tooltip_text = "เก็บ"
 expand_icon = true
 icon_alignment = 0
 theme_override_constants/icon_max_width = 24
-theme_override_styles/normal = ExtResource("m_button")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
 theme_override_constants/h_separation = 12
 
 

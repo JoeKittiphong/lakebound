@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/grey_mullet.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/grey_mullet.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"grey_mullet"
+display_name = "ปลากระบอกดำ"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.469
+preview_tilt_degrees = 12.0
+min_weight = 0.4
+max_weight = 2.5
+preferred_depth = Vector2(0.3,2.0)
+bait_preferences = PackedStringArray("dough")
+swim_speed = 1.5
+pull_strength = 0.7
+struggle_frequency = 2.0
+detection_radius = 10.0
+tension_pressure = 0.0735

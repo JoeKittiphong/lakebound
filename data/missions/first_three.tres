@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MissionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "first_three"
+tier = 0
+title = "เริ่มคุ้นมือ"
+description = "จับปลาใดก็ได้ 3 ตัวที่ไม่ซ้ำกัน"
+metric = "count"
+target = 3.0
+reward_coins = 20

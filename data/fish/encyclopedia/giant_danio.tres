@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/giant_danio.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/giant_danio.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"giant_danio"
+display_name = "ปลาซิวใบไผ่"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.191
+preview_tilt_degrees = 12.0
+min_weight = 0.03
+max_weight = 0.15
+preferred_depth = Vector2(0.1,0.6)
+bait_preferences = PackedStringArray("worm","lure")
+swim_speed = 1.7
+pull_strength = 0.25
+struggle_frequency = 2.0
+detection_radius = 10.0
+tension_pressure = 0.0488

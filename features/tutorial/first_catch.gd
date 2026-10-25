@@ -31,6 +31,7 @@ func _process(delta: float) -> void:
  if not active or not is_instance_valid(fishing):
   return
  visible = not hud.is_collection_open()
+ $Card/Content/Skip.visible = not completed
  $Waypoint.hide()
  if completed:
   visible = fishing.state != FishingController.State.RESULT
@@ -98,3 +99,13 @@ func _on_landed(_fish: RefCounted) -> void:
  config.set_value("tutorial", "completed", true)
  if config.save(save_path) != OK:
   push_warning("Could not save tutorial completion.")
+
+func _skip() -> void:
+ var config := ConfigFile.new()
+ config.set_value("tutorial", "completed", true)
+ if config.save(save_path) != OK:
+  $Card/Content/Instruction.text = "บันทึกไม่สำเร็จ ลองข้ามบทสอนอีกครั้งได้"
+  return
+ completed = true
+ active = false
+ hide()

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/fourfinger_threadfin.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/fourfinger_threadfin.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"fourfinger_threadfin"
+display_name = "ปลากุเราสี่เส้น"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.604
+preview_tilt_degrees = 12.0
+min_weight = 0.8
+max_weight = 5.5
+preferred_depth = Vector2(1.0,4.0)
+bait_preferences = PackedStringArray("worm","lure")
+swim_speed = 1.6
+pull_strength = 1.05
+struggle_frequency = 2.2
+detection_radius = 10.0
+tension_pressure = 0.0927

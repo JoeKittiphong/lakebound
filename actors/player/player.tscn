@@ -1,221 +1,37 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://actors/player/player.gd" id="script"]
-
-[sub_resource type="StandardMaterial3D" id="skin"]
-albedo_color = Color(0.84, 0.6, 0.39, 1)
-roughness = 0.9
-
-
-[sub_resource type="StandardMaterial3D" id="vest"]
-albedo_color = Color(0.66, 0.64, 0.33, 1)
-roughness = 0.9
-
-
-[sub_resource type="StandardMaterial3D" id="pants"]
-albedo_color = Color(0.16, 0.24, 0.25, 1)
-roughness = 0.9
-
-
-[sub_resource type="StandardMaterial3D" id="hat"]
-albedo_color = Color(0.39, 0.23, 0.12, 1)
-roughness = 0.9
-
-
-[sub_resource type="StandardMaterial3D" id="bag"]
-albedo_color = Color(0.25, 0.34, 0.2, 1)
-roughness = 0.9
-
+[ext_resource type="PackedScene" path="res://actors/player/angler_model.tscn" id="angler"]
 
 [sub_resource type="CapsuleShape3D" id="shape"]
-radius = 0.3
-height = 1.7
-
-[sub_resource type="BoxMesh" id="BodyMesh"]
-size = Vector3(0.58, 0.65, 0.35)
-material = SubResource("vest")
-
-[sub_resource type="SphereMesh" id="HeadMesh"]
-radius = 0.24
-height = 0.47
-radial_segments = 10
-rings = 5
-material = SubResource("skin")
-
-[sub_resource type="CylinderMesh" id="HatBrimMesh"]
-top_radius = 0.39
-bottom_radius = 0.39
-height = 0.065
-radial_segments = 12
-material = SubResource("hat")
-
-[sub_resource type="CylinderMesh" id="HatCrownMesh"]
-top_radius = 0.23
-bottom_radius = 0.27
-height = 0.22
-radial_segments = 10
-material = SubResource("hat")
-
-[sub_resource type="BoxMesh" id="LeftLegMesh"]
-size = Vector3(0.23, 0.7, 0.26)
-material = SubResource("pants")
-
-[sub_resource type="BoxMesh" id="RightLegMesh"]
-size = Vector3(0.23, 0.7, 0.26)
-material = SubResource("pants")
-
-[sub_resource type="BoxMesh" id="LeftArmMesh"]
-size = Vector3(0.18, 0.62, 0.22)
-material = SubResource("skin")
-
-[sub_resource type="BoxMesh" id="RightArmMesh"]
-size = Vector3(0.18, 0.62, 0.22)
-material = SubResource("skin")
-
-[sub_resource type="BoxMesh" id="BackpackMesh"]
-size = Vector3(0.44, 0.5, 0.23)
-material = SubResource("bag")
-
-[sub_resource type="CylinderMesh" id="RodMesh"]
-top_radius = 0.012
-bottom_radius = 0.025
-height = 2.6
-radial_segments = 6
-material = SubResource("hat")
-
-[sub_resource type="CylinderMesh" id="BendingRodMesh"]
-top_radius = 0.012
-bottom_radius = 0.019
-height = 0.43
-radial_segments = 6
-material = SubResource("hat")
-
-[sub_resource type="Animation" id="CastAnimation"]
-resource_name = "cast"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visual/FishingRod:rotation:x")
-tracks/0/interp = 1
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.42, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [-0.872665, -1.8, -0.15, -0.872665]
-}
-
-[sub_resource type="AnimationLibrary" id="RodAnimations"]
-_data = {
-"cast": SubResource("CastAnimation")
-}
+radius = 0.378
+height = 2.142
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("script")
+swim_float_depth = 1.48
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-position = Vector3(0, 0.86, 0)
+position = Vector3(0, 1.0836, 0)
 shape = SubResource("shape")
 
 [node name="Visual" type="Node3D" parent="."]
+scale = Vector3(1.4868, 1.4868, 1.4868)
 
-
-[node name="Body" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.12, 0)
-mesh = SubResource("BodyMesh")
-
-
-[node name="Head" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.65, 0)
-mesh = SubResource("HeadMesh")
-
-
-[node name="HatBrim" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.88, 0)
-mesh = SubResource("HatBrimMesh")
-
-
-[node name="HatCrown" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 2.0, 0)
-mesh = SubResource("HatCrownMesh")
-
-
-[node name="LeftLeg" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-0.16, 0.43, 0)
-mesh = SubResource("LeftLegMesh")
-
-
-[node name="RightLeg" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0.16, 0.43, 0)
-mesh = SubResource("RightLegMesh")
-
-
-[node name="LeftArm" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-0.4, 1.13, -0.02)
-mesh = SubResource("LeftArmMesh")
-rotation = Vector3(-0.25, 0, 0)
-
-[node name="RightArm" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0.4, 1.13, -0.02)
-mesh = SubResource("RightArmMesh")
-rotation = Vector3(-0.25, 0, 0)
-
-[node name="Backpack" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 1.18, 0.29)
-mesh = SubResource("BackpackMesh")
-
-
-[node name="Rod" type="MeshInstance3D" parent="Visual"]
-visible = false
-position = Vector3(0.46, 1.6, -0.65)
-mesh = SubResource("RodMesh")
-rotation = Vector3(-0.48, 0, -0.1)
+[node name="AnglerModel" parent="Visual" instance=ExtResource("angler")]
+walk_cycle_distance = 2.52
+run_cycle_distance = 3.78
 
 [node name="FishingRod" type="Node3D" parent="Visual"]
-position = Vector3(0.4, 1.4, -0.25)
-rotation_degrees = Vector3(-50, 0, 0)
-
-[node name="Segment0" type="MeshInstance3D" parent="Visual/FishingRod"]
-position = Vector3(0, 0.21, 0)
-mesh = SubResource("BendingRodMesh")
 
 [node name="Joint1" type="Node3D" parent="Visual/FishingRod"]
-position = Vector3(0, 0.42, 0)
-
-[node name="Segment1" type="MeshInstance3D" parent="Visual/FishingRod/Joint1"]
-position = Vector3(0, 0.21, 0)
-mesh = SubResource("BendingRodMesh")
 
 [node name="Joint2" type="Node3D" parent="Visual/FishingRod/Joint1"]
-position = Vector3(0, 0.42, 0)
-
-[node name="Segment2" type="MeshInstance3D" parent="Visual/FishingRod/Joint1/Joint2"]
-position = Vector3(0, 0.21, 0)
-mesh = SubResource("BendingRodMesh")
 
 [node name="Joint3" type="Node3D" parent="Visual/FishingRod/Joint1/Joint2"]
-position = Vector3(0, 0.42, 0)
-
-[node name="Segment3" type="MeshInstance3D" parent="Visual/FishingRod/Joint1/Joint2/Joint3"]
-position = Vector3(0, 0.21, 0)
-mesh = SubResource("BendingRodMesh")
 
 [node name="Joint4" type="Node3D" parent="Visual/FishingRod/Joint1/Joint2/Joint3"]
-position = Vector3(0, 0.42, 0)
-
-[node name="Segment4" type="MeshInstance3D" parent="Visual/FishingRod/Joint1/Joint2/Joint3/Joint4"]
-position = Vector3(0, 0.21, 0)
-mesh = SubResource("BendingRodMesh")
 
 [node name="Joint5" type="Node3D" parent="Visual/FishingRod/Joint1/Joint2/Joint3/Joint4"]
-position = Vector3(0, 0.42, 0)
-
-[node name="Segment5" type="MeshInstance3D" parent="Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5"]
-position = Vector3(0, 0.21, 0)
-mesh = SubResource("BendingRodMesh")
 
 [node name="Tip" type="Marker3D" parent="Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5"]
-position = Vector3(0, 0.42, 0)
-
-[node name="CastAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("RodAnimations")
-}

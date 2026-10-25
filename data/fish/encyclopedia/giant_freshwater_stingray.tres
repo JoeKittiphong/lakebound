@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/freshwater_stingray.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/icons/freshwater_stingray.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"freshwater_stingray"
+display_name = "ปลากระเบนราหูน้ำจืด (Giant Stingray)"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 1.620
+preview_tilt_degrees = 68.0
+min_weight = 25.0
+max_weight = 120.0
+preferred_depth = Vector2(4.0,9.0)
+bait_preferences = PackedStringArray("worm","lure")
+swim_speed = 0.5
+pull_strength = 1.85
+struggle_frequency = 1.0
+detection_radius = 10.0
+tension_pressure = 0.1368

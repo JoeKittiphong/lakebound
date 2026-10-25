@@ -213,7 +213,7 @@ func boss() -> RefCounted:
 func snapshot() -> Array:
  var records: Array = []
  for record in fish:
-  records.append({"id": record.id, "species": String(record.species.id), "weight": record.weight,
+  records.append({"id": record.id, "persistent_key": record.persistent_key, "species": String(record.species.id), "weight": record.weight,
    "position": record.position, "stamina": record.stamina, "hunger": record.hunger, "caution": record.caution})
  return records
 
@@ -233,6 +233,11 @@ func restore(records: Array) -> bool:
    return false
   var record := FishState.new()
   record.id = entry.id
+  # Legacy populations get a deterministic identity on migration. New fish use
+  # random persistent keys, so recycled numeric IDs cannot block new catches.
+  if entry.has("persistent_key") and (not entry.persistent_key is String or entry.persistent_key.is_empty()):
+   return false
+  record.persistent_key = entry.get("persistent_key", ("%s:%d:%.17f" % [entry.species, entry.id, entry.weight]).sha256_text())
   ids[entry.id] = true
   record.species = definition_found
   record.weight = entry.weight

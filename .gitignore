@@ -24,3 +24,36 @@ __pycache__/
 !.env.example
 *.dpapi
 release-credentials.json
+
+# Packaged builds belong in Releases/artifact storage, not source history.
+*.apk
+*.aab
+*.apks
+*.pck
+*.dmp
+
+# Local tooling and editor state (keep Godot .import and .uid metadata).
+.venv/
+venv/
+node_modules/
+.pytest_cache/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*.blend1
+*.blend2
+
+# Player progress and private service credentials copied into the project.
+/user_data/
+angler_profile*.cfg
+fish_collection*.cfg
+first_catch_tutorial*.cfg
+*service-account*.json
+*.p12
+*.pfx
+*.pem
+*.key

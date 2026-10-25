@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MissionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "tilapia_pair"
+tier = 0
+title = "นักตกปลานิล"
+description = "จับปลานิล 2 ตัวที่ไม่ซ้ำกัน"
+metric = "count"
+target = 2.0
+reward_coins = 25
+species_id = "tilapia"

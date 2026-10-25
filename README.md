@@ -2,18 +2,42 @@
 
 เกมตกปลา 3D สำหรับมือถือแนวนอน ใช้ Godot 4.7 (ตรวจ refactor ด้วย 4.7.2), Mobile renderer และ Jolt Physics
 
-เปิด `project.godot` ใน Godot แล้ว Run Project: Loading → Menu → Gameplay
+เปิด `project.godot` ใน Godot แล้ว Run Project: Loading cinematic → Menu → เลือกแหล่งน้ำ → Gameplay
+
+## Repository และเริ่มบนเครื่องใหม่
+
+ซอร์สอยู่ที่ [JoeKittiphong/lakebound](https://github.com/JoeKittiphong/lakebound)
+ใช้ Godot **4.7.2** เปิด folder ที่ clone มาและรอ import ให้เสร็จก่อน Run
+ไม่ต้องมี signing key หรือ Android SDK เพื่อเปิดเกมใน Editor; Android build
+ต้องติดตั้ง Android build template และกำหนด toolchain ตามหัวข้อ Build Android
+
+```powershell
+git clone https://github.com/JoeKittiphong/lakebound.git
+cd lakebound
+godot --headless --path . --editor --import --quit
+godot --path .
+```
+
+คำสั่ง `godot` ต้องอยู่ใน PATH หรือเปลี่ยนเป็น executable ของ Godot 4.7.2 บนเครื่อง
+เซฟผู้เล่น, build, cache และ signing credentials ไม่อยู่ใน repository
+ดู [นโยบายไฟล์ GitHub](docs/repository-policy.md) และ
+[แผน refactor รอบถัดไป](docs/refactor-roadmap-2026-10.md)
+
+เนื้อหาปัจจุบันมี 6 แหล่งน้ำ เรือ ภารกิจ และสมุดสะสม 105 รายการ ดูรายละเอียดที่
+[แผนที่และสารานุกรม](docs/regions-and-encyclopedia.md)
 
 ## โครงสร้างและจุดแก้ใน Editor
 
 | สิ่งที่ต้องการแก้ | เปิดไฟล์ |
 |---|---|
 | ประกอบ session และกำหนด reference ข้ามระบบ | `features/gameplay/gameplay.tscn` |
-| ฉากทะเลสาบ ท่าเรือ ต้นไม้ แสง collision | `world/pond/pond.tscn` |
-| กติกาขอบเขตน้ำ/พื้นที่เดิน/การขึ้นปลา | `world/pond/default_pond.tres` |
+| ฉากแม่น้ำ ท่าเรือ ต้นไม้ แสง collision | `world/river/river_world.tscn` |
+| กติกาแม่น้ำ/พื้นที่เดิน/การขึ้นปลา | `world/river/river_definition.tres` |
+| แผนที่ใหม่และ configuration รายโซน | `features/regions/*.tscn`, `world/regions/*/world.tscn` |
 | กล้องและ sensitivity/pitch/follow speed | `features/gameplay/camera_rig.tscn` |
 | ตัวละครและความเร็วเดิน/สู้ปลา | `actors/player/player.tscn` |
 | HUD และตำแหน่งปุ่ม | `features/fishing/fishing_hud.tscn` |
+| ภาพกล่องปลา จำนวนและแถบความจุ | `features/fishing/ui/fish_box.tscn` |
 | หน้าผลจับปลาและ preview | `features/fishing/ui/catch_result.tscn` |
 | joystick คุมคันและรอก | `features/fishing/ui/rod_control.tscn` |
 | สายเบ็ด ทุ่น วงน้ำ เสียง | `features/fishing/fishing_effects.tscn` |

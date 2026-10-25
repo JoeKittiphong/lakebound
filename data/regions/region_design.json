@@ -1,0 +1,175 @@
+[
+  {
+    "id": "grand_river",
+    "kind": "river",
+    "name": "แม่น้ำสายใหญ่",
+    "subtitle": "วังน้ำลึก · ตลิ่งหิน · ปลายักษ์",
+    "biomes": [
+      2
+    ],
+    "fish": [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "scene": "res://features/regions/grand_river.tscn"
+  },
+  {
+    "id": "lotus_marsh",
+    "kind": "marsh",
+    "name": "บึงบัวริมทุ่ง",
+    "subtitle": "น้ำนิ่งตื้น · กอบัว · ฝึกตกปลา",
+    "biomes": [
+      1
+    ],
+    "fish": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "scene": "res://features/regions/lotus_marsh.tscn"
+  },
+  {
+    "id": "forest_stream",
+    "kind": "stream",
+    "name": "ลำธารป่าภูเขา",
+    "subtitle": "แก่งหิน · ป่าลึก · ปลาพื้นถิ่น",
+    "biomes": [
+      3,
+      5
+    ],
+    "fish": [
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71
+    ],
+    "scene": "res://features/regions/forest_stream.tscn"
+  },
+  {
+    "id": "wild_reservoir",
+    "kind": "reservoir",
+    "name": "เขื่อนดงตอไม้",
+    "subtitle": "อ่างน้ำลึก · ซากไม้จม · ชะโดยักษ์",
+    "biomes": [
+      4
+    ],
+    "fish": [
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57
+    ],
+    "scene": "res://features/regions/wild_reservoir.tscn"
+  },
+  {
+    "id": "mangrove_estuary",
+    "kind": "estuary",
+    "name": "ปากอ่าวป่าชายเลน",
+    "subtitle": "น้ำกร่อย · รากโกงกาง · ชายเลน",
+    "biomes": [
+      6
+    ],
+    "fish": [
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85
+    ],
+    "scene": "res://features/regions/mangrove_estuary.tscn"
+  },
+  {
+    "id": "coral_coast",
+    "kind": "ocean",
+    "name": "ทะเลแนวปะการัง",
+    "subtitle": "หาดทราย · แนวหิน · ทูน่าและกระโทง",
+    "biomes": [
+      7
+    ],
+    "fish": [
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100
+    ],
+    "scene": "res://features/regions/coral_coast.tscn"
+  }
+]

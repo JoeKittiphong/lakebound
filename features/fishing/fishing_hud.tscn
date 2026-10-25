@@ -1,4 +1,13 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=26 format=3]
+
+[ext_resource type="PackedScene" path="res://features/fishing/ui/fish_box.tscn" id="fish_box"]
+
+[ext_resource type="Script" path="res://shared/ui/touch_action_button.gd" id="touch_action"]
+
+[ext_resource type="Script" path="res://features/fishing/ui/orbit_button.gd" id="orbit_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/modern/eye.svg" id="eye"]
+
+[ext_resource type="PackedScene" path="res://features/missions/mission_panel.tscn" id="missions"]
 
 [ext_resource type="PackedScene" path="res://features/economy/tackle_panel.tscn" id="tackle"]
 
@@ -15,12 +24,12 @@
 
 [ext_resource type="Script" path="res://shared/ui/tension_meter.gd" id="meter"]
 
-[ext_resource type="Texture2D" path="res://assets/ui/modern/book.svg" id="i_book"]
-[ext_resource type="Texture2D" path="res://assets/ui/modern/help.svg" id="i_help"]
-[ext_resource type="Texture2D" path="res://assets/ui/modern/back.svg" id="i_back"]
-[ext_resource type="Texture2D" path="res://assets/ui/modern/cast.svg" id="i_cast"]
-[ext_resource type="Texture2D" path="res://assets/ui/modern/depth.svg" id="i_depth"]
-[ext_resource type="Texture2D" path="res://assets/ui/modern/worm.svg" id="i_worm"]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/icon_book.tres" id="i_book"]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/icon_help.tres" id="i_help"]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/icon_back.tres" id="i_back"]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/icon_hook.tres" id="i_cast"]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/icon_depth.tres" id="i_depth"]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/icon_worm.tres" id="i_worm"]
 [ext_resource type="StyleBox" path="res://assets/ui/modern/button.tres" id="m_button"]
 [ext_resource type="StyleBox" path="res://assets/ui/modern/pressed.tres" id="m_pressed"]
 [ext_resource type="StyleBox" path="res://assets/ui/modern/accent.tres" id="m_accent"]
@@ -48,6 +57,32 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("safe")
+
+[node name="FishBox" parent="SafeArea" instance=ExtResource("fish_box")]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -326.0
+offset_right = -78.0
+offset_top = 0.0
+offset_bottom = 100.0
+
+[node name="CastReason" type="Label" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.0
+offset_right = 310.0
+offset_top = 116.0
+offset_bottom = 170.0
+mouse_filter = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 20
+theme_override_constants/outline_size = 6
+theme_override_colors/font_outline_color = Color(0.02, 0.04, 0.06, 1)
+theme_override_colors/font_color = Color(1, 0.84, 0.48, 1)
+text = ""
 
 [node name="Location" type="PanelContainer" parent="SafeArea"]
 layout_mode = 1
@@ -103,9 +138,6 @@ tooltip_text = "วิธีเล่นและปลาในบ่อ"
 expand_icon = true
 icon_alignment = 1
 theme_override_constants/icon_max_width = 28
-theme_override_styles/normal = ExtResource("m_button")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
 
 [node name="Status" type="PanelContainer" parent="SafeArea"]
 layout_mode = 1
@@ -166,9 +198,6 @@ tooltip_text = "หน้าหลัก"
 expand_icon = true
 icon_alignment = 1
 theme_override_constants/icon_max_width = 28
-theme_override_styles/normal = ExtResource("m_button")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
 
 [node name="EcologyPanel" type="PanelContainer" parent="SafeArea"]
 layout_mode = 1
@@ -272,6 +301,8 @@ text = "ลากเล็ง • ปล่อยเพื่อเหวี่�
 horizontal_alignment = 1
 mouse_filter = 2
 theme_override_font_sizes/font_size = 16
+theme_override_constants/outline_size = 5
+theme_override_colors/font_outline_color = Color(0.02, 0.04, 0.06, 1)
 visible = false
 
 [node name="TensionMeter" type="Control" parent="SafeArea"]
@@ -314,9 +345,9 @@ anchor_left = 1
 anchor_top = 1
 anchor_right = 1
 anchor_bottom = 1
-offset_left = -396.0
+offset_left = -340.0
 offset_top = -152
-offset_right = -276.0
+offset_right = -220.0
 offset_bottom = -100
 grow_horizontal = 2
 grow_vertical = 2
@@ -441,12 +472,6 @@ offset_right = 64
 offset_bottom = 64
 text = ""
 focus_mode = 0
-theme_override_styles/normal = ExtResource("m_button")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
-theme_override_colors/font_color = Color(1, 0.92, 0.70, 1)
-theme_override_colors/font_hover_color = Color(1, 0.97, 0.85, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.92, 0.70, 1)
 icon = ExtResource("i_book")
 tooltip_text = "สมุดสะสมปลา"
 expand_icon = true
@@ -490,9 +515,6 @@ icon_alignment = 1
 focus_mode = 0
 tooltip_text = "ไส้เดือน"
 theme_override_constants/icon_max_width = 28
-theme_override_styles/normal = ExtResource("m_button")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
 
 [node name="DepthButton" type="Button" parent="SafeArea/BaitDock"]
 layout_mode = 2
@@ -503,9 +525,6 @@ expand_icon = true
 focus_mode = 0
 tooltip_text = "ปรับความลึก (เมตร)"
 theme_override_constants/icon_max_width = 24
-theme_override_styles/normal = ExtResource("m_button")
-theme_override_styles/hover = ExtResource("m_pressed")
-theme_override_styles/pressed = ExtResource("m_pressed")
 
 [node name="Toast" type="Label" parent="SafeArea"]
 layout_mode = 1
@@ -565,6 +584,155 @@ mouse_filter = 2
 
 [node name="TacklePanel" parent="." instance=ExtResource("tackle")]
 
+[node name="MissionPanel" parent="." instance=ExtResource("missions")]
+
+[node name="MissionButton" type="Button" parent="SafeArea"]
+visible = false
+offset_left = 392.0
+offset_right = 540.0
+offset_bottom = 56.0
+text = "ภารกิจ"
+focus_mode = 0
+
+[node name="MissionTracker" type="PanelContainer" parent="SafeArea"]
+visible = false
+offset_top = 80.0
+offset_right = 350.0
+offset_bottom = 150.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("m_panel")
+
+[node name="Text" type="Label" parent="SafeArea/MissionTracker"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "ภารกิจ · เริ่มคุ้นมือ\n0 / 3"
+autowrap_mode = 3
+
+[node name="MissionToast" type="Label" parent="SafeArea"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_top = 164.0
+offset_bottom = 224.0
+horizontal_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.65, 1, 0.8, 1)
+theme_override_constants/outline_size = 6
+theme_override_colors/font_outline_color = Color(0.01, 0.03, 0.04, 1)
+
+[connection signal="pressed" from="SafeArea/MissionButton" to="." method="_on_missions_pressed"]
+
 [connection signal="pressed" from="SafeArea/TackleButton" to="." method="_on_tackle_pressed"]
 [connection signal="button_down" from="SafeArea/LureAction" to="." method="_on_lure_down"]
 [connection signal="button_up" from="SafeArea/LureAction" to="." method="_on_lure_up"]
+
+[node name="OrbitButton" type="Button" parent="SafeArea"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -76.0
+offset_right = -236.0
+offset_bottom = -12.0
+icon = ExtResource("eye")
+icon_alignment = 1
+tooltip_text = "กดค้างแล้วลากซ้าย–ขวา เพื่อมองรอบตัวละคร"
+script = ExtResource("orbit_script")
+focus_mode = 0
+
+[connection signal="orbit_started" from="SafeArea/OrbitButton" to="." method="_on_orbit_down"]
+[connection signal="orbit_ended" from="SafeArea/OrbitButton" to="." method="_on_orbit_up"]
+[connection signal="orbit_dragged" from="SafeArea/OrbitButton" to="." method="_on_orbit_dragged"]
+
+[node name="MovementActions" type="Control" parent="SafeArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Jump" type="Button" parent="SafeArea/MovementActions"]
+script = ExtResource("touch_action")
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -282.0
+offset_right = -20.0
+offset_bottom = -226.0
+custom_minimum_size = Vector2(88, 56)
+focus_mode = 0
+text = "กระโดด"
+tooltip_text = "กระโดด / ขึ้นจากน้ำ · Space"
+
+[node name="LeftActions" type="HBoxContainer" parent="SafeArea/MovementActions"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -282.0
+offset_right = 180.0
+offset_bottom = -226.0
+theme_override_constants/separation = 8
+mouse_filter = 2
+
+[node name="Run" type="Button" parent="SafeArea/MovementActions/LeftActions"]
+script = ExtResource("touch_action")
+layout_mode = 2
+custom_minimum_size = Vector2(72, 56)
+focus_mode = 0
+toggle_mode = true
+text = "วิ่ง"
+tooltip_text = "เปิด/ปิดวิ่ง · คีย์บอร์ดกด Shift ค้าง"
+
+[node name="Wave" type="Button" parent="SafeArea/MovementActions/LeftActions"]
+script = ExtResource("touch_action")
+layout_mode = 2
+custom_minimum_size = Vector2(80, 56)
+focus_mode = 0
+text = "โบกมือ"
+tooltip_text = "ทักทาย · H"
+
+[connection signal="pressed" from="SafeArea/MovementActions/Jump" to="." method="_on_jump_pressed"]
+[connection signal="toggled" from="SafeArea/MovementActions/LeftActions/Run" to="." method="_on_run_toggled"]
+[connection signal="pressed" from="SafeArea/MovementActions/LeftActions/Wave" to="." method="_on_wave_pressed"]
+
+[node name="BoatActions" type="VBoxContainer" parent="SafeArea"]
+visible = false
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -224.0
+offset_top = 140.0
+offset_right = -20.0
+offset_bottom = 260.0
+theme_override_constants/separation = 8
+mouse_filter = 2
+
+[node name="Action" type="Button" parent="SafeArea/BoatActions"]
+script = ExtResource("touch_action")
+layout_mode = 2
+custom_minimum_size = Vector2(184, 56)
+focus_mode = 0
+text = "ขับเรือ"
+
+[node name="Exit" type="Button" parent="SafeArea/BoatActions"]
+script = ExtResource("touch_action")
+layout_mode = 2
+custom_minimum_size = Vector2(184, 56)
+focus_mode = 0
+text = "ลงเรือ"
+
+[connection signal="pressed" from="SafeArea/BoatActions/Action" to="." method="_on_boat_action_pressed"]
+[connection signal="pressed" from="SafeArea/BoatActions/Exit" to="." method="_on_boat_exit_pressed"]

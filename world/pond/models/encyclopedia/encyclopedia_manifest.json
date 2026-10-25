@@ -1,0 +1,1815 @@
+[
+  {
+    "number": 1,
+    "id": "nile_tilapia",
+    "name_th": "ปลานิล",
+    "scientific_name": "Oreochromis niloticus",
+    "biome": 1,
+    "anatomy": "cichlid",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "bars",
+    "description": "รวมฝูงตามกอบัว กินเหยื่อง่าย สู้เบ็ดระดับเบา ว่ายวนเป็นวงกลม",
+    "source_row": "**ปลานิล**<br>Nile Tilapia<br>*(Oreochromis niloticus)*",
+    "status": "existing",
+    "existing_id": "tilapia",
+    "model_scene": "res://world/pond/models/tilapia.tscn"
+  },
+  {
+    "number": 2,
+    "id": "red_tilapia",
+    "name_th": "ปลาทับทิม",
+    "scientific_name": "Oreochromis sp.",
+    "biome": 1,
+    "anatomy": "cichlid",
+    "palette": [
+      "a85639",
+      "e89373",
+      "f8d7b5"
+    ],
+    "pattern": "plain",
+    "description": "ลำตัวสีส้มอมชมพูสวยงาม ว่ายน้ำเร็วกว่าปลานิล ตอดเหยื่อถี่",
+    "source_row": "**ปลาทับทิม**<br>Red Tilapia<br>*(Oreochromis sp.)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/red_tilapia.tscn"
+  },
+  {
+    "number": 3,
+    "id": "climbing_perch",
+    "name_th": "ปลาหมอไทย",
+    "scientific_name": "Anabas testudineus",
+    "biome": 1,
+    "anatomy": "perch",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "mottled",
+    "description": "ชอบตอดเหยื่อตามชายตลิ่งและกอหญ้า สู้ดิ้นสะบัดตัวเร็ว ครีบหลังแข็ง",
+    "source_row": "**ปลาหมอไทย**<br>Climbing Perch<br>*(Anabas testudineus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/climbing_perch.tscn"
+  },
+  {
+    "number": 4,
+    "id": "malayan_leaffish",
+    "name_th": "ปลาหมอช้างเหยียบ (หมอโค้ว)",
+    "scientific_name": "Pristolepis fasciata",
+    "biome": 1,
+    "anatomy": "disc",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "bars",
+    "description": "ลำตัวแบนกลม ลายพาดสีเขียวมะกอก ซ่อนตัวตามซากใบไม้ ดึงดิ่งลงลึก",
+    "source_row": "**ปลาหมอช้างเหยียบ (หมอโค้ว)**<br>Banded Gourami / Leaffish<br>*(Pristolepis fasciata)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/malayan_leaffish.tscn"
+  },
+  {
+    "number": 5,
+    "id": "broadhead_catfish",
+    "name_th": "ปลาดุกอุย",
+    "scientific_name": "Clarias macrocephalus",
+    "biome": 1,
+    "anatomy": "clarias",
+    "palette": [
+      "29261c",
+      "69563c",
+      "b3a879"
+    ],
+    "pattern": "plain",
+    "description": "หากินหน้าดินโคลน เนื้อนุ่ม กินเหยื่อช้าแต่มั่นคง ลากจมดิ่งลงพื้น",
+    "source_row": "**ปลาดุกอุย**<br>Broadhead Catfish<br>*(Clarias macrocephalus)*",
+    "status": "existing",
+    "existing_id": "catfish",
+    "model_scene": "res://world/pond/models/catfish.tscn"
+  },
+  {
+    "number": 6,
+    "id": "walking_catfish",
+    "name_th": "ปลาดุกด้าน",
+    "scientific_name": "Clarias batrachus",
+    "biome": 1,
+    "anatomy": "clarias",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "mottled",
+    "description": "ลำตัวเพรียวกว่าดุกอุย ว่ายมุดโคลนเก่ง ดิ้นสะบัดรวดเร็ว",
+    "source_row": "**ปลาดุกด้าน**<br>Walking Catfish<br>*(Clarias batrachus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/walking_catfish.tscn"
+  },
+  {
+    "number": 7,
+    "id": "java_barb",
+    "name_th": "ปลาตะเพียนขาว",
+    "scientific_name": "Barbonymus gonionotus",
+    "biome": 1,
+    "anatomy": "barb",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "เกล็ดสีเงินวาว ว่ายน้ำคล่องแคล่ว ตกเป็นฝูงง่าย สนุกมือ",
+    "source_row": "**ปลาตะเพียนขาว**<br>Java Barb<br>*(Barbonymus gonionotus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/java_barb.tscn"
+  },
+  {
+    "number": 8,
+    "id": "golden_barb",
+    "name_th": "ปลาตะเพียนทอง",
+    "scientific_name": "Barbonymus altus",
+    "biome": 1,
+    "anatomy": "barb",
+    "palette": [
+      "514522",
+      "bda34b",
+      "e9d595"
+    ],
+    "pattern": "plain",
+    "description": "ครีบสีแดงส้ม ลำตัวสะท้อนประกายทอง ตอดเหยื่อเป็นจังหวะ",
+    "source_row": "**ปลาตะเพียนทอง**<br>Golden Barb<br>*(Barbonymus altus)*",
+    "status": "existing",
+    "existing_id": "golden_barb",
+    "model_scene": "res://world/pond/models/golden_barb.tscn"
+  },
+  {
+    "number": 9,
+    "id": "three_spot_gourami",
+    "name_th": "ปลากระดี่หม้อ",
+    "scientific_name": "Trichopodus trichopterus",
+    "biome": 1,
+    "anatomy": "gourami",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "spots2",
+    "description": "ลอยฮุบอากาศผิวน้ำ มีจุดดำ 2 จุด ลำตัวสีฟ้าคราม ตกง่ายมาก",
+    "source_row": "**ปลากระดี่หม้อ**<br>Three Spot Gourami<br>*(Trichopodus trichopterus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/three_spot_gourami.tscn"
+  },
+  {
+    "number": 10,
+    "id": "snakeskin_gourami",
+    "name_th": "ปลากระดี่นาง",
+    "scientific_name": "Trichopodus pectoralis",
+    "biome": 1,
+    "anatomy": "gourami",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "snakeskin",
+    "description": "ลำตัวใหญ่กว่ากระดี่หม้อ ลวดลายคล้ายเกล็ดงู ว่ายลอยช้าๆ ริมกอบัว",
+    "source_row": "**ปลากระดี่นาง**<br>Snakeskin Gourami<br>*(Trichopodus pectoralis)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/snakeskin_gourami.tscn"
+  },
+  {
+    "number": 11,
+    "id": "striped_snakehead",
+    "name_th": "ปลาช่อน",
+    "scientific_name": "Channa striata",
+    "biome": 1,
+    "anatomy": "snakehead",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "chevrons",
+    "description": "ซุ่มใต้กอบัว พุ่งชาร์จเหยื่อผิวน้ำดุดัน กระโดดสะบัดหัวให้เบ็ดหลุด",
+    "source_row": "**ปลาช่อน**<br>Striped Snakehead<br>*(Channa striata)*",
+    "status": "existing",
+    "existing_id": "snakehead",
+    "model_scene": "res://world/pond/models/snakehead.tscn"
+  },
+  {
+    "number": 12,
+    "id": "asian_swamp_eel",
+    "name_th": "ปลาไหลนา",
+    "scientific_name": "Monopterus albus",
+    "biome": 1,
+    "anatomy": "swamp_eel",
+    "palette": [
+      "3a3425",
+      "9b854e",
+      "d8c68e"
+    ],
+    "pattern": "plain",
+    "description": "หลบในรูโคลน กินตอนพลบค่ำหรือกลางคืน ลากสายมุดรู ตึงสายจัด",
+    "source_row": "**ปลาไหลนา**<br>Asian Swamp Eel<br>*(Monopterus albus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/asian_swamp_eel.tscn"
+  },
+  {
+    "number": 13,
+    "id": "siamese_gourami",
+    "name_th": "ปลาสลิด",
+    "scientific_name": "Trichopodus pectoralis farm",
+    "biome": 1,
+    "anatomy": "gourami",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "snakeskin",
+    "description": "ปลาสัญลักษณ์บ่อไทย เลี้ยงง่าย ตกสนุก กินพืชผิวน้ำ",
+    "source_row": "**ปลาสลิด**<br>Siamese Gourami<br>*(Trichopodus pectoralis farm)*",
+    "status": "alias",
+    "model_scene": "res://world/pond/models/encyclopedia/snakeskin_gourami.tscn",
+    "alias_of": 10
+  },
+  {
+    "number": 14,
+    "id": "elder_snakehead",
+    "name_th": "พญาปลาช่อนลายคราม",
+    "scientific_name": "",
+    "biome": 1,
+    "anatomy": "snakehead",
+    "palette": [
+      "132237",
+      "3e637f",
+      "b5c8c7"
+    ],
+    "pattern": "porcelain",
+    "description": "เจ้าถิ่นดงบัว กัดเหยื่อเสียงตูมใหญ่ พุ่งลากสายเข้าดงกอบัวให้สายติด",
+    "source_row": "👑 **พญาปลาช่อนลายคราม**<br>The Elder Snakehead (Boss)",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/elder_snakehead.tscn"
+  },
+  {
+    "number": 15,
+    "id": "iridescent_shark",
+    "name_th": "ปลาสวาย",
+    "scientific_name": "Pangasianodon hypophthalmus",
+    "biome": 2,
+    "anatomy": "pangasius",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "lateral",
+    "description": "ปลาฝูงกลางน้ำ ว่ายทวนน้ำแข็งแกร่ง ลากสายยาวต่อเนื่องไม่หยุด",
+    "source_row": "**ปลาสวาย**<br>Iridescent Shark<br>*(Pangasianodon hypophthalmus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/iridescent_shark.tscn"
+  },
+  {
+    "number": 16,
+    "id": "seven_striped_barb",
+    "name_th": "ปลายี่สกไทย",
+    "scientific_name": "Probarbus jullieni",
+    "biome": 2,
+    "anatomy": "carp",
+    "palette": [
+      "514522",
+      "bda34b",
+      "e9d595"
+    ],
+    "pattern": "stripes7",
+    "description": "ระแวงเบ็ดสูงมาก ดูดเหยื่อเนิบๆ แต่วิ่งกระชากสายรุนแรงเมื่อติดเบ็ด",
+    "source_row": "**ปลายี่สกไทย**<br>Seven-striped Barb<br>*(Probarbus jullieni)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/seven_striped_barb.tscn"
+  },
+  {
+    "number": 17,
+    "id": "rohu",
+    "name_th": "ปลายี่สกเทศ (โรหู่)",
+    "scientific_name": "Labeo rohita",
+    "biome": 2,
+    "anatomy": "carp",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "redcheek",
+    "description": "กินเหยื่อหน้าดิน ดูดตะไคร่ ว่ายดึงหนักหน่วง เป็นที่นิยมของนักตกปลาบ่อแม่น้ำ",
+    "source_row": "**ปลายี่สกเทศ (โรหู่)**<br>Rohu / Indian Carp<br>*(Labeo rohita)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/rohu.tscn"
+  },
+  {
+    "number": 18,
+    "id": "asian_redtail_catfish",
+    "name_th": "ปลากดคัง",
+    "scientific_name": "Hemibagrus wyckioides",
+    "biome": 2,
+    "anatomy": "bagrid",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "redtail",
+    "description": "ปลานักล่าหน้าดิน กัดดุมาก มุดลงซอกหินทันที แรงดึงหนักหน่วง",
+    "source_row": "**ปลากดคัง**<br>Asian Redtail Catfish<br>*(Hemibagrus wyckioides)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/asian_redtail_catfish.tscn"
+  },
+  {
+    "number": 19,
+    "id": "yellow_mystus",
+    "name_th": "ปลากดเหลือง",
+    "scientific_name": "Hemibagrus filamentus",
+    "biome": 2,
+    "anatomy": "bagrid",
+    "palette": [
+      "3a3425",
+      "9b854e",
+      "d8c68e"
+    ],
+    "pattern": "plain",
+    "description": "หากินหน้าดินตามน้ำไหล กัดกระตุกเบ็ดถี่ มีเงี่ยงแหลม",
+    "source_row": "**ปลากดเหลือง**<br>Yellow Mystus<br>*(Hemibagrus filamentus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/yellow_mystus.tscn"
+  },
+  {
+    "number": 20,
+    "id": "crystal_eyed_catfish",
+    "name_th": "ปลากดแก้ว",
+    "scientific_name": "Hemibagrus wyckii",
+    "biome": 2,
+    "anatomy": "bagrid",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "whiteedge",
+    "description": "ดวงตาสะท้อนแสงแวววาว ดุร้าย กัดสะบัดเหยื่อรุนแรง อาศัยตามวังน้ำวน",
+    "source_row": "**ปลากดแก้ว**<br>Crystal Eyed Catfish<br>*(Hemibagrus wyckii)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/crystal_eyed_catfish.tscn"
+  },
+  {
+    "number": 21,
+    "id": "clown_featherback",
+    "name_th": "ปลากราย",
+    "scientific_name": "Chitala ornata",
+    "biome": 2,
+    "anatomy": "featherback",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "ocelli",
+    "description": "ว่ายลอยตัวนิ่งๆ ฮุบเหยื่อเนียน ถอยหลังว่ายได้ ลีลาพริ้วไหว",
+    "source_row": "**ปลากราย**<br>Clown Featherback<br>*(Chitala ornata)*",
+    "status": "existing",
+    "existing_id": "featherback",
+    "model_scene": "res://world/pond/models/featherback.tscn"
+  },
+  {
+    "number": 22,
+    "id": "bronze_featherback",
+    "name_th": "ปลาสลาด",
+    "scientific_name": "Notopterus notopterus",
+    "biome": 2,
+    "anatomy": "featherback",
+    "palette": [
+      "3d3023",
+      "99835b",
+      "d0c0a0"
+    ],
+    "pattern": "plain",
+    "description": "ญาติขนาดเล็กของปลากราย ไม่มีลายจุด กลางคืนหากินผิวน้ำ",
+    "source_row": "**ปลาสลาด**<br>Bronze Featherback<br>*(Notopterus notopterus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/bronze_featherback.tscn"
+  },
+  {
+    "number": 23,
+    "id": "black_sharkminnow",
+    "name_th": "ปลากา (ปลากาดำ)",
+    "scientific_name": "Morulius chrysophekadion",
+    "biome": 2,
+    "anatomy": "carp",
+    "palette": [
+      "111916",
+      "26302b",
+      "797e63"
+    ],
+    "pattern": "plain",
+    "description": "ลำตัวสีดำสนิท ครีบหลังสูงเหมือนฉลาม ว่ายน้ำทรงพลัง สู้แรงดี",
+    "source_row": "**ปลากา (ปลากาดำ)**<br>Black Sharkminnow<br>*(Morulius chrysophekadion)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/black_sharkminnow.tscn"
+  },
+  {
+    "number": 24,
+    "id": "white_sheatfish",
+    "name_th": "ปลาเค้าขาว",
+    "scientific_name": "Wallago attu",
+    "biome": 2,
+    "anatomy": "wallago",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "ปิศาจแห่งแม่น้ำลึก ปากกว้างฟันคม กัดเหยื่อลึกแล้วกระชากลงน้ำลึก",
+    "source_row": "**ปลาเค้าขาว**<br>Great White Sheatfish<br>*(Wallago attu)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/white_sheatfish.tscn"
+  },
+  {
+    "number": 25,
+    "id": "black_sheatfish",
+    "name_th": "ปลาเค้าดำ",
+    "scientific_name": "Wallagonia micropogon",
+    "biome": 2,
+    "anatomy": "wallago",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "plain",
+    "description": "ลำตัวสีดำปนเทา ลึกลับ หายากกว่าเค้าขาว มักอาศัยก้นวังน้ำวนลึก",
+    "source_row": "**ปลาเค้าดำ**<br>Black Sheatfish<br>*(Wallagonia micropogon)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/black_sheatfish.tscn"
+  },
+  {
+    "number": 26,
+    "id": "smallscale_mud_carp",
+    "name_th": "ปลานวลจันทร์น้ำจืด",
+    "scientific_name": "Cirrhinus microlepis",
+    "biome": 2,
+    "anatomy": "carp",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "เกล็ดละเอียดสีเงินสะท้อนแสง ว่ายเร็วและระแวงเบ็ด ตกยาก",
+    "source_row": "**ปลานวลจันทร์น้ำจืด**<br>Smallscale Mud Carp<br>*(Cirrhinus microlepis)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/smallscale_mud_carp.tscn"
+  },
+  {
+    "number": 27,
+    "id": "mekong_giant_catfish",
+    "name_th": "ปลาบึก (Mekong Giant Catfish)",
+    "scientific_name": "Pangasianodon gigas",
+    "biome": 2,
+    "anatomy": "pangasius",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "ยักษ์ใหญ่กินพืช สู้ด้วยน้ำหนักตัวมหาศาล ดึงสายลงก้นแม่น้ำนิ่งๆ",
+    "source_row": "👑 **ปลาบึก (Mekong Giant Catfish)**<br>*(Pangasianodon gigas)*",
+    "status": "existing",
+    "existing_id": "giant_catfish",
+    "model_scene": "res://world/pond/models/giant_catfish.tscn"
+  },
+  {
+    "number": 28,
+    "id": "giant_pangasius",
+    "name_th": "ปลาเทพา (Chao Phraya Giant Catfish)",
+    "scientific_name": "Pangasius sanitwongsei",
+    "biome": 2,
+    "anatomy": "pangasius",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "whiteedge",
+    "description": "ฉลามน้ำจืด ครีบกระโดงสูง ว่ายพุ่งตัดกระแสน้ำด้วยความเร็วสูง",
+    "source_row": "👑 **ปลาเทพา (Chao Phraya Giant Catfish)**<br>*(Pangasius sanitwongsei)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/giant_pangasius.tscn"
+  },
+  {
+    "number": 29,
+    "id": "giant_freshwater_stingray",
+    "name_th": "ปลากระเบนราหูน้ำจืด (Giant Stingray)",
+    "scientific_name": "Urogymnus polylepis",
+    "biome": 2,
+    "anatomy": "ray",
+    "palette": [
+      "29261c",
+      "69563c",
+      "b3a879"
+    ],
+    "pattern": "plain",
+    "description": "สิ่งมีชีวิตระดับตำนาน กบดานแนบพื้นทราย ดึงเหมือนติดตอไม้",
+    "source_row": "🌟 **ปลากระเบนราหูน้ำจืด (Giant Stingray)**<br>*(Urogymnus polylepis)*",
+    "status": "existing",
+    "existing_id": "freshwater_stingray",
+    "model_scene": "res://world/pond/models/freshwater_stingray.tscn"
+  },
+  {
+    "number": 30,
+    "id": "blue_mahseer",
+    "name_th": "ปลาพลวงหิน",
+    "scientific_name": "Neolissochilus stracheyi",
+    "biome": 3,
+    "anatomy": "mahseer",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "plain",
+    "description": "อาศัยตามวังน้ำตก น้ำไหลแรง ว่ายต้านน้ำฉุดสายรอกร้องดัง",
+    "source_row": "**ปลาพลวงหิน**<br>Blue Mahseer<br>*(Neolissochilus stracheyi)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/blue_mahseer.tscn"
+  },
+  {
+    "number": 31,
+    "id": "red_mahseer",
+    "name_th": "ปลาพลวงชมพู (ปลากือเลาะห์)",
+    "scientific_name": "Tor douronensis",
+    "biome": 3,
+    "anatomy": "mahseer",
+    "palette": [
+      "a85639",
+      "e89373",
+      "f8d7b5"
+    ],
+    "pattern": "plain",
+    "description": "ราชาแห่งลุ่มน้ำปัตตานี/ยะลา เกล็ดสีชมพูเหลือบเงิน หายากราคาแพงลิบ",
+    "source_row": "**ปลาพลวงชมพู (ปลากือเลาะห์)**<br>Red Mahseer<br>*(Tor douronensis)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/red_mahseer.tscn"
+  },
+  {
+    "number": 32,
+    "id": "thai_mahseer",
+    "name_th": "ปลาเวียน (Thai Mahseer)",
+    "scientific_name": "Tor tambroides",
+    "biome": 3,
+    "anatomy": "mahseer",
+    "palette": [
+      "3d3023",
+      "99835b",
+      "d0c0a0"
+    ],
+    "pattern": "plain",
+    "description": "ราชาแห่งแก่งน้ำ เกล็ดสีทองแดงขนาดใหญ่ สู้ทวนน้ำอย่างทรงพลัง",
+    "source_row": "**ปลาเวียน (Thai Mahseer)**<br>*(Tor tambroides)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/thai_mahseer.tscn"
+  },
+  {
+    "number": 33,
+    "id": "hampala_barb",
+    "name_th": "ปลากระสูบขีด",
+    "scientific_name": "Hampala macrolepidota",
+    "biome": 3,
+    "anatomy": "barb",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "band1",
+    "description": "นักล่าสายน้ำไหล ชาร์จเหยื่อเร็วดั่งสายฟ้า กัดแล้วกลับตัวว่ายหนี",
+    "source_row": "**ปลากระสูบขีด**<br>Hampala Barb<br>*(Hampala macrolepidota)*",
+    "status": "existing",
+    "existing_id": "hampala",
+    "model_scene": "res://world/pond/models/hampala.tscn"
+  },
+  {
+    "number": 34,
+    "id": "burmese_trout",
+    "name_th": "ปลาซิวอ้าว",
+    "scientific_name": "Raiamas guttatus",
+    "biome": 3,
+    "anatomy": "minnow",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "spots",
+    "description": "ล่าแมลงผิวน้ำ กัดเหยื่อกระโดดเหนือน้ำทันที ตัวเล็กแต่สู้สนุก",
+    "source_row": "**ปลาซิวอ้าว**<br>Burmese Trout<br>*(Raiamas guttatus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/burmese_trout.tscn"
+  },
+  {
+    "number": 35,
+    "id": "giant_danio",
+    "name_th": "ปลาซิวใบไผ่",
+    "scientific_name": "Devario aequipinnatus",
+    "biome": 3,
+    "anatomy": "minnow",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "stripes3",
+    "description": "ลายแถบสีน้ำเงินสดสะท้อนแสง ว่ายน้ำเร็วเป็นฝูงผิวน้ำ",
+    "source_row": "**ปลาซิวใบไผ่**<br>Giant Danio<br>*(Devario aequipinnatus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/giant_danio.tscn"
+  },
+  {
+    "number": 36,
+    "id": "fire_eel",
+    "name_th": "ปลากระทิงไฟ",
+    "scientific_name": "Mastacembelus erythrotaenia",
+    "biome": 3,
+    "anatomy": "spiny_eel",
+    "palette": [
+      "111916",
+      "26302b",
+      "797e63"
+    ],
+    "pattern": "fire",
+    "description": "ซ่อนตัวตามซอกหลืบหิน ลายเปลวไฟสีส้มสด มุดหินเก่งมาก",
+    "source_row": "**ปลากระทิงไฟ**<br>Fire Eel<br>*(Mastacembelus erythrotaenia)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/fire_eel.tscn"
+  },
+  {
+    "number": 37,
+    "id": "tire_track_eel",
+    "name_th": "ปลากระทิงลาย",
+    "scientific_name": "Mastacembelus armatus",
+    "biome": 3,
+    "anatomy": "spiny_eel",
+    "palette": [
+      "3a3425",
+      "9b854e",
+      "d8c68e"
+    ],
+    "pattern": "reticulate",
+    "description": "ลายคล้ายรอยล้อรถยาง มุดใต้ก้อนหินเวลาติดเบ็ด ดึงเหนียว",
+    "source_row": "**ปลากระทิงลาย**<br>Tire Track Eel<br>*(Mastacembelus armatus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/tire_track_eel.tscn"
+  },
+  {
+    "number": 38,
+    "id": "freshwater_garfish",
+    "name_th": "ปลากระทั่งเหว",
+    "scientific_name": "Xenentodon cancila",
+    "biome": 3,
+    "anatomy": "needle",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "lateral",
+    "description": "ปากแหลมยาวเหมือนเข็ม ลอยตัวผิวน้ำ ชาร์จเหยื่อเร็ว กระโดดสู้เบ็ด",
+    "source_row": "**ปลากระทั่งเหว**<br>Freshwater Garfish<br>*(Xenentodon cancila)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/freshwater_garfish.tscn"
+  },
+  {
+    "number": 39,
+    "id": "dwarf_snakehead",
+    "name_th": "ปลาก้าง (ก้างพระร่วงภูเขา)",
+    "scientific_name": "Channa gachua",
+    "biome": 3,
+    "anatomy": "snakehead",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "blueedge",
+    "description": "ซ่อนตัวตามใบไม้ก้นลำธาร ตัวเล็ก ครีบสีฟ้าขลิบส้มสดใส",
+    "source_row": "**ปลาก้าง (ก้างพระร่วงภูเขา)**<br>Dwarf Snakehead<br>*(Channa gachua)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/dwarf_snakehead.tscn"
+  },
+  {
+    "number": 40,
+    "id": "mountain_barb",
+    "name_th": "ปลาจาด",
+    "scientific_name": "Poropuntius deauratus",
+    "biome": 3,
+    "anatomy": "barb",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "plain",
+    "description": "อาศัยตามแก่งน้ำเชี่ยว เกล็ดสีเงินอมเขียว สู้เบ็ดด้วยแรงน้ำ",
+    "source_row": "**ปลาจาด**<br>Mountain Barb<br>*(Poropuntius deauratus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/mountain_barb.tscn"
+  },
+  {
+    "number": 41,
+    "id": "boeseman_croaker",
+    "name_th": "ปลาม้า",
+    "scientific_name": "Boesemania microlepis",
+    "biome": 3,
+    "anatomy": "croaker",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "ส่งเสียงร้อง \"ครืดๆ\" ในน้ำได้ ชอบอาศัยตามวังน้ำลึกใต้แก่ง",
+    "source_row": "**ปลาม้า**<br>Boeseman Croaker<br>*(Boesemania microlepis)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/boeseman_croaker.tscn"
+  },
+  {
+    "number": 42,
+    "id": "goonch",
+    "name_th": "ปลาแค้ขี้หมู",
+    "scientific_name": "Bagarius yarrelli",
+    "biome": 3,
+    "anatomy": "bagrid",
+    "palette": [
+      "29261c",
+      "69563c",
+      "b3a879"
+    ],
+    "pattern": "saddle",
+    "description": "ลำตัวลายพรางหิน หน้าตาแปลก อาศัยเกาะพื้นหินน้ำไหลแรง ดึงหนักมาก",
+    "source_row": "**ปลาแค้ขี้หมู**<br>Giant River Catfish<br>*(Bagarius yarrelli)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/goonch.tscn"
+  },
+  {
+    "number": 43,
+    "id": "golden_tor",
+    "name_th": "พญาปลาเวียนทอง (Golden Tor)",
+    "scientific_name": "",
+    "biome": 3,
+    "anatomy": "mahseer",
+    "palette": [
+      "514522",
+      "bda34b",
+      "e9d595"
+    ],
+    "pattern": "gilded",
+    "description": "ตัวสีทองประกายเรืองรอง ว่ายพุ่งตัดแก่งหิน เสี่ยงสายเอ็นครูดหินขาด",
+    "source_row": "👑 **พญาปลาเวียนทอง (Golden Tor)**",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/golden_tor.tscn"
+  },
+  {
+    "number": 44,
+    "id": "giant_snakehead",
+    "name_th": "ปลาชะโด",
+    "scientific_name": "Channa micropeltes",
+    "biome": 4,
+    "anatomy": "snakehead",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "redstripe",
+    "description": "ราชาแห่งเขื่อน กัดเหยื่อผิวน้ำระเบิดตูม กระชากสายเข้าตอไม้ทันที",
+    "source_row": "**ปลาชะโด**<br>Giant Snakehead<br>*(Channa micropeltes)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/giant_snakehead.tscn"
+  },
+  {
+    "number": 45,
+    "id": "spotted_hampala",
+    "name_th": "ปลากระสูบจุดดง",
+    "scientific_name": "Hampala dispar",
+    "biome": 4,
+    "anatomy": "barb",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "spot1",
+    "description": "ล่าเหยื่อเป็นฝูงตามชายฝั่งตอไม้ กัดเหยื่อกระตุกแรงและว่ายเร็ว",
+    "source_row": "**ปลากระสูบจุดดง**<br>Spotted Hampala<br>*(Hampala dispar)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/spotted_hampala.tscn"
+  },
+  {
+    "number": 46,
+    "id": "giant_danionin",
+    "name_th": "ปลาแปบควาย",
+    "scientific_name": "Paralaubuca typus",
+    "biome": 4,
+    "anatomy": "minnow",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "lateral",
+    "description": "ฝูงปลาผิวน้ำ กระโดดฮุบเหยื่อเรี่ยผิวน้ำ กินง่าย ช่วยเก็บเควสต์ฝูง",
+    "source_row": "**ปลาแปบควาย**<br>Giant Danionin<br>*(Paralaubuca typus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/giant_danionin.tscn"
+  },
+  {
+    "number": 47,
+    "id": "red_bellied_pacu",
+    "name_th": "ปลาเปคู (จาระเม็ดน้ำจืด)",
+    "scientific_name": "Piaractus brachypomus",
+    "biome": 4,
+    "anatomy": "pacu",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "redbelly",
+    "description": "ฟันเหมือนฟันคน แข็งแรงมาก กัดสายเอ็นขาดง่าย ดึงขนานข้างลำตัว",
+    "source_row": "**ปลาเปคู (จาระเม็ดน้ำจืด)**<br>Red-bellied Pacu<br>*(Piaractus brachypomus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/red_bellied_pacu.tscn"
+  },
+  {
+    "number": 48,
+    "id": "royal_featherback",
+    "name_th": "ปลาตองลาย (กรายเสือ)",
+    "scientific_name": "Chitala blanci",
+    "biome": 4,
+    "anatomy": "featherback",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "reticulate",
+    "description": "ลายจุดเสือสวยงาม อาศัยตามตอไม้ลึก ลอยตัวฮุบเหยื่อเนียนๆ",
+    "source_row": "**ปลาตองลาย (กรายเสือ)**<br>Royal Featherback<br>*(Chitala blanci)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/royal_featherback.tscn"
+  },
+  {
+    "number": 49,
+    "id": "sultan_fish",
+    "name_th": "ปลาบ้า (ปลาพวง)",
+    "scientific_name": "Leptobarbus hoevenii",
+    "biome": 4,
+    "anatomy": "carp",
+    "palette": [
+      "3d3023",
+      "99835b",
+      "d0c0a0"
+    ],
+    "pattern": "redfin",
+    "description": "กินผลไม้มีพิษบางชนิดแล้วว่ายน้ำส่ายหัว สู้เบ็ดกระชากแรงสะใจ",
+    "source_row": "**ปลาบ้า (ปลาพวง)**<br>Mad Barb / Sultan Fish<br>*(Leptobarbus hoevenii)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/sultan_fish.tscn"
+  },
+  {
+    "number": 50,
+    "id": "tinfoil_barb",
+    "name_th": "ปลากระแห (กระแหทอง)",
+    "scientific_name": "Barbonymus schwanenfeldii",
+    "biome": 4,
+    "anatomy": "barb",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "blacktip",
+    "description": "เกล็ดสีเงิน ครีบสีแดงขลิบดำ รวมฝูงขนาดใหญ่ตามคุ้งน้ำเขื่อน",
+    "source_row": "**ปลากระแห (กระแหทอง)**<br>Tinfoil Barb<br>*(Barbonymus schwanenfeldii)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/tinfoil_barb.tscn"
+  },
+  {
+    "number": 51,
+    "id": "bighead_carp",
+    "name_th": "ปลาซ่งฮื้อ (ปลาหัวโต)",
+    "scientific_name": "Hypophthalmichthys nobilis",
+    "biome": 4,
+    "anatomy": "bighead",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "mottled",
+    "description": "หัวใหญ่ ตัวอวบ กรองกินแพลงก์ตอน ลากสายเอ็นช้าแต่น้ำหนักหน่วง",
+    "source_row": "**ปลาซ่งฮื้อ (ปลาหัวโต)**<br>Bighead Carp<br>*(Hypophthalmichthys nobilis)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/bighead_carp.tscn"
+  },
+  {
+    "number": 52,
+    "id": "silver_carp",
+    "name_th": "ปลาเล่งฮื้อ (ปลาเกล็ดเงิน)",
+    "scientific_name": "Hypophthalmichthys molitrix",
+    "biome": 4,
+    "anatomy": "bighead",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "ชอบกระโดดพ้นผิวน้ำตกใจง่าย สู้เบ็ดด้วยการกระโดดสะบัดตัว",
+    "source_row": "**ปลาเล่งฮื้อ (ปลาเกล็ดเงิน)**<br>Silver Carp<br>*(Hypophthalmichthys molitrix)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/silver_carp.tscn"
+  },
+  {
+    "number": 53,
+    "id": "grass_carp",
+    "name_th": "ปลาเฉาฮื้อ (ปลากินหญ้า)",
+    "scientific_name": "Ctenopharyngodon idella",
+    "biome": 4,
+    "anatomy": "carp",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "plain",
+    "description": "กินพืชริมฝั่งเขื่อน ตัวยาวกลม ดึงสายมุดลงดงสาหร่ายลึก",
+    "source_row": "**ปลาเฉาฮื้อ (ปลากินหญ้า)**<br>Grass Carp<br>*(Ctenopharyngodon idella)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/grass_carp.tscn"
+  },
+  {
+    "number": 54,
+    "id": "red_cheeked_barb",
+    "name_th": "ปลาแก้มช้ำ",
+    "scientific_name": "Systomus orphoides",
+    "biome": 4,
+    "anatomy": "barb",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "redcheek",
+    "description": "มีแต้มสีแดงที่แก้มและครีบ รวมฝูงตามชายน้ำ ตกเพลินๆ",
+    "source_row": "**ปลาแก้มช้ำ**<br>Red-cheeked Barb<br>*(Systomus orphoides)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/red_cheeked_barb.tscn"
+  },
+  {
+    "number": 55,
+    "id": "black_ear_catfish",
+    "name_th": "ปลาเทโพ",
+    "scientific_name": "Pangasius larnaudii",
+    "biome": 4,
+    "anatomy": "pangasius",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "earspot",
+    "description": "มีจุดดำกลมที่โคนครีบหู ดึงสายทวนน้ำสม่ำเสมอ แข็งแรงมาก",
+    "source_row": "**ปลาเทโพ**<br>Black Ear Catfish<br>*(Pangasius larnaudii)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/black_ear_catfish.tscn"
+  },
+  {
+    "number": 56,
+    "id": "giant_gourami",
+    "name_th": "ปลาแรด",
+    "scientific_name": "Osphronemus goramy",
+    "biome": 4,
+    "anatomy": "gourami",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "plain",
+    "description": "หน้าผากโหนก ลอยตัวช้าๆ ใต้ร่มไม้เขื่อน เวลาติดเบ็ดจะดึงกดลงลึก",
+    "source_row": "**ปลาแรด**<br>Giant Gourami<br>*(Osphronemus goramy)*",
+    "status": "existing",
+    "existing_id": "gourami",
+    "model_scene": "res://world/pond/models/gourami.tscn"
+  },
+  {
+    "number": 57,
+    "id": "red_fin_titan",
+    "name_th": "พญาชะโดลายเสือแห่งดงตอ",
+    "scientific_name": "",
+    "biome": 4,
+    "anatomy": "snakehead",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "tigerred",
+    "description": "ชะโดยักษ์ตัวลายพาดสีแดงเข้ม กัดกระชากคันเบ็ดเกือบหลุดมือ ลากเรือขยับ",
+    "source_row": "👑 **พญาชะโดลายเสือแห่งดงตอ**<br>The Red-Fin Titan (Boss)",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/red_fin_titan.tscn"
+  },
+  {
+    "number": 58,
+    "id": "asian_arowana",
+    "name_th": "ปลามังกรทอง (อโรวาน่าป่า)",
+    "scientific_name": "Scleropages formosus",
+    "biome": 5,
+    "anatomy": "arowana",
+    "palette": [
+      "514522",
+      "bda34b",
+      "e9d595"
+    ],
+    "pattern": "plain",
+    "description": "เกล็ดสีทอง/เขียวมรกต ลอยนิ่งผิวน้ำ กระโดดพุ่งงับเหยื่อสูงพ้นน้ำ",
+    "source_row": "**ปลามังกรทอง (อโรวาน่าป่า)**<br>Asian Bonytongue<br>*(Scleropages formosus)*",
+    "status": "existing",
+    "existing_id": "arowana",
+    "model_scene": "res://world/pond/models/arowana.tscn"
+  },
+  {
+    "number": 59,
+    "id": "silver_arowana",
+    "name_th": "ปลามังกรเงิน",
+    "scientific_name": "Osteoglossum bicirrhosum",
+    "biome": 5,
+    "anatomy": "arowana",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "ลำตัวเรียวยาวดั่งริบบิ้นเงิน กระโดดงับเหยื่อเหนือกิ่งไม้",
+    "source_row": "**ปลามังกรเงิน**<br>Silver Arowana<br>*(Osteoglossum bicirrhosum)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/silver_arowana.tscn"
+  },
+  {
+    "number": 60,
+    "id": "alligator_gar",
+    "name_th": "ปลาอัลลิเกเตอร์การ์",
+    "scientific_name": "Atractosteus spatula",
+    "biome": 5,
+    "anatomy": "gar",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "spots",
+    "description": "ปากยาวฟันคมเหมือนจระเข้ เกล็ดแข็ง สู้แบบกระชากทื่อๆ แรงมหาศาล",
+    "source_row": "**ปลาอัลลิเกเตอร์การ์**<br>Alligator Gar (ป่าลึก)<br>*(Atractosteus spatula)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/alligator_gar.tscn"
+  },
+  {
+    "number": 61,
+    "id": "emperor_snakehead",
+    "name_th": "ปลาช่อนข้าหลวง",
+    "scientific_name": "Channa marulioides",
+    "biome": 5,
+    "anatomy": "snakehead",
+    "palette": [
+      "303a23",
+      "788257",
+      "c9c99a"
+    ],
+    "pattern": "ocelli",
+    "description": "ลวดลายดวงตาสีส้มทองตามลำตัว ซุ่มซ่อนตามรากไม้ ดุร้ายและสวยงาม",
+    "source_row": "**ปลาช่อนข้าหลวง**<br>Emperor Snakehead<br>*(Channa marulioides)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/emperor_snakehead.tscn"
+  },
+  {
+    "number": 62,
+    "id": "cobra_snakehead",
+    "name_th": "ปลาช่อนงูเห่า",
+    "scientific_name": "Channa aurantimaculata",
+    "biome": 5,
+    "anatomy": "snakehead",
+    "palette": [
+      "3a3425",
+      "9b854e",
+      "d8c68e"
+    ],
+    "pattern": "saddle",
+    "description": "ลายเกล็ดสีเหลืองทองสลับดำ ชูคอแผ่เหมือนงูเห่า กัดดุร้ายมาก",
+    "source_row": "**ปลาช่อนงูเห่า**<br>Cobra Snakehead<br>*(Channa aurantimaculata)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/cobra_snakehead.tscn"
+  },
+  {
+    "number": 63,
+    "id": "wild_betta",
+    "name_th": "ปลากัดป่าโบราณ",
+    "scientific_name": "Betta splendens wild",
+    "biome": 5,
+    "anatomy": "betta",
+    "palette": [
+      "123a39",
+      "38958c",
+      "a4ce9e"
+    ],
+    "pattern": "redfin",
+    "description": "อาศัยตามแอ่งน้ำโคนต้นไม้ ตัวเล็ก สีเขียวเหลือบฟ้า ตกด้วยเบ็ดจิ๋ว",
+    "source_row": "**ปลากัดป่าโบราณ**<br>Wild Forest Betta<br>*(Betta splendens wild)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/wild_betta.tscn"
+  },
+  {
+    "number": 64,
+    "id": "torrent_catfish",
+    "name_th": "ปลาดุกด่านน้ำตก",
+    "scientific_name": "Amblyceps forcipatum",
+    "biome": 5,
+    "anatomy": "bagrid",
+    "palette": [
+      "29261c",
+      "69563c",
+      "b3a879"
+    ],
+    "pattern": "plain",
+    "description": "ตัวสีน้ำตาลเข้ม มีหนวดยาว ซ่อนใต้ขอนไม้จม ดูดเหยื่อเงียบกริบ",
+    "source_row": "**ปลาดุกด่านน้ำตก**<br>Mountain Torrent Catfish<br>*(Amblyceps forcipatum)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/torrent_catfish.tscn"
+  },
+  {
+    "number": 65,
+    "id": "giant_luciosoma",
+    "name_th": "ปลาสะนากยักษ์",
+    "scientific_name": "Luciosoma spilopleura",
+    "biome": 5,
+    "anatomy": "minnow",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "lateral",
+    "description": "ลำตัวเรียวยาว ว่ายน้ำเร็วมาก ล่าลูกปลาผิวน้ำ กัดเหยื่อสะบัดตัว",
+    "source_row": "**ปลาสะนากยักษ์**<br>Giant Luciosoma<br>*(Luciosoma spilopleura)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/giant_luciosoma.tscn"
+  },
+  {
+    "number": 66,
+    "id": "black_swamp_spiny_eel",
+    "name_th": "ปลากระทิงดำป่าพรุ",
+    "scientific_name": "Macrognathus siamensis dark",
+    "biome": 5,
+    "anatomy": "spiny_eel",
+    "palette": [
+      "111916",
+      "26302b",
+      "797e63"
+    ],
+    "pattern": "eyespots",
+    "description": "ตัวสีดำสนิท มีหนามแหลมตามสันหลัง ซ่อนตัวใต้ใบไม้ผุ",
+    "source_row": "**ปลากระทิงดำป่าพรุ**<br>Black Swamp Spiny Eel<br>*(Macrognathus siamensis dark)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/black_swamp_spiny_eel.tscn"
+  },
+  {
+    "number": 67,
+    "id": "marbled_sleeper",
+    "name_th": "ปลาบู่ทราย",
+    "scientific_name": "Oxyeleotris marmorata",
+    "biome": 5,
+    "anatomy": "goby",
+    "palette": [
+      "29261c",
+      "69563c",
+      "b3a879"
+    ],
+    "pattern": "marbled",
+    "description": "พรางตัวกลมกลืนกับโคลน นอนนิ่ง ฮุบเหยื่อคำเดียวมิดคอ ดึงหนักแน่น",
+    "source_row": "**ปลาบู่ทราย**<br>Sand Goby / Marbled Sleeper<br>*(Oxyeleotris marmorata)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/marbled_sleeper.tscn"
+  },
+  {
+    "number": 68,
+    "id": "pearl_gourami",
+    "name_th": "ปลากระดี่มุก",
+    "scientific_name": "Trichopodus leerii",
+    "biome": 5,
+    "anatomy": "gourami",
+    "palette": [
+      "3a3425",
+      "9b854e",
+      "d8c68e"
+    ],
+    "pattern": "pearls",
+    "description": "ลวดลายจุดมุกระยิบระยับทั่วตัว ลอยตัวนิ่งๆ ริมรากไม้ สวยงามสง่า",
+    "source_row": "**ปลากระดี่มุก**<br>Pearl Gourami<br>*(Trichopodus leerii)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/pearl_gourami.tscn"
+  },
+  {
+    "number": 69,
+    "id": "siamese_tigerfish",
+    "name_th": "ปลาเสือตอไทย",
+    "scientific_name": "Datnioides pulcher",
+    "biome": 5,
+    "anatomy": "perch",
+    "palette": [
+      "514522",
+      "bda34b",
+      "e9d595"
+    ],
+    "pattern": "bars",
+    "description": "ลายพาดกลอนเสือ 7 แถบคมชัด หายากระดับตำนาน กัดเหยื่อกระตุกแรง",
+    "source_row": "**ปลาเสือตอไทย**<br>Siamese Tigerfish<br>*(Datnioides pulcher)*",
+    "status": "existing",
+    "existing_id": "tigerfish",
+    "model_scene": "res://world/pond/models/tigerfish.tscn"
+  },
+  {
+    "number": 70,
+    "id": "ghost_glass_catfish",
+    "name_th": "ปลาก้างพระร่วงแก้ว",
+    "scientific_name": "Kryptopterus vitreolus",
+    "biome": 5,
+    "anatomy": "glass",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "skeleton",
+    "description": "ลำตัวโปร่งใสมองทะลุเห็นก้าง รวมฝูงโบกพัดตามน้ำนิ่ง ตกด้วยเบ็ดจิ๋ว",
+    "source_row": "**ปลาก้างพระร่วงแก้ว**<br>Ghost Glass Catfish<br>*(Kryptopterus vitreolus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/ghost_glass_catfish.tscn"
+  },
+  {
+    "number": 71,
+    "id": "mythic_golden_dragon",
+    "name_th": "พญามังกรทองแห่งป่าลึก",
+    "scientific_name": "",
+    "biome": 5,
+    "anatomy": "arowana",
+    "palette": [
+      "514522",
+      "bda34b",
+      "e9d595"
+    ],
+    "pattern": "gilded",
+    "description": "ปลามังกรทองคำโบราณในตำนาน ว่ายน้ำสง่างาม เปล่งแสงเรืองรอง สู้เบ็ดด้วยการบินเหนือน้ำ",
+    "source_row": "🌟 **พญามังกรทองแห่งป่าลึก**<br>Mythic Golden Dragon (Legendary)",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/mythic_golden_dragon.tscn"
+  },
+  {
+    "number": 72,
+    "id": "barramundi",
+    "name_th": "ปลากะพงขาว",
+    "scientific_name": "Lates calcarifer",
+    "biome": 6,
+    "anatomy": "bass",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "ราชาปลาปากอ่าว กัดดุมาก และกระโดดตีลังกาพ้นน้ำสะบัดหัวให้เบ็ดหลุด",
+    "source_row": "**ปลากะพงขาว**<br>Barramundi<br>*(Lates calcarifer)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/barramundi.tscn"
+  },
+  {
+    "number": 73,
+    "id": "mangrove_snapper",
+    "name_th": "ปลากะพงแดงป่าชายเลน",
+    "scientific_name": "Lutjanus argentimaculatus",
+    "biome": 6,
+    "anatomy": "snapper",
+    "palette": [
+      "5d201b",
+      "bb5138",
+      "e9a47f"
+    ],
+    "pattern": "plain",
+    "description": "ซุ่มตามรากไม้โกงกาง กัดแล้วพุ่งกระชากเข้าหารากไม้ทันที เขี้ยวคม",
+    "source_row": "**ปลากะพงแดงป่าชายเลน**<br>Mangrove Red Snapper<br>*(Lutjanus argentimaculatus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/mangrove_snapper.tscn"
+  },
+  {
+    "number": 74,
+    "id": "black_seabream",
+    "name_th": "ปลากะพงดำ (ปลาขี้ขม)",
+    "scientific_name": "Acanthopagrus berda",
+    "biome": 6,
+    "anatomy": "bream",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "plain",
+    "description": "อาศัยตามตอม่อสะพานและรากโกงกาง ฟันแข็งบดก้ามปูแตก สู้เบ็ดเหนียวแน่น",
+    "source_row": "**ปลากะพงดำ (ปลาขี้ขม)**<br>Black Seabream<br>*(Acanthopagrus berda)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/black_seabream.tscn"
+  },
+  {
+    "number": 75,
+    "id": "archerfish",
+    "name_th": "ปลาเสือพ่นน้ำ",
+    "scientific_name": "Toxotes jaculatrix",
+    "biome": 6,
+    "anatomy": "disc",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "bars",
+    "description": "ลอยตัวใต้รากโกงกาง พ่นน้ำใส่แมลง กัดเหยื่อผิวน้ำน่ารัก",
+    "source_row": "**ปลาเสือพ่นน้ำ**<br>Banded Archerfish<br>*(Toxotes jaculatrix)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/archerfish.tscn"
+  },
+  {
+    "number": 76,
+    "id": "river_barracuda",
+    "name_th": "ปลาสากแม่น้ำ",
+    "scientific_name": "Sphyraena barracuda est.",
+    "biome": 6,
+    "anatomy": "barracuda",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "spots",
+    "description": "ฟันคมกริบดั่งมีดโกน พุ่งเข้าชาร์จเหยื่อด้วยความเร็วสูง กัดสายขาด",
+    "source_row": "**ปลาสากแม่น้ำ**<br>River Barracuda<br>*(Sphyraena barracuda est.)*",
+    "status": "alias",
+    "model_scene": "res://world/pond/models/encyclopedia/great_barracuda.tscn",
+    "alias_of": 96
+  },
+  {
+    "number": 77,
+    "id": "marine_catfish",
+    "name_th": "ปลากดทะเล",
+    "scientific_name": "Arius maculatus",
+    "biome": 6,
+    "anatomy": "bagrid",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "spots",
+    "description": "กินเหยื่อหน้าดินตามกระแสน้ำขึ้นลง ดึงสายสม่ำเสมอ มีเงี่ยงพิษ",
+    "source_row": "**ปลากดทะเล**<br>Marine Catfish<br>*(Arius maculatus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/marine_catfish.tscn"
+  },
+  {
+    "number": 78,
+    "id": "fourfinger_threadfin",
+    "name_th": "ปลากุเราสี่เส้น",
+    "scientific_name": "Eleutheronema tetradactylum",
+    "biome": 6,
+    "anatomy": "threadfin",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "มีหนวด 4 เส้นใต้คาง หากินตามพื้นทรายปนเลนปากอ่าว ว่ายกระชากเร็ว",
+    "source_row": "**ปลากุเราสี่เส้น**<br>Fourfinger Threadfin<br>*(Eleutheronema tetradactylum)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/fourfinger_threadfin.tscn"
+  },
+  {
+    "number": 79,
+    "id": "grey_mullet",
+    "name_th": "ปลากระบอกดำ",
+    "scientific_name": "Mugil cephalus",
+    "biome": 6,
+    "anatomy": "mullet",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "stripes5",
+    "description": "ฝูงปลาผิวน้ำ ชอบกระโดดข้ามผิวน้ำ ระแวงเบ็ด ตกด้วยตัวเบ็ดพวง",
+    "source_row": "**ปลากระบอกดำ**<br>Flathead Grey Mullet<br>*(Mugil cephalus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/grey_mullet.tscn"
+  },
+  {
+    "number": 80,
+    "id": "silver_pomfret",
+    "name_th": "ปลาจาระเม็ดขาว",
+    "scientific_name": "Pampus argenteus",
+    "biome": 6,
+    "anatomy": "pomfret",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "รูปร่างแบนป้อม เกล็ดสีเงินวาว ปลาเศรษฐกิจราคาสูง ดึงขนานข้างต้านน้ำ",
+    "source_row": "**ปลาจาระเม็ดขาว**<br>Silver Pomfret<br>*(Pampus argenteus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/silver_pomfret.tscn"
+  },
+  {
+    "number": 81,
+    "id": "giant_mudskipper",
+    "name_th": "ปลาตีนยักษ์",
+    "scientific_name": "Periophthalmodon schlosseri",
+    "biome": 6,
+    "anatomy": "mudskipper",
+    "palette": [
+      "29261c",
+      "69563c",
+      "b3a879"
+    ],
+    "pattern": "blueflecks",
+    "description": "อาศัยบนเลนชายป่าโกงกาง ดวงตาปูดโปน ตกตามชายเลนเวลาน้ำลง",
+    "source_row": "**ปลาตีนยักษ์**<br>Giant Mudskipper<br>*(Periophthalmodon schlosseri)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/giant_mudskipper.tscn"
+  },
+  {
+    "number": 82,
+    "id": "striped_eel_catfish",
+    "name_th": "ปลาดุกทะเล (ปลาปิ่นแก้ว)",
+    "scientific_name": "Plotosus lineatus",
+    "biome": 6,
+    "anatomy": "eelcat",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "stripes3",
+    "description": "มีแถบสีส้มตามยาว รวมฝูงเหมือนลูกบอลใต้น้ำ มีเงี่ยงพิษรุนแรง",
+    "source_row": "**ปลาดุกทะเล (ปลาปิ่นแก้ว)**<br>Striped Eel Catfish<br>*(Plotosus lineatus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/striped_eel_catfish.tscn"
+  },
+  {
+    "number": 83,
+    "id": "estuary_grouper",
+    "name_th": "ปลากะรังปากแม่น้ำ (เก๋าปากอ่าว)",
+    "scientific_name": "Epinephelus coioides",
+    "biome": 6,
+    "anatomy": "grouper",
+    "palette": [
+      "3a3425",
+      "9b854e",
+      "d8c68e"
+    ],
+    "pattern": "spots",
+    "description": "ตัวลายจุดส้มน้ำตาล หลบตามโพรงรากโกงกาง กัดแล้วมุดรูทันที",
+    "source_row": "**ปลากะรังปากแม่น้ำ (เก๋าปากอ่าว)**<br>Estuary Grouper<br>*(Epinephelus coioides)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/estuary_grouper.tscn"
+  },
+  {
+    "number": 84,
+    "id": "toli_shad",
+    "name_th": "ปลาตะลุมพุก",
+    "scientific_name": "Tenualosa toli",
+    "biome": 6,
+    "anatomy": "shad",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "ปลาตระกูลปลาเฮอริ่ง ว่ายทวนน้ำขึ้นมาวางไข่ในแม่น้ำ ว่ายสู้เบ็ดว่องไว",
+    "source_row": "**ปลาตะลุมพุก**<br>Toli Shad<br>*(Tenualosa toli)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/toli_shad.tscn"
+  },
+  {
+    "number": 85,
+    "id": "silver_titan",
+    "name_th": "พญากะพงขาวปากอ่าว",
+    "scientific_name": "",
+    "biome": 6,
+    "anatomy": "bass",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "gilded",
+    "description": "กะพงยักษ์ลำตัวสีเงินวาว กระโดดพ้นน้ำสูงท่วมหัว ดึงสายรอกกรีดร้อง",
+    "source_row": "👑 **พญากะพงขาวปากอ่าว**<br>The Silver Titan (Boss)",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/silver_titan.tscn"
+  },
+  {
+    "number": 86,
+    "id": "giant_trevally",
+    "name_th": "ปลากะมงพร้าว (GT)",
+    "scientific_name": "Caranx ignobilis",
+    "biome": 7,
+    "anatomy": "trevally",
+    "palette": [
+      "151e22",
+      "465257",
+      "b4bbb0"
+    ],
+    "pattern": "plain",
+    "description": "จอมพลังแห่งกองหิน กัดป็อปเปอร์ตูมสนั่นทะเล วิ่งลากสายร้อยเมตรไม่หยุด",
+    "source_row": "**ปลากะมงพร้าว (GT)**<br>Giant Trevally<br>*(Caranx ignobilis)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/giant_trevally.tscn"
+  },
+  {
+    "number": 87,
+    "id": "bigeye_trevally",
+    "name_th": "ปลากะมงตาโต",
+    "scientific_name": "Caranx sexfasciatus",
+    "biome": 7,
+    "anatomy": "trevally",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "รวมฝูงเป็นพายุหมุนตามแนวปะการัง กัดดุและวิ่งเร็วเป็นกลุ่ม",
+    "source_row": "**ปลากะมงตาโต**<br>Bigeye Trevally<br>*(Caranx sexfasciatus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/bigeye_trevally.tscn"
+  },
+  {
+    "number": 88,
+    "id": "yellowfin_tuna",
+    "name_th": "ปลาทูน่าครีบเหลือง",
+    "scientific_name": "Thunnus albacares",
+    "biome": 7,
+    "anatomy": "tuna",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "yellowfin",
+    "description": "ตอร์ปิโดมีชีวิต ว่ายเร็วที่สุด มุดลากสายดิ่งลงทะเลลึกแนวตั้ง",
+    "source_row": "**ปลาทูน่าครีบเหลือง**<br>Yellowfin Tuna<br>*(Thunnus albacares)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/yellowfin_tuna.tscn"
+  },
+  {
+    "number": 89,
+    "id": "bigeye_tuna",
+    "name_th": "ปลาทูน่าตาโต",
+    "scientific_name": "Thunnus obesus",
+    "biome": 7,
+    "anatomy": "tuna",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "plain",
+    "description": "ตาโตมองเห็นในที่มืด อาศัยน้ำลึกมาก ดึงสายดิ่งลงก้นทะเลลึก",
+    "source_row": "**ปลาทูน่าตาโต**<br>Bigeye Tuna<br>*(Thunnus obesus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/bigeye_tuna.tscn"
+  },
+  {
+    "number": 90,
+    "id": "spanish_mackerel",
+    "name_th": "ปลาอินทรีบั้ง",
+    "scientific_name": "Scomberomorus commerson",
+    "biome": 7,
+    "anatomy": "mackerel",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "bars",
+    "description": "ลำตัวเรียวเงิน ลายบั้งขวาง ฟันคมมาก กัดสายขาดในพริบตา วิ่งเร็วจัด",
+    "source_row": "**ปลาอินทรีบั้ง**<br>Spanish Mackerel<br>*(Scomberomorus commerson)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/spanish_mackerel.tscn"
+  },
+  {
+    "number": 91,
+    "id": "giant_grouper",
+    "name_th": "ปลาเก๋ายักษ์ (กะรังดอกแดง)",
+    "scientific_name": "Epinephelus lanceolatus",
+    "biome": 7,
+    "anatomy": "grouper",
+    "palette": [
+      "29261c",
+      "69563c",
+      "b3a879"
+    ],
+    "pattern": "marbled",
+    "description": "ยักษ์ใหญ่ประจำถ้ำปะการัง กัดแล้วมุดเข้ารูหินทันที ถ้าดึงไม่ออกสายขาด",
+    "source_row": "**ปลาเก๋ายักษ์ (กะรังดอกแดง)**<br>Giant Grouper<br>*(Epinephelus lanceolatus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/giant_grouper.tscn"
+  },
+  {
+    "number": 92,
+    "id": "coral_trout",
+    "name_th": "ปลาเก๋าจุดฟ้า (กะรังจุดฟ้า)",
+    "scientific_name": "Plectropomus leopardus",
+    "biome": 7,
+    "anatomy": "grouper",
+    "palette": [
+      "5d201b",
+      "bb5138",
+      "e9a47f"
+    ],
+    "pattern": "bluespots",
+    "description": "ลำตัวสีแดงสดมีจุดฟ้าประดับ ปลาสวยงามชั้นเลิศ ซุ่มตามแนวปะการัง",
+    "source_row": "**ปลาเก๋าจุดฟ้า (กะรังจุดฟ้า)**<br>Coral Trout<br>*(Plectropomus leopardus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/coral_trout.tscn"
+  },
+  {
+    "number": 93,
+    "id": "parrotfish",
+    "name_th": "ปลานกแก้ว",
+    "scientific_name": "Scarus ghobban",
+    "biome": 7,
+    "anatomy": "parrot",
+    "palette": [
+      "123a39",
+      "38958c",
+      "a4ce9e"
+    ],
+    "pattern": "scalesblue",
+    "description": "ปากเหมือนนกแก้ว แทะปะการัง สีสันฟ้าเขียวสดใส สู้เบ็ดแบบดึงขืน",
+    "source_row": "**ปลานกแก้ว**<br>Parrotfish<br>*(Scarus ghobban)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/parrotfish.tscn"
+  },
+  {
+    "number": 94,
+    "id": "mahi_mahi",
+    "name_th": "ปลาดอลฟินฟิช (อีโต้มอญ)",
+    "scientific_name": "Coryphaena hippurus",
+    "biome": 7,
+    "anatomy": "mahi",
+    "palette": [
+      "123a39",
+      "38958c",
+      "a4ce9e"
+    ],
+    "pattern": "bluespots",
+    "description": "สีสันเขียวทองนีออนสดใส ว่ายกระโดดพ้นน้ำเป็นสายรุ้ง ลีลาเร้าใจ",
+    "source_row": "**ปลาดอลฟินฟิช (อีโต้มอญ)**<br>Mahi-Mahi / Dorado<br>*(Coryphaena hippurus)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/mahi_mahi.tscn"
+  },
+  {
+    "number": 95,
+    "id": "cobia",
+    "name_th": "ปลาช่อนทะเล (Cobia)",
+    "scientific_name": "Rachycentron canadum",
+    "biome": 7,
+    "anatomy": "cobia",
+    "palette": [
+      "29261c",
+      "69563c",
+      "b3a879"
+    ],
+    "pattern": "lateral",
+    "description": "ลำตัวสีน้ำตาลคาดแถบขาว ว่ายตามปลาใหญ่ สู้ทื่อๆ หนักหน่วงไม่ยอมแพ้",
+    "source_row": "**ปลาช่อนทะเล (Cobia)**<br>*(Rachycentron canadum)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/cobia.tscn"
+  },
+  {
+    "number": 96,
+    "id": "great_barracuda",
+    "name_th": "ปลาสากใหญ่ทะเล",
+    "scientific_name": "Sphyraena barracuda",
+    "biome": 7,
+    "anatomy": "barracuda",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "spots",
+    "description": "ตอร์ปิโดฟันมีดโกน ลอยตัวนิ่งๆ แล้วพุ่งชาร์จเหยื่อ กระโดดสะบัดตัว",
+    "source_row": "**ปลาสากใหญ่ทะเล**<br>Great Barracuda<br>*(Sphyraena barracuda)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/great_barracuda.tscn"
+  },
+  {
+    "number": 97,
+    "id": "diamond_trevally",
+    "name_th": "ปลาโฉมงาม",
+    "scientific_name": "Alectis ciliaris",
+    "biome": 7,
+    "anatomy": "diamond",
+    "palette": [
+      "344d55",
+      "a9bbb7",
+      "e3e4ce"
+    ],
+    "pattern": "plain",
+    "description": "ลำตัวรูปเพชรสีเงินวาว ครีบยาวพริ้วไหว ดึงข้างต้านน้ำแรงมาก",
+    "source_row": "**ปลาโฉมงาม**<br>Diamond Trevally<br>*(Alectis ciliaris)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/diamond_trevally.tscn"
+  },
+  {
+    "number": 98,
+    "id": "wahoo",
+    "name_th": "ปลาวาฮู (Wahoo)",
+    "scientific_name": "Acanthocybium solandri",
+    "biome": 7,
+    "anatomy": "mackerel",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "bars",
+    "description": "ปลาตระกูลอินทรีที่ว่ายเร็วที่สุดในโลก ลายบั้งสีน้ำเงิน วิ่งลากสายจนรอกไหม้",
+    "source_row": "**ปลาวาฮู (Wahoo)**<br>*(Acanthocybium solandri)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/wahoo.tscn"
+  },
+  {
+    "number": 99,
+    "id": "bluefin_tuna",
+    "name_th": "ปลาทูน่าครีบน้ำเงิน (Bluefin Tuna)",
+    "scientific_name": "Thunnus orientalis",
+    "biome": 7,
+    "anatomy": "tuna",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "plain",
+    "description": "ยักษ์ใหญ่แห่งมหาสมุทร เนื้อราคาสูงที่สุด สู้ด้วยพละกำลังระดับเหนือมนุษย์",
+    "source_row": "👑 **ปลาทูน่าครีบน้ำเงิน (Bluefin Tuna)**<br>*(Thunnus orientalis)*",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/bluefin_tuna.tscn"
+  },
+  {
+    "number": 100,
+    "id": "sailfish",
+    "name_th": "ปลากระโทงร่ม (Sailfish)",
+    "scientific_name": "",
+    "biome": 7,
+    "anatomy": "sail",
+    "palette": [
+      "102a43",
+      "588b9c",
+      "d0dad6"
+    ],
+    "pattern": "stripesblue",
+    "description": "สัญลักษณ์แห่งเกมกีฬาตกปลา ครีบหลังใบเรือ กระโดดตีลังกาเหนือน้ำ 5-6 ครั้งติด",
+    "source_row": "🌟 **ปลากระโทงร่ม (Sailfish)**<br>Indo-Pacific Sailfish (Legendary)",
+    "status": "new",
+    "model_scene": "res://world/pond/models/encyclopedia/sailfish.tscn"
+  }
+]

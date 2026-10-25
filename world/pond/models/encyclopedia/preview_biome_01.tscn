@@ -1,0 +1,209 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://world/pond/models/tilapia.tscn" id="f1"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/red_tilapia.tscn" id="f2"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/climbing_perch.tscn" id="f3"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/malayan_leaffish.tscn" id="f4"]
+[ext_resource type="PackedScene" path="res://world/pond/models/catfish.tscn" id="f5"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/walking_catfish.tscn" id="f6"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/java_barb.tscn" id="f7"]
+[ext_resource type="PackedScene" path="res://world/pond/models/golden_barb.tscn" id="f8"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/three_spot_gourami.tscn" id="f9"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/snakeskin_gourami.tscn" id="f10"]
+[ext_resource type="PackedScene" path="res://world/pond/models/snakehead.tscn" id="f11"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/asian_swamp_eel.tscn" id="f12"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/snakeskin_gourami.tscn" id="f13"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/elder_snakehead.tscn" id="f14"]
+[ext_resource type="FontFile" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.035,0.065,0.085,1)
+ambient_light_source = 2
+ambient_light_color = Color(0.82,0.89,1,1)
+ambient_light_energy = 0.9
+tonemap_mode = 2
+[node name="EncyclopediaPage" type="Node3D"]
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+[node name="Light" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-25,-25,0)
+light_energy = 1.1
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0,0.2,10)
+projection = 1
+size = 7.5
+current = true
+[node name="Fish" type="Node3D" parent="."]
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(0,3.25,0.1)
+text = "LAKEBOUND / 01 Village Lotus Marsh"
+font_size = 36
+pixel_size = 0.004
+outline_size = 0
+[node name="Fish001" parent="Fish" instance=ExtResource("f1")]
+position = Vector3(-3.9000000000000004,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 1
+[node name="Label001" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,1.7,0.1)
+font = ExtResource("font")
+text = "001 ปลานิล"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish002" parent="Fish" instance=ExtResource("f2")]
+position = Vector3(-1.3,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 2
+[node name="Label002" type="Label3D" parent="."]
+position = Vector3(-1.3,1.7,0.1)
+font = ExtResource("font")
+text = "002 ปลาทับทิม"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish003" parent="Fish" instance=ExtResource("f3")]
+position = Vector3(1.3,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 3
+[node name="Label003" type="Label3D" parent="."]
+position = Vector3(1.3,1.7,0.1)
+font = ExtResource("font")
+text = "003 ปลาหมอไทย"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish004" parent="Fish" instance=ExtResource("f4")]
+position = Vector3(3.9000000000000004,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 4
+[node name="Label004" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,1.7,0.1)
+font = ExtResource("font")
+text = "004 ปลาหมอช้างเหยียบ (หมอโค้ว)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish005" parent="Fish" instance=ExtResource("f5")]
+position = Vector3(-3.9000000000000004,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 5
+[node name="Label005" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "005 ปลาดุกอุย"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish006" parent="Fish" instance=ExtResource("f6")]
+position = Vector3(-1.3,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 6
+[node name="Label006" type="Label3D" parent="."]
+position = Vector3(-1.3,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "006 ปลาดุกด้าน"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish007" parent="Fish" instance=ExtResource("f7")]
+position = Vector3(1.3,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 7
+[node name="Label007" type="Label3D" parent="."]
+position = Vector3(1.3,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "007 ปลาตะเพียนขาว"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish008" parent="Fish" instance=ExtResource("f8")]
+position = Vector3(3.9000000000000004,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 8
+[node name="Label008" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "008 ปลาตะเพียนทอง"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish009" parent="Fish" instance=ExtResource("f9")]
+position = Vector3(-3.9000000000000004,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 9
+[node name="Label009" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,-1.3,0.1)
+font = ExtResource("font")
+text = "009 ปลากระดี่หม้อ"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish010" parent="Fish" instance=ExtResource("f10")]
+position = Vector3(-1.3,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 10
+[node name="Label010" type="Label3D" parent="."]
+position = Vector3(-1.3,-1.3,0.1)
+font = ExtResource("font")
+text = "010 ปลากระดี่นาง"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish011" parent="Fish" instance=ExtResource("f11")]
+position = Vector3(1.3,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 11
+[node name="Label011" type="Label3D" parent="."]
+position = Vector3(1.3,-1.3,0.1)
+font = ExtResource("font")
+text = "011 ปลาช่อน"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish012" parent="Fish" instance=ExtResource("f12")]
+position = Vector3(3.9000000000000004,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 12
+[node name="Label012" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,-1.3,0.1)
+font = ExtResource("font")
+text = "012 ปลาไหลนา"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish013" parent="Fish" instance=ExtResource("f13")]
+position = Vector3(-3.9000000000000004,-2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 13
+[node name="Label013" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,-2.8,0.1)
+font = ExtResource("font")
+text = "013 ปลาสลิด"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish014" parent="Fish" instance=ExtResource("f14")]
+position = Vector3(-1.3,-2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 14
+[node name="Label014" type="Label3D" parent="."]
+position = Vector3(-1.3,-2.8,0.1)
+font = ExtResource("font")
+text = "014 พญาปลาช่อนลายคราม"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2

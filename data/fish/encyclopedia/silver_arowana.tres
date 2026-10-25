@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/silver_arowana.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/silver_arowana.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"silver_arowana"
+display_name = "ปลามังกรเงิน"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.604
+preview_tilt_degrees = 12.0
+min_weight = 1.2
+max_weight = 5.5
+preferred_depth = Vector2(0.3,1.5)
+bait_preferences = PackedStringArray("worm","lure")
+swim_speed = 1.5
+pull_strength = 1.05
+struggle_frequency = 2.4
+detection_radius = 10.0
+tension_pressure = 0.0927

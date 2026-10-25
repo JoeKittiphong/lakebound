@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/grass_carp.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/grass_carp.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"grass_carp"
+display_name = "ปลาเฉาฮื้อ (ปลากินหญ้า)"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.913
+preview_tilt_degrees = 12.0
+min_weight = 3.5
+max_weight = 20.0
+preferred_depth = Vector2(1.0,4.0)
+bait_preferences = PackedStringArray("dough")
+swim_speed = 1.1
+pull_strength = 1.25
+struggle_frequency = 1.5
+detection_radius = 10.0
+tension_pressure = 0.1038

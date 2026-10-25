@@ -6,7 +6,7 @@ script = ExtResource("camera_script")
 position = Vector3(0, 0, -3)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-position = Vector3(0, 4.8, 9.8)
+position = Vector3(0, 3.8, 7.2)
 rotation_degrees = Vector3(-18, 0, 0)
 current = true
 fov = 58.0

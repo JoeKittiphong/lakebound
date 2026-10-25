@@ -58,19 +58,19 @@ func run() -> void:
   root.push_input(touch, true)
   await process_frame
  expect(paused and hud.get_node("CollectionPanel").visible, "collection button opens a paused modal")
- expect(hud.get_node("CollectionPanel/Card/Content/Scroll/Rows").get_child_count() == 16, "all sixteen pond species have cards")
+ expect(hud.get_node("CollectionPanel/Card/Content/Scroll/Rows").get_child_count() == collection.SPECIES.size(), "all catalog species have cards")
  await process_frame
  var rows: Node = hud.get_node("CollectionPanel/Card/Content/Scroll/Rows")
- var shared_atlas: Texture2D
+ var atlas_paths := {}
  for index in rows.get_child_count():
   var icon: TextureRect = rows.get_child(index).get_node("Content/Preview")
   var definition: Resource = collection.SPECIES[index]
   expect(icon.texture != null and icon.texture == definition.collection_icon, String(definition.id) + " has its assigned collection icon")
   expect(icon.texture is AtlasTexture and rows.get_child(index).find_children("*", "SubViewport", true, false).is_empty(), String(definition.id) + " uses the atlas without a 3D viewport")
   if icon.texture is AtlasTexture:
-   if shared_atlas == null:
-    shared_atlas = icon.texture.atlas
-   expect(icon.texture.atlas == shared_atlas and icon.texture.region.size == Vector2(256, 176), String(definition.id) + " shares the 1024 atlas with a padded 256 pixel wide region")
+   atlas_paths[icon.texture.atlas.resource_path] = true
+   expect(icon.texture.region.size == Vector2(256, 176), String(definition.id) + " has a padded 256 pixel wide atlas region")
+ expect(atlas_paths.size() == 2, "105 collection entries use two shared icon atlases")
  for index in rows.get_child_count():
   var row: Control = rows.get_child(index)
   var unlocked: bool = collection.stats(collection.SPECIES[index].id).count > 0
@@ -97,7 +97,11 @@ func run() -> void:
   expect(modal_card.get_global_rect().encloses(close_button.get_global_rect()), "close button stays inside the journal at " + str(viewport_size))
   expect(hud.get_node("CollectionPanel/Card/Content/Scroll").size.y > 180, "fish grid remains visible at " + str(viewport_size))
   var scroll: ScrollContainer = hud.get_node("CollectionPanel/Card/Content/Scroll")
-  expect(rows.get_rect().size.y <= scroll.size.y + 1.0, "all sixteen slots fit without vertical scrolling at " + str(viewport_size))
+  expect(rows.get_rect().size.y > scroll.size.y, "expanded catalog has scrollable extent at " + str(viewport_size))
+  scroll.scroll_vertical = 100000
+  for frame in 3:await process_frame
+  expect(scroll.get_global_rect().intersects(rows.get_child(rows.get_child_count()-1).get_global_rect()), "last catalog card is reachable")
+  scroll.scroll_vertical = 0
   await RenderingServer.frame_post_draw
   root.get_texture().get_image().save_png(output + "/collection-%d.png" % viewport_size.x)
  var close_point: Vector2 = hud.get_node("CollectionPanel/Card/Content/Header/Close").get_global_rect().get_center()

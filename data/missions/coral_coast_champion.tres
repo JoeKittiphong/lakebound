@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MissionDefinition" format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+id = "coral_coast_champion"
+tier = 3
+title = "ตามหาปลากระโทงร่ม (Sailfish)"
+description = "ตกปลากระโทงร่ม (Sailfish) ประจำพื้นที่"
+metric = "count"
+target = 1.0
+map_id = "coral_coast"
+species_id = "sailfish"
+depth_range = Vector2(0,100)
+reward_coins = 350

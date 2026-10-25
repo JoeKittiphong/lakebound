@@ -41,6 +41,15 @@ func roaming_position(rng: RandomNumberGenerator, _current: Vector3, depths: Vec
 func is_wading(_point: Vector3) -> bool:
  return false
 
+func surface_height() -> float:
+ return 0.0
+
+func can_swim_at(_point: Vector3) -> bool:
+ return false
+
+func constrain_travel(point: Vector3) -> Vector3:
+ return constrain_walking(point)
+
 func constrain_walking(point: Vector3) -> Vector3:
  point.z = clampf(point.z, walking_z.x, walking_z.y)
  var half_width := dock_walk_half_width if point.z < bank_start_z else bank_walk_half_width

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/red_fin_titan.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/red_fin_titan.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"red_fin_titan"
+display_name = "พญาชะโดลายเสือแห่งดงตอ"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.850
+preview_tilt_degrees = 12.0
+min_weight = 8.0
+max_weight = 16.0
+preferred_depth = Vector2(1.0,4.5)
+bait_preferences = PackedStringArray("lure")
+swim_speed = 1.7
+pull_strength = 1.65
+struggle_frequency = 2.7
+detection_radius = 10.0
+tension_pressure = 0.1258

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MissionDefinition" format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="script"]
+[resource]
+script = ExtResource("script")
+id = "coral_coast_depth"
+tier = 2
+title = "สีสันแห่งแนวปะการัง"
+description = "ใช้เหยื่อปลอมตกปลาเก๋าจุดฟ้า"
+metric = "count"
+target = 2.0
+map_id = "coral_coast"
+species_id = "coral_trout"
+depth_range = Vector2(1.0,15.0)
+reward_coins = 220
+bait_kind = "lure"

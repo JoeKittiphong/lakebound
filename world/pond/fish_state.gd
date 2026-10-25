@@ -2,6 +2,7 @@ class_name FishState
 extends RefCounted
 
 var id: int
+var persistent_key: String = Crypto.new().generate_random_bytes(16).hex_encode()
 var species: FishSpecies
 var position := Vector3.ZERO # y is depth below water; positive metres.
 var destination := Vector3.ZERO

@@ -1,0 +1,222 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/giant_trevally.tscn" id="f86"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/bigeye_trevally.tscn" id="f87"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/yellowfin_tuna.tscn" id="f88"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/bigeye_tuna.tscn" id="f89"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/spanish_mackerel.tscn" id="f90"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/giant_grouper.tscn" id="f91"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/coral_trout.tscn" id="f92"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/parrotfish.tscn" id="f93"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/mahi_mahi.tscn" id="f94"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/cobia.tscn" id="f95"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/great_barracuda.tscn" id="f96"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/diamond_trevally.tscn" id="f97"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/wahoo.tscn" id="f98"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/bluefin_tuna.tscn" id="f99"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/sailfish.tscn" id="f100"]
+[ext_resource type="FontFile" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.035,0.065,0.085,1)
+ambient_light_source = 2
+ambient_light_color = Color(0.82,0.89,1,1)
+ambient_light_energy = 0.9
+tonemap_mode = 2
+[node name="EncyclopediaPage" type="Node3D"]
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+[node name="Light" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-25,-25,0)
+light_energy = 1.1
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0,0.2,10)
+projection = 1
+size = 7.5
+current = true
+[node name="Fish" type="Node3D" parent="."]
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(0,3.25,0.1)
+text = "LAKEBOUND / 07 Open Ocean"
+font_size = 36
+pixel_size = 0.004
+outline_size = 0
+[node name="Fish086" parent="Fish" instance=ExtResource("f86")]
+position = Vector3(-3.9000000000000004,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 86
+[node name="Label086" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,1.7,0.1)
+font = ExtResource("font")
+text = "086 ปลากะมงพร้าว (GT)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish087" parent="Fish" instance=ExtResource("f87")]
+position = Vector3(-1.3,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 87
+[node name="Label087" type="Label3D" parent="."]
+position = Vector3(-1.3,1.7,0.1)
+font = ExtResource("font")
+text = "087 ปลากะมงตาโต"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish088" parent="Fish" instance=ExtResource("f88")]
+position = Vector3(1.3,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 88
+[node name="Label088" type="Label3D" parent="."]
+position = Vector3(1.3,1.7,0.1)
+font = ExtResource("font")
+text = "088 ปลาทูน่าครีบเหลือง"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish089" parent="Fish" instance=ExtResource("f89")]
+position = Vector3(3.9000000000000004,2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 89
+[node name="Label089" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,1.7,0.1)
+font = ExtResource("font")
+text = "089 ปลาทูน่าตาโต"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish090" parent="Fish" instance=ExtResource("f90")]
+position = Vector3(-3.9000000000000004,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 90
+[node name="Label090" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "090 ปลาอินทรีบั้ง"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish091" parent="Fish" instance=ExtResource("f91")]
+position = Vector3(-1.3,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 91
+[node name="Label091" type="Label3D" parent="."]
+position = Vector3(-1.3,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "091 ปลาเก๋ายักษ์ (กะรังดอกแดง)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish092" parent="Fish" instance=ExtResource("f92")]
+position = Vector3(1.3,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 92
+[node name="Label092" type="Label3D" parent="."]
+position = Vector3(1.3,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "092 ปลาเก๋าจุดฟ้า (กะรังจุดฟ้า)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish093" parent="Fish" instance=ExtResource("f93")]
+position = Vector3(3.9000000000000004,0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 93
+[node name="Label093" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,0.19999999999999996,0.1)
+font = ExtResource("font")
+text = "093 ปลานกแก้ว"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish094" parent="Fish" instance=ExtResource("f94")]
+position = Vector3(-3.9000000000000004,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 94
+[node name="Label094" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,-1.3,0.1)
+font = ExtResource("font")
+text = "094 ปลาดอลฟินฟิช (อีโต้มอญ)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish095" parent="Fish" instance=ExtResource("f95")]
+position = Vector3(-1.3,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 95
+[node name="Label095" type="Label3D" parent="."]
+position = Vector3(-1.3,-1.3,0.1)
+font = ExtResource("font")
+text = "095 ปลาช่อนทะเล (Cobia)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish096" parent="Fish" instance=ExtResource("f96")]
+position = Vector3(1.3,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 96
+[node name="Label096" type="Label3D" parent="."]
+position = Vector3(1.3,-1.3,0.1)
+font = ExtResource("font")
+text = "096 ปลาสากใหญ่ทะเล"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish097" parent="Fish" instance=ExtResource("f97")]
+position = Vector3(3.9000000000000004,-0.75,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 97
+[node name="Label097" type="Label3D" parent="."]
+position = Vector3(3.9000000000000004,-1.3,0.1)
+font = ExtResource("font")
+text = "097 ปลาโฉมงาม"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish098" parent="Fish" instance=ExtResource("f98")]
+position = Vector3(-3.9000000000000004,-2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 98
+[node name="Label098" type="Label3D" parent="."]
+position = Vector3(-3.9000000000000004,-2.8,0.1)
+font = ExtResource("font")
+text = "098 ปลาวาฮู (Wahoo)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish099" parent="Fish" instance=ExtResource("f99")]
+position = Vector3(-1.3,-2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 99
+[node name="Label099" type="Label3D" parent="."]
+position = Vector3(-1.3,-2.8,0.1)
+font = ExtResource("font")
+text = "099 ปลาทูน่าครีบน้ำเงิน (Bluefin Tuna)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2
+[node name="Fish100" parent="Fish" instance=ExtResource("f100")]
+position = Vector3(1.3,-2.25,0)
+rotation_degrees = Vector3(0,82,0)
+scale = Vector3(1.9,1.9,1.9)
+metadata/encyclopedia_number = 100
+[node name="Label100" type="Label3D" parent="."]
+position = Vector3(1.3,-2.8,0.1)
+font = ExtResource("font")
+text = "100 ปลากระโทงร่ม (Sailfish)"
+font_size = 25
+pixel_size = 0.003
+outline_size = 2

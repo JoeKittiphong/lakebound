@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FishSpecies" format=3]
+[ext_resource type="Script" path="res://data/fish/fish_species.gd" id="script"]
+[ext_resource type="PackedScene" path="res://world/pond/models/encyclopedia/malayan_leaffish.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/fish/encyclopedia_icons/malayan_leaffish.tres" id="icon"]
+[resource]
+script = ExtResource("script")
+id = &"malayan_leaffish"
+display_name = "ปลาหมอช้างเหยียบ (หมอโค้ว)"
+model_scene = ExtResource("model")
+collection_icon = ExtResource("icon")
+visual_length_m = 0.326
+preview_tilt_degrees = 12.0
+min_weight = 0.15
+max_weight = 0.8
+preferred_depth = Vector2(0.5,1.5)
+bait_preferences = PackedStringArray("worm")
+swim_speed = 0.9
+pull_strength = 0.55
+struggle_frequency = 1.7
+detection_radius = 10.0
+tension_pressure = 0.0653

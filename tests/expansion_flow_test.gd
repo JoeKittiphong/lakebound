@@ -33,6 +33,8 @@ func run() -> void:
  player = scene.get_node("Player")
  controller.set_physics_process(false)
  pond.set_physics_process(false)
+ for frame in 25:
+  await physics_frame
  player.set_physics_process(false)
  scene.get_node("FishingEffects").audio_enabled = false
  var hud: FishingHUD = scene.get_node("HUD/FishingHUD")

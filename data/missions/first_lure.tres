@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MissionDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://features/missions/mission_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "first_lure"
+tier = 1
+title = "ลองเหยื่อปลอม"
+description = "จับปลาด้วยเหยื่อปลอม 1 ตัว"
+metric = "count"
+target = 1.0
+reward_coins = 35
+bait_kind = "lure"
