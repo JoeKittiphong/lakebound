@@ -1,5 +1,7 @@
 [gd_scene format=4]
 
+[ext_resource type="PackedScene" path="res://world/regions/coral_coast/garden_dressing.tscn" id="garden_dressing"]
+
 [ext_resource type="Script" path="res://world/pond/pond.gd" id="1_qx2ia"]
 [ext_resource type="Resource" path="res://world/regions/coral_coast/definition.tres" id="2_5mjea"]
 [ext_resource type="Sky" path="res://world/river/background/river_sky.tres" id="3_gtjm5"]
@@ -3113,3 +3115,5 @@ mesh = SubResource("CylinderMesh_khrae")
 
 [node name="Spawn" type="Marker3D" parent="GameplayMarkers" unique_id=875767185]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.8489529, 39)
+
+[node name="GardenDressing" parent="." instance=ExtResource("garden_dressing")]

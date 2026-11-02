@@ -1,0 +1,121 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/fishing/ui/game_settings_panel.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+[sub_resource type="StyleBoxFlat" id="volume_track"]
+bg_color = Color(0.22,0.36,0.41,1)
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+[sub_resource type="StyleBoxFlat" id="volume_fill"]
+bg_color = Color(0.28,0.88,0.75,1)
+content_margin_top = 3.0
+content_margin_bottom = 3.0
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+[node name="GameSettingsPanel" type="Control"]
+visible = false
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01,0.04,0.06,0.88)
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_top = -225.0
+offset_bottom = 225.0
+[node name="Content" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+[node name="Header" type="HBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ตั้งค่า"
+theme_override_font_sizes/font_size = 30
+[node name="Close" type="Button" parent="Panel/Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "×"
+custom_minimum_size = Vector2(48,48)
+[node name="Menu" type="VBoxContainer" parent="Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+[node name="VolumeRow" type="HBoxContainer" parent="Panel/Content/Menu"]
+layout_mode = 2
+theme_override_constants/separation = 12
+[node name="Label" type="Label" parent="Panel/Content/Menu/VolumeRow"]
+layout_mode = 2
+text = "เสียง"
+[node name="Volume" type="HSlider" parent="Panel/Content/Menu/VolumeRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,48)
+value = 100.0
+theme_override_styles/slider = SubResource("volume_track")
+theme_override_styles/grabber_area = SubResource("volume_fill")
+theme_override_styles/grabber_area_highlight = SubResource("volume_fill")
+[node name="VolumeValue" type="Label" parent="Panel/Content/Menu/VolumeRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100%"
+custom_minimum_size = Vector2(60,0)
+[node name="Resume" type="Button" parent="Panel/Content/Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "เล่นต่อ"
+custom_minimum_size = Vector2(0,60)
+[node name="Help" type="Button" parent="Panel/Content/Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "วิธีเล่น"
+custom_minimum_size = Vector2(0,60)
+[node name="Home" type="Button" parent="Panel/Content/Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "กลับหน้าหลัก"
+custom_minimum_size = Vector2(0,60)
+[node name="HelpView" type="VBoxContainer" parent="Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+[node name="Scroll" type="ScrollContainer" parent="Panel/Content/HelpView"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Instructions" type="Label" parent="Panel/Content/HelpView/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "วิธีเล่น"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 17
+[node name="BackToSettings" type="Button" parent="Panel/Content/HelpView"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "กลับไปตั้งค่า"
+custom_minimum_size = Vector2(0,52)

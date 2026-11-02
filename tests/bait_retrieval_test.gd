@@ -35,7 +35,7 @@ func run() -> void:
  expect(controller.cast(), "cast begins normally")
  controller.advance(controller.tuning.cast_duration, player.global_position)
  expect(controller.state == controller.State.WAITING and hud.rod_joystick.enabled, "reeling is enabled as soon as bait enters the water")
- expect(hud.rod_joystick.get_node("Reel").visible and not hud.rod_joystick.get_node("Knob").visible, "waiting state immediately shows the reel instead of the aiming pad")
+ expect(not hud.rod_joystick.has_node("Reel") and hud.rod_joystick.get_node("Knob").visible, "waiting state keeps the control pad without a duplicate HUD reel")
  var original_bait := controller.cast_position
  var original_length := controller.line_length
  var population := pond.fish.duplicate()
@@ -59,7 +59,7 @@ func run() -> void:
   if controller.state == controller.State.READY:
    break
  expect(controller.state == controller.State.READY and not pond.bait_active and controller.active_fish == null, "unhooked bait automatically packs away when reeled close to the angler")
- expect(not hud.rod_joystick.get_node("Reel").visible and hud.rod_joystick.get_node("Knob").visible, "automatic retrieval restores the aiming control")
+ expect(not hud.rod_joystick.has_node("Reel") and hud.rod_joystick.get_node("Knob").visible, "automatic retrieval restores the aiming control")
  expect(controller.cast(), "another cast works after automatic retrieval")
  controller.advance(controller.tuning.cast_duration, player.global_position)
  # Moving the angler into reach also retrieves an unhooked bait at neutral.
@@ -75,7 +75,7 @@ func run() -> void:
  fish.state = &"biting"
  pond.reserved_fish = fish
  controller._on_fish_biting(fish)
- expect(controller.state == controller.State.BITE and hud.rod_joystick.get_node("Reel").visible, "bite retains the reel control")
+ expect(controller.state == controller.State.BITE and not hud.rod_joystick.has_node("Reel"), "bite retains joystick control without a HUD reel")
  controller.rod_input = Vector2(0, 1)
  controller.advance(0.1, player.global_position)
  expect(controller.state == controller.State.FIGHT and controller.active_fish == fish, "pulling the reel on a bite hooks the same fish instead of packing away")

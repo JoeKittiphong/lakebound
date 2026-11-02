@@ -19,11 +19,13 @@ func run() -> void:
  check(not profile.incompatible,"old river profile remains compatible")
  check(profile.data.coins==777 and profile.data.stock.worm==37 and profile.data.line_remaining==32.0,"wallet, bait stock and line length preserved")
  var pond: PondEcosystem=game.get_node("PondEcosystem")
- check(pond.species.size()==28 and pond.fish.size()==112,"expanded roster retains existing population")
- var intact:=true
+ check(pond.species.size()==48 and pond.fish.size()==960,"expanded roster retains existing population")
+ var intact:=true;var retained:=0
  for fish in pond.fish:
-  if not identities.has(fish.persistent_key) or identities[fish.persistent_key]!=fish.weight:intact=false
- check(intact,"every old fish identity and weight preserved")
+  if identities.has(fish.persistent_key):
+   retained+=1
+   if identities[fish.persistent_key]!=fish.weight:intact=false
+ check(intact and retained==identities.size(),"every old fish identity and weight preserved alongside added fish")
  check(MissionProgress.entry(profile.data.missions,MissionCatalog.find("first_three")).progress==2.0,"existing mission progress preserved")
  check(game.get_node("HUD/FishingHUD/MissionPanel").definitions.size()==12,"all twelve original missions remain available")
  check(profile.data.missions.tracked=="first_three","tracked original mission preserved")

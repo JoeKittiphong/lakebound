@@ -21,7 +21,7 @@ size = Vector2(2, 2)
 transform_format = 0
 use_custom_data = true
 mesh = SubResource("stamp_quad")
-instance_count = 12
+instance_count = 0
 visible_instance_count = 0
 
 [node name="WaterInteractions" type="Node3D"]

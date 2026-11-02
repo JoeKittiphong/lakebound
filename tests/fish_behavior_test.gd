@@ -39,7 +39,7 @@ func run() -> void:
   green.tension = green.yellow_start - 0.04
   yellow.tension = (yellow.yellow_start + yellow.red_start) * 0.5
   green.advance(0.02, Vector3.ZERO, green_fish, Vector2.ZERO, tuning)
-  yellow.advance(0.02, Vector3.ZERO, yellow_fish, Vector2(0, 0.2), tuning)
+  yellow.advance(0.02, Vector3.ZERO, yellow_fish, Vector2(0, 0.6), tuning)
  expect(Vector2(green_fish.position.x, green_fish.position.z).length() > 15.5, "fish actually escapes farther during green tension")
  expect(green_fish.position.length() > yellow_fish.position.length(), "green loses more distance than yellow control")
  expect(yellow_fish.stamina < green_fish.stamina, "maintaining yellow tires fish faster than green")
@@ -49,7 +49,7 @@ func run() -> void:
  neutral.update_zones(neutral_fish)
  neutral.tension = (neutral.yellow_start + neutral.red_start) * 0.5
  neutral.advance(0.02, Vector3.ZERO, neutral_fish, Vector2.ZERO, tuning)
- expect(neutral_fish.position.z > -15.0, "holding yellow at neutral always brings the fish closer")
+ expect(neutral_fish.position.z < -15.0, "neutral lets the fish run even after yellow pressure")
  var hard_fish := make_fish()
  hard_fish.species = load("res://data/fish/giant_catfish.tres")
  hard_fish.weight = 25

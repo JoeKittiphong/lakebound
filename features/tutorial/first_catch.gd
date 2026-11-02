@@ -19,7 +19,9 @@ func bind(controller: FishingController, fishing_hud: FishingHUD) -> void:
  visible = active
  destination = fishing.player.global_position
  var definition := fishing.ecosystem.definition
- if definition is RiverDefinition:
+ if definition is RainforestLakeDefinition:
+  destination=Vector3(-320,.9,118)
+ elif definition is RiverDefinition:
   var side := signf(destination.x - definition.center_at(destination.z))
   destination.x = definition.center_at(destination.z) + side * (definition.half_width_at(destination.z) + 0.5)
   destination.y = definition.ground_height(Vector2(destination.x, destination.z)) + 0.1
@@ -33,6 +35,11 @@ func _process(delta: float) -> void:
  visible = not hud.is_collection_open()
  $Card/Content/Skip.visible = not completed
  $Waypoint.hide()
+ # The guided announcement becomes the tutorial for lure rhythm. Keep the
+ # tutorial active without placing its larger card over the timed arrows.
+ $Card.visible = completed or fishing.state != FishingController.State.WAITING or not fishing.using_lure()
+ if not $Card.visible:
+  return
  if completed:
   visible = fishing.state != FishingController.State.RESULT
   success_time = success_time + delta if visible else 0.0
@@ -57,18 +64,20 @@ func _process(delta: float) -> void:
    _show_step("2/5 กำลังเหวี่ยงเบ็ด", "รอเหยื่อลงน้ำ แล้วสังเกตทุ่น", 1)
   FishingController.State.WAITING:
    if fishing.using_lure():
-    _show_step("3/5 ล่อปลาด้วยเหยื่อปลอม", "ปุ่มแอ็กชัน / E: แตะ, แตะสองครั้ง, ค้าง, ปล่อย\nเมื่อปลากิน ให้ลากรอกขวาลงทันที / กด I", 2)
+    _show_step("3/5 ล่อปลาด้วยเหยื่อปลอม", "จอยขวา: ขึ้นกระตุก • ลงกรอ • ซ้ายขวาสะบัด\nปล่อยจอยเพื่อหยุดจังหวะ เมื่อปลากินให้ปล่อยนิ้วแล้วดึงลง / I", 2)
    else:
-    _show_step("3/5 รอปลากินเหยื่อ", "ยังไม่ต้องหมุนรอก รอข้อความ ปลากินเบ็ด!\nเมื่อปลากิน ให้ลากรอกขวาลงทันที / กด I", 2)
+    _show_step("3/5 รอปลากินเหยื่อ", "ยังไม่ต้องหมุนรอก รอข้อความ ปลากินเบ็ด!\nเมื่อปลากิน ให้ลากจอยขวาลงทันที / กด I", 2)
   FishingController.State.BITE:
-   _show_step("3/5 ปลากินแล้ว! วัดเบ็ดเลย", "ลากรอกขวาลงทันที / กด I เพื่อเกี่ยวปลาไว้", 2)
+   _show_step("3/5 ปลากินแล้ว! วัดเบ็ดเลย", "ลากจอยขวาลงทันที / กด I เพื่อเกี่ยวปลาไว้", 2)
   FishingController.State.FIGHT:
-   if fishing.tension >= fishing.red_start:
-    _show_step("4/5 แรงตึงสูง! ผ่อนสาย", "ลากรอกขวาขึ้น / K จนพ้นสีแดง เพื่อป้องกันสายขาด", 3)
+   if fishing.fight.exhausted:
+    _show_step("4/5 ปลาหมดแรงแล้ว! กรอเข้ามา", "หลอดแรงตึงเป็นเหลืองทั้งหมดแล้ว\nลากจอยขวาลง / I เพื่อกรอปลาเข้าฝั่ง", 3)
+   elif fishing.fight.line_load_kgf >= fishing.fight.line_strength:
+    _show_step("4/5 แรงตึงสูง! ผ่อนสาย", "ลากจอยขวาขึ้น / K เพื่อลดแรงที่เกินสเปคเอ็น", 3)
    elif fishing.tension < fishing.yellow_start:
-    _show_step("4/5 เก็บสายเข้าหาตัว", "ลากรอกขวาลง / I ให้แรงตึงกลับเข้าสีเหลือง\nอย่าปล่อยสายหย่อนนาน ปลาจะหลุด", 3)
+    _show_step("4/5 เก็บสายเข้าหาตัว", "ลากจอยขวาลง / I ให้แรงตึงกลับเข้าสีเหลือง\nอย่าปล่อยสายหย่อนนาน ปลาจะหลุด", 3)
    else:
-    _show_step("4/5 ประคองสีเหลือง แล้วดึงปลาเข้าฝั่ง", "ลง / I = เก็บสาย • ขึ้น / K = ผ่อนสาย • ซ้ายขวา / J L = คุมคัน\nค่อย ๆ เก็บสายจนปลาเข้าฝั่งและหมดแรง", 3)
+    _show_step("4/5 ประคองเหลือง/แดงเพื่อลดเลือดปลา", "ลง / I = เก็บสาย • ขึ้น / K = ผ่อนสาย • ซ้ายขวา / J L = คุมคัน\nเลือดหมดแล้วหลอดจะเป็นเหลืองทั้งหลอด จากนั้นกรอปลาเข้าฝั่ง", 3)
   FishingController.State.LOST:
    _show_step("ลองอีกครั้งได้เลย", fishing.feedback + "\nรอสักครู่ แล้วเหวี่ยงใหม่ บทสอนจะช่วยต่อ", 1)
   FishingController.State.RESULT:

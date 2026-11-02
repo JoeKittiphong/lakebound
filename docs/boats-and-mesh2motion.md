@@ -6,7 +6,7 @@ The selected twelve clips are Driving, Sitting_Idle, Fishing_Cast, Fishing_Catch
 
 ## Playing
 
-Open `features/gameplay/gameplay.tscn`. A blue wooden-deck fishing boat is moored near the starting bank. Walk toward it until the **ขับเรือ** button appears at the upper right. Press it to board.
+Open `features/gameplay/gameplay.tscn`. An ivory-and-teal fiberglass fishing boat (design B) is moored near the starting bank. Walk toward it until the **ขับเรือ** button appears at the upper right. Press it to board.
 
 - Left joystick / WASD: forward, reverse, turn left/right. Camera and orbit controls remain available.
 - **ตกปลา**: stop the boat immediately and stand at the bow with the equipped rod. Aim and release the right stick to cast normally; hook, reel and fight work as before.
@@ -17,7 +17,7 @@ The empty boat stays moored. Boat movement is blocked by terrain and map bounds;
 
 ## Editor authoring
 
-`actors/boat/fishing_boat.tscn` contains the hull, deck, bench, motor, helm, collisions and two Marker3D anchors. All are saved and editable before Play. DriverAnchor sets the root for sitting; FishingAnchor sets the standing position. The boat is a reusable CharacterBody3D, with its Pond reference assigned by `gameplay.tscn`.
+`actors/boat/fishing_boat.tscn` instances `models/fishing_boat_b.glb` and retains collisions and two Marker3D anchors. The design B model contains a pointed fiberglass hull, tan bow casting deck, helm, seat, outboard motor and red ice cooler: 3,511 triangles, five meshes, one shared material with a 128x128 palette atlas. Editable Blender source is `output/boat-model-b/fishing_boat_b.blend` in the workspace. All are saved and editable before Play. DriverAnchor sets the root for sitting; FishingAnchor sets the standing position. The boat is a reusable CharacterBody3D, with its Pond reference assigned by `gameplay.tscn`.
 
 Inspector exports on FishingBoat control speed, acceleration, steering, boarding radius, minimum water depth and shore-exit search radius. Existing RiverDefinition geometry determines navigable water. Shore exits query the actual player capsule against the physics world before restoring walking.
 

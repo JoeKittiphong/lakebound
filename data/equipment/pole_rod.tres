@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/pole_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/rods/pole_rod.tscn" id="model"]
+
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/pole_rod.tres" id="rod_spec_fit"]
+
+[resource]
+script = ExtResource("script")
+id = &"pole_rod"
+display_name = "คันชิงหลิว"
+kind = "rod"
+equipment_type = "ชิงหลิว"
+shop_icon = ExtResource("icon")
+description = "ชิงหลิว · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 90
+strength = 4
+cast_multiplier = 0.4
+responsiveness = 1.3
+model_scene = ExtResource("model")
+
+
+mount_layout = "fixed"
+
+rod_spec = ExtResource("rod_spec_fit")

@@ -114,16 +114,21 @@ func run() -> void:
  root.push_input(duplicate, true)
  expect(release_count[0] == 1 and joystick.direction == Vector2.ZERO, "touch plus synthetic mouse release emits exactly one joystick release")
  # The camera must also accept the same forwarded desktop mouse source.
+ # Keep the gesture below the new-player tutorial's Skip button. The old
+ # (900, 200) point clicks Skip instead of testing a gesture on empty terrain.
+ var camera_point := root.get_visible_rect().size * Vector2(0.70, 0.42)
+ var tutorial_skip: Control = scene.get_node("HUD/FishingHUD/SafeArea/FirstCatch/Card/Content/Skip")
+ expect(not tutorial_skip.is_visible_in_tree() or not tutorial_skip.get_global_rect().has_point(camera_point), "camera gesture fixture avoids tutorial controls")
  var camera_press := InputEventMouseButton.new()
  camera_press.device = InputEvent.DEVICE_ID_EMULATION
  camera_press.button_index = MOUSE_BUTTON_LEFT
  camera_press.pressed = true
- camera_press.position = Vector2(900, 200)
+ camera_press.position = camera_point
  var yaw_before := camera.rotation.y
  root.push_input(camera_press, true)
  var camera_motion := InputEventMouseMotion.new()
  camera_motion.device = InputEvent.DEVICE_ID_EMULATION
- camera_motion.position = Vector2(960, 200)
+ camera_motion.position = camera_point + Vector2(60, 0)
  camera_motion.relative = Vector2(60, 0)
  camera_motion.button_mask = MOUSE_BUTTON_MASK_LEFT
  root.push_input(camera_motion, true)
@@ -138,9 +143,9 @@ func run() -> void:
  duplicate.pressed = true
  root.push_input(duplicate, true)
  expect(not camera.look_mouse and rod.touch_index == 19, "mouse duplicate from rod touch cannot claim the camera")
- touch(20, true, Vector2(900, 200))
+ touch(20, true, camera_point)
  expect(camera.look_finger == 20 and rod.touch_index == 19, "camera and rod keep separate real fingers after synthetic mouse input")
- touch(20, false, Vector2(900, 200))
+ touch(20, false, camera_point)
  touch(19, false, rod_point)
  duplicate.pressed = false
  root.push_input(duplicate, true)

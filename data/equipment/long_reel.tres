@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://d3rclenkbraug"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_05_conventional_star.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/long_reel.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/long_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script = ExtResource("1")
+id = &"long_reel"
+display_name = "รอกจุสาย · 110 ม."
+shop_icon = ExtResource("shop")
+equipment_type = "รอกเบทพื้นฐาน"
+kind = "reel"
+price = 320
+model_scene = ExtResource("model")
+length = 110.0
+reel_speed = 2.9
+
+reel_family = "star"
+
+reel_spec = ExtResource("reel_spec_fit")

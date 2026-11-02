@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/spinning_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/brook_762mh.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/brook_762mh.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"brook_762mh"
+display_name = "Brook 762MH"
+kind = "rod"
+equipment_type = "สปินนิ่ง · Brook"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "ตีไกล เหยื่อขนาดกลาง รับแรงกระชากได้ต่อเนื่อง · Moderate-Fast"
+price = 460
+strength = 11
+cast_multiplier = 1.24
+responsiveness = 1.05
+
+mount_layout = "spinning"

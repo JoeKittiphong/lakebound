@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_11.res" id="1_yx7yq"]
+
+[node name="11_Purple_Bellflowers" type="Node3D" unique_id=1459837443]
+metadata/garden_concept = 11
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=581326660]
+visibility_range_end = 46.0
+mesh = ExtResource("1_yx7yq")

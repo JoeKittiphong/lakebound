@@ -16,6 +16,9 @@ uniform bool detail_patch_enabled = false;
 uniform bool is_detail_patch = false;
 uniform vec2 detail_patch_center = vec2(0.0);
 uniform float detail_patch_half_size = 8.0;
+group_uniforms Cave;
+uniform bool cave_water_enabled = false;
+uniform vec4 cave_water_rect = vec4(0.0);
 group_uniforms Water;
 uniform vec4 shallow_color : source_color = vec4(0.18, 0.40, 0.36, 1.0);
 uniform vec4 deep_color : source_color = vec4(0.035, 0.15, 0.23, 1.0);
@@ -113,7 +116,15 @@ void fragment() {
  vec3 reflected_world = (INV_VIEW_MATRIX * vec4(reflected, 0.0)).xyz;
  vec3 sky_reflection = mix(reflection_horizon.rgb, reflection_zenith.rgb,
                             smoothstep(0.0, 0.85, reflected_world.y));
- EMISSION = sky_reflection * fresnel * 0.45 / max(ALPHA, 0.05);
+ float cave_shade = 0.0;
+ if (cave_water_enabled) {
+  vec2 q = world_position.xz - cave_water_rect.xy;
+  float sides = smoothstep(0.0, 7.0, min(q.x, cave_water_rect.z-q.x));
+  float depth_inside = 1.0-smoothstep(cave_water_rect.w-14.0,cave_water_rect.w,q.y);
+  cave_shade = sides * depth_inside * step(0.0,q.y) * step(q.y,cave_water_rect.w);
+ }
+ ALBEDO *= mix(1.0,0.52,cave_shade);
+ EMISSION = sky_reflection * fresnel * 0.45 / max(ALPHA, 0.05) * mix(1.0,0.12,cave_shade);
  ROUGHNESS = surface_roughness;
  METALLIC = 0.0;
  SPECULAR = 0.25;

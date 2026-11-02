@@ -108,7 +108,7 @@ func run_tests() -> void:
   expect(landed, "feedback-based reeling can land " + String(record.species.id))
   if landed:
    expect(fishing.fish_distance < 7.1 and fishing.active_fish.position.z <= -9.19, "catch is within rod reach at wet pier edge, not on the deck")
-   expect(record.stamina < 0.4, "catch requires fatigue, no fish HP bar")
+   expect(record.stamina <= 0.0, "catch requires depleted fish health")
    if index == 0:
     fishing.resolve_catch(false)
     expect(pond.fish.has(record) and record.id == id and pond.fish.size() == 30, "release returns the same fish identity without changing population")

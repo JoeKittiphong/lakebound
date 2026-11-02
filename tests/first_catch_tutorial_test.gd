@@ -20,12 +20,16 @@ func run() -> void:
  # Configure before _ready reads the completion flag; do not touch a player's
  # tutorial file or depend on another suite's completion state.
  var tutorial = scene.get_node("HUD/FishingHUD/SafeArea/FirstCatch")
- tutorial.save_path = "user://tutorial_test_%d.cfg" % Time.get_ticks_usec()
+ var qa_dir := OS.get_environment("LAKEBOUND_QA_DIR")
+ tutorial.save_path = (qa_dir if not qa_dir.is_empty() else "user://").path_join("tutorial_test_%d.cfg" % Time.get_ticks_usec())
  root.add_child(scene)
  current_scene = scene
  scene.set_process(false)
  var fishing: FishingController = scene.get_node("FishingController")
  fishing.set_physics_process(false)
+ var hud: FishingHUD = scene.get_node("HUD/FishingHUD")
+ hud.set_boss_notice_visible(true)
+ expect(not hud.get_node("SafeArea/BossToast").visible, "Boss notice stays hidden during first-catch tutorial")
  if DisplayServer.get_name() != "headless":
   await process_frame
   await RenderingServer.frame_post_draw
@@ -59,6 +63,8 @@ func run() -> void:
  expect(not tutorial.visible, "Tutorial does not cover catch result")
  tutorial.bind(fishing, scene.get_node("HUD/FishingHUD"))
  expect(not tutorial.active, "Returning player does not repeat tutorial")
+ hud.set_boss_notice_visible(true)
+ expect(hud.get_node("SafeArea/BossToast").visible, "Boss notice returns after tutorial")
  DirAccess.remove_absolute(tutorial.save_path)
  scene.queue_free()
  await process_frame

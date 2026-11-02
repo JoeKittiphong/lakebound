@@ -1,0 +1,29 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/fishing/ui/stored_fish_display.gd" id="script"]
+[ext_resource type="FontVariation" path="res://shared/ui/fonts/game_font.tres" id="font"]
+[sub_resource type="StandardMaterial3D" id="selected"]
+shading_mode = 0
+transparency = 1
+albedo_color = Color(1, 0.78, 0.25, 0.65)
+[sub_resource type="QuadMesh" id="plane"]
+size = Vector2(1.27, 1.18)
+material = SubResource("selected")
+[node name="StoredFish" type="Node3D"]
+script = ExtResource("script")
+[node name="Selection" type="MeshInstance3D" parent="."]
+visible = false
+position = Vector3(0, 0.012, 0)
+rotation_degrees = Vector3(-90, 0, 0)
+mesh = SubResource("plane")
+cast_shadow = 0
+[node name="Number" type="Label3D" parent="."]
+position = Vector3(-0.5, 0.45, 0.54)
+billboard = 1
+font = ExtResource("font")
+font_size = 36
+pixel_size = 0.006
+text = "1"
+modulate = Color(0.05, 0.16, 0.19, 1)
+outline_modulate = Color(1, 1, 1, 1)
+outline_size = 5
+no_depth_test = false

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="FishingMapDefinition" load_steps=3 format=3]
+[ext_resource type="Script" path="res://features/map/fishing_map_definition.gd" id="script"]
+[ext_resource type="Texture2D" path="res://features/map/maps/lotus_marsh.png" id="texture"]
+[resource]
+script = ExtResource("script")
+map_id = "lotus_marsh"
+bounds = Rect2(-90.0, -88.0, 180.0, 176.0)
+texture = ExtResource("texture")

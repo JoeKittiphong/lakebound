@@ -1,0 +1,136 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/map/minimap.gd" id="script"]
+[ext_resource type="Script" path="res://features/map/local_minimap_view.gd" id="view"]
+[ext_resource type="Resource" path="res://features/map/maps/river.tres" id="map"]
+[ext_resource type="Texture2D" path="res://features/map/maps/river.png" id="terrain"]
+[ext_resource type="Texture2D" path="res://assets/ui/minimap/rim.svg" id="rim"]
+[ext_resource type="Texture2D" path="res://assets/ui/minimap/scan.svg" id="scan"]
+[ext_resource type="Shader" path="res://features/map/local_minimap.gdshader" id="terrain_shader"]
+[ext_resource type="Shader" path="res://features/map/minimap_marker_clip.gdshader" id="clip_shader"]
+[ext_resource type="FontVariation" path="res://assets/ui/hud_affinity/numbers.tres" id="font"]
+[sub_resource type="StyleBoxEmpty" id="empty"]
+[sub_resource type="ShaderMaterial" id="terrain_material"]
+resource_local_to_scene = true
+shader = ExtResource("terrain_shader")
+[sub_resource type="ShaderMaterial" id="clip_material"]
+resource_local_to_scene = true
+shader = ExtResource("clip_shader")
+[sub_resource type="StyleBoxFlat" id="scan_normal"]
+bg_color = Color(1,0.94,0.80,1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.05,0.06,0.04,1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_left = 24
+corner_radius_bottom_right = 24
+[sub_resource type="StyleBoxFlat" id="scan_pressed"]
+bg_color = Color(0.95,0.30,0.24,1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.05,0.06,0.04,1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_left = 24
+corner_radius_bottom_right = 24
+[node name="Minimap" type="Button"]
+custom_minimum_size = Vector2(196,202)
+script = ExtResource("script")
+focus_mode = 0
+tooltip_text = "แผนที่และประวัติจุดตกปลา"
+theme_override_styles/normal = SubResource("empty")
+theme_override_styles/hover = SubResource("empty")
+theme_override_styles/pressed = SubResource("empty")
+theme_override_styles/disabled = SubResource("empty")
+theme_override_styles/focus = SubResource("empty")
+[node name="Content" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+[node name="View" type="Control" parent="Content"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 20.0
+offset_right = 182.0
+offset_bottom = 188.0
+mouse_filter = 2
+material = SubResource("clip_material")
+script = ExtResource("view")
+map_data = ExtResource("map")
+[node name="Terrain" type="TextureRect" parent="Content/View"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture_filter = 2
+texture = ExtResource("terrain")
+material = SubResource("terrain_material")
+expand_mode = 1
+stretch_mode = 0
+[node name="Rim" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 196.0
+offset_bottom = 202.0
+mouse_filter = 2
+texture = ExtResource("rim")
+expand_mode = 1
+stretch_mode = 0
+[node name="North" type="Label" parent="."]
+layout_mode = 0
+offset_left = 87.0
+offset_top = -6.0
+offset_right = 109.0
+offset_bottom = 18.0
+mouse_filter = 2
+text = "N"
+horizontal_alignment = 1
+theme_override_fonts/font = ExtResource("font")
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1,0.98,0.91,1)
+theme_override_colors/font_outline_color = Color(0.02,0.03,0.02,1)
+theme_override_constants/outline_size = 4
+[node name="ScanButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 142.0
+offset_right = 188.0
+offset_bottom = 190.0
+custom_minimum_size = Vector2(48,48)
+focus_mode = 0
+mouse_filter = 0
+icon = ExtResource("scan")
+expand_icon = true
+theme_override_constants/icon_max_width = 34
+theme_override_colors/icon_normal_color = Color(1,1,1,1)
+theme_override_colors/icon_hover_color = Color(1,1,1,1)
+theme_override_colors/icon_pressed_color = Color(1,1,1,1)
+theme_override_styles/normal = SubResource("scan_normal")
+theme_override_styles/hover = SubResource("scan_normal")
+theme_override_styles/pressed = SubResource("scan_pressed")
+theme_override_styles/disabled = SubResource("scan_normal")
+theme_override_styles/focus = SubResource("scan_normal")
+tooltip_text = "สแกนหาปลา"
+[node name="ScanFeedback" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = 163.0
+offset_right = 136.0
+offset_bottom = 183.0
+mouse_filter = 2
+text = "พบปลา"
+horizontal_alignment = 1
+theme_override_fonts/font = ExtResource("font")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1,0.98,0.91,1)
+theme_override_colors/font_outline_color = Color(0.02,0.03,0.02,1)
+theme_override_constants/outline_size = 3
+[connection signal="pressed" from="ScanButton" to="." method="scan_fish"]

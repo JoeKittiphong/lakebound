@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TerminalRigSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+id = "feeder_large"
+display_name = "ตะกร้อรำใหญ่ 95 g โดยประมาณ"
+technique = "cast_bottom"
+hook_g = 0.5
+sinker_g = 35
+feeder_g = 18
+bait_fill_g = 40
+fittings_g = 0.5
+swivel = true

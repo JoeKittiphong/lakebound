@@ -1,5 +1,7 @@
 [gd_scene format=3]
 
+[ext_resource type="PackedScene" path="res://world/regions/forest_stream/garden_dressing.tscn" id="garden_dressing"]
+
 [ext_resource type="Script" path="res://world/pond/pond.gd" id="1_bud02"]
 [ext_resource type="Resource" path="res://world/regions/forest_stream/definition.tres" id="2_rasu7"]
 [ext_resource type="Sky" path="res://world/river/background/river_sky.tres" id="3_1pxb5"]
@@ -871,3 +873,5 @@ transform = Transform3D(1.3746331, 0, 0.6076009, 0, 1.5029289, 0, -0.6076009, 0,
 
 [node name="Spawn" type="Marker3D" parent="GameplayMarkers" unique_id=1008822625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.877013, 0.67, 20)
+
+[node name="GardenDressing" parent="." instance=ExtResource("garden_dressing")]

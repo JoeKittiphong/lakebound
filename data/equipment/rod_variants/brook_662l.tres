@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/spinning_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/brook_662l.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/brook_662l.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"brook_662l"
+display_name = "Brook 662L"
+kind = "rod"
+equipment_type = "สปินนิ่ง · Brook"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "เหยื่อเบา ตะขอสามทาง ลดอาการกระชาก · Moderate-Fast"
+price = 240
+strength = 6
+cast_multiplier = 1.02
+responsiveness = 1.12
+
+mount_layout = "spinning"

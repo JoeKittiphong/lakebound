@@ -44,14 +44,18 @@ func run() -> void:
  for definition in Catalog.SPECIES:
   collection.records[String(definition.id)] = {"count": 1, "total": 1.0, "best": 1.0, "smallest": 1.0, "last": 1.0}
  hud.get_node("CollectionPanel").open()
+ await create_timer(0.7).timeout
  await capture("godot-collection-first-page")
  var scroll: ScrollContainer = hud.get_node("CollectionPanel/Card/Content/Scroll")
- scroll.scroll_vertical = int(scroll.get_v_scroll_bar().max_value)
+ hud.get_node("CollectionPanel").turn_page(hud.get_node("CollectionPanel").page_count-1)
+ await create_timer(0.9).timeout
  await capture("godot-collection-last-page")
  root.size = Vector2i(1600, 720)
- scroll.scroll_vertical = 0
+ hud.get_node("CollectionPanel").turn_page(-hud.get_node("CollectionPanel").page)
+ await create_timer(0.9).timeout
  await capture("godot-collection-wide")
  hud.get_node("CollectionPanel").close()
+ await hud.get_node("CollectionPanel").closed
  root.size = Vector2i(1280, 720)
  for index in mini(7, pond.fish.size()):
   var fish: RefCounted = pond.fish[index]

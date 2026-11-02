@@ -8,7 +8,7 @@ Open `project.godot` in Godot 4.7.2 and press F5, or run `features/gameplay/game
 2. Select bait and depth in the lower center panel. Tilapia prefer dough/worms at 0.5–2.4 m, snakehead prefer lures/worms at 0.6–3.4 m, catfish prefer worms/dough at 3–5.5 m.
 3. Drag the right joystick to adjust aim/distance, then release to cast. Alternatively press the cast button or Space. The aim ring indicates the actual target; bait becomes active when its cast arc lands.
 4. Watch the bobber. When a fish takes the bait, strike within five seconds using the button or Space. A short mobile vibration notifies only this bite; the battle does not vibrate continuously.
-5. During the fight, right-stick up reels in, down pays out line, left/right steers. On desktop use I/K and J/L. Green tension is controllable, yellow suggests caution, red requires release. Holding full reel can break the line; sustained slack can lose the hook. The brake can slip under surges.
+5. During the fight, right-stick down reels in, up pays out line, left/right steers. On desktop I reels in, K pays out and J/L steer. Green tension is controllable, yellow retrieves steadily, red requires release. Holding full reel can break the line; sustained slack can lose the hook. The brake can slip under surges. Release the stick between bite, strike and fight so a held gesture cannot carry into the next mode.
 6. Walk while fighting to change the line geometry. A landing requires the fish within 2.4 m, sufficiently fatigued, and a controlled line. No HP is displayed.
 7. Keep the catch to remove that individual, or release to return the same fish with fatigue, lower hunger, and temporary caution. R or the retrieve button cancels/retrieves without removing a fish.
 

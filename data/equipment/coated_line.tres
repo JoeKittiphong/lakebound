@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/coated_line.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/line_specs/coated_line.tres" id="line_spec_fit"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/shop_goods/coated_line.tscn" id="display_model"]
+
+[resource]
+script = ExtResource("script")
+id = &"coated_line"
+display_name = "สายเคลือบฟลูออโร 12 kgf · 150 ม."
+kind = "line"
+equipment_type = "ไนลอนเคลือบฟลูออโร"
+shop_icon = ExtResource("icon")
+description = "ไนลอนเคลือบฟลูออโร · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 120
+strength = 12
+length = 150
+visibility = 0.8
+shock_absorption = 1.1
+
+
+line_visual_style="fluoro"
+
+line_spec = ExtResource("line_spec_fit")
+
+model_scene = ExtResource("display_model")

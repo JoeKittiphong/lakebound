@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Brook"
+family = "spinning"
+power = "UL"
+action = "Fast"
+sections = 2
+line_min_lb = 2
+line_max_lb = 6
+lure_min_g = 0.8
+lure_max_g = 5
+pe_max = 0
+bend_radians = 1.85
+progression = 0.22
+recovery_seconds = 0.12
+intended_use = "เหยื่อจิ๋วในลำธาร ปลาซิวและปลาขนาดเล็ก"
+reference_url = "https://www.uglystik.com/collections/spinning-rods/products/gx2-spinning-rod-1624495"
+length_m = 1.68
+handle_m = 0.42
+
+techniques = PackedStringArray("cast_float", "cast_bottom", "cast_retrieve")
+cast_min_g = 0.8
+cast_max_g = 5
+max_working_drag_kgf = 0.816466266

@@ -9,7 +9,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN = re.compile(
-    r"(^|/)(?:\.godot|android|exports|signing|\.signing|\.venv|node_modules|user_data)(/|$)"
+    r"(^|/)(?:\.godot|android|exports|signing|\.signing|\.venv|node_modules|user_data|server|\.local)(/|$)"
     r"|(^|/)(?:\.env(?:\..*)?|release-credentials\.json|id_rsa|id_ed25519)$"
     r"|\.(?:jks|keystore|dpapi|p12|pfx|pem|key|apk|aab|apks|pck|pyc|tmp|bak)$",
     re.IGNORECASE,

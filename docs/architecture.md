@@ -1,5 +1,13 @@
 # Runtime architecture
 
+Current online boundary (28 October 2026): the game uses Google Sheets only.
+`SocialPanel` owns UI/request lifecycle; `SheetsRankingSync` owns upload deltas
+and acknowledgements; `RankingSnapshot` validates both HTTP rows and disk cache.
+Apps Script and its tooling live in `services/google_sheets/`, outside Godot's
+resource graph via `services/.gdignore`. Local profile/collection persistence
+remains authoritative for offline gameplay. See [profile and ranking](profile-and-ranking.md)
+and [this refactor's plan/results](refactor-2026-10-28.md).
+
 > เอกสารขอบเขตจาก refactor รอบก่อน: ปัจจุบัน session มี economy, boats,
 > missions และ regions เพิ่ม การเข้าถึง HUD ภายในจาก session ถูกแทนด้วย API แล้ว
 > ใน [refactor phase 1](refactor-phase1-verification.md)

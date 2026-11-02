@@ -1,11 +1,21 @@
-[gd_resource type="Resource" script_class="TackleItem" load_steps=3 format=3]
-[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://pkbvapaiiewg"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
 [ext_resource type="PackedScene" path="res://features/equipment/rods/heavy_rod.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/heavy_rod.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/heavy_rod.tres" id="rod_spec_fit"]
+
 [resource]
 script = ExtResource("1")
 id = &"heavy_rod"
 display_name = "คันหนัก · รับแรงสูง"
+shop_icon = ExtResource("shop")
 kind = "rod"
 price = 240
 strength = 12.0
 model_scene = ExtResource("model")
+
+mount_layout = "overhead"
+
+rod_spec = ExtResource("rod_spec_fit")

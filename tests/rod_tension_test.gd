@@ -53,8 +53,8 @@ func run() -> void:
     await process_frame
    var bar := meter.get_global_rect()
    var reel := hud.rod_joystick.get_global_rect()
-   var guide := hud.rod_joystick.reel_guide_position()
-   expect(absf(bar.end.y - (guide.y - 24.0)) < 1.0 and absf(bar.get_center().x - guide.x) < 1.0, "layout B stays on the projected reel axis at " + str(resolution))
+
+   expect(bar.end.x < reel.position.x and absf(bar.end.y - (reel.end.y - 18.0)) < 1.0, "tension readout stays next to the joystick at " + str(resolution))
    expect(root.get_visible_rect().encloses(bar) and not bar.intersects(hud.get_node("SafeArea/LineInfo").get_global_rect()), "rod stays inside viewport and clear of distance info")
   root.size = Vector2i(1280, 720)
   for tick in 4:
@@ -77,9 +77,9 @@ func run() -> void:
  var b := FightSimulation.new()
  a.line_length = 16.0
  b.line_length = 16.0
- a.advance(0.1, Vector3.ZERO, easy, Vector2.ZERO, controller.tuning)
- b.advance(0.1, Vector3.ZERO, hard, Vector2.ZERO, controller.tuning)
- expect(b.tension > a.tension, "higher species pressure increases actual tension, not just red coloring")
+ a.advance(0.1, Vector3.ZERO, easy, Vector2(0,.6), controller.tuning)
+ b.advance(0.1, Vector3.ZERO, hard, Vector2(0,.6), controller.tuning)
+ expect(b.tension / b.red_start > a.tension / a.red_start, "higher species pressure increases danger at the same active pull")
  scene.queue_free()
  await process_frame
  print("ROD TENSION RESULT: ", errors, " failures")

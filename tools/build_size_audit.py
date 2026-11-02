@@ -14,6 +14,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ("project", "output", "godot", "java-home", "sdk", "gradle-cache", "qa-key", "profile"):
         p.add_argument("--" + name, type=Path, required=True)
+    p.add_argument("--preset", default="Android AAB")
     args = p.parse_args()
     output = args.output.resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -25,21 +26,35 @@ def main():
     startup = subprocess.STARTUPINFO()
     startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     startup.wShowWindow = 0
-    command = [str(args.godot), "--path", str(args.project.resolve()), "--rendering-method", "gl_compatibility",
-               "--log-file", str(output.parent / "qa-aab-build.log"), "--export-release", "Android AAB", str(output)]
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env,
-                               startupinfo=startup, creationflags=subprocess.CREATE_NO_WINDOW)
-    try:
-        data, _ = process.communicate(timeout=240)
-        result = {"exit": process.returncode, "timeout": False}
-    except subprocess.TimeoutExpired:
-        process.kill()
-        data, _ = process.communicate(timeout=10)
-        result = {"exit": process.returncode, "timeout": True}
-    (output.parent / "qa-aab-console.log").write_bytes(data)
-    result["aab_bytes"] = output.stat().st_size if output.exists() else None
+    # The Windows console launcher can outlive its engine child after export.
+    # With output already redirected, invoke the real engine directly.
+    engine = args.godot
+    if os.name == "nt" and engine.name.endswith("_console.exe"):
+        candidate = engine.with_name(engine.name.replace("_console.exe", ".exe"))
+        if candidate.is_file():
+            engine = candidate
+    command = [str(engine), "--headless", "--quit", "--path", str(args.project.resolve()), "--rendering-method", "gl_compatibility",
+               "--log-file", str(output.parent / (output.stem + "-build.log")), "--export-release", args.preset, str(output)]
+    # Gradle daemons may inherit a stdout pipe after Godot exits. Capture to a
+    # file and wait on the actual exporter, so a live daemon cannot stall QA.
+    console_log = output.parent / (output.stem + "-console.log")
+    with console_log.open("wb") as capture:
+        process = subprocess.Popen(command, stdout=capture, stderr=subprocess.STDOUT, env=env,
+                                   startupinfo=startup, creationflags=subprocess.CREATE_NO_WINDOW)
+        try:
+            process.wait(timeout=240)
+            result = {"exit": process.returncode, "timeout": False}
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait(timeout=10)
+            result = {"exit": process.returncode, "timeout": True}
+    data = console_log.read_bytes()
+    result["archive_bytes"] = output.stat().st_size if output.exists() else None
+    result["preset"] = args.preset
+    if output.suffix == ".aab":
+        result["aab_bytes"] = result["archive_bytes"]
     result["qa_only"] = True
-    (output.parent / "qa-aab-result.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
+    (output.parent / (output.stem + "-result.json")).write_text(json.dumps(result, indent=2), encoding="utf-8")
     print(json.dumps(result), flush=True)
     # Keep output concise and avoid printing any environment or signing data.
     print(data.decode("utf-8", errors="replace")[-1800:], flush=True)

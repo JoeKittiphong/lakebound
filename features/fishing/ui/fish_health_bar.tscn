@@ -1,0 +1,52 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/fishing/ui/fish_health_bar.gd" id="script"]
+[sub_resource type="StyleBoxFlat" id="background"]
+bg_color=Color(0.03,0.1,0.13,0.94)
+border_width_left=2
+border_width_top=2
+border_width_right=2
+border_width_bottom=2
+border_color=Color(0.75,0.87,0.9,0.7)
+corner_radius_top_left=7
+corner_radius_top_right=7
+corner_radius_bottom_left=7
+corner_radius_bottom_right=7
+[sub_resource type="StyleBoxFlat" id="fill"]
+bg_color=Color(0.96,0.28,0.29,1)
+corner_radius_top_left=6
+corner_radius_top_right=6
+corner_radius_bottom_left=6
+corner_radius_bottom_right=6
+[node name="FishHealth" type="Control"]
+layout_mode=1
+anchor_left=0.5
+anchor_right=0.5
+offset_left=-150.0
+offset_right=150.0
+offset_top=8.0
+offset_bottom=60.0
+mouse_filter=2
+script=ExtResource("script")
+[node name="Title" type="Label" parent="."]
+layout_mode=1
+anchor_right=1.0
+offset_bottom=26.0
+mouse_filter=2
+horizontal_alignment=1
+clip_text=true
+text="เลือดปลา • 100%"
+theme_override_font_sizes/font_size=18
+theme_override_colors/font_outline_color=Color(0.01,0.04,0.06,1)
+theme_override_constants/outline_size=6
+[node name="Track" type="ProgressBar" parent="."]
+layout_mode=1
+anchor_right=1.0
+offset_top=30.0
+offset_bottom=50.0
+mouse_filter=2
+max_value=1.0
+step=0.001
+value=1.0
+show_percentage=false
+theme_override_styles/background=SubResource("background")
+theme_override_styles/fill=SubResource("fill")

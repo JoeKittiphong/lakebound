@@ -19,10 +19,13 @@ var _boss_toast := 0.0
 @onready var vessel: FishingBoat = get_node_or_null("FishingBoat")
 
 func _notification(what: int) -> void:
- if what == NOTIFICATION_APPLICATION_FOCUS_OUT and is_instance_valid(camera_rig):
+ if what in [NOTIFICATION_APPLICATION_FOCUS_OUT, NOTIFICATION_APPLICATION_PAUSED] and is_instance_valid(camera_rig):
   camera_rig.reset_input()
   if is_instance_valid(fishing):
    fishing.lure_input.reset()
+   fishing.lure_gestures.reset()
+   fishing.lure_rhythm.reset()
+   fishing.ecosystem.invalidate_lure_action()
    fishing.lure_holding = false
  elif what == NOTIFICATION_WM_GO_BACK_REQUEST:
   _on_back_pressed()
@@ -30,6 +33,7 @@ func _notification(what: int) -> void:
   get_tree().quit()
 
 func _ready() -> void:
+ camera_rig.configure_fishing_view(player, fishing)
  hud.configure_session(map_id, maximum_fishing_depth)
  fishing.map_id = map_id
  if economy_enabled:
@@ -37,13 +41,18 @@ func _ready() -> void:
   fishing.bind_profile(profile, collection)
   if not CatchSettlement.reconcile(profile, collection) and not collection.save_error.is_empty():
    profile.save_error = collection.save_error
-  if profile.data.ponds.has(map_id):
+  var had_saved_population: bool=profile.data.ponds.has(map_id)
+  if had_saved_population:
    if not pond.restore(profile.data.ponds[map_id]):
     profile.incompatible = true
     profile.save_error = "ข้อมูลบ่อเดิมไม่ถูกต้อง — เก็บไฟล์ไว้และหยุดการเขียนทับ"
   else:
    pond.reset_population(randi())
    profile.store_pond(map_id, pond.snapshot())
+  if not profile.incompatible and not pond.population_expansion_revision.is_empty() and profile.data.pond_revisions.get(map_id,"")!=pond.population_expansion_revision:
+   var before_expansion:=pond.snapshot()
+   if had_saved_population:pond.expand_population(pond.population_expansion_count)
+   if not profile.store_pond(map_id,pond.snapshot(),pond.population_expansion_revision):pond.restore(before_expansion)
   commerce = $CommerceGateway
   hud.bind_economy(profile, fishing, pond, commerce)
   commerce.reward_completed.connect(func(receipt: String, recovery_id: String): profile.apply_verified_reward(receipt, recovery_id))
@@ -72,6 +81,7 @@ func _ready() -> void:
  camera_rig.view_changed.connect(_on_view_changed)
  _on_view_changed(camera_rig.global_rotation.y)
  hud.bind(fishing, pond)
+ hud.bind_map(profile, player, $World.definition)
  hud.orbit_requested.connect(camera_rig.set_orbiting)
  hud.orbit_dragged.connect(camera_rig.drag_orbit)
  if profile != null:
@@ -82,7 +92,8 @@ func _ready() -> void:
  hud.configuration_changed.connect(_on_configuration_changed)
  hud.back_requested.connect(_on_back_pressed)
  hud.collection_visibility_changed.connect(_on_collection_visibility_changed)
- fishing.cast_started.connect(func(): player.play_cast(fishing.tuning.cast_duration))
+ fishing.cast_started.connect(func():
+  if not fishing.is_drop_method(): player.play_cast(fishing.tuning.cast_duration))
  fishing.fish_landed.connect(_on_fish_landed)
  fishing.state_changed.connect(_on_fishing_state_changed)
  _on_fishing_state_changed()
@@ -99,7 +110,7 @@ func _on_fish_landed(fish: FishState) -> void:
   if fishing.catch_record.is_empty():
    fishing.catch_record = CatchSettlement.make_record(fish, profile, map_id,
     fishing.catch_event_id, fishing.cast_bait_id, fishing.bite_depth,
-    pond.boss() == fish, bool(profile.data.missions.started) and not hud.is_tutorial_active())
+    pond.boss() == fish, bool(profile.data.missions.started) and not hud.is_tutorial_active(), fishing.bite_context)
   var result := CatchSettlement.persist(profile, collection, fishing.catch_record)
   outcome = result.outcome
   error = result.error
@@ -118,6 +129,7 @@ func _on_view_changed(yaw: float) -> void:
  fishing.aim_yaw = yaw
 
 func _on_fishing_state_changed() -> void:
+ camera_rig.set_fishing_view(fishing.state in [FishingController.State.WAITING, FishingController.State.BITE, FishingController.State.FIGHT])
  player.input_enabled = fishing.state != fishing.State.RESULT
  player.set_fighting(fishing.state == fishing.State.FIGHT)
  player.set_fishing_animation_state(fishing.state, maxf(0.0, fishing.rod_input.y), fishing.tension)
@@ -192,6 +204,8 @@ func _on_configuration_changed(bait: StringName, depth: float) -> void:
 func _on_collection_visibility_changed(opened: bool) -> void:
  camera_rig.reset_input()
  if opened and not _modal_active:
+  fishing.lure_input.reset()
+  fishing.lure_holding = false
   _previous_pause = get_tree().paused
   _modal_active = true
   get_tree().paused = true
@@ -241,7 +255,7 @@ func _refresh_profile() -> void:
   return
  fishing.refresh_equipment()
  hud.sync_equipment()
- hud.update_wallet(profile.data.coins)
+ hud.update_wallet(profile.data.coins,profile.data.diamonds)
  var boss := pond.boss()
  if boss != null:
   var discovered: bool = collection.stats(boss.species.id).count > 0

@@ -1,18 +1,19 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 [ext_resource type="Script" path="res://features/fishing/ui/fish_box.gd" id="view"]
-[ext_resource type="Texture2D" path="res://features/fishing/ui/fish_box.svg" id="icon"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/small_box.tres" id="icon"]
 [ext_resource type="StyleBox" path="res://assets/ui/modern/panel.tres" id="panel"]
+[sub_resource type="StyleBoxEmpty" id="empty"]
 [node name="FishBox" type="PanelContainer"]
 script = ExtResource("view")
-custom_minimum_size = Vector2(240, 86)
+custom_minimum_size = Vector2(148, 64)
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("panel")
 [node name="Row" type="HBoxContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 6
 [node name="Icon" type="TextureRect" parent="Row"]
-custom_minimum_size = Vector2(62, 60)
+custom_minimum_size = Vector2(38, 38)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("icon")
@@ -21,25 +22,20 @@ stretch_mode = 5
 [node name="Info" type="VBoxContainer" parent="Row"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/separation = 0
-[node name="Count" type="Label" parent="Row/Info"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_font_sizes/font_size = 18
-text = "กล่องปลา · 0 ตัว"
 [node name="Weight" type="Label" parent="Row/Info"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/font_size = 16
-text = "0.0 / 25.0 กก."
-[node name="Fill" type="ProgressBar" parent="Row/Info"]
-custom_minimum_size = Vector2(140, 10)
+text = "0/25"
+[node name="Open" type="Button" parent="."]
 layout_mode = 2
-mouse_filter = 2
-show_percentage = false
-[node name="State" type="Label" parent="Row/Info"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_font_sizes/font_size = 15
-text = "ยังว่าง · เหลือ 25.0 กก."
+focus_mode = 0
+tooltip_text = "เปิดกล่องปลา"
+theme_override_styles/normal = SubResource("empty")
+theme_override_styles/hover = SubResource("empty")
+theme_override_styles/pressed = SubResource("empty")
+theme_override_styles/focus = SubResource("empty")
+theme_override_styles/disabled = SubResource("empty")

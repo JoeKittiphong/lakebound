@@ -1,0 +1,50 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://features/loading/map_transition.gd" id="script"]
+[ext_resource type="Theme" path="res://features/menu/lake_menu_theme.tres" id="theme"]
+
+[node name="MapTransition" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.87, 0.96, 1, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Content" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Status" type="Label" parent="Center/Content"]
+layout_mode = 2
+text = "กำลังเตรียมแหล่งน้ำ…"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="Center/Content"]
+layout_mode = 2
+text = "อาจใช้เวลาสักครู่"
+horizontal_alignment = 1
+
+[node name="Retry" type="Button" parent="Center/Content"]
+visible = false
+layout_mode = 2
+text = "ลองอีกครั้ง"
+
+[node name="Back" type="Button" parent="Center/Content"]
+visible = false
+layout_mode = 2
+text = "กลับหน้าหลัก"
+
+[connection signal="pressed" from="Center/Content/Retry" to="." method="_request_map"]
+[connection signal="pressed" from="Center/Content/Back" to="." method="_on_back_pressed"]

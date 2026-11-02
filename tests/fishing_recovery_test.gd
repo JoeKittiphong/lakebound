@@ -64,7 +64,7 @@ func run() -> void:
    slack_time = slack_time + 1.0 / 60.0 if fight.tension < 0.12 else maxf(0, slack_time - 2.0 / 60.0)
    if red_time >= 1.4 or slack_time >= 2.5:
     break
-   if fish.stamina < 0.4 and Vector2(fish.position.x, fish.position.z).length() <= 2.0:
+   if fight.exhausted and Vector2(fish.position.x, fish.position.z).length() <= 2.0:
     landed = true
     break
   expect(landed, "%s can be retrieved with visible tension feedback" % species.id)
@@ -101,15 +101,16 @@ func run() -> void:
   profile.data.catches = [] if fraction == 0.0 else [{"weight": profile.equipped("box").capacity * fraction}]
   profile.changed.emit()
   hud._process(0.01)
-  var info := hud.get_node("SafeArea/FishBox/Row/Info")
-  expect(info.get_node("Count").text.contains("0 ตัว" if fraction == 0 else "1 ตัว"), "box count reflects retained fish at %.0f%%" % (fraction * 100))
-  expect(is_equal_approx(info.get_node("Fill").value, fraction * 100), "box weight fill reflects %.0f%%" % (fraction * 100))
+  var info := hud.get_node("SafeArea/TopBar/Actions/FishBox/Row/Info")
+  var expected := "%s/%.0f" % [("%.1f" % (profile.equipped("box").capacity*fraction)).trim_suffix(".0"),profile.equipped("box").capacity]
+  expect(info.get_node("Weight").text == expected, "compact box weight/capacity updates at %.0f%%" % (fraction*100))
+  expect(not info.has_node("Fill") and not info.has_node("Count"), "compact box omits bar and verbose count")
   if fraction >= 0.8:
-   expect(("เต็มแล้ว" if fraction == 1.0 else "ใกล้เต็ม") in info.get_node("State").text, "box warns near/full %.0f%%" % (fraction * 100))
+   expect(info.get_node("Weight").modulate == Color.WHITE, "capacity readout retains the established white HUD text")
  profile.data.catches = []
  profile.changed.emit()
  hud._process(0.01)
- expect(hud.get_node("SafeArea/FishBox/Row/Info/Fill").value == 0, "selling/removing stored fish clears the capacity indicator")
+ expect(hud.get_node("SafeArea/TopBar/Actions/FishBox/Row/Info/Weight").text.begins_with("0/"), "selling/removing stored fish clears the capacity indicator")
  controller.profile = null
  controller.haptics_enabled = false
  # Exercise the controller at the spool boundary too, where it previously

@@ -19,7 +19,8 @@ var _transitioning := false
 
 func _notification(what: int) -> void:
  if what == NOTIFICATION_WM_GO_BACK_REQUEST or what == NOTIFICATION_WM_CLOSE_REQUEST:
-  get_tree().quit()
+  if not is_instance_valid(menu_ui):
+   get_tree().quit()
 
 func _ready() -> void:
  # Present the light lakeside scene before requesting the full game.

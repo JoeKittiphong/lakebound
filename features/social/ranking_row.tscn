@@ -1,0 +1,42 @@
+[gd_scene format=3]
+[node name="RankingRow" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 60)
+[node name="Line" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+[node name="Rank" type="Label" parent="Line"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(48, 0)
+text = "01"
+theme_override_font_sizes/font_size = 24
+[node name="Info" type="Label" parent="Line"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.4
+text = "ชื่อนักตกปลา"
+text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 20
+[node name="Fish" type="Label" parent="Line"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ปลานิล"
+text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 20
+[node name="Location" type="Label" parent="Line"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "แม่น้ำสายใหญ่"
+text_overrun_behavior = 3
+theme_override_font_sizes/font_size = 20
+[node name="Weight" type="Label" parent="Line"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(132, 0)
+text = "12.500 กก."
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 22

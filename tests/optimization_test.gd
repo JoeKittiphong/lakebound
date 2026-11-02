@@ -49,7 +49,10 @@ func run() -> void:
    expect(ProfileStore.save_profile(path, value) == OK, "stress profile save succeeds")
    writes.append(Time.get_ticks_usec() - start)
   var loaded := ProfileStore.load_profile(path)
-  expect(not loaded.incompatible and loaded.data == value, "large profile survives save and reload")
+  var migrated := value.duplicate(true)
+  CatchArchive.prepare(migrated)
+  expect(not loaded.incompatible and loaded.data == migrated, "large profile survives save and bounded-history migration")
+  expect(int(loaded.data.history.stats.get("tilapia",{}).get("count",0)) == count and loaded.data.journal.size() == mini(count,10), "large migration preserves lifetime count with at most ten detailed catches")
   profile.save_path = "user://missing-optimization-directory/profile.cfg"
   var original := value.duplicate(true)
   expect(not profile.buy("worm") and profile.data == original, "failed purchase restores full large profile")

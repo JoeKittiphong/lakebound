@@ -2,7 +2,11 @@ class_name CommerceGateway
 extends Node
 
 signal status_changed
+# Platform adapters publish these inherited callback signals after server verification.
+# The disabled base adapter deliberately never emits a reward or purchase.
+@warning_ignore("unused_signal")
 signal reward_completed(receipt: String, recovery_id: String)
+@warning_ignore("unused_signal")
 signal purchase_completed(receipt: String, diamonds: int)
 var status := "ยังไม่เปิดบริการโฆษณา / เติมเพชร / Top 10 ออนไลน์"
 

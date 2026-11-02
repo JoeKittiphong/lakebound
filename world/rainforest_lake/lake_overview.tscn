@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://world/rainforest_lake/rainforest_lake.tscn" id="1_8a0cu"]
+[ext_resource type="Script" path="res://world/pond/pond.gd" id="2_8miyj"]
+[ext_resource type="Resource" path="res://world/rainforest_lake/lake_definition.tres" id="3_klsm8"]
+
+[node name="LakeOverview" type="Node3D" unique_id=1760965978]
+
+[node name="RainforestLake" type="Node3D" parent="." unique_id=63385759 instance=ExtResource("1_8a0cu")]
+script = ExtResource("2_8miyj")
+definition = ExtResource("3_klsm8")
+metadata/cliff_pieces = 183
+metadata/cave_roof_triangles = 920
+metadata/shoreline_metrics = {
+"added_water_m2": 67048,
+"area_multiplier": 4.291854218092057,
+"previous_shallow_area_m2": 27548,
+"previous_water_area_m2": 251512,
+"shallow_area_m2": 118232,
+"water_area_m2": 318560
+}
+metadata/placement_counts = {
+"banana": 116,
+"bush": 1022,
+"dark_taro": 1007,
+"emergent_lotus": 1036,
+"fern": 1017,
+"grass": 1010,
+"old_log": 71,
+"old_lotus": 2315,
+"old_tree": 70,
+"plume_grass": 362,
+"rock_boulder": 658,
+"rock_flat": 924,
+"seaweed": 61,
+"shore_reeds": 368,
+"taro": 1033,
+"tree_a": 485,
+"tree_b": 354
+}
+
+[node name="OverviewCamera" type="Camera3D" parent="." unique_id=518872277]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 700, 0)
+keep_aspect = 0
+projection = 1
+size = 1040.0
+far = 1200.0

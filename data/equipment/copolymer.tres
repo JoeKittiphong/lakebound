@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/copolymer.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/line_specs/copolymer.tres" id="line_spec_fit"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/shop_goods/copolymer.tscn" id="display_model"]
+
+[resource]
+script = ExtResource("script")
+id = &"copolymer"
+display_name = "โคพอลิเมอร์ 10 kgf · 120 ม."
+kind = "line"
+equipment_type = "โคพอลิเมอร์"
+shop_icon = ExtResource("icon")
+description = "โคพอลิเมอร์ · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 95
+strength = 10
+length = 120
+visibility = 0.9
+shock_absorption = 1.15
+
+
+line_visual_style="mono"
+
+line_spec = ExtResource("line_spec_fit")
+
+model_scene = ExtResource("display_model")

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://b31m3m6nsl3l2"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/clear_line.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/line_specs/clear_line.tres" id="line_spec_fit"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/shop_goods/clear_line.tscn" id="display_model"]
+
+[resource]
+script = ExtResource("1")
+id = &"clear_line"
+display_name = "สายใส 8 kgf · 80 ม."
+shop_icon = ExtResource("shop")
+kind = "line"
+price = 75
+strength = 8.0
+visibility = 0.75
+length = 80.0
+
+line_visual_style="fluoro"
+
+line_spec = ExtResource("line_spec_fit")
+
+model_scene = ExtResource("display_model")

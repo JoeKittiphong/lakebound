@@ -1,0 +1,995 @@
+{
+  "reels": [
+    {
+      "id": "01_spinning",
+      "label": "SPINNING",
+      "family": "spinning",
+      "ratio": 5.2,
+      "low_ratio": 5.2,
+      "model": "res://models/01_spinning.glb",
+      "rod": "spinning",
+      "mount_x": 0.28,
+      "mount_y": -0.01,
+      "slot_axis": "X",
+      "core_radius": 0.019,
+      "maximum_radius": 0.023,
+      "width": 0.0255,
+      "base_triangles": 1414,
+      "has_rotor": true,
+      "grips": [
+        "GripPivot0"
+      ],
+      "spool_center_blender": [
+        0,
+        0,
+        -0.065
+      ],
+      "tangent_exit": false,
+      "levelwind_travel": 0.013600000000000001,
+      "foot_local": [
+        -0.02531914785504341,
+        -3.182185173500329e-05,
+        -0.0
+      ],
+      "foot_length": 0.053904890664853156,
+      "foot_width": 0.011492055375128984,
+      "foot_body_object": "Hero_01_Continuous_body_stem_foot.002",
+      "source_scene": "Reel_01_spinning • asset.001"
+    },
+    {
+      "id": "02_low_profile",
+      "label": "LOW-PROFILE BAITCASTER",
+      "family": "low",
+      "ratio": 7.2,
+      "low_ratio": 7.2,
+      "model": "res://models/02_low_profile.glb",
+      "rod": "casting",
+      "mount_x": 0.32,
+      "mount_y": 0.01,
+      "slot_axis": "Y",
+      "core_radius": 0.009,
+      "maximum_radius": 0.018000000000000002,
+      "width": 0.025999999999999995,
+      "base_triangles": 1180,
+      "has_rotor": false,
+      "grips": [
+        "GripPivot0",
+        "GripPivot1"
+      ],
+      "spool_center_blender": [
+        0,
+        0,
+        0.032
+      ],
+      "tangent_exit": false,
+      "levelwind_travel": 0.01224,
+      "foot_local": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "foot_length": 0.05999999865889549,
+      "foot_width": 0.012000000104308128,
+      "foot_body_object": "02_low_profile__Continuous_frame_and_foot",
+      "source_scene": "Reel_02_low_profile • asset"
+    },
+    {
+      "id": "03_round_baitcaster",
+      "label": "ROUND BAITCASTER",
+      "family": "round",
+      "ratio": 5.2,
+      "low_ratio": 5.2,
+      "model": "res://models/03_round_baitcaster.glb",
+      "rod": "casting",
+      "mount_x": 0.32,
+      "mount_y": 0.01,
+      "slot_axis": "Y",
+      "core_radius": 0.011,
+      "maximum_radius": 0.024,
+      "width": 0.033999999999999996,
+      "base_triangles": 1340,
+      "has_rotor": false,
+      "grips": [
+        "GripPivot0",
+        "GripPivot1"
+      ],
+      "spool_center_blender": [
+        0,
+        0,
+        0.038
+      ],
+      "tangent_exit": false,
+      "levelwind_travel": 0.01496,
+      "foot_local": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "foot_length": 0.05999999865889549,
+      "foot_width": 0.012000000104308128,
+      "foot_body_object": "03_round_baitcaster__Continuous_frame_and_foot",
+      "source_scene": "Reel_03_round_baitcaster • asset"
+    },
+    {
+      "id": "04_spincast",
+      "label": "SPINCAST",
+      "family": "spincast",
+      "ratio": 3.2,
+      "low_ratio": 3.2,
+      "model": "res://models/04_spincast.glb",
+      "rod": "casting",
+      "mount_x": 0.32,
+      "mount_y": 0.01,
+      "slot_axis": "X",
+      "core_radius": 0.009,
+      "maximum_radius": 0.018,
+      "width": 0.018,
+      "base_triangles": 1196,
+      "has_rotor": true,
+      "grips": [
+        "GripPivot0",
+        "GripPivot1"
+      ],
+      "spool_center_blender": [
+        0,
+        0,
+        -0.065
+      ],
+      "tangent_exit": false,
+      "levelwind_travel": 0.013600000000000001,
+      "foot_local": [
+        -0.0279999990016222,
+        0.0,
+        -0.0
+      ],
+      "foot_length": 0.05999999842606485,
+      "foot_width": 0.012000000104308128,
+      "foot_body_object": "04_spincast__Continuous_body_and_foot",
+      "source_scene": "Reel_04_spincast • asset"
+    },
+    {
+      "id": "05_conventional_star",
+      "label": "CONVENTIONAL / STAR DRAG",
+      "family": "star",
+      "ratio": 6.1,
+      "low_ratio": 6.1,
+      "model": "res://models/05_conventional_star.glb",
+      "rod": "casting",
+      "mount_x": 0.32,
+      "mount_y": 0.01,
+      "slot_axis": "Y",
+      "core_radius": 0.014,
+      "maximum_radius": 0.033,
+      "width": 0.048,
+      "base_triangles": 1152,
+      "has_rotor": false,
+      "grips": [
+        "GripPivot0"
+      ],
+      "spool_center_blender": [
+        0,
+        0,
+        0.048
+      ],
+      "tangent_exit": true,
+      "levelwind_travel": 0.01972,
+      "foot_local": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "foot_length": 0.05999999865889549,
+      "foot_width": 0.012000000104308128,
+      "foot_body_object": "05_conventional_star__Continuous_frame_and_foot",
+      "source_scene": "Reel_05_conventional_star • asset"
+    },
+    {
+      "id": "06_conventional_lever",
+      "label": "CONVENTIONAL / LEVER DRAG",
+      "family": "lever",
+      "ratio": 6.2,
+      "low_ratio": 2.8,
+      "model": "res://models/06_conventional_lever.glb",
+      "rod": "casting",
+      "mount_x": 0.32,
+      "mount_y": 0.01,
+      "slot_axis": "Y",
+      "core_radius": 0.015,
+      "maximum_radius": 0.034999999999999996,
+      "width": 0.049999999999999996,
+      "base_triangles": 1204,
+      "has_rotor": false,
+      "grips": [
+        "GripPivot0"
+      ],
+      "spool_center_blender": [
+        0,
+        0,
+        0.05
+      ],
+      "tangent_exit": true,
+      "levelwind_travel": 0.0204,
+      "foot_local": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "foot_length": 0.05999999865889549,
+      "foot_width": 0.012000000104308128,
+      "foot_body_object": "06_conventional_lever__Continuous_frame_and_foot",
+      "source_scene": "Reel_06_conventional_lever • asset"
+    },
+    {
+      "id": "07_fly",
+      "label": "FLY / DIRECT DRIVE",
+      "family": "fly",
+      "ratio": 1.0,
+      "low_ratio": 1.0,
+      "model": "res://models/07_fly.glb",
+      "rod": "fly",
+      "mount_x": 0.065,
+      "mount_y": -0.01,
+      "slot_axis": "Y",
+      "core_radius": 0.012,
+      "maximum_radius": 0.033,
+      "width": 0.022,
+      "base_triangles": 1184,
+      "has_rotor": false,
+      "grips": [
+        "GripPivot0"
+      ],
+      "spool_center_blender": [
+        0,
+        0,
+        -0.056
+      ],
+      "tangent_exit": true,
+      "levelwind_travel": 0.01088,
+      "foot_local": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "foot_length": 0.05999999865889549,
+      "foot_width": 0.012000000104308128,
+      "foot_body_object": "07_fly__Continuous_frame_and_foot",
+      "source_scene": "Reel_07_fly • asset"
+    },
+    {
+      "id": "08_inline_ice",
+      "label": "INLINE ICE",
+      "family": "ice",
+      "ratio": 2.7,
+      "low_ratio": 2.7,
+      "model": "res://models/08_inline_ice.glb",
+      "rod": "ice",
+      "mount_x": 0.16,
+      "mount_y": -0.01,
+      "slot_axis": "Y",
+      "core_radius": 0.011,
+      "maximum_radius": 0.024,
+      "width": 0.022,
+      "base_triangles": 1176,
+      "has_rotor": false,
+      "grips": [
+        "GripPivot0",
+        "GripPivot1"
+      ],
+      "spool_center_blender": [
+        0,
+        0,
+        -0.049
+      ],
+      "tangent_exit": true,
+      "levelwind_travel": 0.01088,
+      "foot_local": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "foot_length": 0.05999999865889549,
+      "foot_width": 0.012000000104308128,
+      "foot_body_object": "08_inline_ice__Continuous_frame_and_foot",
+      "source_scene": "Reel_08_inline_ice • asset"
+    }
+  ],
+  "rods": {
+    "spinning": {
+      "model": "res://models/rod_spinning.glb",
+      "guide_rest_godot": [
+        0.5400000214576721,
+        -0.05708760395646095,
+        -0.0
+      ],
+      "weights": [
+        {
+          "bone": "Bend_01",
+          "weight": 0.6428571343421936
+        },
+        {
+          "bone": "Bend_02",
+          "weight": 0.3571428656578064
+        }
+      ],
+      "bone_count": 12,
+      "length": 2.1,
+      "guides": [
+        {
+          "rest": [
+            0.5400000214576721,
+            -0.05708760395646095,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_01",
+              "weight": 0.6428571343421936
+            },
+            {
+              "bone": "Bend_02",
+              "weight": 0.3571428656578064
+            }
+          ]
+        },
+        {
+          "rest": [
+            0.7899999618530273,
+            -0.05157121270895004,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_03",
+              "weight": 0.8571428656578064
+            },
+            {
+              "bone": "Bend_04",
+              "weight": 0.1428571492433548
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.0299999713897705,
+            -0.046149466186761856,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_04",
+              "weight": 0.1428571492433548
+            },
+            {
+              "bone": "Bend_05",
+              "weight": 0.8571428656578064
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.2599999904632568,
+            -0.04082431644201279,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_06",
+              "weight": 0.5
+            },
+            {
+              "bone": "Bend_07",
+              "weight": 0.5
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.4700000286102295,
+            -0.03564940765500069,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_08",
+              "weight": 1.0
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.6500000953674316,
+            -0.030670560896396637,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_09",
+              "weight": 0.7142857313156128
+            },
+            {
+              "bone": "Bend_10",
+              "weight": 0.2857142984867096
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.809999942779541,
+            -0.025833381339907646,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_10",
+              "weight": 0.5714285969734192
+            },
+            {
+              "bone": "Bend_11",
+              "weight": 0.4285714328289032
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.9500000476837158,
+            -0.021138222888112068,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_11",
+              "weight": 0.5714285969734192
+            },
+            {
+              "bone": "Bend_12",
+              "weight": 0.4285714328289032
+            }
+          ]
+        },
+        {
+          "rest": [
+            2.0950000286102295,
+            -0.016524571925401688,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_12",
+              "weight": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    "casting": {
+      "model": "res://models/rod_casting.glb",
+      "guide_rest_godot": [
+        0.5849000215530396,
+        0.03382539749145508,
+        -0.0
+      ],
+      "weights": [
+        {
+          "bone": "Bend_01",
+          "weight": 0.41999998688697815
+        },
+        {
+          "bone": "Bend_02",
+          "weight": 0.5799999833106995
+        }
+      ],
+      "bone_count": 12,
+      "length": 2.1,
+      "guides": [
+        {
+          "rest": [
+            0.5849000215530396,
+            0.03382539749145508,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_01",
+              "weight": 0.41999998688697815
+            },
+            {
+              "bone": "Bend_02",
+              "weight": 0.5799999833106995
+            }
+          ]
+        },
+        {
+          "rest": [
+            0.8618744611740112,
+            0.029802341014146805,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_03",
+              "weight": 0.35559403896331787
+            },
+            {
+              "bone": "Bend_04",
+              "weight": 0.6444059610366821
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.0671405792236328,
+            0.026253391057252884,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_05",
+              "weight": 0.8256604671478271
+            },
+            {
+              "bone": "Bend_06",
+              "weight": 0.17433954775333405
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.251916766166687,
+            0.022855600342154503,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_06",
+              "weight": 0.4484466016292572
+            },
+            {
+              "bone": "Bend_07",
+              "weight": 0.5515534281730652
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.4245295524597168,
+            0.019557975232601166,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_07",
+              "weight": 0.16189135611057281
+            },
+            {
+              "bone": "Bend_08",
+              "weight": 0.8381086587905884
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.5886273384094238,
+            0.01634097844362259,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_09",
+              "weight": 0.9388027191162109
+            },
+            {
+              "bone": "Bend_10",
+              "weight": 0.061197299510240555
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.7462437152862549,
+            0.013198372907936573,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_10",
+              "weight": 0.7640227675437927
+            },
+            {
+              "bone": "Bend_11",
+              "weight": 0.23597723245620728
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.898666501045227,
+            0.01013610977679491,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_11",
+              "weight": 0.6279519200325012
+            },
+            {
+              "bone": "Bend_12",
+              "weight": 0.3720480799674988
+            }
+          ]
+        },
+        {
+          "rest": [
+            2.0467801094055176,
+            0.007204728201031685,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_12",
+              "weight": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    "fly": {
+      "model": "res://models/rod_fly.glb",
+      "guide_rest_godot": [
+        0.5978999733924866,
+        -0.03440546616911888,
+        -0.0
+      ],
+      "weights": [
+        {
+          "bone": "Bend_01",
+          "weight": 0.41999998688697815
+        },
+        {
+          "bone": "Bend_02",
+          "weight": 0.5799999833106995
+        }
+      ],
+      "bone_count": 12,
+      "length": 2.1,
+      "guides": [
+        {
+          "rest": [
+            0.5978999733924866,
+            -0.03440546616911888,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_01",
+              "weight": 0.41999998688697815
+            },
+            {
+              "bone": "Bend_02",
+              "weight": 0.5799999833106995
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.0401006937026978,
+            -0.030152034014463425,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_03",
+              "weight": 0.12285365909337997
+            },
+            {
+              "bone": "Bend_04",
+              "weight": 0.8771463632583618
+            }
+          ]
+        },
+        {
+          "rest": [
+            1.3679383993148804,
+            -0.006909091025590897,
+            0.00016249995678663254
+          ],
+          "weights": [
+            {
+              "bone": "Bend_05",
+              "weight": 0.42043593525886536
+            },
+            {
+              "bone": "Bend_06",
+              "weight": 0.579564094543457
+            }
+          ],
+          "bounds": [
+            [
+              1.3540716171264648,
+              -0.0055590905249118805,
+              -0.012381098233163357
+            ],
+            [
+              1.381805181503296,
+              0.005234090611338615,
+              -0.0014370835851877928
+            ]
+          ]
+        },
+        {
+          "rest": [
+            1.6629343032836914,
+            -0.00636363634839654,
+            0.00016249995678663254
+          ],
+          "weights": [
+            {
+              "bone": "Bend_07",
+              "weight": 0.8879554867744446
+            },
+            {
+              "bone": "Bend_08",
+              "weight": 0.11204452067613602
+            }
+          ],
+          "bounds": [
+            [
+              1.6490869522094727,
+              -0.005013636313378811,
+              -0.011290188878774643
+            ],
+            [
+              1.6767816543579102,
+              0.004688636399805546,
+              -0.0014370835851877928
+            ]
+          ]
+        },
+        {
+          "rest": [
+            1.9385097026824951,
+            -0.00581818213686347,
+            0.00016249995678663254
+          ],
+          "weights": [
+            {
+              "bone": "Bend_08",
+              "weight": 0.4563544690608978
+            },
+            {
+              "bone": "Bend_09",
+              "weight": 0.5436455011367798
+            }
+          ],
+          "bounds": [
+            [
+              1.9246858358383179,
+              -0.004468181636184454,
+              -0.010199280455708504
+            ],
+            [
+              1.9523335695266724,
+              0.004143181722611189,
+              -0.0014370835851877928
+            ]
+          ]
+        },
+        {
+          "rest": [
+            2.200488805770874,
+            -0.005272727459669113,
+            0.00016250007320195436
+          ],
+          "weights": [
+            {
+              "bone": "Bend_09",
+              "weight": 0.09537524729967117
+            },
+            {
+              "bone": "Bend_10",
+              "weight": 0.9046247601509094
+            }
+          ],
+          "bounds": [
+            [
+              2.1866934299468994,
+              -0.003922727424651384,
+              -0.00910837110131979
+            ],
+            [
+              2.2142841815948486,
+              0.0035977272782474756,
+              -0.0014370835851877928
+            ]
+          ]
+        },
+        {
+          "rest": [
+            2.452117919921875,
+            -0.004727272782474756,
+            0.00016250007320195436
+          ],
+          "weights": [
+            {
+              "bone": "Bend_11",
+              "weight": 0.7881510853767395
+            },
+            {
+              "bone": "Bend_12",
+              "weight": 0.21184894442558289
+            }
+          ],
+          "bounds": [
+            [
+              2.438356876373291,
+              -0.0033772727474570274,
+              -0.008017461746931076
+            ],
+            [
+              2.465879201889038,
+              0.0030522726010531187,
+              -0.0014370835851877928
+            ]
+          ]
+        },
+        {
+          "rest": [
+            2.6953799724578857,
+            -0.008086789399385452,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_12",
+              "weight": 1.0
+            }
+          ]
+        }
+      ]
+    },
+    "ice": {
+      "model": "res://models/rod_ice.glb",
+      "guide_rest_godot": [
+        0.2632000148296356,
+        -0.024415643885731697,
+        -0.0
+      ],
+      "weights": [
+        {
+          "bone": "Bend_01",
+          "weight": 0.41999998688697815
+        },
+        {
+          "bone": "Bend_02",
+          "weight": 0.5799999833106995
+        }
+      ],
+      "bone_count": 12,
+      "length": 2.1,
+      "guides": [
+        {
+          "rest": [
+            0.2632000148296356,
+            -0.024415643885731697,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_01",
+              "weight": 0.41999998688697815
+            },
+            {
+              "bone": "Bend_02",
+              "weight": 0.5799999833106995
+            }
+          ]
+        },
+        {
+          "rest": [
+            0.40697360038757324,
+            -0.01937253773212433,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_05",
+              "weight": 0.8256604671478271
+            },
+            {
+              "bone": "Bend_06",
+              "weight": 0.17433954775333405
+            }
+          ]
+        },
+        {
+          "rest": [
+            0.5135243535041809,
+            -0.014719032682478428,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_07",
+              "weight": 0.16189135611057281
+            },
+            {
+              "bone": "Bend_08",
+              "weight": 0.8381086587905884
+            }
+          ]
+        },
+        {
+          "rest": [
+            0.6094390749931335,
+            -0.010214775800704956,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_10",
+              "weight": 0.7640227675437927
+            },
+            {
+              "bone": "Bend_11",
+              "weight": 0.23597723245620728
+            }
+          ]
+        },
+        {
+          "rest": [
+            0.6990399956703186,
+            -0.005873166490346193,
+            -0.0
+          ],
+          "weights": [
+            {
+              "bone": "Bend_12",
+              "weight": 1.0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "line_types": [
+    {
+      "id": "mono",
+      "label": "NYLON / MONO",
+      "color": [
+        0.44,
+        0.67,
+        0.78
+      ],
+      "normal_strength": 0.26
+    },
+    {
+      "id": "fluoro",
+      "label": "FLUOROCARBON",
+      "color": [
+        0.69,
+        0.74,
+        0.68
+      ],
+      "normal_strength": 0.22
+    },
+    {
+      "id": "braid",
+      "label": "PE / BRAID",
+      "color": [
+        0.47,
+        0.58,
+        0.27
+      ],
+      "normal_strength": 0.72
+    },
+    {
+      "id": "fly",
+      "label": "FLY LINE",
+      "color": [
+        0.91,
+        0.38,
+        0.15
+      ],
+      "normal_strength": 0.42
+    }
+  ]
+}

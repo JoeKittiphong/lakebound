@@ -72,7 +72,7 @@ func run() -> void:
  controller.advance(controller.tuning.cast_duration + 0.01, player.global_position)
  await ticks(5)
  expect(model.current_action == &"Fishing_Reel", "waiting with no reel input holds the rod quietly")
- expect(model.rod_mesh.visible, "animated fishing rod is visible while fishing")
+ expect(is_instance_valid(player.first_person_rod) and player.first_person_rod.is_visible_in_tree() and not model.rod_mesh.visible, "selected rod is visible in first person without a duplicate world rod")
  Input.action_press("reel_in")
  await ticks(5)
  expect(model.current_action == &"Fishing_Reel", "real reel input switches to the reeling action")

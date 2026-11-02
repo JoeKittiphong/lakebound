@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BaitAttractionSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/bait_attraction_spec.gd" id="script"]
+[resource]
+script = ExtResource("script")
+radius_m = 5.5
+visual_length_m = 0.11
+attraction_description = "หางสั่นขณะกรอ"

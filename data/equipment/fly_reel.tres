@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/fly_reel.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_07_fly.tscn" id="model"]
+
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/fly_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script = ExtResource("script")
+id = &"fly_reel"
+display_name = "รอกฟลาย"
+kind = "reel"
+spool_axis = "y"
+equipment_type = "ฟลาย"
+shop_icon = ExtResource("icon")
+description = "ฟลาย · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 160
+length = 70
+reel_speed = 1.9
+drag_power = 0.8
+model_scene = ExtResource("model")
+
+
+reel_family = "fly"
+
+reel_spec = ExtResource("reel_spec_fit")

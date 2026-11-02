@@ -1,0 +1,4 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://features/equipment/baits/models/popper.glb" id="model"]
+[node name="popper" type="Node3D"]
+[node name="Model" parent="." instance=ExtResource("model")]

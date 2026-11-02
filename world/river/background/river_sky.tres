@@ -1,12 +1,11 @@
-[gd_resource type="Sky" load_steps=3 format=3]
+[gd_resource type="Sky" format=3 uid="uid://con3pgabfnwhd"]
 
-[ext_resource type="Texture2D" path="res://assets/environment/river/sky_panorama_512.jpg" id="1_panorama"]
+[ext_resource type="Texture2D" uid="uid://c8plfllig2hxp" path="res://assets/environment/river/sky_panorama_512.jpg" id="1_panorama"]
 
 [sub_resource type="PanoramaSkyMaterial" id="Panorama"]
 panorama = ExtResource("1_panorama")
 
 [resource]
-radiance_size = 2
-process_mode = 1
 sky_material = SubResource("Panorama")
-
+process_mode = 1
+radiance_size = 2

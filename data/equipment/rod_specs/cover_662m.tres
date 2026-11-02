@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Cover"
+family = "casting"
+power = "M"
+action = "Moderate"
+sections = 2
+line_min_lb = 8
+line_max_lb = 16
+lure_min_g = 5
+lure_max_g = 21
+pe_max = 0
+bend_radians = 1.45
+progression = 0.22
+recovery_seconds = 0.22
+intended_use = "แครงก์และเหยื่อตะขอสามทาง โค้งต่อเนื่องช่วงกลาง"
+reference_url = "https://www.daiwa.com/jp/product/995wk7u"
+length_m = 1.98
+handle_m = 0.44
+
+techniques = PackedStringArray("cast_float", "cast_bottom", "cast_retrieve")
+cast_min_g = 5
+cast_max_g = 21
+max_working_drag_kgf = 2.177243376

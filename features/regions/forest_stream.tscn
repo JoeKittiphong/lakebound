@@ -82,11 +82,12 @@ script = ExtResource("controller")
 ecosystem = NodePath("../PondEcosystem")
 player = NodePath("../Player")
 
-[node name="FishingEffects" parent="." node_paths=PackedStringArray("controller", "player", "ecosystem", "rod_tip") instance=ExtResource("effects_scene")]
+[node name="FishingEffects" parent="." node_paths=PackedStringArray("controller", "player", "ecosystem", "rod_tip", "water_interactions") instance=ExtResource("effects_scene")]
 controller = NodePath("../FishingController")
 player = NodePath("../Player")
 ecosystem = NodePath("../PondEcosystem")
 rod_tip = NodePath("../Player/Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5/Tip")
+water_interactions = NodePath("../WaterInteractions")
 
 [node name="WaterInteractions" parent="." node_paths=PackedStringArray("player", "pond", "ecosystem", "water_surface") instance=ExtResource("water_interactions")]
 player = NodePath("../Player")

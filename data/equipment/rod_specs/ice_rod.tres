@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Standard"
+family = "ice"
+length_m = 0.65
+power = "L"
+action = "Fast"
+drop_min_g = 0.5
+drop_max_g = 20
+techniques = PackedStringArray("ice_drop")
+max_working_drag_kgf = 2

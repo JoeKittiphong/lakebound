@@ -80,7 +80,7 @@ func run() -> void:
  scene.get_node("FishingEffects").audio_enabled = false
  await frames()
  expect(tutorial.active and not profile.data.missions.started, "fresh tutorial precedes missions")
- expect(not hud.get_node("SafeArea/TackleButton").visible, "bag button does not overlap tutorial card")
+ expect(not hud.get_node("SafeArea/TopBar/Actions/TackleButton").visible, "bag button does not overlap tutorial card")
  await capture("missions-tutorial-1280")
  hud._on_missions_pressed()
  expect(not hud.get_node("MissionPanel").visible and not paused, "mission modal cannot interrupt tutorial")
@@ -112,7 +112,7 @@ func run() -> void:
  for viewport_size in [Vector2i(1280, 720), Vector2i(1600, 720)]:
   root.size = viewport_size
   await frames()
-  await click(hud.get_node("SafeArea/MissionButton"))
+  await click(hud.get_node("SafeArea/TopBar/Actions/MissionButton"))
   expect(panel.visible and paused and not scene.get_node("CameraRig").enabled, "mission button opens modal and pauses camera %d" % viewport_size.x)
   expect(panel.rows.size() == 12, "twelve editable row instances")
   for tier in 4:
@@ -150,7 +150,7 @@ func run() -> void:
   await capture("missions-tracker-%d" % viewport_size.x)
  controller._change_state(FishingController.State.FIGHT)
  hud._process(0.0)
- expect(not hud.get_node("SafeArea/MissionButton").visible and not hud.get_node("SafeArea/MissionTracker").visible, "mission HUD does not obstruct fishing fight")
+ expect(not hud.get_node("SafeArea/TopBar/Actions/MissionButton").visible and not hud.get_node("SafeArea/MissionTracker").visible, "mission HUD does not obstruct fishing fight")
  controller.reset_cast()
  var old_path := profile.save_path
  land(pond.fish[3])

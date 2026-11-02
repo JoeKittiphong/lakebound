@@ -1,7 +1,7 @@
 extends Node3D
-## The saved AnimationPlayer owns the camera and walk path; this bridges character actions.
+## One authored Timeline owns the camera, travel, skeleton and action cues.
 signal intro_finished
-enum Stage { ESTABLISHING, WALKING, CASTING, WAITING }
+enum Stage { ESTABLISHING, WALKING, SETTLING, CASTING, WAITING }
 @export var play_intro: bool = true
 @export_range(0.25, 3.0) var playback_speed: float = 1.0
 @export_range(0.0, 0.1) var bob_amplitude: float = 0.025
@@ -17,50 +17,65 @@ enum Stage { ESTABLISHING, WALKING, CASTING, WAITING }
 var stage: Stage = Stage.ESTABLISHING
 var finished := false
 var _time := 0.0
-var _last_position := Vector3.ZERO
 var _line_mesh := ImmediateMesh.new()
-var _cast_time := 0.0
 var _released := false
+var _release_pending := false
+var _landed := false
 var _release_origin := Vector3.ZERO
-var _step_distance := 0.0
+var _release_time := 0.0
+var _landing_time := 0.0
+@onready var _boat_origin: Vector3 = $Scenery/BoatFloat.position
 
 func _ready() -> void:
- _last_position = actor_motion.position
  fishing_line.mesh = _line_mesh
- angler.aiming = true
- angler.set_fishing_state(FishingController.State.READY, 0.0, 0.0)
- angler.update_motion(0.0, false, 0.0, false)
+ # The cinematic has a full-body performance; gameplay's locomotion/reel layers
+ # must not overwrite it. The original imported clips remain shared and unchanged.
+ angler.animation_player.stop()
+ angler.animation_player.active = false
+ angler.locomotion_tree.active = false
+ angler.rod_mesh.show()
+ var arrival := timeline.get_animation("arrival")
+ for track in arrival.get_track_count():
+  if arrival.track_get_type(track) != Animation.TYPE_METHOD:
+   continue
+  for key in arrival.track_get_key_count(track):
+   var cue: Dictionary = arrival.track_get_key_value(track, key)
+   if cue.method == &"release_line":
+    _release_time = arrival.track_get_key_time(track, key)
+   elif cue.method == &"land_bobber":
+    _landing_time = arrival.track_get_key_time(track, key)
  timeline.speed_scale = playback_speed
  timeline.play("arrival")
+ # Apply the authored resting pose before the very first visible loading frame.
+ timeline.advance(0.0)
  if not play_intro:
-  timeline.advance(0.0)
   timeline.seek(timeline.get_animation("arrival").length, true)
   timeline.pause()
   bobber.show()
   fishing_line.show()
   ripples.show()
   begin_wait()
-  angler.update_motion(0.0, false, 0.0, false)
-  _last_position = actor_motion.position
   timeline.play("waiting")
+  timeline.advance(0.0)
 
 func _process(delta: float) -> void:
- _time += delta
- var distance := actor_motion.position.distance_to(_last_position)
- var speed := distance / maxf(delta, 0.0001)
- if stage == Stage.WALKING:
-  _step_distance += distance
-  if _step_distance >= 0.68:
-   _step_distance = fmod(_step_distance, 0.68)
-   $Footstep.play()
- _last_position = actor_motion.position
- angler.update_motion(delta, stage == Stage.WALKING, speed, false)
- if stage == Stage.CASTING:
-  _cast_time += delta * playback_speed
- if _released and stage == Stage.CASTING:
-  var flight := clampf((_cast_time - 0.42) / 0.85, 0.0, 1.0)
+ _time += delta * playback_speed
+ $Scenery/BoatFloat.position.y = _boat_origin.y + sin(_time * 1.15) * 0.025
+ $Scenery/BoatFloat.rotation.z = sin(_time * 0.85) * 0.012
+ $Scenery/BoatFloat.rotation.x = cos(_time * 0.7) * 0.008
+ if _release_pending:
+  _release_pending = false
+  _release_origin = _rod_tip_position()
+  _released = true
+  bobber.global_position = landing.global_position if _landed else _release_origin
+  bobber.show()
+  fishing_line.show()
+  $CastSound.play()
+ if _released and not _landed:
+  var flight := clampf((timeline.current_animation_position - _release_time) / maxf(_landing_time - _release_time, 0.01), 0.0, 1.0)
   bobber.global_position = _release_origin.lerp(landing.global_position, flight)
-  bobber.position.y += sin(flight * PI) * 1.4
+  # A ballistic arc with a finite downward velocity at water contact.
+  bobber.global_position.y += 4.0 * flight * (1.0 - flight) * 0.85
  if stage == Stage.WAITING:
   bobber.position.y = landing.position.y + sin(_time * bob_speed) * bob_amplitude
   bobber.rotation.z = sin(_time * 1.6) * 0.055
@@ -79,35 +94,40 @@ func _exit_tree() -> void:
 
 func begin_walk() -> void:
  stage = Stage.WALKING
+ angler.current_action = &"Walk"
+
+func finish_walk() -> void:
+ stage = Stage.SETTLING
+
+func footstep() -> void:
+ if stage == Stage.WALKING:
+  $Footstep.play()
 
 func begin_cast() -> void:
  stage = Stage.CASTING
- _cast_time = 0.0
- angler.set_fishing_state(FishingController.State.CASTING, 0.0, 0.0)
- # Release the walk/upper-body blend before asking the AnimationPlayer to cast.
- angler.update_motion(0.0, false, 0.0, false)
- angler.cast(1.45 / playback_speed)
- $CastSound.play()
+ angler.current_action = &"Fishing_Cast"
 
 func release_line() -> void:
- _release_origin = angler.rod_tip_position()
- _released = true
- bobber.global_position = _release_origin
- bobber.show()
- fishing_line.show()
+ # Capture after the Timeline has applied this frame's full skeleton pose.
+ _release_pending = true
 
 func land_bobber() -> void:
+ _landed = true
  bobber.global_position = landing.global_position
  ripples.show()
  splash.emitting = true
  $SplashSound.play()
 
 func begin_wait() -> void:
+ # Deferred animation cues may arrive after a scene change removed the intro.
+ if not is_inside_tree():
+  return
  stage = Stage.WAITING
  bobber.global_position = landing.global_position
- angler.set_fishing_state(FishingController.State.WAITING, 0.0, 0.0)
- finished = true
- intro_finished.emit()
+ angler.current_action = &"Fishing_Reel"
+ if not finished:
+  finished = true
+  intro_finished.emit()
 
 func _on_animation_finished(animation_name: StringName) -> void:
  if animation_name == &"arrival":
@@ -117,7 +137,7 @@ func _update_line() -> void:
  # Only the moving fishing line is procedural; all scenery is authored in the scene.
  _line_mesh.clear_surfaces()
  _line_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
- var tip := fishing_line.to_local(angler.rod_tip_position())
+ var tip := fishing_line.to_local(_rod_tip_position())
  var end := fishing_line.to_local(bobber.global_position)
  for index in 17:
   var fraction := float(index) / 16.0
@@ -125,3 +145,12 @@ func _update_line() -> void:
   point.y -= sin(fraction * PI) * 0.13
   _line_mesh.surface_add_vertex(point)
  _line_mesh.surface_end()
+
+func _rod_tip_position() -> Vector3:
+ # BoneAttachment updates can lag the AnimationMixer's method cue. Evaluate the
+ # existing grip and flexible rod against the current hand pose on the same clock.
+ angler.skeleton.force_update_all_bone_transforms()
+ var hand := angler.skeleton.find_bone("hand_r")
+ var hand_world := angler.skeleton.global_transform * angler.skeleton.get_bone_global_pose(hand)
+ var tip_local := angler.rod_mesh.to_local(angler.rod_tip_position())
+ return hand_world * angler.rod_grip.transform * angler.rod_mesh.transform * tip_local

@@ -1,0 +1,11 @@
+# Affinity top HUD
+
+The current top HUD uses the seven icon PNGs from the eight unmodified transparent PNG exports from the user's `ui design panel.af`, supplied in `C:/Users/Zylaah/.codex/generated_images/panel export`. Runtime copies are in `assets/ui/hud_affinity/`. Keep the editable Affinity original as the artwork source; these PNG exports are not SVG files.
+
+Open `features/fishing/fishing_hud.tscn`. `SafeArea/TopBar/Actions` contains independently interactive controls in the reference composition: oversized shop, coin and diamond icons with balances below, cooler with weight below, mission, collection and settings. The authored coordinates use scale 0.55, reduced from 0.77 (about 29% smaller). The toolbar region is 543x77 logical pixels at the upper right. The panel background node has been removed; the exported panel image remains available but is not displayed. SafeArea optionally lifts TopBar 16 pixels into desktop decorative padding while retaining real mobile/web safe insets. The settings touch region is at least 44 logical pixels wide.
+
+Wallet values are live Labels, white with black outlines, abbreviated to K from 10,000 and M from 1,000,000. Their tooltips retain exact balances. Capacity uses the same white outline treatment and live weight/capacity values. `fish_box_comic.tscn` is the authored vertical cooler presentation and reuses `FishBoxView`; the optional icon override survives equipment refresh. Its capacity warning tint is disabled to respect the requested white numbers. The original cooler scene and its default warning tint remain available to other callers.
+
+Boss notices and casting/fight status are below the taller HUD. Artwork does not intercept input; five action targets retain the existing handlers and modal pause behavior.
+
+Validation: `tests/compact_hud_test.gd` renders 1280x720, 1600x720 and 1024x768, checks layout, imported textures, label placement, refresh persistence and real touch actions. `tests/hud_session_test.gd` covers shared HUD session behavior. Screenshots and logs are in `exports/compact-icons-qa/`. `reference-values.png` deliberately uses the reference's sample balances and capacity; these are test fixture values, not a save-file change.

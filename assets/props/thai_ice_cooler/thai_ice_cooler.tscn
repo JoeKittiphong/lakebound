@@ -1,0 +1,8 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://assets/props/thai_ice_cooler/cooler_body.glb" id="body"]
+[ext_resource type="PackedScene" path="res://assets/props/thai_ice_cooler/cooler_lid.glb" id="lid"]
+[node name="ThaiIceCooler" type="Node3D"]
+[node name="Body" parent="." instance=ExtResource("body")]
+[node name="Lid" type="Node3D" parent="."]
+position = Vector3(0, 0.515, -0.245)
+[node name="Model" parent="Lid" instance=ExtResource("lid")]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TerminalRigSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+id = "surface"
+display_name = "ผิวน้ำ · สายหน้าสั้น"
+technique = "cast_retrieve"
+leader_material = "mono"
+leader_length_m = 0.2

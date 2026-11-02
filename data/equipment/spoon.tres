@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/spoon.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/plug.tres" id="rig_plug"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/ice.tres" id="rig_ice"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/spoon.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/spoon.tres" id="attraction"]
+
+[resource]
+script = ExtResource("script")
+id = &"spoon"
+display_name = "สปูน"
+kind = "lure"
+equipment_type = "เหยื่อโลหะ"
+shop_icon = ExtResource("icon")
+description = "เหยื่อโลหะ · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 130
+bait_type = "lure"
+motion = "sink"
+lure_pattern = "steady"
+lure_visual = "Spoon"
+sink_speed = 0.6
+swim_depth = -1
+
+
+payload_g = 10
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_plug"), ExtResource("rig_ice")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

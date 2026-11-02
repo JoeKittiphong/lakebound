@@ -1,0 +1,24 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://assets/props/collection_book/collection_book.glb" id="book"]
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+ambient_light_source = 3
+ambient_light_color = Color(1, 0.96, 0.86, 1)
+ambient_light_energy = 0.7
+tonemap_mode = 0
+[node name="Stage" type="Node3D"]
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+[node name="Camera" type="Camera3D" parent="."]
+position = Vector3(0, 7.8, 1.85)
+rotation_degrees = Vector3(-78, 0, 0)
+projection = 1
+size = 3.0
+current = true
+[node name="Key" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-60, -25, 0)
+light_energy = 1.1
+[node name="Book" parent="." instance=ExtResource("book")]
+position = Vector3(0.08, 0, 0)
+scale = Vector3(1.35, 1, 1.2)

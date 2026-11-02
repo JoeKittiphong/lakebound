@@ -1,0 +1,641 @@
+{
+  "columns": 8,
+  "rows": 8,
+  "cell_size": 256,
+  "source": ".source/equipment_source.png",
+  "atlas": "equipment.png",
+  "generator": "built-in image_gen",
+  "items": [
+    {
+      "id": "light_rod",
+      "column": 0,
+      "row": 0,
+      "source_box": [
+        9,
+        11,
+        172,
+        173
+      ]
+    },
+    {
+      "id": "medium_rod",
+      "column": 1,
+      "row": 0,
+      "source_box": [
+        165,
+        13,
+        327,
+        176
+      ]
+    },
+    {
+      "id": "heavy_rod",
+      "column": 2,
+      "row": 0,
+      "source_box": [
+        320,
+        9,
+        480,
+        176
+      ]
+    },
+    {
+      "id": "spinning_rod",
+      "column": 3,
+      "row": 0,
+      "source_box": [
+        472,
+        12,
+        627,
+        175
+      ]
+    },
+    {
+      "id": "casting_rod",
+      "column": 4,
+      "row": 0,
+      "source_box": [
+        630,
+        12,
+        783,
+        174
+      ]
+    },
+    {
+      "id": "pole_rod",
+      "column": 5,
+      "row": 0,
+      "source_box": [
+        790,
+        9,
+        935,
+        175
+      ]
+    },
+    {
+      "id": "fly_rod",
+      "column": 6,
+      "row": 0,
+      "source_box": [
+        941,
+        10,
+        1090,
+        175
+      ]
+    },
+    {
+      "id": "surf_rod",
+      "column": 7,
+      "row": 0,
+      "source_box": [
+        1093,
+        7,
+        1245,
+        175
+      ]
+    },
+    {
+      "id": "jigging_rod",
+      "column": 0,
+      "row": 1,
+      "source_box": [
+        8,
+        191,
+        158,
+        338
+      ]
+    },
+    {
+      "id": "trolling_rod",
+      "column": 1,
+      "row": 1,
+      "source_box": [
+        158,
+        185,
+        313,
+        341
+      ]
+    },
+    {
+      "id": "basic_reel",
+      "column": 2,
+      "row": 1,
+      "source_box": [
+        323,
+        200,
+        475,
+        337
+      ]
+    },
+    {
+      "id": "fast_reel",
+      "column": 3,
+      "row": 1,
+      "source_box": [
+        484,
+        210,
+        633,
+        329
+      ]
+    },
+    {
+      "id": "long_reel",
+      "column": 4,
+      "row": 1,
+      "source_box": [
+        633,
+        193,
+        778,
+        343
+      ]
+    },
+    {
+      "id": "spinning_reel",
+      "column": 5,
+      "row": 1,
+      "source_box": [
+        792,
+        194,
+        924,
+        335
+      ]
+    },
+    {
+      "id": "baitcasting_reel",
+      "column": 6,
+      "row": 1,
+      "source_box": [
+        943,
+        209,
+        1104,
+        333
+      ]
+    },
+    {
+      "id": "spincast_reel",
+      "column": 7,
+      "row": 1,
+      "source_box": [
+        1106,
+        206,
+        1241,
+        327
+      ]
+    },
+    {
+      "id": "conventional_reel",
+      "column": 0,
+      "row": 2,
+      "source_box": [
+        12,
+        352,
+        163,
+        485
+      ]
+    },
+    {
+      "id": "fly_reel",
+      "column": 1,
+      "row": 2,
+      "source_box": [
+        186,
+        352,
+        310,
+        489
+      ]
+    },
+    {
+      "id": "electric_reel",
+      "column": 2,
+      "row": 2,
+      "source_box": [
+        328,
+        354,
+        477,
+        500
+      ]
+    },
+    {
+      "id": "nylon",
+      "column": 3,
+      "row": 2,
+      "source_box": [
+        490,
+        358,
+        610,
+        491
+      ]
+    },
+    {
+      "id": "fine_line",
+      "column": 4,
+      "row": 2,
+      "source_box": [
+        643,
+        360,
+        768,
+        493
+      ]
+    },
+    {
+      "id": "braid",
+      "column": 5,
+      "row": 2,
+      "source_box": [
+        796,
+        358,
+        920,
+        491
+      ]
+    },
+    {
+      "id": "clear_line",
+      "column": 6,
+      "row": 2,
+      "source_box": [
+        948,
+        355,
+        1077,
+        491
+      ]
+    },
+    {
+      "id": "copolymer",
+      "column": 7,
+      "row": 2,
+      "source_box": [
+        1110,
+        356,
+        1232,
+        489
+      ]
+    },
+    {
+      "id": "coated_line",
+      "column": 0,
+      "row": 3,
+      "source_box": [
+        21,
+        512,
+        140,
+        643
+      ]
+    },
+    {
+      "id": "heavy_braid",
+      "column": 1,
+      "row": 3,
+      "source_box": [
+        172,
+        507,
+        290,
+        640
+      ]
+    },
+    {
+      "id": "micro_box",
+      "column": 2,
+      "row": 3,
+      "source_box": [
+        326,
+        525,
+        434,
+        637
+      ]
+    },
+    {
+      "id": "small_box",
+      "column": 3,
+      "row": 3,
+      "source_box": [
+        461,
+        530,
+        574,
+        638
+      ]
+    },
+    {
+      "id": "medium_box",
+      "column": 4,
+      "row": 3,
+      "source_box": [
+        585,
+        521,
+        725,
+        641
+      ]
+    },
+    {
+      "id": "large_box",
+      "column": 5,
+      "row": 3,
+      "source_box": [
+        733,
+        508,
+        880,
+        645
+      ]
+    },
+    {
+      "id": "xl_box",
+      "column": 6,
+      "row": 3,
+      "source_box": [
+        889,
+        513,
+        1056,
+        649
+      ]
+    },
+    {
+      "id": "expedition_box",
+      "column": 7,
+      "row": 3,
+      "source_box": [
+        1063,
+        501,
+        1244,
+        649
+      ]
+    },
+    {
+      "id": "worm",
+      "column": 0,
+      "row": 4,
+      "source_box": [
+        9,
+        668,
+        151,
+        782
+      ]
+    },
+    {
+      "id": "insect",
+      "column": 1,
+      "row": 4,
+      "source_box": [
+        163,
+        662,
+        313,
+        787
+      ]
+    },
+    {
+      "id": "shrimp",
+      "column": 2,
+      "row": 4,
+      "source_box": [
+        330,
+        659,
+        459,
+        791
+      ]
+    },
+    {
+      "id": "live_fish",
+      "column": 3,
+      "row": 4,
+      "source_box": [
+        471,
+        692,
+        625,
+        768
+      ]
+    },
+    {
+      "id": "cut_fish",
+      "column": 4,
+      "row": 4,
+      "source_box": [
+        635,
+        670,
+        777,
+        788
+      ]
+    },
+    {
+      "id": "dead_shrimp",
+      "column": 5,
+      "row": 4,
+      "source_box": [
+        793,
+        676,
+        927,
+        783
+      ]
+    },
+    {
+      "id": "dough",
+      "column": 6,
+      "row": 4,
+      "source_box": [
+        960,
+        681,
+        1074,
+        787
+      ]
+    },
+    {
+      "id": "bread",
+      "column": 7,
+      "row": 4,
+      "source_box": [
+        1100,
+        667,
+        1247,
+        788
+      ]
+    },
+    {
+      "id": "corn",
+      "column": 0,
+      "row": 5,
+      "source_box": [
+        11,
+        814,
+        150,
+        923
+      ]
+    },
+    {
+      "id": "fruit_dough",
+      "column": 1,
+      "row": 5,
+      "source_box": [
+        170,
+        810,
+        301,
+        931
+      ]
+    },
+    {
+      "id": "fermented_dough",
+      "column": 2,
+      "row": 5,
+      "source_box": [
+        324,
+        814,
+        454,
+        921
+      ]
+    },
+    {
+      "id": "fishmeal",
+      "column": 3,
+      "row": 5,
+      "source_box": [
+        477,
+        807,
+        615,
+        926
+      ]
+    },
+    {
+      "id": "minnow",
+      "column": 4,
+      "row": 5,
+      "source_box": [
+        629,
+        819,
+        772,
+        924
+      ]
+    },
+    {
+      "id": "frog",
+      "column": 5,
+      "row": 5,
+      "source_box": [
+        785,
+        809,
+        924,
+        922
+      ]
+    },
+    {
+      "id": "soft_plastic",
+      "column": 6,
+      "row": 5,
+      "source_box": [
+        946,
+        811,
+        1081,
+        928
+      ]
+    },
+    {
+      "id": "spinner",
+      "column": 7,
+      "row": 5,
+      "source_box": [
+        1112,
+        804,
+        1241,
+        929
+      ]
+    },
+    {
+      "id": "floating_lure",
+      "column": 0,
+      "row": 6,
+      "source_box": [
+        10,
+        948,
+        152,
+        1077
+      ]
+    },
+    {
+      "id": "rubber_worm",
+      "column": 1,
+      "row": 6,
+      "source_box": [
+        170,
+        946,
+        308,
+        1070
+      ]
+    },
+    {
+      "id": "shad",
+      "column": 2,
+      "row": 6,
+      "source_box": [
+        321,
+        958,
+        457,
+        1058
+      ]
+    },
+    {
+      "id": "crankbait",
+      "column": 3,
+      "row": 6,
+      "source_box": [
+        462,
+        950,
+        618,
+        1058
+      ]
+    },
+    {
+      "id": "popper",
+      "column": 4,
+      "row": 6,
+      "source_box": [
+        627,
+        948,
+        766,
+        1065
+      ]
+    },
+    {
+      "id": "pencil",
+      "column": 5,
+      "row": 6,
+      "source_box": [
+        778,
+        956,
+        928,
+        1058
+      ]
+    },
+    {
+      "id": "spoon",
+      "column": 6,
+      "row": 6,
+      "source_box": [
+        930,
+        946,
+        1078,
+        1075
+      ]
+    },
+    {
+      "id": "metal_jig",
+      "column": 7,
+      "row": 6,
+      "source_box": [
+        1102,
+        954,
+        1238,
+        1069
+      ]
+    },
+    {
+      "id": "spinnerbait",
+      "column": 0,
+      "row": 7,
+      "source_box": [
+        12,
+        1089,
+        175,
+        1243
+      ]
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: production mobile fishing game inventory sprite atlas. Make ONE square 2048x2048 transparent PNG spritesheet containing an EXACT regular 8 column by 8 row grid of equipment icons. Every cell is 256x256, each object fully inside its own cell with 24px safe padding. No grid lines, no frames, no cell backgrounds, NO TEXT, no lettering, no numbers. Transparent background throughout. A coherent polished cozy stylized 3D game item illustration style: rounded chunky silhouettes, painterly hand-painted surface accents, warm soft highlights, rich teal brass coral and cream, clean readable silhouettes and consistent three-quarter lighting. Not flat line icons, not photographs. Fishing rods shown diagonally entirely inside the square, fishing reels rendered as charming recognizable equipment. Every item isolated, no overlaps between cells. Read row order left-to-right:\nRow 1: teal light fishing rod; amber medium fishing rod; black heavy fishing rod; green spinning rod; red trigger-grip casting rod; bamboo pole with no reel; cream fly rod; blue long surf rod.\nRow 2: purple short jigging rod; navy trolling rod; teal basic baitcasting reel; red fast baitcasting reel; brass large long-spool reel; green spinning reel with open fixed spool and bail; red low-profile baitcasting reel; cream closed-face spincast reel.\nRow 3: brass round overhead conventional reel; copper round flat fly reel with perforated spool; blue electric reel with small screen; blue spool of nylon line; pale cyan spool of fine line; green spool of braided line; translucent silver spool of fluorocarbon line; violet spool of copolymer line.\nRow 4: gold spool of coated line; orange spool of heavy braided line; tiny turquoise fish bucket; small teal lidded fish cooler; medium blue lidded fish cooler; large green lidded fish cooler; extra-large cream fish cooler; huge navy expedition fish cooler.\nRow 5: curled earthworm; brown cricket insect; live pink shrimp; tiny silver baitfish; cut red fish fillet chunks; orange dead shrimp bait; beige dough bait ball; white bread slices.\nRow 6: yellow corn kernels; peach pink fruit-flavored dough balls; brown fermented rice-bran bait balls; dark red fishmeal bait balls; silver minnow hard fishing lure with hooks; bright green frog fishing lure; red soft plastic worm fishing lure; gold inline spinner fishing lure.\nRow 7: green topwater frog lure; purple rubber worm lure; pearl soft shad lure; blue deep diving crankbait lure with clear lip; orange popper lure with cupped mouth; yellow slim pencil topwater lure; hammered gold spoon lure with hook; blue silver metal jig lure with hook.\nRow 8: skirted green spinnerbait with bent wire and two metal blades in first cell. Remaining seven cells EMPTY transparent.\nConstraints: exactly 8x8 uniform grid, exactly 57 isolated item icons occupying the first 57 cells in row-major order, final seven transparent cells, every icon centered and sized consistently. Keep empty inter-cell gutters. No labels whatsoever. This will be sliced by exact equal cell coordinates in a game engine.",
+  "runtime_cell_size": 128,
+  "runtime_texture_size": 1024,
+  "layout_space": "Source coordinates; AtlasTexture regions use runtime_cell_size"
+}

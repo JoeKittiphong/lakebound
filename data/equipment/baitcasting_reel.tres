@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/baitcasting_reel.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_02_low_profile.tscn" id="model"]
+
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/baitcasting_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script = ExtResource("script")
+id = &"baitcasting_reel"
+display_name = "รอกเบทคาสติ้ง"
+kind = "reel"
+equipment_type = "เบทคาสติ้ง"
+shop_icon = ExtResource("icon")
+description = "เบทคาสติ้ง · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 230
+length = 100
+reel_speed = 3.4
+drag_power = 1.05
+model_scene = ExtResource("model")
+
+
+reel_family = "low"
+
+reel_spec = ExtResource("reel_spec_fit")

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/expedition_box.tres" id="icon"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/shop_goods/expedition_box.tscn" id="display_model"]
+
+[resource]
+script = ExtResource("script")
+id = &"expedition_box"
+display_name = "กล่องปลา 300 กก."
+kind = "box"
+equipment_type = "ถังเก็บปลา"
+shop_icon = ExtResource("icon")
+description = "กล่องเก็บปลาขนาดใหญ่ เสริมมุม พร้อมจุกระบายน้ำ"
+price = 800
+capacity = 300
+
+
+model_scene = ExtResource("display_model")

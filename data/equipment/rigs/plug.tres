@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TerminalRigSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+id = "plug"
+display_name = "ตีกรอ · ผูกห่วง"
+technique = "cast_retrieve"
+leader_material = "fluoro"
+leader_length_m = 0.4

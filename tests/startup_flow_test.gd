@@ -14,6 +14,7 @@ func expect(value: bool, message: String) -> void:
 
 func run() -> void:
  root.get_node("FishCollection").recording_enabled = false
+ root.get_node("AnglerSave").data.identity.name = "ทดสอบการเข้าเกม"
  expect(ResourceLoader.exists("res://assets/ui/modern/eye.svg"), "runtime orbit icon survives export filters")
  var loading: Control = load("res://features/loading/loading.tscn").instantiate()
  loading.minimum_display_seconds = 0.05

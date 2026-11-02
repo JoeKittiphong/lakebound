@@ -1,5 +1,35 @@
 # Regression tests
 
+## Lure surface spray
+
+`surface_spray` checks surface retrieve, speed-dependent fish tailbeats, bite splashes,
+depth and distance culling, cast resets, the eight-emitter/240-particle budget, and
+the real controller-to-water connection. It renders isolated and river previews in
+`exports/qa-surface-spray/`. Tune the editable burst scene in
+`features/fishing/ui/surface_spray_burst.tscn` and thresholds on
+`features/fishing/surface_spray.tscn`.
+
+## Google Sheets (28 October 2026)
+
+`node services/google_sheets/test-ranking.cjs` exercises Apps Script handlers
+against in-memory Sheets/Cache/Properties doubles without Google traffic.
+`ranking_snapshot`, `sheets_settings`, `sheets_ranking_sync`, `social_lifecycle`
+cover input bounds, old URL migration, cache corruption, failed acknowledgements,
+retries and hidden-panel work. `ranking_maps`, `cached_ranking`, `social_visual`,
+`sheets_settings_visual` cover authored UI at multiple viewport sizes offline.
+`sheets_live_http` remains an opt-in read-only test with `LAKEBOUND_QA_URL`.
+The retired custom-server integration tests have been removed.
+Run `python tools/run_tests.py --list` to verify every source test is registered.
+
+## Minimap และประวัติจุดตกปลา
+
+`fishing_map_data` ตรวจตำแหน่งที่แช่ตอนปลากินเหยื่อ, journal เดิม, migration,
+notes/favorites save/reload/rollback, projection และ clustering 10,000 catches
+`fishing_map_visual` ตรวจ touch, pause/Back, การนำทางไปจุดยืน, ปล่อยปลา,
+สมุดปลา → แผนที่, ทุกพื้นที่ และภาพที่ 1280×720 / 1600×720 / 1024×768
+ใช้ `--tests fishing_map_data fishing_map_visual --rendering-method mobile`
+รายละเอียดและจุดปรับใน Editor: [minimap-and-fishing-journal.md](../docs/minimap-and-fishing-journal.md)
+
 ## Persistence และ performance (phase 2)
 
 ```powershell
@@ -45,6 +75,14 @@ suite ถัดไป Fixtures บางตัวเขียนไฟล์ QA 
 ขอบเขตและผลรอบล่าสุด: [refactor-phase1-verification.md](../docs/refactor-phase1-verification.md)
 
 ต้องมี Godot console executable รุ่นเดียวกับโปรเจค และ Python 3 ตั้ง `LAKEBOUND_GODOT` หรือส่ง `--godot` ไม่มีการดาวน์โหลด engine อัตโนมัติ
+
+UI refresh: `shop_redesign` checks the added equipment and item images;
+`ui_refresh_visual` renders three viewport sizes and exercises the real shop,
+touches on the inventory surface inside the 3D case, pagination, map boss markers,
+storage animations, selected-fish sale/release, persistence rollback, legacy and
+cross-map restoration, and touch scrolling without accidental purchases. Use
+`--tests shop_redesign ui_refresh_visual --rendering-method gl_compatibility`
+or `--rendering-method mobile`; see `docs/ui-refresh.md` for editable scenes.
 
 ```powershell
 python tools/run_tests.py --godot <godot-console.exe> --suite headless

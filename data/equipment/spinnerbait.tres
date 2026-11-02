@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/spinnerbait.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/plug.tres" id="rig_plug"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/spinnerbait.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/spinnerbait.tres" id="attraction"]
+
+[resource]
+script = ExtResource("script")
+id = &"spinnerbait"
+display_name = "สปินเนอร์เบท"
+kind = "lure"
+equipment_type = "เหยื่อใบหมุน"
+shop_icon = ExtResource("icon")
+description = "เหยื่อใบหมุน · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 180
+bait_type = "lure"
+motion = "sink"
+lure_pattern = "steady"
+lure_visual = "Spinner"
+sink_speed = 0.35
+swim_depth = -1
+
+
+payload_g = 14
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_plug")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

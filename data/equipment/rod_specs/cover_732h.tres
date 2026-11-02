@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Cover"
+family = "casting"
+power = "H"
+action = "Extra-Fast"
+sections = 2
+line_min_lb = 12
+line_max_lb = 25
+lure_min_g = 11
+lure_max_g = 42
+pe_max = 0
+bend_radians = 1.12
+progression = 0.22
+recovery_seconds = 0.1
+intended_use = "กบและงานหมายรก ปลายทำงานก่อนและโคนมีกำลัง"
+reference_url = "https://www.daiwa.com/jp/product/995wk7u"
+length_m = 2.21
+handle_m = 0.44
+
+techniques = PackedStringArray("cast_float", "cast_bottom", "cast_retrieve")
+cast_min_g = 11
+cast_max_g = 42
+max_working_drag_kgf = 3.4019427749999998

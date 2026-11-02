@@ -1,0 +1,43 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/equipment/detailed/detailed_rod.gd" id="script"]
+[ext_resource type="Script" path="res://features/equipment/detailed/line_ribbon.gd" id="ribbon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/models/brook_702m.glb" id="model"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_01_spinning.tscn" id="reel"]
+[ext_resource type="Shader" path="res://features/equipment/detailed/materials/outgoing_line.gdshader" id="shader"]
+[ext_resource type="Texture2D" path="res://features/equipment/detailed/textures/outgoing_strand.png" id="texture"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/brook_702m.tres" id="spec"]
+[sub_resource type="ShaderMaterial" id="ink"]
+resource_local_to_scene=true
+shader=ExtResource("shader")
+shader_parameter/line_texture=ExtResource("texture")
+shader_parameter/line_color=Color(0.44,0.67,0.78,1)
+[node name="DetailedRod" type="Node3D"]
+process_priority=250
+script=ExtResource("script")
+rod_id="brook_702m"
+rod_spec=ExtResource("spec")
+config_path="res://features/equipment/variants/rods.json"
+accepts_reel=true
+default_reel=ExtResource("reel")
+[node name="Model" parent="." instance=ExtResource("model")]
+transform=Transform3D(0,0,1,1,0,0,0,1,0,0,-0.2856,0)
+[node name="ReelMount" type="Marker3D" parent="."]
+transform=Transform3D(0,0,1,1,0,0,0,1,0,0,-0.005599999999999994,-0.012)
+[node name="PrimaryGrip" type="Marker3D" parent="."]
+[node name="ButtGrip" type="Marker3D" parent="."]
+position=Vector3(0,-0.22260000000000002,0)
+[node name="SupportGrip" type="Marker3D" parent="."]
+position=Vector3(0,0.055,0)
+[node name="Tip" type="Marker3D" parent="."]
+position=Vector3(0,1.8443999999999998,0)
+[node name="LineStart" type="Marker3D" parent="."]
+[node name="GuideLine" type="MeshInstance3D" parent="."]
+script=ExtResource("ribbon")
+material_override=SubResource("ink")
+start_anchor=NodePath("../LineStart")
+end_anchor=NodePath("../Tip")
+[node name="FeedLine" type="MeshInstance3D" parent="."]
+script=ExtResource("ribbon")
+material_override=SubResource("ink")
+start_anchor=NodePath("../ReelMount")
+end_anchor=NodePath("../LineStart")

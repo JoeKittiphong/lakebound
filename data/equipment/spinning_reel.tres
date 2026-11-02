@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/spinning_reel.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_01_spinning.tscn" id="model"]
+
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/spinning_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script = ExtResource("script")
+id = &"spinning_reel"
+display_name = "รอกสปินนิ่ง"
+kind = "reel"
+spool_axis = "z"
+equipment_type = "สปินนิ่ง"
+shop_icon = ExtResource("icon")
+description = "สปินนิ่ง · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 180
+length = 120
+reel_speed = 2.9
+drag_power = 0.95
+model_scene = ExtResource("model")
+
+
+reel_family = "spinning"
+
+reel_spec = ExtResource("reel_spec_fit")

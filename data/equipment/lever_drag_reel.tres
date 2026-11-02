@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/conventional_reel.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_06_conventional_lever.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/lever_drag_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script=ExtResource("script")
+id=&"lever_drag_reel"
+display_name="รอกเลเวอร์แดร็ก"
+kind="reel"
+equipment_type="รอกเลเวอร์แดร็ก"
+shop_icon=ExtResource("icon")
+price=320
+model_scene=ExtResource("model")
+
+reel_family = "lever"
+
+reel_spec = ExtResource("reel_spec_fit")

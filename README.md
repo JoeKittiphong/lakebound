@@ -4,6 +4,10 @@
 
 เปิด `project.godot` ใน Godot แล้ว Run Project: Loading cinematic → Menu → เลือกแหล่งน้ำ → Gameplay
 
+## Cleanup และขนาด build ล่าสุด
+
+ดู [ผล cleanup และโครงสร้าง export](docs/cleanup-build-size-2026-10-31.md): AAB 92.30 → 84.31 MB, APK ARM64 61.33 MB และดาวน์โหลด ARM64 ประมาณ 57.14 MB ใช้ dependency-selected exports; `tools/prepare_export.ps1` เตรียม manifest และตรวจ texture budgets ก่อน build ต้นฉบับเก่ามี archive index และเครื่องมือ restore โดยไม่ลบงานเดิม
+
 ## Repository และเริ่มบนเครื่องใหม่
 
 ซอร์สอยู่ที่ [JoeKittiphong/lakebound](https://github.com/JoeKittiphong/lakebound)
@@ -23,7 +27,11 @@ godot --path .
 ดู [นโยบายไฟล์ GitHub](docs/repository-policy.md) และ
 [แผน refactor รอบถัดไป](docs/refactor-roadmap-2026-10.md)
 
-ผลรอบล่าสุด: [Persistence และ performance](docs/refactor-phase2-performance.md)
+ผลรอบล่าสุด: [Refactor และ Google Sheets](docs/refactor-2026-10-28.md)
+ใช้ Google Sheets เป็นบริการออนไลน์ทางเดียว; ซอร์ส Apps Script และเครื่องมืออยู่ใน
+`services/google_sheets/` ซึ่งไม่รวมใน Godot import/export ดู [โปรไฟล์และอันดับ](docs/profile-and-ranking.md)
+
+ผลรอบก่อน: [Persistence และ performance](docs/refactor-phase2-performance.md)
 แยก ProfileStore/CatchSettlement, กู้ journal events ที่ยังลงสมุดปลาไม่ครบ,
 อัปเดตกล่องปลาเมื่อข้อมูลเปลี่ยน และ cache ภาพรอก 3D ตอนนิ่ง
 

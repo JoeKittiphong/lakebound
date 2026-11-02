@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/spinning_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/brook_702m.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/brook_702m.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"brook_702m"
+display_name = "Brook 702M"
+kind = "rod"
+equipment_type = "สปินนิ่ง · Brook"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "สปินนิ่งเอนกประสงค์ เหยื่อยางและมินนาว · Fast"
+price = 330
+strength = 8
+cast_multiplier = 1.14
+responsiveness = 1.22
+
+mount_layout = "spinning"

@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" path="res://features/fishing/fishing_hud.tscn" id="fishing_hud"]
 [ext_resource type="Script" path="res://world/pond/pond_ecosystem.gd" id="ecosystem"]
 [ext_resource type="Script" path="res://features/fishing/fishing_controller.gd" id="controller"]
-[ext_resource type="PackedScene" path="res://world/river/river_world.tscn" id="pond_scene"]
-[ext_resource type="Resource" path="res://world/river/river_definition.tres" id="river_definition"]
+[ext_resource type="PackedScene" path="res://world/rainforest_lake/rainforest_lake.tscn" id="pond_scene"]
+[ext_resource type="Resource" path="res://world/rainforest_lake/lake_definition.tres" id="river_definition"]
 [ext_resource type="PackedScene" path="res://features/gameplay/camera_rig.tscn" id="camera_scene"]
 [ext_resource type="PackedScene" path="res://features/fishing/fishing_effects.tscn" id="effects_scene"]
 [ext_resource type="PackedScene" path="res://world/pond/water_interactions.tscn" id="water_interactions"]
@@ -22,7 +22,7 @@
 [ext_resource type="Resource" path="res://data/fish/encyclopedia/asian_redtail_catfish.tres" id="region_fish_18"]
 [ext_resource type="Resource" path="res://data/fish/encyclopedia/yellow_mystus.tres" id="region_fish_19"]
 [ext_resource type="Resource" path="res://data/fish/encyclopedia/crystal_eyed_catfish.tres" id="region_fish_20"]
-[ext_resource type="Resource" path="res://data/fish/encyclopedia/clown_featherback.tres" id="region_fish_21"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/red_bellied_pacu.tres" id="region_fish_21"]
 [ext_resource type="Resource" path="res://data/fish/encyclopedia/bronze_featherback.tres" id="region_fish_22"]
 [ext_resource type="Resource" path="res://data/fish/encyclopedia/black_sharkminnow.tres" id="region_fish_23"]
 [ext_resource type="Resource" path="res://data/fish/encyclopedia/white_sheatfish.tres" id="region_fish_24"]
@@ -48,6 +48,27 @@
 [ext_resource type="Resource" path="res://data/fish/redtail_catfish.tres" id="legacy_fish_13"]
 [ext_resource type="Resource" path="res://data/fish/freshwater_eel.tres" id="legacy_fish_14"]
 [ext_resource type="Resource" path="res://data/fish/freshwater_stingray.tres" id="legacy_fish_15"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/red_tilapia.tres" id="lake_extra_0"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/climbing_perch.tres" id="lake_extra_1"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/java_barb.tres" id="lake_extra_2"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/three_spot_gourami.tres" id="lake_extra_3"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/snakeskin_gourami.tres" id="lake_extra_4"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/asian_swamp_eel.tres" id="lake_extra_5"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/siamese_gourami.tres" id="lake_extra_6"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/walking_catfish.tres" id="lake_extra_7"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/pearl_gourami.tres" id="lake_extra_8"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/marbled_sleeper.tres" id="lake_extra_9"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/ghost_glass_catfish.tres" id="lake_extra_10"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/wild_betta.tres" id="lake_extra_11"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/tinfoil_barb.tres" id="lake_extra_12"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/grass_carp.tres" id="lake_extra_13"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/silver_carp.tres" id="lake_extra_14"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/bighead_carp.tres" id="lake_extra_15"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/red_cheeked_barb.tres" id="lake_extra_16"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/fire_eel.tres" id="lake_extra_17"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/tire_track_eel.tres" id="lake_extra_18"]
+[ext_resource type="Resource" path="res://data/fish/encyclopedia/red_bellied_pacu.tres" id="lake_extra_19"]
+
 [node name="Gameplay" type="Node3D"]
 script = ExtResource("script")
 economy_enabled = true
@@ -60,36 +81,43 @@ script = ExtResource("commerce")
 [node name="World" parent="." instance=ExtResource("pond_scene")]
 
 [node name="FishingBoat" parent="." node_paths=PackedStringArray("pond") instance=ExtResource("boat")]
-position = Vector3(-64.000000,-0.180000,35.000000)
+position = Vector3(-314,-0.18,111)
 rotation = Vector3(0, -1.5707963, 0)
 pond = NodePath("../World")
 
 [node name="Player" parent="." node_paths=PackedStringArray("pond", "movement_reference") instance=ExtResource("player")]
-position = Vector3(-69.525612,0.450000,42.000000)
+position = Vector3(-324,1.8,143)
 pond = NodePath("../World")
 movement_reference = NodePath("../CameraRig")
 
 [node name="CameraRig" parent="." node_paths=PackedStringArray("target") instance=ExtResource("camera_scene")]
-position = Vector3(-69.525612,0.450000,42.000000)
-rotation_degrees = Vector3(0, -90, 0)
+cave_obstruction_avoidance = true
+position = Vector3(-324,1.8,143)
+rotation_degrees = Vector3(0, 0, 0)
 target = NodePath("../Player")
 
-[node name="PondEcosystem" type="Node" parent="."]
+[node name="PondEcosystem" type="Node" parent="." node_paths=PackedStringArray("simulation_observer")]
 script = ExtResource("ecosystem")
 definition = ExtResource("river_definition")
-population_limit = 112
-species = Array[Resource]([ExtResource("legacy_fish_0"), ExtResource("legacy_fish_1"), ExtResource("legacy_fish_2"), ExtResource("legacy_fish_3"), ExtResource("legacy_fish_4"), ExtResource("legacy_fish_5"), ExtResource("legacy_fish_6"), ExtResource("legacy_fish_7"), ExtResource("legacy_fish_8"), ExtResource("legacy_fish_9"), ExtResource("legacy_fish_10"), ExtResource("legacy_fish_11"), ExtResource("legacy_fish_12"), ExtResource("legacy_fish_13"), ExtResource("legacy_fish_14"), ExtResource("legacy_fish_15"), ExtResource("region_fish_15"), ExtResource("region_fish_16"), ExtResource("region_fish_17"), ExtResource("region_fish_18"), ExtResource("region_fish_19"), ExtResource("region_fish_20"), ExtResource("region_fish_22"), ExtResource("region_fish_23"), ExtResource("region_fish_24"), ExtResource("region_fish_25"), ExtResource("region_fish_26"), ExtResource("region_fish_28")])
+population_limit = 960
+population_expansion_revision = "rainforest_960_v1"
+population_expansion_count = 848
+population_expansion_species_offset = 28
+simulation_observer = NodePath("../Player")
+species = Array[Resource]([ExtResource("legacy_fish_0"), ExtResource("legacy_fish_1"), ExtResource("legacy_fish_2"), ExtResource("legacy_fish_3"), ExtResource("legacy_fish_4"), ExtResource("legacy_fish_5"), ExtResource("legacy_fish_6"), ExtResource("legacy_fish_7"), ExtResource("legacy_fish_8"), ExtResource("legacy_fish_9"), ExtResource("legacy_fish_10"), ExtResource("legacy_fish_11"), ExtResource("legacy_fish_12"), ExtResource("legacy_fish_13"), ExtResource("legacy_fish_14"), ExtResource("legacy_fish_15"), ExtResource("region_fish_15"), ExtResource("region_fish_16"), ExtResource("region_fish_17"), ExtResource("region_fish_18"), ExtResource("region_fish_19"), ExtResource("region_fish_20"), ExtResource("region_fish_22"), ExtResource("region_fish_23"), ExtResource("region_fish_24"), ExtResource("region_fish_25"), ExtResource("region_fish_26"), ExtResource("region_fish_28"), ExtResource("lake_extra_0"), ExtResource("lake_extra_1"), ExtResource("lake_extra_2"), ExtResource("lake_extra_3"), ExtResource("lake_extra_4"), ExtResource("lake_extra_5"), ExtResource("lake_extra_6"), ExtResource("lake_extra_7"), ExtResource("lake_extra_8"), ExtResource("lake_extra_9"), ExtResource("lake_extra_10"), ExtResource("lake_extra_11"), ExtResource("lake_extra_12"), ExtResource("lake_extra_13"), ExtResource("lake_extra_14"), ExtResource("lake_extra_15"), ExtResource("lake_extra_16"), ExtResource("lake_extra_17"), ExtResource("lake_extra_18"), ExtResource("lake_extra_19")])
 
 [node name="FishingController" type="Node" parent="." node_paths=PackedStringArray("ecosystem", "player")]
 script = ExtResource("controller")
 ecosystem = NodePath("../PondEcosystem")
 player = NodePath("../Player")
 
-[node name="FishingEffects" parent="." node_paths=PackedStringArray("controller", "player", "ecosystem", "rod_tip") instance=ExtResource("effects_scene")]
+[node name="FishingEffects" parent="." node_paths=PackedStringArray("controller", "player", "ecosystem", "rod_tip", "water_interactions") instance=ExtResource("effects_scene")]
+maximum_visible_fish = 12
 controller = NodePath("../FishingController")
 player = NodePath("../Player")
 ecosystem = NodePath("../PondEcosystem")
 rod_tip = NodePath("../Player/Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5/Tip")
+water_interactions = NodePath("../WaterInteractions")
 
 [node name="WaterInteractions" parent="." node_paths=PackedStringArray("player", "pond", "ecosystem", "water_surface") instance=ExtResource("water_interactions")]
 player = NodePath("../Player")
@@ -100,3 +128,4 @@ water_surface = NodePath("../World/RiverWater")
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="FishingHUD" parent="HUD" instance=ExtResource("fishing_hud")]
+

@@ -1,0 +1,15 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://features/economy/equipment_model_preview.tscn" id="preview"]
+[node name="BaitCell" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+[node name="Preview" parent="." instance=ExtResource("preview")]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0,120)
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+text = "เหยื่อ"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 18

@@ -1,0 +1,3 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/10_trolling.tscn" id="model"]
+[node name="trolling_rod" instance=ExtResource("model")]

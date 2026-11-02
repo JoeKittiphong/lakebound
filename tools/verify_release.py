@@ -47,11 +47,25 @@ def main():
     require(manifest.find("uses-sdk").attrib[ANDROID + "targetSdkVersion"] == "36", "Unexpected target SDK")
     require(manifest.find("application").attrib.get(ANDROID + "debuggable", "false") == "false", "Debug build")
     permissions = [el.attrib.get(ANDROID + "name") for el in manifest.findall("uses-permission")]
-    require(set(permissions) <= {"android.permission.VIBRATE"}, "Unexpected permissions: " + str(permissions))
+    require(set(permissions) <= {"android.permission.VIBRATE", "android.permission.INTERNET"}, "Unexpected permissions: " + str(permissions))
     libraries = {}
     with zipfile.ZipFile(aab) as bundle:
         require(bundle.testzip() is None, "Corrupt AAB ZIP entry")
         names = bundle.namelist()
+        asset_roots = ("base/assets/", "assetPackInstallTime/assets/")
+        line_materials = []
+        for style in ("mono", "fluoro", "braid", "fly"):
+            relative = "features/equipment/detailed/materials/" + style + ".tres"
+            root = next((prefix for prefix in asset_roots
+                         if prefix + relative in names or prefix + relative + ".remap" in names), None)
+            require(root is not None, "Missing fishing line material: " + style)
+            remap = root + relative + ".remap"
+            if remap in names:
+                targets = re.findall(r'path="res://([^"\n]+)"', bundle.read(remap).decode("utf-8"))
+                require(bool(targets), "Missing material remap target: " + style)
+                for target in targets:
+                    require(any(prefix + target in names for prefix in asset_roots), "Missing packed material: " + target)
+            line_materials.append(style)
         forbidden = [name for name in names if any(part in name.lower() for part in
                      ("/signing/", "/.signing/", ".jks", ".dpapi", "release-credentials", "/tools/",
                       "/tests/", "/docs/", "/exports/", "feature-source", "icon-source"))]
@@ -88,7 +102,8 @@ def main():
               "aab": str(aab), "aab_bytes": aab.stat().st_size,
               "sha256": hashlib.sha256(aab.read_bytes()).hexdigest(), "permissions": permissions,
               "manifest_source": manifest_source, "arm64_load_segment_alignment": libraries,
-              "assets": assets, "qa_directory": str(args.qa_dir.resolve()) if args.qa_dir else None,
+              "assets": assets, "line_materials": line_materials,
+              "qa_directory": str(args.qa_dir.resolve()) if args.qa_dir else None,
               "limitations": ["No physical Android device or Google Play validation performed",
                               "Signature entry presence checked; certificate validity not verified"]}
     if args.manifest:

@@ -1,0 +1,3 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/02_baitcasting.tscn" id="model"]
+[node name="casting_rod" instance=ExtResource("model")]

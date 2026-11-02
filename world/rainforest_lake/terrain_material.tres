@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://world/rainforest_lake/terrain.gdshader" id="1_hh6ri"]
+[ext_resource type="Texture2D" path="res://assets/environment/river/grass.png" id="2_ln2xu"]
+[ext_resource type="Texture2D" path="res://assets/environment/river/gravel.png" id="3_fcsx0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_hh6ri")
+shader_parameter/grass_texture = ExtResource("2_ln2xu")
+shader_parameter/gravel_texture = ExtResource("3_fcsx0")

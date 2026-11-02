@@ -15,3 +15,6 @@ var timer: float = 0.0
 var surface_timer: float = 0.0
 var decision_timer: float = 0.0
 var heading: float = 0.0
+
+# Accumulated ecological time for distant low-frequency simulation (not save state).
+var simulation_elapsed:=0.0

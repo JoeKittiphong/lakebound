@@ -1,10 +1,22 @@
-[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
-[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://dbbjbid1fqp3v"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_01_spinning.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/spinning_reel.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/basic_reel.tres" id="reel_spec_fit"]
+
 [resource]
 script = ExtResource("1")
 id = &"basic_reel"
 display_name = "รอกพื้นฐาน · 100 ม."
+shop_icon = ExtResource("shop")
+equipment_type = "รอกสปินนิ่งพื้นฐาน"
 kind = "reel"
 price = 100
+model_scene = ExtResource("model")
 length = 100.0
-reel_speed = 2.6
+
+reel_family = "spinning"
+
+reel_spec = ExtResource("reel_spec_fit")

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/surf_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/rods/surf_rod.tscn" id="model"]
+
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/surf_rod.tres" id="rod_spec_fit"]
+
+[resource]
+script = ExtResource("script")
+id = &"surf_rod"
+display_name = "คันเซิร์ฟ"
+kind = "rod"
+equipment_type = "เซิร์ฟ / ตีไกล"
+shop_icon = ExtResource("icon")
+description = "เซิร์ฟ / ตีไกล · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 340
+strength = 14
+cast_multiplier = 1.65
+responsiveness = 0.65
+model_scene = ExtResource("model")
+
+
+mount_layout = "spinning"
+
+rod_spec = ExtResource("rod_spec_fit")

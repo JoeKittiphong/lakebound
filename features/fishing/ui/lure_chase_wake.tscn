@@ -1,0 +1,15 @@
+[gd_scene format=3]
+[sub_resource type="StandardMaterial3D" id="material"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.75, 0.95, 1, 0.45)
+[sub_resource type="TorusMesh" id="wake"]
+inner_radius = 0.16
+outer_radius = 0.21
+rings = 16
+ring_segments = 4
+material = SubResource("material")
+[node name="LureChaseWake" type="MeshInstance3D"]
+visible = false
+mesh = SubResource("wake")
+cast_shadow = 0

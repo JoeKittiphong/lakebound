@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Standard"
+family = "jigging"
+length_m = 1.8
+power = "H"
+action = "Moderate"
+jig_min_g = 40
+jig_max_g = 180
+drop_min_g = 40
+drop_max_g = 180
+techniques = PackedStringArray("vertical_jig", "boat_drop")
+max_working_drag_kgf = 5

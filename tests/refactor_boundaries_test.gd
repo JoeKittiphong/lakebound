@@ -61,12 +61,16 @@ func run() -> void:
  paused = true
  panel.open()
  panel.close()
+ await panel.closed
+ await process_frame
  expect(paused, "closing a collection opened during an existing pause preserves that pause")
  paused = false
  camera.look_finger = 8
  panel.open()
  expect(paused and not camera.enabled and camera.look_finger == -1, "collection delegates pause and input ownership to the session")
  panel.close()
+ await panel.closed
+ await process_frame
  expect(not paused and camera.enabled, "closing the modal restores active session input")
  panel.open()
  scene.free()

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/electric_reel.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_06_conventional_lever.tscn" id="model"]
+
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/electric_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script = ExtResource("script")
+id = &"electric_reel"
+display_name = "รอกไฟฟ้า"
+kind = "reel"
+equipment_type = "ไฟฟ้า"
+shop_icon = ExtResource("icon")
+description = "ไฟฟ้า · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 520
+length = 300
+reel_speed = 4.2
+drag_power = 1.25
+model_scene = ExtResource("model")
+
+
+reel_family = "lever"
+
+reel_spec = ExtResource("reel_spec_fit")

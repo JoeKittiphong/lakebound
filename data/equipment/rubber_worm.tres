@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/rubber_worm.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/plug.tres" id="rig_plug"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/rubber_worm.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/rubber_worm.tres" id="attraction"]
+
+[resource]
+script = ExtResource("script")
+id = &"rubber_worm"
+display_name = "หนอนยาง"
+kind = "lure"
+equipment_type = "เหยื่อยาง"
+shop_icon = ExtResource("icon")
+description = "เหยื่อยาง · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 100
+bait_type = "lure"
+motion = "sink"
+lure_pattern = "jerk_fall"
+lure_visual = "SoftPlastic"
+sink_speed = 0.25
+swim_depth = -1
+
+
+payload_g = 4
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_plug")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

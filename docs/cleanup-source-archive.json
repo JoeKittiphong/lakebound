@@ -1,0 +1,142 @@
+[
+  {
+    "original": "assets/environment/rocks/reference_rocks_set.glb",
+    "bytes": 13381864,
+    "sha256": "b634deb2294f3c39ccd85ee6b4a0c541d5e02595fd0a2ab887511d50b05190b7",
+    "reason": "Unreferenced historical source/art; retained outside runtime project",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/reference_rocks_set.glb"
+  },
+  {
+    "original": "assets/environment/rocks/reference_rocks_set.glb.import",
+    "bytes": 1197,
+    "sha256": "084576f9c59cee20e602e2720a49c1f150133258fb3b4f40eaf33e651f9d4389",
+    "reason": "Import identity retained with archived source",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/reference_rocks_set.glb.import"
+  },
+  {
+    "original": "assets/environment/rocks/concept_rocks_01_06_set.glb",
+    "bytes": 3813712,
+    "sha256": "29280244dca9e0d097522ef095bc39a4003c53c7c71a4da847613a8487bbfcda",
+    "reason": "Unreferenced historical source/art; retained outside runtime project",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/concept_rocks_01_06_set.glb"
+  },
+  {
+    "original": "assets/environment/rocks/concept_rocks_01_06_set.glb.import",
+    "bytes": 1209,
+    "sha256": "39fae6b81d27c844baf6289230e77c92e200f6b1a53b0edf5f315fa763d75022",
+    "reason": "Import identity retained with archived source",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/concept_rocks_01_06_set.glb.import"
+  },
+  {
+    "original": "assets/environment/rocks/rock_clusters_20_21.glb",
+    "bytes": 3909228,
+    "sha256": "69d3e8db83dde7d48d073001ec5dc602308f75d6b6d4db7971e6311e38a6d89d",
+    "reason": "Unreferenced historical source/art; retained outside runtime project",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/rock_clusters_20_21.glb"
+  },
+  {
+    "original": "assets/environment/rocks/rock_clusters_20_21.glb.import",
+    "bytes": 1196,
+    "sha256": "413b192052ca058479c46bdaef8c684d704ec71bf82e8b324ef64f3834604589",
+    "reason": "Import identity retained with archived source",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/rock_clusters_20_21.glb.import"
+  },
+  {
+    "original": "features/loading/art/loading_lake.png",
+    "bytes": 2147964,
+    "sha256": "dada6c47afe914957b2734af3e6944723576be381afd0e281980e571850bbfeb",
+    "reason": "Unreferenced historical source/art; retained outside runtime project",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/features/loading/art/loading_lake.png"
+  },
+  {
+    "original": "features/loading/art/loading_lake.png.import",
+    "bytes": 962,
+    "sha256": "7aa6716a8427c4508580f9845f03bc8781abaca63564acd51015eb4a094462c3",
+    "reason": "Import identity retained with archived source",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/features/loading/art/loading_lake.png.import"
+  },
+  {
+    "original": "features/loading/art/lakebound_logo_b.png",
+    "bytes": 2288952,
+    "sha256": "54a95328b2959ac1a0810fa422bf384c7be786d346ac2a01a4bc01803d759f55",
+    "reason": "Unreferenced historical source/art; retained outside runtime project",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/features/loading/art/lakebound_logo_b.png"
+  },
+  {
+    "original": "features/loading/art/lakebound_logo_b.png.import",
+    "bytes": 974,
+    "sha256": "ae844e585408e8fe62fe24626c537906cf96a12520b74c5f567c8427d05c84eb",
+    "reason": "Import identity retained with archived source",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/features/loading/art/lakebound_logo_b.png.import"
+  },
+  {
+    "original": "features/menu/art/menu_lake.png",
+    "bytes": 2061642,
+    "sha256": "794f5a24ab2198101d7526585e3d35c6d22e05fcd707f6056f6481f07f50f3cf",
+    "reason": "Unreferenced historical source/art; retained outside runtime project",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/features/menu/art/menu_lake.png"
+  },
+  {
+    "original": "features/menu/art/menu_lake.png.import",
+    "bytes": 949,
+    "sha256": "23ba225e6ab8d28f82b2784e85e66b538bf6da2c53218771ab0c8a08a13f1aa0",
+    "reason": "Import identity retained with archived source",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/features/menu/art/menu_lake.png.import"
+  },
+  {
+    "original": "assets/ui/maps/river.png",
+    "bytes": 2676100,
+    "sha256": "bfe3c07cd882d9fbac24f76dfa72524e455ab739aacb236753cb6d4a8d749dcb",
+    "reason": "Unreferenced historical source/art; retained outside runtime project",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/ui/maps/river.png"
+  },
+  {
+    "original": "assets/ui/maps/river.png.import",
+    "bytes": 938,
+    "sha256": "447775fe16430dc2fb7c776336b6b4538edc834e2a02e37cef8d3808187a2931",
+    "reason": "Import identity retained with archived source",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/ui/maps/river.png.import"
+  },
+  {
+    "original": "assets/environment/rocks/rock_clusters_20_21_rock_set_albedo_1024.png",
+    "bytes": 1259324,
+    "sha256": "fb72f0b128bd6ca2911ecb38b913a64a21ebf54bbb7ca2160bcc541a959f97f8",
+    "reason": "Identical pixels consolidated onto canonical rock texture",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/rock_clusters_20_21_rock_set_albedo_1024.png"
+  },
+  {
+    "original": "assets/environment/rocks/rock_clusters_20_21_rock_set_albedo_1024.png.import",
+    "bytes": 1412,
+    "sha256": "ea9a14175a41ca909fb014a01489b0b0f62799594cd1c9b36bc349bae135ed2f",
+    "reason": "Archived duplicate import metadata",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/rock_clusters_20_21_rock_set_albedo_1024.png.import"
+  },
+  {
+    "original": "assets/environment/rocks/rock_clusters_20_21_rock_set_normal_opengl_1024.png",
+    "bytes": 1699852,
+    "sha256": "8b311e1853636643fddb4579763b2e80c5a675e0c388788c79c41ca7af7f2951",
+    "reason": "Identical pixels consolidated onto canonical rock texture",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/rock_clusters_20_21_rock_set_normal_opengl_1024.png"
+  },
+  {
+    "original": "assets/environment/rocks/rock_clusters_20_21_rock_set_normal_opengl_1024.png.import",
+    "bytes": 1529,
+    "sha256": "79d097e9af8be209e9c7c2e3a91bb9b92335f151bbcf2357706bc56308e42f6a",
+    "reason": "Archived duplicate import metadata",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/rock_clusters_20_21_rock_set_normal_opengl_1024.png.import"
+  },
+  {
+    "original": "assets/environment/rocks/rock_clusters_20_21_rock_set_roughness_1024.png",
+    "bytes": 662981,
+    "sha256": "1896e2ddf6c8dbfa36a44fdd602913a44159a6bdaa336f2ee82fd2483c4a7e56",
+    "reason": "Identical pixels consolidated onto canonical rock texture",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/rock_clusters_20_21_rock_set_roughness_1024.png"
+  },
+  {
+    "original": "assets/environment/rocks/rock_clusters_20_21_rock_set_roughness_1024.png.import",
+    "bytes": 1427,
+    "sha256": "188cff17284333fc54ab533ef8dabb511519fdb25fc4746911b625ff67449ab5",
+    "reason": "Archived duplicate import metadata",
+    "workspace_archive": "assets-source/project_archive/cleanup-2026-10-31/assets/environment/rocks/rock_clusters_20_21_rock_set_roughness_1024.png.import"
+  }
+]

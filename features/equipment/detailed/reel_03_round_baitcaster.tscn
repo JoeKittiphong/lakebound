@@ -1,0 +1,23 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/equipment/detailed/detailed_reel.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/models/reel_03_round_baitcaster.glb" id="model"]
+[ext_resource type="Material" path="res://features/equipment/detailed/materials/mono.tres" id="mat"]
+[sub_resource type="CylinderMesh" id="fill"]
+top_radius=1.0
+bottom_radius=1.0
+height=1.0
+radial_segments=32
+rings=0
+cap_top=false
+cap_bottom=false
+[node name="Reel" type="Node3D"]
+script=ExtResource("script")
+reel_id="03_round_baitcaster"
+mount_family="round"
+[node name="Model" parent="." instance=ExtResource("model")]
+[node name="FillSurface" type="MeshInstance3D" parent="."]
+mesh=SubResource("fill")
+material_override=ExtResource("mat")
+scale=Vector3(0.02,0.025,0.02)
+[node name="ReelFoot" type="Marker3D" parent="."]
+position=Vector3(0.0,0.0,-0.0)

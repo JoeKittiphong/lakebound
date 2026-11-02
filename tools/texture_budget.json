@@ -1,0 +1,93 @@
+{
+  "textures": [
+    {
+      "path": "assets/environment/bridge/wooden_bridge_joined_bridge_joined_normal_opengl_2048.png",
+      "limit": 1024,
+      "role": "nearby environment normal"
+    },
+    {
+      "path": "assets/environment/rocks/reference_rocks_set_rock_set_normal_opengl_2048.png",
+      "limit": 1024,
+      "role": "environment normal"
+    },
+    {
+      "path": "assets/environment/bridge/wooden_bridge_joined_bridge_joined_roughness_2048.png",
+      "limit": 512,
+      "role": "low frequency surface roughness"
+    },
+    {
+      "path": "assets/environment/rocks/reference_rocks_set_rock_set_roughness_2048.png",
+      "limit": 512,
+      "role": "low frequency surface roughness"
+    },
+    {
+      "path": "assets/ui/shop/equipment_atlas/equipment.png",
+      "limit": 1024,
+      "role": "112-pixel equipment thumbnails"
+    },
+    {
+      "path": "assets/environment/loading_jungle/distant_forest.png",
+      "limit": 1024,
+      "role": "distant background silhouette"
+    },
+    {
+      "path": "assets/environment/rocks/concept_rocks_01_06_set_rock_set_normal_opengl_1024.png",
+      "limit": 512,
+      "role": "shared rock detail normal"
+    },
+    {
+      "path": "assets/environment/rocks/concept_rocks_01_06_set_rock_set_roughness_1024.png",
+      "limit": 256,
+      "role": "shared low-frequency rock roughness"
+    },
+    {
+      "path": "assets/ui/maps/coral_coast.png",
+      "limit": 1024,
+      "compression_mode": 1,
+      "lossy_quality": 0.9,
+      "role": "map selector image shown at 480x270; original PNG retained"
+    },
+    {
+      "path": "assets/ui/maps/forest_stream.png",
+      "limit": 1024,
+      "compression_mode": 1,
+      "lossy_quality": 0.9,
+      "role": "map selector image shown at 480x270; original PNG retained"
+    },
+    {
+      "path": "assets/ui/maps/lotus_marsh.png",
+      "limit": 1024,
+      "compression_mode": 1,
+      "lossy_quality": 0.9,
+      "role": "map selector image shown at 480x270; original PNG retained"
+    },
+    {
+      "path": "assets/ui/maps/mangrove_estuary.png",
+      "limit": 1024,
+      "compression_mode": 1,
+      "lossy_quality": 0.9,
+      "role": "map selector image shown at 480x270; original PNG retained"
+    },
+    {
+      "path": "assets/ui/maps/rainforest_lake.png",
+      "limit": 1024,
+      "compression_mode": 1,
+      "lossy_quality": 0.9,
+      "role": "map selector image shown at 480x270; original PNG retained"
+    },
+    {
+      "path": "assets/ui/maps/wild_reservoir.png",
+      "limit": 1024,
+      "compression_mode": 1,
+      "lossy_quality": 0.9,
+      "role": "map selector image shown at 480x270; original PNG retained"
+    }
+  ],
+  "atlases": [
+    {
+      "manifest": "assets/ui/shop/equipment_atlas/manifest.json",
+      "texture": "assets/ui/shop/equipment_atlas/equipment.png",
+      "source_width": 2048
+    }
+  ]
+}

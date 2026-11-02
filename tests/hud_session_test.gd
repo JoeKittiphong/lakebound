@@ -17,7 +17,8 @@ func run() -> void:
  var collection := root.get_node("FishCollection")
  collection.recording_enabled = false
  var profile: AnglerProfile = root.get_node("AnglerSave")
- profile.save_path = "user://hud-session-test.cfg"
+ var qa_dir := OS.get_environment("LAKEBOUND_QA_DIR")
+ profile.save_path = (qa_dir if not qa_dir.is_empty() else "user://").path_join("hud-session-test.cfg")
  profile.data = profile.defaults()
  profile.incompatible = false
  var scene: Node3D = load("res://features/regions/lotus_marsh.tscn").instantiate()
@@ -29,13 +30,26 @@ func run() -> void:
  var fishing: FishingController = scene.get_node("FishingController")
  fishing.set_physics_process(false)
  hud.collection_visibility_changed.connect(func(opened: bool): modal_events.append(opened))
+ profile.data.identity.name = "Map tester"
+ var ranking: Control = hud.get_node("SocialPanel")
+ ranking.sheets_url = ""
+ for entry in RegionCatalog.MAPS:
+  fishing.map_id = entry.id
+  hud.get_node("SafeArea/RankingButton").pressed.emit()
+  var filter: OptionButton = ranking.get_node("%Filter")
+  expect(ranking.visible and ranking.scope == "map" and str(filter.get_item_metadata(filter.selected)) == entry.id, "HUD button opens ranking for " + str(entry.id))
+  expect(paused and not hud.get_node("SafeArea").visible, "ranking pauses gameplay and hides HUD")
+  hud.close_top_panel()
+  expect(not paused and hud.get_node("SafeArea").visible, "closing ranking restores gameplay")
+ fishing.map_id = "lotus_marsh"
+ modal_events.clear()
  # Internal controls are inspected by this UI integration fixture only. Session
  # callers exercise capabilities instead of learning these scene paths.
  expect(hud.get_node("TacklePanel").map_id == "lotus_marsh" and hud.get_node("MissionPanel").map_id == "lotus_marsh", "region context reaches both economy panels")
  expect(hud.get_node("SafeArea/BaitPanel/Content/DepthRow/Depth").max_value == scene.maximum_fishing_depth, "region depth limit is configured through HUD")
  expect(hud.get_node("TacklePanel").profile == profile and hud.get_node("MissionPanel").profile == profile, "economy panels bind the same persistent profile")
  hud.update_wallet(123)
- expect("123" in hud.get_node("SafeArea/TackleButton").text, "wallet API updates the authored button")
+ expect(hud.get_node("SafeArea/TopBar/Actions/Wallet/Coins/Amount").text == "123", "wallet API updates the separate coin amount")
  hud.set_boss_notice("test boss")
  hud.set_boss_notice_visible(true)
  expect(hud.get_node("SafeArea/BossToast").text == "test boss" and hud.get_node("SafeArea/BossToast").visible, "boss text and visibility use the HUD API")
@@ -103,17 +117,17 @@ func run() -> void:
  profile.equip("minnow")
  fishing._change_state(FishingController.State.WAITING)
  hud._process(0.01)
- var action: Button = hud.get_node("SafeArea/LureAction")
+ var action: Control = hud.rod_joystick
  var press := InputEventMouseButton.new()
  press.button_index = MOUSE_BUTTON_LEFT
  press.pressed = true
- press.position = action.get_global_rect().get_center()
+ press.position = action.get_global_rect().get_center() + Vector2(0, 48)
  root.push_input(press, true)
  await process_frame
- expect(hud.is_lure_action_held(), "session queries the held lure command through its API")
+ expect(hud.rod_direction().y > 0.1 and not hud.get_node("SafeArea/LureAction").visible, "session reads lure retrieval from the visible analog control")
  press.pressed = false
  root.push_input(press, true)
- expect(not hud.is_lure_action_held(), "releasing the lure button clears the session command")
+ expect(hud.rod_direction() == Vector2.ZERO, "releasing the lure joystick clears the session command")
  fishing.reset_cast()
  hud.open_tackle()
  scene.free()

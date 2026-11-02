@@ -1,0 +1,114 @@
+{
+  "source_assets": [
+    {
+      "asset": "tree_a",
+      "triangles": 2071
+    },
+    {
+      "asset": "tree_a_mid",
+      "triangles": 1719
+    },
+    {
+      "asset": "tree_a_far",
+      "triangles": 237
+    },
+    {
+      "asset": "tree_b",
+      "triangles": 1463
+    },
+    {
+      "asset": "tree_b_mid",
+      "triangles": 871
+    },
+    {
+      "asset": "tree_b_far",
+      "triangles": 306
+    },
+    {
+      "asset": "bush",
+      "triangles": 52
+    },
+    {
+      "asset": "bush_mid",
+      "triangles": 28
+    },
+    {
+      "asset": "banana",
+      "triangles": 666
+    },
+    {
+      "asset": "banana_mid",
+      "triangles": 370
+    },
+    {
+      "asset": "taro",
+      "triangles": 832
+    },
+    {
+      "asset": "taro_mid",
+      "triangles": 440
+    },
+    {
+      "asset": "dark_taro",
+      "triangles": 892
+    },
+    {
+      "asset": "dark_taro_mid",
+      "triangles": 466
+    },
+    {
+      "asset": "fern",
+      "triangles": 664
+    },
+    {
+      "asset": "fern_mid",
+      "triangles": 316
+    },
+    {
+      "asset": "grass",
+      "triangles": 108
+    },
+    {
+      "asset": "grass_mid",
+      "triangles": 54
+    },
+    {
+      "asset": "plume_grass",
+      "triangles": 132
+    },
+    {
+      "asset": "plume_grass_mid",
+      "triangles": 66
+    },
+    {
+      "asset": "seaweed",
+      "triangles": 252
+    },
+    {
+      "asset": "seaweed_mid",
+      "triangles": 140
+    },
+    {
+      "asset": "rock_flat",
+      "triangles": 116
+    },
+    {
+      "asset": "rock_boulder",
+      "triangles": 188
+    },
+    {
+      "asset": "rock_red",
+      "triangles": 284
+    },
+    {
+      "asset": "cliff",
+      "triangles": 300
+    },
+    {
+      "asset": "cliff_pillar",
+      "triangles": 240
+    }
+  ],
+  "atlas_tiles": 27,
+  "atlas_size": 2048
+}

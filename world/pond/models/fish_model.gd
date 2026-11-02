@@ -12,7 +12,7 @@ func set_motion(state: StringName, stamina: float = 1.0) -> void:
  var clip: StringName = &"swim"
  var speed := 0.72
  match state:
-  &"resting", &"feeding", &"inspecting", &"biting":
+  &"resting", &"feeding", &"inspecting", &"committed", &"biting":
    clip = &"hover"
    speed = 0.8
   &"landed":

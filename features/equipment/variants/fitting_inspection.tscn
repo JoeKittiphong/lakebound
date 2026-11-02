@@ -1,0 +1,39 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/equipment/variants/fitting_inspection.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/brook_702m.tscn" id="rod"]
+[sub_resource type="Environment" id="env"]
+background_mode = 1
+background_color = Color(0.026,0.042,0.060,1)
+ambient_light_source = 3
+ambient_light_color = Color(0.8,0.86,0.95,1)
+ambient_light_energy = 0.8
+[node name="FittingInspection" type="Node3D"]
+script = ExtResource("script")
+[node name="Rod" parent="." instance=ExtResource("rod")]
+rotation = Vector3(0,0,-1.57079632679)
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0,-2,1)
+projection = 1
+size = 1.7
+near = 0.005
+current = true
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+[node name="Key" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-25,-35,20)
+light_energy = 2.0
+[node name="Fill" type="OmniLight3D" parent="."]
+position = Vector3(0.5,-0.7,0.8)
+light_energy = 1.5
+omni_range = 5.0
+[node name="Labels" type="CanvasLayer" parent="."]
+[node name="Name" type="Label" parent="Labels"]
+offset_left = 30.0
+offset_top = 24.0
+theme_override_font_sizes/font_size = 26
+text = "Brook 702M | Spinning"
+[node name="Info" type="Label" parent="Labels"]
+offset_left = 30.0
+offset_top = 63.0
+theme_override_font_sizes/font_size = 19
+text = "Rod / reel / guide / line inspection"

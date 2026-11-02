@@ -1,4 +1,56 @@
+## Latest: 0.1.26 Alpha and five screenshots submitted — 1 November2026
+
+Original-key code27 accepted in Alpha release25 and submitted with Thai phone screenshot replacement. Console confirms both in review; six Early Access changes remain unsubmitted. Managed publishing on.0.1.25 was cancelled before submission at user's request. Different rod now clears reel/line/bait atomically; overview supports individual removal, empty slots, partial-spool storage, safe legacy migration and incomplete-cast blocking.677 source and163 exact-AAB assertions pass, including responsive visual and six-map navigation. AAB85,303,365 bytes (85.30 MB),+4.07 MB versus published0.1.24; Play install58.1 MB/update4.76 MB. Exact certificate/manifest/archive/material/alignment checks pass. No physical Android/live endpoint QA this task; host certificate/ETC2 warnings and4 shutdown ObjectDB harness leaks remain. See release-0.1.26.md, ../equipment-removal-plan.md and exports/play-store/0.1.26-submitted.png. Prior0.1.24 observed published1 November08:40.
+
+## Latest: 0.1.24 Alpha submitted — 1 November 2026
+
+Original-key code25 accepted as Alpha release24 and submitted. Console confirms only Alpha0.1.24 in review, quick checks running; six Early Access changes remain unsubmitted. Managed publishing on. Includes diagnosed missing braid/fluoro/fly material dependencies plus MultiMesh reload fix and warning cleanup. AAB81,233,009 bytes (81.23 MB),+1.16 MB; Play install54.2 MB/update1.92 MB. Source6773 checks and exact-AAB102 reel/material/all-map/navigation checks passed. Public original certificate and exact archive/material/remap/alignment checks pass. Physical RMX3840 debug QA exists separately (76 checks); no new Play-installed0.1.24 phone test in this task. Host certificate/ETC2 conversion diagnostics remain. See release-0.1.24.md and exports/play-store/0.1.24-submitted.png. Prior0.1.23 observed published1 November06:17.
+
+## Latest: 0.1.23 Alpha submitted — 1 November 2026
+
+Original-key code24 accepted as Alpha release23 and submitted. Console confirms Alpha 0.1.23 alone in review; six Early Access changes remain unsubmitted. Managed publishing on. AAB80,071,648 bytes (80.07 MB),4.64 MB smaller than0.1.22; Play new-install53 MB. Reduced overlapping menu/map memory through a lightweight transition and removed unused eager Gameplay reference. Rebuilt after correcting confirmed stale export dependency caches. Exact AAB six-map transition26 checks and startup passed; exact error UI visually verified. Host certificate/ETC2 warnings and7 shutdown ObjectDB leaks remain; no physical phone crash reproduction/log, so crash cause/fix on that phone remains unconfirmed. See release-0.1.23.md and exports/play-store/0.1.23-submitted.png. Previous0.1.22 observed available to testers, published31 October23:56.
+
 # Lakebound internal release preparation
+
+## Latest: 0.1.21 Alpha submitted — 31 October 2026
+
+Original-key bundle22 accepted as Alpha release21 and submitted. Final Console confirms Alpha alone in review, quick checks running; six Early Access changes remain unsubmitted. Managed publishing on. AAB84,307,021 bytes (84.31 MB),9.21 MB smaller than0.1.20; Play new-install57.2 MB (-9.6 MB), update estimate9.21 MB. Packed resource/all-map cleanup1595 checks and source jungle/minimap/collection passed; exact AAB startup reached gameplay.15 shutdown ObjectDB leaks and host certificate-store diagnostic remain; no physical Android/live endpoint test. See release-0.1.21.md and exports/play-store/0.1.21-submitted.png. Previous0.1.20 observed published29 October21:13.
+
+## Latest: 0.1.20 Alpha submitted — 29 October 2026
+
+Original-key bundle21 accepted as Alpha release20 and submitted. Console confirms 0.1.20 alone in review; Early Access six changes remain unsubmitted. Previous approved 0.1.19 still ready to publish, not published during this task. Managed publishing on. AAB 93,519,154 bytes (93.52 MB), +36,880 bytes; Play new-install estimate66.8 MB (+35.3 KB). Lure rhythm238/icon glyph664 checks passed,902 total. Exact AAB startup reached gameplay;14 shutdown ObjectDB leaks and host certificate-store diagnostic remain; no physical Android/live endpoint test. See release-0.1.20.md and exports/play-store/0.1.20-submitted.png.
+
+## Latest: 0.1.19 Alpha submitted — 29 October 2026
+
+Original-key bundle 20, 0.1.19, accepted as Alpha release 19 and submitted. Final Console confirms Alpha alone in review; six Early Access changes remain unsubmitted. Managed publishing on. AAB 93,482,274 bytes (93.48 MB), +3.41 MB versus 0.1.18; Play new-install estimate 66.8 MB (+3.3 MB). Surface spray, collection, map data, collection tabs (69 checks), character integration passed. Fixed imported-model editable Asset serialization so authored LeftHandIK survives export; rebuilt exact AAB startup reaches gameplay without script errors. 14 shutdown ObjectDB leaks and host certificate-store diagnostic remain; no physical Android/live HTTPS test. See release-0.1.19.md and exports/play-store/0.1.19-submitted.png.
+
+## Latest: Alpha only resubmitted — 28 October 2026
+
+User explicitly authorized withdrawing the combined review and resubmitting Alpha only. Final Console state confirms only Alpha 0.1.18 in review; six Early Access changes remain unsubmitted for later, not published. Managed publishing on. Temporary Console error 6884FC2E cleared by cancelling and reloading; verified fresh one-change confirmation without error before successful submission. Proof: exports/play-store/0.1.18-alpha-only-submitted.png. Do not submit the six pending Early Access changes without a new request.
+
+## Early Access — 28 October 2026
+
+Created track 4699453280236503670 / release 1 using bundle 19 (0.1.18). Thailand/Japan, open invitations without a user cap. Final Console snapshot shows all six Early Access changes in review alongside Alpha; managed publishing on. Submission tool reported automatic rejection, so no retry was attempted; subsequent read-only verification confirmed actual in-review state. See release-0.1.18.md and exports/play-store/0.1.18-early-access-prepared.png.
+
+## Current status — 28 October 2026, 0.1.18 submitted
+
+Original-key bundle 19 (0.1.18) accepted as Alpha release 18 and submitted. Publishing overview confirms Changes in review; initial quick checks running, managed publishing enabled. Archive 90.07 MB (+18,478 bytes), Play new-install estimate 63.5 MB (+18.2 KB). Region ranking and Sheets synchronization: 56 checks passed; cached Top100 first draw 295.602 ms. Exact AAB startup reached gameplay. No physical Android/live endpoint test; isolated desktop certificate-store diagnostic and 17 shutdown ObjectDB leaks documented in release-0.1.18.md. Proof: exports/play-store/0.1.18-submitted.png. Prior 0.1.17 observed available to testers.
+
+## Current status — 27 October 2026, 0.1.16 submitted
+
+Bundle 17 (0.1.16), exact prepared AAB with new server settings UI, accepted as Alpha release 16 and submitted. Changes in review confirmed; managed publishing enabled. Archive 88.52 MB, Play new-install estimate 62 MB. No new device validation; prepared focused UI/HTTPS checks documented in release-0.1.16.md. Proof: exports/play-store/0.1.16-submitted.png.
+
+## Current status — 27 October 2026, 0.1.15 prepared
+
+Bundle 16 (0.1.15), five gameplay screenshots and updated online description saved as pending changes, not submitted. Existing Data Safety declaration says no collection but new leaderboard collects player ID, name and catch statistics. Privacy disclosure and data deletion/retention decisions need completion before release. Real HTTPS smoke and named-profile packed startup passed; 854 region checks passed with updated QA fixture. See release-0.1.15.md.
+
+## Current status — 26 October 2026, 0.1.14
+
+Original-key bundle 15 (0.1.14) accepted and submitted as Alpha release 14. Changes in review confirmed; managed publishing enabled. AAB 87.37 MB (-7.16 MB), Play estimate 60.9 MB (-7.17 MB). Map data 43/rendered UI 68/catch settlement 36/economy 40 checks passed, 187 total. Exact AAB startup reached gameplay. No physical Android test; nine shutdown ObjectDB leaks remain. See release-0.1.14.md and exports/play-store/0.1.14-submitted.png.
+
+## Current status — 25 October 2026, 0.1.13
+
+Original-key bundle 14 (0.1.13) accepted and submitted as Alpha release 13. Changes in review confirmed, managed publishing enabled. AAB 94.53 MB (+19,890 bytes); Play estimate 68 MB (+17.3 KB). Catch settlement 36/missions 76/economy 40 checks passed. Exact AAB startup reached menu and grand river; nine shutdown ObjectDB leaks remain. No physical Android test. See release-0.1.13.md and exports/play-store/0.1.13-submitted.png.
 
 ## Current status — 25 October 2026, 0.1.12
 
@@ -70,3 +122,7 @@ SHA-256: `f49ede46b04e608022750083b29fbdd250366ce1065197fe14a4e4a25e539c72`.
 Local checks passed: Godot import, GPU scene/menu/navigation/movement smoke, 16 KB ARM64 ELF segment alignment, release manifest with no requested permissions, ZIP integrity and signing-file exclusion. `jarsigner -verify` reports jar verified (self-signed certificate/no timestamp and streaming ZIP-order warnings remain); Google Play validation is the final upload check. No physical Android device test has been performed.
 
 Support email, privacy-policy owner/contact and final hosted policy, intended audience and production setup remain unprovided. Do not use the signed-in Google email as a public contact without instruction. This is an internal world-preview prototype, not a completed fishing game or production launch.
+
+
+
+

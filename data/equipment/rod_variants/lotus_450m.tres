@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/pole_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/lotus_450m.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/lotus_450m.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"lotus_450m"
+display_name = "Lotus 450M"
+kind = "rod"
+equipment_type = "ชิงหลิว · Lotus"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "ชิงหลิวโค้งลึก เน้นความนุ่มและผ่อนแรงกระชาก · Slow"
+price = 230
+strength = 5
+cast_multiplier = 0.45
+responsiveness = 1.0
+
+mount_layout = "fixed"

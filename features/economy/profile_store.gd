@@ -4,9 +4,9 @@ extends RefCounted
 const Catalog = preload("res://data/equipment/tackle_catalog.gd")
 
 static func defaults() -> Dictionary:
- return {"coins": 350, "diamonds": 0, "stock": {"worm": 20, "dough": 10, "minnow": 1, "light_rod": 1, "basic_reel": 1, "small_box": 1},
+ return {"terminal_rig": "float", "identity": AnglerIdentity.create(), "coins": 350, "diamonds": 0, "stock": {"worm": 20, "dough": 10, "minnow": 1, "light_rod": 1, "basic_reel": 1, "small_box": 1},
   "equipped": {"bait": "worm", "lure": "minnow", "rod": "light_rod", "reel": "basic_reel", "box": "small_box", "line": "nylon"},
-  "line_remaining": 65.0, "spares": {}, "catches": [], "journal": [], "boss_history": [], "ponds": {}, "pending": {}, "receipts": [], "missions": MissionProgress.defaults()}
+  "line_remaining": 65.0, "spares": {}, "stored_lines": {}, "catches": [], "journal": [], "boss_history": [], "ponds": {}, "pond_revisions": {}, "pending": {}, "receipts": [], "missions": MissionProgress.defaults(), "map_memory": FishingJournal.defaults(), "history": CatchArchive.defaults()}
 
 static func valid(value: Variant) -> bool:
  if not value is Dictionary:
@@ -15,11 +15,19 @@ static func valid(value: Variant) -> bool:
  for key in expected:
   if not value.has(key) or typeof(value[key]) != typeof(expected[key]):
    return false
+ if not AnglerIdentity.valid(value.identity):
+  return false
  if value.coins < 0 or value.diamonds < 0 or not is_finite(value.line_remaining) or value.line_remaining < 0:
   return false
  if not MissionProgress.valid(value.missions):
   return false
+ if not FishingJournal.valid_memory(value.map_memory):
+  return false
+ if not CatchArchive.valid(value.history):
+  return false
  for slot in expected.equipped:
+  if not value.equipped.has(slot) or not value.equipped[slot] is String: return false
+  if value.equipped[slot].is_empty() and slot in ["rod", "reel", "line", "bait", "box"]: continue
   var entry := Catalog.item(str(value.equipped.get(slot, "")))
   if entry == null or (entry.kind != slot and not (slot == "bait" and entry.kind == "lure")):
    return false
@@ -30,8 +38,14 @@ static func valid(value: Variant) -> bool:
   var spare := Catalog.item(str(key))
   if spare == null or spare.kind != "line" or not value.spares[key] is int or value.spares[key] < 0:
    return false
- if value.line_remaining > Catalog.item(str(value.equipped.line)).length:
+ var line := Catalog.item(str(value.equipped.line))
+ if (line == null and value.line_remaining != 0) or (line != null and value.line_remaining > line.length):
   return false
+ for id in value.stored_lines:
+  var stored := Catalog.item(str(id))
+  if stored == null or stored.kind != "line" or not value.stored_lines[id] is Array: return false
+  for length in value.stored_lines[id]:
+   if not (length is float or length is int) or not is_finite(float(length)) or length <= 0 or length > stored.length: return false
  if not value.pending.is_empty():
   var lure := Catalog.item(str(value.pending.get("lure", "")))
   if lure == null or lure.kind != "lure" or not value.pending.get("id") is String or str(value.pending.id).is_empty() or value.pending.get("cost", -1) != lure.recovery_cost:
@@ -39,7 +53,7 @@ static func valid(value: Variant) -> bool:
  for receipt in value.receipts:
   if not receipt is String or receipt.is_empty():
    return false
- for entries in [value.catches, value.journal, value.boss_history]:
+ for entries in [value.catches, value.journal, value.boss_history, value.history.pending]:
   for record in entries:
    if not record is Dictionary:
     return false
@@ -51,6 +65,10 @@ static func valid(value: Variant) -> bool:
      return false
    if record.weight <= 0:
     return false
+   if record.has("location") and not FishingJournal.valid_location(record.location):
+    return false
+ for map_id in value.pond_revisions:
+  if not map_id is String or not value.pond_revisions[map_id] is String:return false
  for map_id in value.ponds:
   if not map_id is String or not value.ponds[map_id] is Array:
    return false
@@ -67,13 +85,23 @@ static func load_profile(path: String) -> Dictionary:
   result.error = error if error != OK else ERR_INVALID_DATA
   return result
  var saved = config.get_value("profile", "data", {})
+ if saved is Dictionary and not saved.has("stored_lines"): saved["stored_lines"] = {}
+ if saved is Dictionary and not saved.has("identity"):
+  saved["identity"] = AnglerIdentity.create()
  if saved is Dictionary and not saved.has("missions"):
   saved["missions"] = MissionProgress.defaults()
+ if saved is Dictionary and not saved.has("map_memory"):
+  saved["map_memory"] = FishingJournal.defaults()
+ if saved is Dictionary and not saved.has("history"):
+  saved["history"] = CatchArchive.defaults()
+ if saved is Dictionary and not saved.has("pond_revisions"):saved["pond_revisions"]={}
+ if saved is Dictionary and not saved.has("terminal_rig"): saved["terminal_rig"] = ""
  if not valid(saved):
   result.incompatible = true
   result.error = ERR_INVALID_DATA
   result.invalid_data = true
   return result
+ CatchArchive.prepare(saved)
  result.data = saved
  return result
 

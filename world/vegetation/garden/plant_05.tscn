@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_05.res" id="1_gnysy"]
+
+[node name="05_Broadleaf_Clump" type="Node3D" unique_id=1807620290]
+metadata/garden_concept = 5
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=1568190537]
+visibility_range_end = 68.0
+mesh = ExtResource("1_gnysy")

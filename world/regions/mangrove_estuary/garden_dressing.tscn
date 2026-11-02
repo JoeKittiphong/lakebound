@@ -1,0 +1,790 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_02.res" id="1_bbebg"]
+[ext_resource type="Script" path="res://world/rainforest_lake/foliage_batch.gd" id="1_p1ho1"]
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_05.res" id="2_p1ho1"]
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_03.res" id="3_iuags"]
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_01.res" id="4_46pbk"]
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_07.res" id="5_v5wf2"]
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_08.res" id="6_xs4be"]
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_06.res" id="7_qf76l"]
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_09.res" id="8_arwcd"]
+
+[node name="GardenDressing" type="Node3D" unique_id=459403597]
+metadata/map_id = "mangrove_estuary"
+metadata/source_library = "garden-12-v01"
+metadata/authoring_seed = 20264990
+metadata/plant_count = 260
+metadata/render_batch_count = 61
+
+[node name="Shrubs" type="Node3D" parent="." unique_id=576388942]
+
+[node name="Plant_02_n2_0" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1388838182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("1_bbebg")
+authored_transforms = Array[Transform3D]([Transform3D(0.6561486, 0, -1.0389758, 0, 1.1865113, 0, 0.9331591, 0, 0.5893218, -4.1832275, 1.379419, -9.259484), Transform3D(1.2069035, 0, 1.0193975, 0, 1.5239421, 0, -1.0049173, 0, 1.1897597, -3.853012, 1.3986107, -5.845687), Transform3D(1.5172421, 0, -0.03359401, 0, 1.4999745, 0, 0.035220213, 0, 1.5906881, -0.68211746, 1.2667862, -7.3857226), Transform3D(0.9718526, 0, 0.49471843, 0, 1.0327811, 0, -0.49580994, 0, 0.97399676, -2.9232788, 1.3615013, -6.455529)])
+authored_colors = Array[Color]([Color(0.9916992, 0.9916992, 0.97216797, 1), Color(0.9550781, 0.9550781, 0.93603516, 1), Color(0.9711914, 0.9711914, 0.95166016, 1), Color(0.94189453, 0.94189453, 0.92285156, 1)])
+metadata/garden_concept = 2
+metadata/source_asset = "02_Spreading_Shrub"
+metadata/plant_count = 4
+metadata/footprint_radius = 1.0924923
+
+[node name="Plant_05_n2_0" type="MultiMeshInstance3D" parent="Shrubs" unique_id=183611758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(0.5422187, 0, -0.85635304, 0, 1.1034008, 0, 0.9241068, 0, 0.5851185, -3.8683548, 1.3907143, -6.85717), Transform3D(-0.3508141, 0, 1.2322277, 0, 1.1996682, 0, -1.08481, 0, -0.30884445, -7.41296, 1.5262047, -0.06669235), Transform3D(0.34840953, 0, -1.0762727, 0, 1.1175668, 0, 1.0016984, 0, 0.32426843, -8.547363, 1.5549179, 0.41662502), Transform3D(0.7703847, 0, -0.7619081, 0, 1.1750964, 0, 0.83226424, 0, 0.84152365, -7.8774605, 1.538797, 2.9582329), Transform3D(-0.14486398, 0, -1.1336442, 0, 1.2494806, 0, 1.149018, 0, -0.14682855, -12.2139015, 1.6467148, -2.7438297), Transform3D(-0.6064099, 0, -0.7165018, 0, 1.0071089, 0, 0.73739946, 0, -0.62409663, -8.041576, 1.5383469, 6.8596363), Transform3D(-0.8139571, 0, -1.0922867, 0, 1.3168492, 0, 0.9899325, 0, -0.73768413, -4.587044, 1.4437844, 5.9540863), Transform3D(1.1746979, 0, -0.188643, 0, 1.2243452, 0, 0.20714411, 0, 1.2899061, -5.9326286, 1.478685, 7.075781), Transform3D(0.4588107, 0, -0.9436851, 0, 0.9728108, 0, 0.85434914, 0, 0.4153764, -0.6421051, 1.2448403, 12.561033), Transform3D(0.27527955, 0, -1.1454865, 0, 1.2215762, 0, 1.2027864, 0, 0.28904969, -1.0897636, 1.2468544, -10.095414), Transform3D(0.5520518, 0, 1.0808336, 0, 1.1482633, 0, -0.9390396, 0, 0.47962844, -5.947674, 1.4807488, -3.0384588)])
+authored_colors = Array[Color]([Color(0.97509766, 0.97509766, 0.9555664, 1), Color(0.9980469, 0.9980469, 0.97802734, 1), Color(0.99365234, 0.99365234, 0.9736328, 1), Color(0.93408203, 0.93408203, 0.91552734, 1), Color(0.9248047, 0.9248047, 0.90625, 1), Color(0.9296875, 0.9296875, 0.9111328, 1), Color(0.96972656, 0.96972656, 0.9501953, 1), Color(0.94091797, 0.94091797, 0.9223633, 1), Color(0.9375, 0.9375, 0.91845703, 1), Color(0.93408203, 0.93408203, 0.91552734, 1), Color(0.9921875, 0.9921875, 0.97216797, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 11
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_03_n2_0" type="MultiMeshInstance3D" parent="Shrubs" unique_id=613030411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(-0.1618709, 0, -0.9145577, 0, 1.015102, 0, 0.9101418, 0, -0.1610893, -0.31580734, 1.2830559, -4.576602), Transform3D(-0.42281032, 0, -1.0035152, 0, 1.0195265, 0, 1.0124834, 0, -0.42658886, 2.337841, 1.1610161, -5.634282), Transform3D(0.49291766, 0, -0.9452705, 0, 1.0236378, 0, 0.8685854, 0, 0.4529297, 4.3105125, 1.0701157, -5.64789), Transform3D(-1.4706782, 0, -0.22966388, 0, 1.3970054, 0, 0.22920808, 0, -1.4677595, 4.3229485, 1.0829483, -4.3701), Transform3D(1.4791601, 0, 0.18279806, 0, 1.4942312, 0, -0.1975384, 0, 1.5984355, 3.042965, 1.119558, -6.5479617), Transform3D(0.014987467, 0, -1.0310043, 0, 1.1005245, 0, 1.0575774, 0, 0.015373752, -0.55332947, 1.2315651, 13.272644)])
+authored_colors = Array[Color]([Color(0.9291992, 0.9291992, 0.91015625, 1), Color(0.9477539, 0.9477539, 0.92871094, 1), Color(0.9135742, 0.9135742, 0.8955078, 1), Color(0.9736328, 0.9736328, 0.95410156, 1), Color(0.9345703, 0.9345703, 0.9160156, 1), Color(0.9584961, 0.9584961, 0.9394531, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 6
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_05_n2_1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1385508180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(-0.97907877, 0, -0.25254306, 0, 0.93973976, 0, 0.24754192, 0, -0.95969, 6.049633, 0.7789093, -10.553051), Transform3D(1.1888719, 0, -0.6365286, 0, 1.2692298, 0, 0.5674129, 0, 1.0597814, 2.657032, 0.9089638, -1.3341904), Transform3D(1.114676, 0, -0.17299072, 0, 1.1436037, 0, 0.17415549, 0, 1.1221812, -8.587593, 1.5408188, -13.791075), Transform3D(0.78134805, 0, -0.75920594, 0, 1.1604657, 0, 0.7474626, 0, 0.7692622, 4.632324, 0.8814713, -6.7153854), Transform3D(1.2894002, 0, -0.10029591, 0, 1.2849972, 0, 0.09629638, 0, 1.2379824, -0.16849518, 1.0479027, 7.3305893)])
+authored_colors = Array[Color]([Color(0.9765625, 0.9765625, 0.95703125, 1), Color(0.9248047, 0.9248047, 0.90625, 1), Color(0.92822266, 0.92822266, 0.90966797, 1), Color(0.9868164, 0.9868164, 0.96728516, 1), Color(0.9111328, 0.9111328, 0.8925781, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 5
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_01_n2_0" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1688145978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("4_46pbk")
+authored_transforms = Array[Transform3D]([Transform3D(0.009608449, 0, 1.2786216, 0, 1.2432281, 0, -1.2033025, 0, 0.009042449, -12.250793, 1.6436707, 0.19612217), Transform3D(-1.452919, 0, 0.26213047, 0, 1.4962858, 0, -0.2571218, 0, -1.4251573, -9.276112, 1.5716263, -1.3259296), Transform3D(0.6542438, 0, -0.8894133, 0, 1.1698623, 0, 0.9878718, 0, 0.726669, -9.536037, 1.5785424, 0.54791737), Transform3D(0.57745427, 0, -1.2176056, 0, 1.2891053, 0, 1.1764029, 0, 0.5579138, -10.955997, 1.613012, -1.8300953), Transform3D(-0.9562179, 0, 0.4694872, 0, 1.0927546, 0, -0.45574668, 0, -0.9282322, -11.853718, 1.6358124, -1.6895256)])
+authored_colors = Array[Color]([Color(0.93603516, 0.93603516, 0.91748047, 1), Color(0.98535156, 0.98535156, 0.96533203, 1), Color(0.92041016, 0.92041016, 0.90234375, 1), Color(0.98583984, 0.98583984, 0.9663086, 1), Color(0.92871094, 0.92871094, 0.91015625, 1)])
+metadata/garden_concept = 1
+metadata/source_asset = "01_Round_Shrub"
+metadata/plant_count = 5
+metadata/footprint_radius = 1.0679992
+
+[node name="Plant_03_n2_1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=289207364]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(-0.44801313, 0, -1.014869, 0, 1.0797776, 0, 0.9041949, 0, -0.39915612, -0.91470337, 1.2368942, -13.999332), Transform3D(0.79450613, 0, 0.71980923, 0, 1.0429438, 0, -0.7524825, 0, 0.83057004, -7.9435043, 1.5072914, -11.315525), Transform3D(0.89488405, 0, -0.40636563, 0, 1.0016229, 0, 0.38572454, 0, 0.849429, -6.635212, 1.4599663, -12.9508915), Transform3D(0.68002844, 0, 1.0453261, 0, 1.1937901, 0, -1.005222, 0, 0.65393907, 0.6217613, 0.99114764, 4.3025017), Transform3D(-0.7800466, 0, 0.7232431, 0, 0.99361134, 0, -0.6602023, 0, -0.71205455, -2.094036, 1.1366822, 4.2638893)])
+authored_colors = Array[Color]([Color(0.98583984, 0.98583984, 0.9658203, 1), Color(0.94189453, 0.94189453, 0.92285156, 1), Color(0.94628906, 0.94628906, 0.9277344, 1), Color(0.9975586, 0.9975586, 0.97753906, 1), Color(0.9921875, 0.9921875, 0.97265625, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 5
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_05_n2_n2" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1137918710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(-0.6971088, 0, 0.4065998, 0, 0.8261739, 0, -0.37990946, 0, -0.65134865, -7.667042, 1.4426781, -12.162991)])
+authored_colors = Array[Color]([Color(0.9926758, 0.9926758, 0.97265625, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_05_2_1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1732626601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(-0.9239818, 0, 0.9691259, 0, 1.3440753, 0, -0.92800784, 0, -0.88477904, -7.553547, 1.1745621, 9.418934), Transform3D(0.7443074, 0, 0.20283069, 0, 0.81483144, 0, -0.22768326, 0, 0.8355064, -5.610031, 1.2321335, 7.6470222), Transform3D(-0.98434293, 0, -0.4008084, 0, 1.0860898, 0, 0.3937086, 0, -0.96690655, -6.927746, 1.1703278, 6.7540245), Transform3D(0.73723227, 0, -0.21892184, 0, 0.8071272, 0, 0.21466295, 0, 0.7228902, -4.0332413, 1.2904297, 6.1522408), Transform3D(1.078426, 0, -0.5642702, 0, 1.3213727, 0, 0.5862467, 0, 1.1204273, -3.108261, 1.3579346, -0.5711632), Transform3D(0.79658717, 0, 0.60659415, 0, 0.99763924, 0, -0.6366011, 0, 0.8359927, -8.804817, 1.1974274, -5.423401)])
+authored_colors = Array[Color]([Color(0.95947266, 0.95947266, 0.9404297, 1), Color(0.9692383, 0.9692383, 0.94970703, 1), Color(0.9189453, 0.9189453, 0.9008789, 1), Color(0.9501953, 0.9501953, 0.93115234, 1), Color(0.98339844, 0.98339844, 0.9638672, 1), Color(0.9614258, 0.9614258, 0.9423828, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 6
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_05_n2_n1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1400206095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(-0.29312083, 0, 0.7770537, 0, 0.8586134, 0, -0.73823744, 0, -0.27847853, -0.7926712, 1.0756928, 7.0308886), Transform3D(0.627413, 0, 1.1519969, 0, 1.2250937, 0, -1.0790765, 0, 0.58769834, 0.16443634, 1.0091721, 5.3543787)])
+authored_colors = Array[Color]([Color(0.9790039, 0.9790039, 0.95947266, 1), Color(0.9760742, 0.9760742, 0.95654297, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_05_1_n1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=798888583]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(-0.8393376, 0, 1.0516888, 0, 1.2932818, 0, -0.9442925, 0, -0.75362617, -2.5549736, 1.1068703, 12.16949), Transform3D(0.018540757, 0, -1.3925722, 0, 1.2948041, 0, 1.3405346, 0, 0.017847927, -3.501072, 1.3640419, 4.890414), Transform3D(-0.8212091, 0, -0.35904568, 0, 0.93186724, 0, 0.389906, 0, -0.8917927, -1.3321419, 1.3861557, 6.8497887)])
+authored_colors = Array[Color]([Color(0.9550781, 0.9550781, 0.93603516, 1), Color(0.9736328, 0.9736328, 0.95410156, 1), Color(0.9716797, 0.9716797, 0.95214844, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 3
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_01_1_n3" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1919311692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -70)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("4_46pbk")
+authored_transforms = Array[Transform3D]([Transform3D(1.2360736, 0, 0.37856922, 0, 1.244749, 0, -0.34327942, 0, 1.1208483, -11.068092, 1.208635, 2.8474655), Transform3D(-0.84194887, 0, -0.4732743, 0, 0.903117, 0, 0.44466916, 0, -0.79106075, -12.390476, 1.169046, 5.521637), Transform3D(0.47432506, 0, 1.2763529, 0, 1.4236331, 0, -1.2623074, 0, 0.46910545, -10.309628, 1.2683274, 5.4437027)])
+authored_colors = Array[Color]([Color(0.92578125, 0.92578125, 0.90722656, 1), Color(0.9482422, 0.9482422, 0.9291992, 1), Color(0.96484375, 0.96484375, 0.9453125, 1)])
+metadata/garden_concept = 1
+metadata/source_asset = "01_Round_Shrub"
+metadata/plant_count = 3
+metadata/footprint_radius = 1.0679992
+
+[node name="Plant_02_1_n1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1776748464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("1_bbebg")
+authored_transforms = Array[Transform3D]([Transform3D(0.87077314, 0, -0.5144936, 0, 0.9675168, 0, 0.50107765, 0, 0.84806687, -7.1509705, 1.307058, 0.90753746), Transform3D(-1.2960033, 0, 0.19690663, 0, 1.3811139, 0, -0.20695499, 0, -1.3621397, -3.9080353, 1.4186379, 2.7436628)])
+authored_colors = Array[Color]([Color(0.9633789, 0.9633789, 0.94433594, 1), Color(0.9394531, 0.9394531, 0.92041016, 1)])
+metadata/garden_concept = 2
+metadata/source_asset = "02_Spreading_Shrub"
+metadata/plant_count = 2
+metadata/footprint_radius = 1.0924923
+
+[node name="Plant_03_1_n2" type="MultiMeshInstance3D" parent="Shrubs" unique_id=622846987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(-0.8685876, 0, -1.224612, 0, 1.4053624, 0, 1.0898323, 0, -0.77299166, -8.45652, 1.4407402, 13.955658), Transform3D(0.7426405, 0, -1.064884, 0, 1.352554, 0, 1.1864812, 0, 0.82744133, -7.5474777, 1.4813477, 11.316662)])
+authored_colors = Array[Color]([Color(0.9458008, 0.9458008, 0.9267578, 1), Color(0.95703125, 0.95703125, 0.9379883, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_03_1_n1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=957916940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(0.98056936, 0, -1.0082862, 0, 1.4127249, 0, 0.97553515, 0, 0.9487186, -7.3838463, 1.4927155, -13.580559), Transform3D(0.3333059, 0, -1.2652711, 0, 1.3555855, 0, 1.3995999, 0, 0.36869165, -9.317261, 1.3973976, -13.827803), Transform3D(-0.47043025, 0, -1.0675734, 0, 1.2224793, 0, 1.114659, 0, -0.49117866, -5.2576065, 0.91875994, 12.857831), Transform3D(-0.13716531, 0, 0.99396795, 0, 1.0842292, 0, -1.0448077, 0, -0.14418107, -8.585865, 1.3757836, -6.2530766), Transform3D(-1.3775741, 0, 0.13926128, 0, 1.4458638, 0, -0.15693866, 0, -1.5524389, -7.050083, 1.3911415, -2.2576675), Transform3D(-0.75205773, 0, -0.667383, 0, 1.0968449, 0, 0.6890745, 0, -0.7765014, -8.420147, 1.3371216, -3.4293022), Transform3D(0.717248, 0, -0.6677936, 0, 1.0239222, 0, 0.72000635, 0, 0.7733275, -5.8814926, 1.5261856, -6.443676), Transform3D(-0.5423102, 0, -0.68543285, 0, 0.9377307, 0, 0.7403083, 0, -0.5857273, -13.801838, 1.1118714, -9.612051), Transform3D(1.2184021, 0, -0.4874443, 0, 1.4017135, 0, 0.5076793, 0, 1.268981, -13.345911, 1.1520287, -10.601028)])
+authored_colors = Array[Color]([Color(0.9824219, 0.9824219, 0.9628906, 1), Color(0.91796875, 0.91796875, 0.89990234, 1), Color(0.91748047, 0.91748047, 0.89941406, 1), Color(0.96972656, 0.96972656, 0.9501953, 1), Color(0.9243164, 0.9243164, 0.9057617, 1), Color(0.9458008, 0.9458008, 0.9267578, 1), Color(0.94384766, 0.94384766, 0.9248047, 1), Color(0.98535156, 0.98535156, 0.9658203, 1), Color(0.97802734, 0.97802734, 0.9584961, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 9
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_05_1_n2" type="MultiMeshInstance3D" parent="Shrubs" unique_id=360308857]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(-0.594751, 0, 0.72758114, 0, 0.92391527, 0, -0.6975458, 0, -0.5701991, -9.412655, 1.3933808, 13.248934)])
+authored_colors = Array[Color]([Color(0.9824219, 0.9824219, 0.9628906, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_01_1_0" type="MultiMeshInstance3D" parent="Shrubs" unique_id=863973194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("4_46pbk")
+authored_transforms = Array[Transform3D]([Transform3D(1.0714746, 0, 0.29754364, 0, 1.0767599, 0, -0.31074792, 0, 1.119024, 9.51115, 1.3104187, -4.8033037), Transform3D(1.073294, 0, -0.53671324, 0, 1.2611421, 0, 0.5684735, 0, 1.1368068, 10.297298, 1.3086182, -2.7964487), Transform3D(0.19398606, 0, 0.83708674, 0, 0.9008423, 0, -0.86683476, 0, 0.20087986, 11.234425, 1.3399521, -1.5913353), Transform3D(-0.6562581, 0, -0.6172447, 0, 0.8819154, 0, 0.5884362, 0, -0.62562865, 11.605442, 1.4088227, -3.4794579)])
+authored_colors = Array[Color]([Color(0.9272461, 0.9272461, 0.9086914, 1), Color(0.9160156, 0.9160156, 0.8979492, 1), Color(0.9951172, 0.9951172, 0.97509766, 1), Color(0.92285156, 0.92285156, 0.9042969, 1)])
+metadata/garden_concept = 1
+metadata/source_asset = "01_Round_Shrub"
+metadata/plant_count = 4
+metadata/footprint_radius = 1.0679992
+
+[node name="Plant_05_1_0" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1579773290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(0.43744177, 0, -0.992376, 0, 1.1006641, 0, 1.0100292, 0, 0.44522333, 9.221954, 1.2352883, -2.6348743), Transform3D(0.6658212, 0, 0.50731725, 0, 0.85727596, 0, -0.5609676, 0, 0.73623383, 4.741249, 1.2942902, -12.469747), Transform3D(0.96529007, 0, -0.36990082, 0, 0.97495973, 0, 0.3215228, 0, 0.8390432, 3.6115837, 1.2586342, -12.920193), Transform3D(0.97321653, 0, 0.6063372, 0, 1.2349191, 0, -0.62262934, 0, 0.99936664, 1.0719414, 0.95945513, -8.563179), Transform3D(-0.018168757, 0, 0.7822249, 0, 0.801758, 0, -0.7544672, 0, -0.017524028, 2.113842, 0.9744202, -7.5834513)])
+authored_colors = Array[Color]([Color(0.9321289, 0.9321289, 0.91308594, 1), Color(0.99072266, 0.99072266, 0.9707031, 1), Color(0.9404297, 0.9404297, 0.9213867, 1), Color(0.9116211, 0.9116211, 0.8935547, 1), Color(0.9121094, 0.9121094, 0.8935547, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 5
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_03_1_2" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1183391906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 70)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(0.4142429, 0, -1.1226208, 0, 1.1087096, 0, 1.1098222, 0, 0.40952018, 8.415092, 1.0509621, 1.5845032), Transform3D(0.68847054, 0, -0.9104974, 0, 1.0818493, 0, 0.9052879, 0, 0.6845314, 7.597801, 0.9362885, -2.4385223), Transform3D(0.09428791, 0, 1.1740454, 0, 1.2422149, 0, -1.2344304, 0, 0.09913745, 7.0848083, 0.9367157, -0.4581833), Transform3D(1.3189393, 0, 0.7550014, 0, 1.5093713, 0, -0.72579527, 0, 1.267918, 9.4734, 1.0563751, -1.4866638)])
+authored_colors = Array[Color]([Color(0.921875, 0.921875, 0.9033203, 1), Color(0.92871094, 0.92871094, 0.91015625, 1), Color(0.9692383, 0.9692383, 0.94970703, 1), Color(0.9160156, 0.9160156, 0.8979492, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 4
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_05_0_n2" type="MultiMeshInstance3D" parent="Shrubs" unique_id=990396142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(1.1622027, 0, -0.4765633, 0, 1.2217152, 0, 0.4940765, 0, 1.2049124, -0.9053688, -0.022386933, 9.216564)])
+authored_colors = Array[Color]([Color(0.9453125, 0.9453125, 0.92626953, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_03_n2_2" type="MultiMeshInstance3D" parent="Shrubs" unique_id=146234284]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 70)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(0.9712409, 0, -0.6846145, 0, 1.1330377, 0, 0.65422684, 0, 0.92813087, 0.865963, 1.2987114, -3.7996292), Transform3D(0.00087422045, 0, 0.8775652, 0, 0.904053, 0, -0.9176984, 0, 0.0009142007, 0.9024811, 1.2759148, -4.800598)])
+authored_colors = Array[Color]([Color(0.9428711, 0.9428711, 0.9238281, 1), Color(0.99121094, 0.99121094, 0.9716797, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_02_n2_1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1883440890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("1_bbebg")
+authored_transforms = Array[Transform3D]([Transform3D(-0.762052, 0, 0.4772766, 0, 0.88866705, 0, -0.46960953, 0, -0.7498102, -1.050972, 1.0928208, -1.6632576), Transform3D(-0.76670575, 0, 1.218432, 0, 1.3636057, 0, -1.0669316, 0, -0.67137325, 1.377037, 0.9518181, 2.5522919)])
+authored_colors = Array[Color]([Color(0.9628906, 0.9628906, 0.94384766, 1), Color(0.9941406, 0.9941406, 0.9746094, 1)])
+metadata/garden_concept = 2
+metadata/source_asset = "02_Spreading_Shrub"
+metadata/plant_count = 2
+metadata/footprint_radius = 1.0924923
+
+[node name="Plant_03_1_0" type="MultiMeshInstance3D" parent="Shrubs" unique_id=372637185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(-1.023601, 0, -0.58256245, 0, 1.2704232, 0, 0.6157433, 0, -1.081902, -5.290447, 0.8047501, -13.266789)])
+authored_colors = Array[Color]([Color(0.98095703, 0.98095703, 0.9614258, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_03_n2_n3" type="MultiMeshInstance3D" parent="Shrubs" unique_id=75858821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -70)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(0.67907673, 0, -1.1708361, 0, 1.2842604, 0, 1.1189961, 0, 0.64900994, -2.9125328, 1.0717751, 3.0597153), Transform3D(1.3673767, 0, 0.25541586, 0, 1.3233724, 0, -0.25500682, 0, 1.3651869, -1.6541252, 0.9750267, 1.1510391), Transform3D(-1.2389323, 0, 0.1809817, 0, 1.2220562, 0, -0.18560931, 0, -1.2706112, -6.4738617, 1.2460037, 2.249237), Transform3D(-0.2222239, 0, 1.1934298, 0, 1.2919784, 0, -1.2732413, 0, -0.23708528, -9.389378, 1.3996292, 1.2746582), Transform3D(0.19575392, 0, -0.8492396, 0, 0.9036449, 0, 0.9066436, 0, 0.20898584, -8.8557625, 1.3479096, -1.9242859)])
+authored_colors = Array[Color]([Color(0.9116211, 0.9116211, 0.8935547, 1), Color(0.9838867, 0.9838867, 0.96435547, 1), Color(0.98779297, 0.98779297, 0.9682617, 1), Color(0.9628906, 0.9628906, 0.94384766, 1), Color(0.95214844, 0.95214844, 0.93310547, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 5
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_03_2_1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1936201759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("3_iuags")
+authored_transforms = Array[Transform3D]([Transform3D(-1.1420562, 0, 0.124431856, 0, 1.2048286, 0, -0.13943145, 0, -1.279725, -8.872356, 1.096357, 6.4112167), Transform3D(-0.44488597, 0, 0.97425157, 0, 1.1110435, 0, -0.94563884, 0, -0.43182012, -6.6944656, 1.2189652, 10.214203)])
+authored_colors = Array[Color]([Color(0.97509766, 0.97509766, 0.9555664, 1), Color(0.92333984, 0.92333984, 0.90478516, 1)])
+metadata/garden_concept = 3
+metadata/source_asset = "03_Airy_Shrub"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.82409906
+
+[node name="Plant_01_1_n1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1057116871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("4_46pbk")
+authored_transforms = Array[Transform3D]([Transform3D(1.3964908, 0, 0.30824435, 0, 1.4802684, 0, -0.29285023, 0, 1.3267484, -11.970909, 1.2377754, -11.189632), Transform3D(1.0676959, 0, 0.056570698, 0, 1.119082, 0, -0.055875722, 0, 1.0545791, -10.763412, 1.3207299, -13.421904), Transform3D(-1.3107561, 0, 0.15433268, 0, 1.4140732, 0, -0.17838536, 0, -1.5150367, -9.6866455, 1.356157, -10.092501), Transform3D(0.64413595, 0, 0.98868465, 0, 1.2047373, 0, -0.99961656, 0, 0.65125823, -13.298389, 1.0981003, -6.844801), Transform3D(1.1020285, 0, 0.74907994, 0, 1.3568187, 0, -0.7644402, 0, 1.1246262, -13.094923, 1.152929, -9.589251), Transform3D(-0.061833486, 0, -0.84232074, 0, 0.92734784, 0, 0.8842797, 0, -0.06491363, -12.840853, 1.1399094, -7.6709023)])
+authored_colors = Array[Color]([Color(0.9267578, 0.9267578, 0.9082031, 1), Color(0.9140625, 0.9140625, 0.8955078, 1), Color(0.94189453, 0.94189453, 0.92285156, 1), Color(0.96484375, 0.96484375, 0.9453125, 1), Color(0.9194336, 0.9194336, 0.9008789, 1), Color(0.9770508, 0.9770508, 0.95751953, 1)])
+metadata/garden_concept = 1
+metadata/source_asset = "01_Round_Shrub"
+metadata/plant_count = 6
+metadata/footprint_radius = 1.0679992
+
+[node name="Plant_05_n2_n3" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1006684839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -70)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(-0.65266454, 0, -1.0151488, 0, 1.2374728, 0, 0.9634824, 0, -0.61944693, 2.5656586, 0.8521477, 7.5888443)])
+authored_colors = Array[Color]([Color(0.96728516, 0.96728516, 0.9477539, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_05_1_1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=208425352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 42)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(0.9466366, 0, 0.17268185, 0, 0.92812824, 0, -0.15626764, 0, 0.8566544, 13.2640915, 0.96085894, -3.9217186)])
+authored_colors = Array[Color]([Color(0.9638672, 0.9638672, 0.94433594, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.7442579
+
+[node name="Plant_01_0_n1" type="MultiMeshInstance3D" parent="Shrubs" unique_id=1428333737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("4_46pbk")
+authored_transforms = Array[Transform3D]([Transform3D(-0.8926839, 0, -0.09534178, 0, 0.98196083, 0, 0.11220974, 0, -1.0506184, 12.789997, 0.98601305, -7.3340816)])
+authored_colors = Array[Color]([Color(0.9970703, 0.9970703, 0.97753906, 1)])
+metadata/garden_concept = 1
+metadata/source_asset = "01_Round_Shrub"
+metadata/plant_count = 1
+metadata/footprint_radius = 1.0679992
+
+[node name="Plant_05_2_0" type="MultiMeshInstance3D" parent="Shrubs" unique_id=389240640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 14)
+visibility_range_end = 68.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("2_p1ho1")
+authored_transforms = Array[Transform3D]([Transform3D(0.50545883, 0, 0.9300643, 0, 1.0381329, 0, -0.9470896, 0, 0.5147115, -12.511772, 1.3687989, 8.742998), Transform3D(0.8983881, 0, 0.29745215, 0, 0.95475554, 0, -0.29947236, 0, 0.9044897, -9.086277, 1.5114533, 10.461609)])
+authored_colors = Array[Color]([Color(0.9814453, 0.9814453, 0.96191406, 1), Color(0.9902344, 0.9902344, 0.97021484, 1)])
+metadata/garden_concept = 5
+metadata/source_asset = "05_Broadleaf_Clump"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.7442579
+
+[node name="Grasses" type="Node3D" parent="." unique_id=1272141963]
+
+[node name="Plant_07_n2_0" type="MultiMeshInstance3D" parent="Grasses" unique_id=62512215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 14)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.7140054, 0, 0.60687566, 0, 0.976014, 0, -0.67346793, 0, -0.792353, 0.837307, 1.2045609, -7.3665843), Transform3D(0.16834286, 0, 1.1848706, 0, 1.2135481, 0, -1.22055, 0, 0.17341205, -3.6006355, 1.3703781, -7.9773006), Transform3D(0.23019476, 0, -1.3603748, 0, 1.3104087, 0, 1.314808, 0, 0.2224842, -3.0134163, 1.3844429, -4.0025463), Transform3D(-1.145632, 0, -0.010163977, 0, 1.1397823, 0, 0.009879332, 0, -1.1135483, -1.989109, 1.3609215, -2.2469463), Transform3D(0.310522, 0, 1.0495676, 0, 1.1578727, 0, -1.1106906, 0, 0.32860568, -4.3738594, 1.436998, -2.5862265), Transform3D(0.7193991, 0, -0.53994817, 0, 0.8994275, 0, 0.55617833, 0, 0.74102336, 3.2056656, 1.0778214, 12.58112)])
+authored_colors = Array[Color]([Color(0.91064453, 0.91064453, 0.8925781, 1), Color(0.92041016, 0.92041016, 0.90185547, 1), Color(0.953125, 0.953125, 0.93408203, 1), Color(0.99902344, 0.99902344, 0.9790039, 1), Color(0.95703125, 0.95703125, 0.9379883, 1), Color(0.96240234, 0.96240234, 0.9428711, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 6
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_07_n2_1" type="MultiMeshInstance3D" parent="Grasses" unique_id=1577699281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(0.89845, 0, -0.256503, 0, 0.9489918, 0, 0.2659994, 0, 0.93171304, 2.7179413, 0.92234194, -3.161686), Transform3D(-0.67277104, 0, -0.5799596, 0, 0.898898, 0, 0.5361245, 0, -0.62192106, 5.0266495, 0.844648, -5.6549034), Transform3D(0.8229524, 0, -0.12841558, 0, 0.8456533, 0, 0.14038035, 0, 0.89962876, 4.922638, 0.8383156, -4.321598), Transform3D(0.9778849, 0, -0.08566095, 0, 1.0597444, 0, 0.09278823, 0, 1.0592482, -3.6049423, 1.2646424, -6.127201), Transform3D(0.47789934, 0, -0.97346395, 0, 1.1074358, 0, 1.0065867, 0, 0.49416015, -5.5134964, 1.3694512, -7.005188), Transform3D(-0.76513356, 0, 0.77497554, 0, 1.022932, 0, -0.78433466, 0, -0.7743738, -4.6732216, 1.3238808, -6.763439), Transform3D(0.11680844, 0, 1.0854077, 0, 1.1307647, 0, -1.0516526, 0, 0.1131758, -3.4269638, 1.2986199, -10.326519), Transform3D(0.7968013, 0, -1.1080865, 0, 1.3494135, 0, 1.0567995, 0, 0.759922, -5.345356, 1.3836685, -9.988247), Transform3D(0.093709596, 0, 0.99037, 0, 1.0074139, 0, -0.9339272, 0, 0.08836893, -3.6266556, 1.2995545, -9.476978), Transform3D(0.14779988, 0, 1.3236706, 0, 1.2670984, 0, -1.2266364, 0, 0.13696511, -2.528572, 1.1771485, -2.5271606), Transform3D(0.35130104, 0, -0.6270195, 0, 0.7821216, 0, 0.7196937, 0, 0.40322372, -4.9618416, 1.3046433, 0.44997406), Transform3D(0.95515203, 0, -0.6129857, 0, 1.0558138, 0, 0.5422846, 0, 0.8449859, -5.855854, 1.3674675, 5.317112), Transform3D(1.2935152, 0, 0.31736207, 0, 1.2565304, 0, -0.32225767, 0, 1.3134688, -2.948326, 1.1897942, 5.321419), Transform3D(1.186317, 0, -0.22599585, 0, 1.3043983, 0, 0.23694026, 0, 1.2437673, -2.855564, 1.1784073, 1.9101753), Transform3D(-0.48962462, 0, -1.0363237, 0, 1.2224904, 0, 1.0650458, 0, -0.5031948, -2.274704, 1.1728035, 8.588245), Transform3D(-0.8993876, 0, 0.31649736, 0, 0.9024539, 0, -0.30170432, 0, -0.85735035, 1.4410362, 0.9809166, 8.829346), Transform3D(-0.8013788, 0, 0.26754114, 0, 0.9267926, 0, -0.2765091, 0, -0.8282409, 0.8851547, 1.0157067, 9.535934), Transform3D(0.07266751, 0, 1.2409269, 0, 1.3387872, 0, -1.2736074, 0, 0.07458124, 0.97826004, 0.9934555, 7.86697), Transform3D(0.13314389, 0, -1.1063524, 0, 1.1753521, 0, 1.2009107, 0, 0.1445235, 2.249157, 0.9228188, 6.5236397), Transform3D(0.9362605, 0, 0.059677526, 0, 0.97224283, 0, -0.06285887, 0, 0.9861716, 3.2059708, 0.8772255, 6.275379)])
+authored_colors = Array[Color]([Color(0.98535156, 0.98535156, 0.9658203, 1), Color(0.92333984, 0.92333984, 0.90478516, 1), Color(0.9921875, 0.9921875, 0.97216797, 1), Color(0.97021484, 0.97021484, 0.9506836, 1), Color(0.91259766, 0.91259766, 0.89453125, 1), Color(0.96728516, 0.96728516, 0.9477539, 1), Color(0.9941406, 0.9941406, 0.9741211, 1), Color(0.9770508, 0.9770508, 0.95751953, 1), Color(0.99609375, 0.99609375, 0.9760742, 1), Color(0.9609375, 0.9609375, 0.94140625, 1), Color(0.92578125, 0.92578125, 0.90722656, 1), Color(0.9584961, 0.9584961, 0.9394531, 1), Color(0.96728516, 0.96728516, 0.9477539, 1), Color(0.91552734, 0.91552734, 0.89697266, 1), Color(0.9477539, 0.9477539, 0.92871094, 1), Color(0.91796875, 0.91796875, 0.89941406, 1), Color(0.95703125, 0.95703125, 0.9379883, 1), Color(0.91748047, 0.91748047, 0.89941406, 1), Color(0.9243164, 0.9243164, 0.9057617, 1), Color(0.9921875, 0.9921875, 0.97265625, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 20
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_08_1_n1" type="MultiMeshInstance3D" parent="Grasses" unique_id=2093099424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("6_xs4be")
+authored_transforms = Array[Transform3D]([Transform3D(0.44838452, 0, -1.0622023, 0, 1.0777044, 0, 0.94029474, 0, 0.39692402, -2.6656227, 1.4973389, 2.0687351), Transform3D(1.1476539, 0, 0.83961505, 0, 1.355883, 0, -0.8154723, 0, 1.1146536, -2.1496925, 1.578653, 0.030643463), Transform3D(-0.761388, 0, -0.25213146, 0, 0.82676405, 0, 0.24411434, 0, -0.7371778, -2.0848083, 1.301004, 8.141497), Transform3D(-0.6970321, 0, 1.0492656, 0, 1.2229719, 0, -1.0700371, 0, -0.7108307, -4.0209503, 1.3666054, 4.116396)])
+authored_colors = Array[Color]([Color(0.94677734, 0.94677734, 0.9277344, 1), Color(0.9370117, 0.9370117, 0.91845703, 1), Color(0.9941406, 0.9941406, 0.9741211, 1), Color(0.9794922, 0.9794922, 0.95996094, 1)])
+metadata/garden_concept = 8
+metadata/source_asset = "08_Windswept_Grass"
+metadata/plant_count = 4
+metadata/footprint_radius = 0.61844784
+
+[node name="Plant_07_1_n1" type="MultiMeshInstance3D" parent="Grasses" unique_id=353496465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.3604981, 0, -1.0942351, 0, 1.1968539, 0, 1.0596044, 0, -0.34908894, -1.992691, 1.6030785, -0.6253433), Transform3D(0.4633493, 0, -0.7854422, 0, 0.90862, 0, 0.732569, 0, 0.43215826, -1.6448288, 1.5609299, 1.4434986), Transform3D(0.967693, 0, 0.64992696, 0, 1.1871649, 0, -0.626243, 0, 0.93242925, -2.5570717, 1.5930268, -1.2171116), Transform3D(0.7098299, 0, 0.38888568, 0, 0.8224753, 0, -0.3667756, 0, 0.6694725, -2.415741, 1.0456368, 13.677166), Transform3D(0.6489457, 0, -0.6108581, 0, 0.8997285, 0, 0.6635525, 0, 0.7049257, -0.94020844, 1.1200196, 13.49264), Transform3D(0.6851675, 0, -0.9888847, 0, 1.1266859, 0, 0.9677034, 0, 0.6704916, -4.840893, 1.2606751, 5.954172), Transform3D(0.26541638, 0, 1.0932372, 0, 1.1913224, 0, -1.0634707, 0, 0.25818968, -2.2286224, 1.4444023, 4.239362), Transform3D(0.818407, 0, -0.63079333, 0, 1.0396657, 0, 0.58534044, 0, 0.75943524, -6.4444695, 1.4463288, -3.3329773), Transform3D(-1.2240703, 0, -0.16206631, 0, 1.2074627, 0, 0.17072427, 0, -1.2894629, -8.333221, 1.3583657, -4.2837124), Transform3D(-0.87817115, 0, 0.2355852, 0, 0.97210526, 0, -0.23238315, 0, -0.86623514, -3.3410301, 1.2299706, 8.505336), Transform3D(-1.1394534, 0, -0.19898513, 0, 1.2625204, 0, 0.20336455, 0, -1.1645314, -3.4369087, 1.257711, 7.7127323), Transform3D(-0.001160048, 0, 0.82950103, 0, 0.857915, 0, -0.8607657, 0, -0.0012037712, -10.474293, 1.3121392, -10.075817), Transform3D(-0.028334888, 0, -0.9692695, 0, 1.0070767, 0, 1.0644214, 0, -0.031116484, -7.710205, 1.4494301, -8.354849), Transform3D(-0.32420084, 0, 0.9628545, 0, 0.9610569, 0, -0.94768775, 0, -0.31909406, 2.1403885, 1.4670578, 8.354788), Transform3D(-0.7048607, 0, 0.8308301, 0, 1.0461282, 0, -0.7542955, 0, -0.6399302, -11.612608, 1.2315041, -8.906448)])
+authored_colors = Array[Color]([Color(0.94873047, 0.94873047, 0.9296875, 1), Color(0.9453125, 0.9453125, 0.92626953, 1), Color(0.9316406, 0.9316406, 0.91308594, 1), Color(0.96435547, 0.96435547, 0.9453125, 1), Color(0.91259766, 0.91259766, 0.89453125, 1), Color(0.9995117, 0.9995117, 0.9794922, 1), Color(0.9897461, 0.9897461, 0.97021484, 1), Color(0.97509766, 0.97509766, 0.9555664, 1), Color(0.97509766, 0.97509766, 0.9555664, 1), Color(0.9316406, 0.9316406, 0.91308594, 1), Color(0.97265625, 0.97265625, 0.953125, 1), Color(0.9916992, 0.9916992, 0.9716797, 1), Color(0.93896484, 0.93896484, 0.92041016, 1), Color(0.94189453, 0.94189453, 0.92333984, 1), Color(0.98291016, 0.98291016, 0.9633789, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 15
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_07_n2_n2" type="MultiMeshInstance3D" parent="Grasses" unique_id=1182414423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.78590965, 0, 0.3353889, 0, 0.9013697, 0, -0.3476637, 0, -0.81467295, -5.785801, 1.3675972, -13.842266), Transform3D(-1.2582059, 0, -0.0967742, 0, 1.3380083, 0, 0.10271046, 0, -1.335386, 1.0489235, 1.2178665, -2.4396133), Transform3D(-1.1922578, 0, 0.3044381, 0, 1.1585349, 0, -0.26242283, 0, -1.0277152, 3.968502, 0.96906054, 0.98207474), Transform3D(-0.87001044, 0, 0.791768, 0, 1.1266559, 0, -0.7782919, 0, -0.8552026, 2.9520607, 1.1343018, -1.8669701), Transform3D(0.64211273, 0, -1.0192318, 0, 1.321382, 0, 1.1500872, 0, 0.72455126, -5.575836, 1.4264694, 4.262581), Transform3D(0.8775439, 0, -0.31657392, 0, 0.98861027, 0, 0.32885438, 0, 0.9115855, -4.713852, 1.4001251, 3.610649), Transform3D(-0.94381356, 0, -0.33287564, 0, 0.9396032, 0, 0.3170264, 0, -0.89887565, -3.1559944, 1.3253723, 5.9433136), Transform3D(0.5244627, 0, 0.9531493, 0, 1.0741018, 0, -1.0059392, 0, 0.55350995, 11.249378, -0.12714234, -4.384613), Transform3D(-1.2545063, 0, -0.2559374, 0, 1.2919799, 0, 0.24965519, 0, -1.2237133, -4.014042, 1.383844, 2.1979942), Transform3D(-0.07412632, 0, 1.0010394, 0, 1.0062895, 0, -1.0797895, 0, -0.079957716, -1.3204498, 1.2753121, 3.7659912), Transform3D(-0.19751467, 0, -1.0332552, 0, 1.0324495, 0, 0.9716974, 0, -0.18574741, -5.0290833, 1.4215409, 0.8432541), Transform3D(0.11340076, 0, 0.7559036, 0, 0.8159173, 0, -0.7594646, 0, 0.11393499, -5.0372925, 1.4015442, 5.3075867), Transform3D(-0.5263695, 0, -0.9226003, 0, 0.99912965, 0, 0.8242381, 0, -0.4702511, -0.8878212, 1.2915207, -3.4334183), Transform3D(-1.3022244, 0, 0.096591815, 0, 1.2758851, 0, -0.09078372, 0, -1.2239212, -0.52456665, 1.2707726, 0.20174026), Transform3D(0.19325773, 0, 0.7994937, 0, 0.83486813, 0, -0.7480422, 0, 0.18082063, 0.8068352, 1.2188622, 0.090595245), Transform3D(-0.81349313, 0, 0.6335083, 0, 0.98221314, 0, -0.6108141, 0, -0.7843512, 1.6355782, 1.1854912, -0.16060638), Transform3D(-1.050381, 0, 0.3751177, 0, 1.124377, 0, -0.37955186, 0, -1.0627972, 0.33844757, 1.2437493, -1.6295013), Transform3D(0.31828654, 0, 1.1377395, 0, 1.1180488, 0, -1.0919617, 0, 0.30548003, -7.5665016, 1.4287087, -13.493057), Transform3D(-0.72679794, 0, 0.30720356, 0, 0.7936489, 0, -0.33174598, 0, -0.7848617, -5.6004944, 1.4412667, -1.4979706), Transform3D(-1.082606, 0, 0.48601162, 0, 1.2196186, 0, -0.455581, 0, -1.0148208, -9.624573, 1.547342, -1.3459969), Transform3D(0.89251506, 0, -0.86703366, 0, 1.306698, 0, 0.8622158, 0, 0.8875556, -7.6743546, 1.4994217, 0.5360222)])
+authored_colors = Array[Color]([Color(0.9926758, 0.9926758, 0.97265625, 1), Color(0.9980469, 0.9980469, 0.97802734, 1), Color(0.96777344, 0.96777344, 0.9482422, 1), Color(0.9951172, 0.9951172, 0.97509766, 1), Color(0.91845703, 0.91845703, 0.89990234, 1), Color(0.9970703, 0.9970703, 0.9770508, 1), Color(0.95703125, 0.95703125, 0.9379883, 1), Color(0.92041016, 0.92041016, 0.90234375, 1), Color(0.96484375, 0.96484375, 0.9453125, 1), Color(0.9399414, 0.9399414, 0.9213867, 1), Color(0.9145508, 0.9145508, 0.8964844, 1), Color(0.94189453, 0.94189453, 0.92285156, 1), Color(0.9716797, 0.9716797, 0.95214844, 1), Color(0.94873047, 0.94873047, 0.9296875, 1), Color(0.9296875, 0.9296875, 0.9111328, 1), Color(0.9160156, 0.9160156, 0.89746094, 1), Color(0.9838867, 0.9838867, 0.9638672, 1), Color(0.9301758, 0.9301758, 0.9116211, 1), Color(0.92578125, 0.92578125, 0.90722656, 1), Color(0.96533203, 0.96533203, 0.9458008, 1), Color(0.9291992, 0.9291992, 0.91064453, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 21
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_07_n2_n3" type="MultiMeshInstance3D" parent="Grasses" unique_id=1601506612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -70)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(0.140804, 0, -1.1561178, 0, 1.1649852, 0, 1.0993191, 0, 0.13388646, -5.4976807, 1.3497063, 13.573429), Transform3D(-0.25190458, 0, -0.94560194, 0, 1.0423886, 0, 0.93634117, 0, -0.24943754, -4.091709, 1.1256157, 2.6957092), Transform3D(-0.33738756, 0, -1.3970351, 0, 1.3582059, 0, 1.2055509, 0, -0.29114363, 0.0536232, 1.0313355, 8.054028), Transform3D(0.82359785, 0, 0.033736, 0, 0.7801032, 0, -0.034378733, 0, 0.83928883, 0.64910126, 1.0553643, 10.3736), Transform3D(-0.54067194, 0, 0.5675714, 0, 0.7999542, 0, -0.6095423, 0, -0.58065367, -6.687607, 1.2460152, 1.1711426)])
+authored_colors = Array[Color]([Color(0.9326172, 0.9326172, 0.9140625, 1), Color(0.9291992, 0.9291992, 0.91064453, 1), Color(0.95410156, 0.95410156, 0.9350586, 1), Color(0.97265625, 0.97265625, 0.953125, 1), Color(0.99365234, 0.99365234, 0.9736328, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 5
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_07_1_0" type="MultiMeshInstance3D" parent="Grasses" unique_id=188878211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 14)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(0.8864892, 0, 0.46110338, 0, 1.0802412, 0, -0.47196794, 0, 0.90737677, 11.57748, 1.1154686, 9.661507), Transform3D(0.7628618, 0, 0.63805205, 0, 0.9652141, 0, -0.66073513, 0, 0.7899819, 13.951416, 1.2100579, 11.684349), Transform3D(-1.0910323, 0, 0.4978969, 0, 1.1882814, 0, -0.5149815, 0, -1.1284695, -3.3851128, 0.91635287, -12.679346), Transform3D(-0.5128813, 0, 0.86774355, 0, 0.9763859, 0, -0.89132, 0, -0.5268162, -0.078617096, 1.0711609, -12.512865), Transform3D(0.37785608, 0, 1.010847, 0, 1.1113012, 0, -1.1058822, 0, 0.41338038, 11.313477, 1.4240662, -4.880418), Transform3D(-0.94910735, 0, -0.27513593, 0, 1.0761429, 0, 0.27904287, 0, -0.96258473, 2.9443588, 1.1637207, -11.329392), Transform3D(0.7361153, 0, -0.8374296, 0, 1.0541043, 0, 0.7907886, 0, 0.69511706, 4.778042, 1.3335053, -13.442459)])
+authored_colors = Array[Color]([Color(0.91064453, 0.91064453, 0.8925781, 1), Color(0.99609375, 0.99609375, 0.9760742, 1), Color(0.93066406, 0.93066406, 0.9121094, 1), Color(0.9560547, 0.9560547, 0.9370117, 1), Color(0.94384766, 0.94384766, 0.9248047, 1), Color(0.9790039, 0.9790039, 0.95947266, 1), Color(0.9145508, 0.9145508, 0.8964844, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 7
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_07_2_0" type="MultiMeshInstance3D" parent="Grasses" unique_id=847011261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 14)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-1.0777881, 0, -0.2980793, 0, 1.2050958, 0, 0.33506852, 0, -1.2115328, -13.34161, 1.3055092, 9.357166), Transform3D(-0.7581369, 0, 1.1238192, 0, 1.341877, 0, -1.1685659, 0, -0.78832334, -9.5783615, 1.5200592, 9.249369)])
+authored_colors = Array[Color]([Color(0.9555664, 0.9555664, 0.93652344, 1), Color(0.9477539, 0.9477539, 0.9291992, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_07_n2_n1" type="MultiMeshInstance3D" parent="Grasses" unique_id=463071137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -14)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.8361977, 0, -0.6762509, 0, 1.0930835, 0, 0.7099762, 0, -0.8778997, 0.932457, 0.9767014, 5.8567123), Transform3D(0.12764686, 0, -0.9745928, 0, 0.995716, 0, 1.0012704, 0, 0.13114095, -4.3420105, 1.2273003, -3.7960682), Transform3D(-0.8418985, 0, 0.79718935, 0, 1.2506312, 0, -0.82780606, 0, -0.87423223, -5.871044, 1.3250138, -4.967064), Transform3D(1.2771368, 0, -0.017825881, 0, 1.3591884, 0, 0.020174164, 0, 1.4453797, -4.6577415, 1.2445465, -2.3024673), Transform3D(-0.25430924, 0, -0.94937384, 0, 0.9496716, 0, 0.98201156, 0, -0.2630519, -5.5565834, 1.3016335, -3.074314), Transform3D(0.4428665, 0, -0.65395236, 0, 0.8254336, 0, 0.700664, 0, 0.47450036, -6.7168274, 1.3797165, -5.620508), Transform3D(-0.19673745, 0, -1.3738064, 0, 1.3218817, 0, 1.3818617, 0, -0.19789103, -1.0607567, 1.0804383, 6.2213926), Transform3D(0.71477634, 0, 0.9957719, 0, 1.3344226, 0, -1.1639138, 0, 0.83547056, -0.43709946, 1.0691124, 7.920926), Transform3D(-0.99244267, 0, -0.16830924, 0, 0.95839894, 0, 0.15257789, 0, -0.8996821, -2.822853, 1.1850144, 7.3672595), Transform3D(0.6472403, 0, 0.74312675, 0, 0.9333557, 0, -0.7424638, 0, 0.6466629, -2.099865, 1.1420914, 6.907149), Transform3D(-0.7117163, 0, 0.76038384, 0, 1.0033228, 0, -0.67848265, 0, -0.6350571, 3.460083, 0.916391, -13.526112), Transform3D(-1.2229633, 0, -0.46979356, 0, 1.2706738, 0, 0.46707577, 0, -1.2158884, 4.656166, 0.8275238, -10.879946), Transform3D(0.87365127, 0, -0.14184809, 0, 0.82836646, 0, 0.14138417, 0, 0.870794, 1.42976, 0.9951149, -12.619949)])
+authored_colors = Array[Color]([Color(0.9633789, 0.9633789, 0.94384766, 1), Color(0.95214844, 0.95214844, 0.93310547, 1), Color(0.9350586, 0.9350586, 0.9160156, 1), Color(0.95703125, 0.95703125, 0.9379883, 1), Color(0.9453125, 0.9453125, 0.92626953, 1), Color(0.9458008, 0.9458008, 0.9267578, 1), Color(0.95458984, 0.95458984, 0.9355469, 1), Color(0.9243164, 0.9243164, 0.9057617, 1), Color(0.99121094, 0.99121094, 0.9711914, 1), Color(0.92089844, 0.92089844, 0.90234375, 1), Color(0.9291992, 0.9291992, 0.91064453, 1), Color(0.9589844, 0.9589844, 0.9394531, 1), Color(0.93066406, 0.93066406, 0.9121094, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 13
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_06_1_n2" type="MultiMeshInstance3D" parent="Grasses" unique_id=316413463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("7_qf76l")
+authored_transforms = Array[Transform3D]([Transform3D(-0.4270482, 0, -1.146319, 0, 1.2259716, 0, 1.0640335, 0, -0.39639366, -10.0573635, 1.3647553, 7.5485115), Transform3D(-0.7487224, 0, -0.66787946, 0, 0.93214417, 0, 0.60726726, 0, -0.68077344, -7.108452, 1.4746491, 5.7339478)])
+authored_colors = Array[Color]([Color(0.9628906, 0.9628906, 0.94384766, 1), Color(0.95996094, 0.95996094, 0.94091797, 1)])
+metadata/garden_concept = 6
+metadata/source_asset = "06_Lanceleaf_Clump"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.82320035
+
+[node name="Plant_07_0_n2" type="MultiMeshInstance3D" parent="Grasses" unique_id=95734548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.71718854, 0, 0.28565592, 0, 0.784029, 0, -0.31033498, 0, -0.7791496, -0.10121727, -0.13033906, -12.277031), Transform3D(-0.29563785, 0, -0.8783308, 0, 0.998079, 0, 0.88160914, 0, -0.2967413, 12.673468, 1.121679, 11.250887), Transform3D(0.9074839, 0, 0.4034682, 0, 0.9346456, 0, -0.4090582, 0, 0.92005706, 13.037857, 1.161863, 8.881134), Transform3D(-1.0824531, 0, -0.27018684, 0, 1.0424501, 0, 0.24950626, 0, -0.99960023, 13.3414135, 1.1465012, 11.950628), Transform3D(-0.89865655, 0, 0.8523868, 0, 1.311098, 0, -0.95239776, 0, -1.0040964, 13.968258, 1.1728569, 12.393192)])
+authored_colors = Array[Color]([Color(0.94189453, 0.94189453, 0.92285156, 1), Color(0.9584961, 0.9584961, 0.93896484, 1), Color(0.96728516, 0.96728516, 0.9477539, 1), Color(0.9145508, 0.9145508, 0.8959961, 1), Color(0.9399414, 0.9399414, 0.92089844, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 5
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_06_2_1" type="MultiMeshInstance3D" parent="Grasses" unique_id=1540216197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("7_qf76l")
+authored_transforms = Array[Transform3D]([Transform3D(-0.050840326, 0, 1.1039652, 0, 1.070229, 0, -1.0426434, 0, -0.048016306, -1.3066101, 1.4441048, -0.21041489), Transform3D(0.18082492, 0, 0.77273405, 0, 0.7994847, 0, -0.8232043, 0, 0.19263528, -1.0434189, 1.4415909, 1.7774467), Transform3D(0.08221937, 0, 1.0897319, 0, 1.1078134, 0, -1.1157935, 0, 0.08418568, -4.195915, 1.3139397, -1.1137047)])
+authored_colors = Array[Color]([Color(0.96533203, 0.96533203, 0.94628906, 1), Color(0.93359375, 0.93359375, 0.9145508, 1), Color(0.91064453, 0.91064453, 0.8925781, 1)])
+metadata/garden_concept = 6
+metadata/source_asset = "06_Lanceleaf_Clump"
+metadata/plant_count = 3
+metadata/footprint_radius = 0.82320035
+
+[node name="Plant_07_2_1" type="MultiMeshInstance3D" parent="Grasses" unique_id=984286393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.4527589, 0, -1.0392892, 0, 1.0860946, 0, 0.92959, 0, -0.40496922, -5.1613464, 1.2477967, 0.92190933), Transform3D(0.03608217, 0, -0.8736075, 0, 0.83549833, 0, 0.7884447, 0, 0.032564733, -3.8378677, 1.3006912, 2.0331001), Transform3D(0.72028744, 0, 0.58184946, 0, 0.997779, 0, -0.65296, 0, 0.8083171, -13.247723, 0.9831406, -1.5335808), Transform3D(-0.86081916, 0, -0.26362517, 0, 0.9037024, 0, 0.2738032, 0, -0.89405364, -12.341179, 1.0054909, -1.0764275), Transform3D(-1.0480623, 0, 0.20046313, 0, 1.0559504, 0, -0.19302376, 0, -1.0091677, -9.40271, 1.1074272, 9.40683), Transform3D(-1.0301183, 0, -0.6806568, 0, 1.2211661, 0, 0.6993521, 0, -1.0584122, -10.107014, 1.0938011, 10.195396)])
+authored_colors = Array[Color]([Color(0.96435547, 0.96435547, 0.9453125, 1), Color(0.9345703, 0.9345703, 0.9160156, 1), Color(0.91748047, 0.91748047, 0.89941406, 1), Color(0.9116211, 0.9116211, 0.8935547, 1), Color(0.98876953, 0.98876953, 0.9692383, 1), Color(0.94921875, 0.94921875, 0.9301758, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 6
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_07_1_1" type="MultiMeshInstance3D" parent="Grasses" unique_id=1651966989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.840188, 0, -0.414835, 0, 0.9273128, 0, 0.40676472, 0, -0.8238429, 13.518967, 0.9284531, 1.8602638), Transform3D(0.8767955, 0, -0.20643178, 0, 0.8523969, 0, 0.18309921, 0, 0.77769303, 12.932728, 0.93966067, -2.9241714), Transform3D(0.7202656, 0, -0.91108555, 0, 1.1574806, 0, 0.9472948, 0, 0.7488911, 11.005905, 0.81120074, -2.9674263)])
+authored_colors = Array[Color]([Color(0.9477539, 0.9477539, 0.92871094, 1), Color(0.99902344, 0.99902344, 0.9790039, 1), Color(0.92529297, 0.92529297, 0.9067383, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 3
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_07_2_2" type="MultiMeshInstance3D" parent="Grasses" unique_id=458414911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 70)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.30312398, 0, 0.7991181, 0, 0.8569958, 0, -0.77387255, 0, -0.29354775, -12.60392, 1.3142639, -4.0895996), Transform3D(1.0979549, 0, 0.25363523, 0, 1.1790427, 0, -0.27257898, 0, 1.17996, -10.10825, 1.3848702, -5.7820435), Transform3D(-0.11991222, 0, -0.7639025, 0, 0.8157914, 0, 0.8550725, 0, -0.13422346, -10.117897, 1.4194504, -4.6708603), Transform3D(0.20370746, 0, 1.0667131, 0, 1.0838046, 0, -1.0430809, 0, 0.19919448, -12.596645, 1.3853356, -1.5969086)])
+authored_colors = Array[Color]([Color(0.93359375, 0.93359375, 0.9145508, 1), Color(0.9135742, 0.9135742, 0.8955078, 1), Color(0.91259766, 0.91259766, 0.89453125, 1), Color(0.92285156, 0.92285156, 0.9042969, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 4
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_08_0_n2" type="MultiMeshInstance3D" parent="Grasses" unique_id=304044952]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("6_xs4be")
+authored_transforms = Array[Transform3D]([Transform3D(0.85715485, 0, -0.023362683, 0, 0.8178919, 0, 0.024064373, 0, 0.88289917, 0.7086954, -0.027113343, 9.943748), Transform3D(-0.00061248854, 0, 1.2436383, 0, 1.293282, 0, -1.3864264, 0, -0.0006828113, 0.9437084, -0.10783615, 11.900902)])
+authored_colors = Array[Color]([Color(0.9370117, 0.9370117, 0.91845703, 1), Color(0.953125, 0.953125, 0.93408203, 1)])
+metadata/garden_concept = 8
+metadata/source_asset = "08_Windswept_Grass"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.61844784
+
+[node name="Plant_08_2_2" type="MultiMeshInstance3D" parent="Grasses" unique_id=665164584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, 70)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("6_xs4be")
+authored_transforms = Array[Transform3D]([Transform3D(0.16564162, 0, -1.2122314, 0, 1.3273269, 0, 1.2398819, 0, 0.16941984, -9.110722, 1.4198776, -6.1438904), Transform3D(1.1545174, 0, 0.3423544, 0, 1.1741333, 0, -0.35936743, 0, 1.2118901, -8.025898, 1.4048973, -8.153633), Transform3D(0.9691279, 0, 0.103485316, 0, 0.9792441, 0, -0.100395136, 0, 0.94018877, -5.6985245, 1.6129929, -5.0873413), Transform3D(-0.71548563, 0, 0.29363957, 0, 0.84346306, 0, -0.3109959, 0, -0.75777626, -8.195263, 1.4513642, -6.4774246), Transform3D(0.5558492, 0, -0.6091352, 0, 0.85036373, 0, 0.64629203, 0, 0.5897556, -9.439213, 1.454908, -4.5707626)])
+authored_colors = Array[Color]([Color(0.9511719, 0.9511719, 0.9321289, 1), Color(0.94140625, 0.94140625, 0.92285156, 1), Color(0.9692383, 0.9692383, 0.94970703, 1), Color(0.9584961, 0.9584961, 0.9394531, 1), Color(0.9921875, 0.9921875, 0.97216797, 1)])
+metadata/garden_concept = 8
+metadata/source_asset = "08_Windswept_Grass"
+metadata/plant_count = 5
+metadata/footprint_radius = 0.61844784
+
+[node name="Plant_07_n2_2" type="MultiMeshInstance3D" parent="Grasses" unique_id=1794173007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 70)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(0.22692858, 0, -0.8189942, 0, 0.8354205, 0, 0.80911773, 0, 0.22419198, -0.35549164, 1.337114, -4.4864197), Transform3D(0.13541403, 0, -0.92001766, 0, 0.94467425, 0, 0.9302614, 0, 0.13692178, -3.1501617, 1.296785, -13.469387), Transform3D(1.1187087, 0, -0.39427176, 0, 1.2205029, 0, 0.37790385, 0, 1.0722663, 2.2234535, 1.0413834, -12.917831)])
+authored_colors = Array[Color]([Color(0.94091797, 0.94091797, 0.921875, 1), Color(0.9404297, 0.9404297, 0.9213867, 1), Color(0.93896484, 0.93896484, 0.9199219, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 3
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_08_n2_2" type="MultiMeshInstance3D" parent="Grasses" unique_id=1684945948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 70)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("6_xs4be")
+authored_transforms = Array[Transform3D]([Transform3D(-0.17111716, 0, 1.0156349, 0, 1.1012504, 0, -1.0804844, 0, -0.1820432, -6.5685883, 1.480085, -13.858376)])
+authored_colors = Array[Color]([Color(0.91748047, 0.91748047, 0.89941406, 1)])
+metadata/garden_concept = 8
+metadata/source_asset = "08_Windswept_Grass"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.61844784
+
+[node name="Plant_08_n2_1" type="MultiMeshInstance3D" parent="Grasses" unique_id=22459650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("6_xs4be")
+authored_transforms = Array[Transform3D]([Transform3D(1.1788077, 0, -0.45528638, 0, 1.3159039, 0, 0.50540924, 0, 1.3085836, -6.8795357, 1.4659821, 10.713192), Transform3D(0.8826405, 0, -0.59135485, 0, 0.99403507, 0, 0.5046206, 0, 0.7531833, 2.679039, 0.9599892, 11.661728), Transform3D(0.014751257, 0, 1.2841573, 0, 1.3418002, 0, -1.2491195, 0, 0.014348774, 3.5173492, 0.9311768, 12.169617)])
+authored_colors = Array[Color]([Color(0.95166016, 0.95166016, 0.9326172, 1), Color(0.95214844, 0.95214844, 0.93310547, 1), Color(0.9926758, 0.9926758, 0.97265625, 1)])
+metadata/garden_concept = 8
+metadata/source_asset = "08_Windswept_Grass"
+metadata/plant_count = 3
+metadata/footprint_radius = 0.61844784
+
+[node name="Plant_07_1_2" type="MultiMeshInstance3D" parent="Grasses" unique_id=2060176878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 70)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.60855526, 0, -1.1791376, 0, 1.2530342, 0, 1.0938764, 0, -0.5645518, 8.19912, 0.95470583, -3.4465256), Transform3D(-0.6007952, 0, 1.0429522, 0, 1.1488297, 0, -0.9282473, 0, -0.53471917, 10.419041, 1.143705, 0.20014954), Transform3D(1.2805953, 0, -0.0329205, 0, 1.1895062, 0, 0.02952179, 0, 1.1483867, 10.271233, 1.0801598, -2.5854645), Transform3D(-0.62476104, 0, -0.86359, 0, 1.1629735, 0, 0.90299106, 0, -0.6532656, 10.660503, 1.1127106, -1.9596024)])
+authored_colors = Array[Color]([Color(0.98876953, 0.98876953, 0.9692383, 1), Color(0.9868164, 0.9868164, 0.96728516, 1), Color(0.98046875, 0.98046875, 0.9609375, 1), Color(0.93408203, 0.93408203, 0.91552734, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 4
+metadata/footprint_radius = 0.7195669
+
+[node name="Plant_06_1_0" type="MultiMeshInstance3D" parent="Grasses" unique_id=1312571742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 14)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("7_qf76l")
+authored_transforms = Array[Transform3D]([Transform3D(1.1700635, 0, 0.527727, 0, 1.2610161, 0, -0.48244315, 0, 1.0696614, 1.6277809, 1.0472428, -10.040659), Transform3D(0.5449612, 0, 0.7215491, 0, 0.8391943, 0, -0.6543039, 0, 0.49417326, 0.7826004, 1.0357376, -10.751464), Transform3D(0.15653124, 0, -1.2036698, 0, 1.1315136, 0, 1.0780551, 0, 0.14019568, 1.5708046, 1.1799637, -13.290241), Transform3D(-0.42504904, 0, 0.9625001, 0, 1.0614569, 0, -1.0352869, 0, -0.4571924, 1.3951187, 1.1196648, -12.046595), Transform3D(0.4826908, 0, -0.8958812, 0, 0.96901464, 0, 0.7876381, 0, 0.42437065, 1.536396, 1.0096871, -9.238771)])
+authored_colors = Array[Color]([Color(0.93896484, 0.93896484, 0.92041016, 1), Color(0.9394531, 0.9394531, 0.92041016, 1), Color(0.9394531, 0.9394531, 0.92089844, 1), Color(0.9272461, 0.9272461, 0.9086914, 1), Color(0.9350586, 0.9350586, 0.9165039, 1)])
+metadata/garden_concept = 6
+metadata/source_asset = "06_Lanceleaf_Clump"
+metadata/plant_count = 5
+metadata/footprint_radius = 0.82320035
+
+[node name="Plant_06_n1_2" type="MultiMeshInstance3D" parent="Grasses" unique_id=2101302923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 70)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("7_qf76l")
+authored_transforms = Array[Transform3D]([Transform3D(0.771554, 0, 0.39010754, 0, 0.8621671, 0, -0.39234775, 0, 0.77598464, -13.044521, -0.1069931, -7.8137245)])
+authored_colors = Array[Color]([Color(0.94628906, 0.94628906, 0.9277344, 1)])
+metadata/garden_concept = 6
+metadata/source_asset = "06_Lanceleaf_Clump"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.82320035
+
+[node name="Plant_06_1_1" type="MultiMeshInstance3D" parent="Grasses" unique_id=38140511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("7_qf76l")
+authored_transforms = Array[Transform3D]([Transform3D(0.36908236, 0, 0.92329764, 0, 0.9579429, 0, -0.8896142, 0, 0.3556176, 13.881115, 0.9743935, -3.3844528), Transform3D(1.2168902, 0, 0.29112276, 0, 1.2568823, 0, -0.27484828, 0, 1.1488631, 10.479683, 0.7282578, -0.6385689), Transform3D(-0.64665264, 0, -0.70235395, 0, 0.89835495, 0, 0.66404116, 0, -0.6113783, 12.100105, 0.9012047, -0.88077545), Transform3D(0.4659765, 0, -0.6067305, 0, 0.79728574, 0, 0.62897265, 0, 0.48305875, 13.094852, 0.9307114, -1.1796837)])
+authored_colors = Array[Color]([Color(0.9345703, 0.9345703, 0.9160156, 1), Color(0.9946289, 0.9946289, 0.9746094, 1), Color(0.9433594, 0.9433594, 0.9243164, 1), Color(0.95214844, 0.95214844, 0.93310547, 1)])
+metadata/garden_concept = 6
+metadata/source_asset = "06_Lanceleaf_Clump"
+metadata/plant_count = 4
+metadata/footprint_radius = 0.82320035
+
+[node name="Plant_06_1_n1" type="MultiMeshInstance3D" parent="Grasses" unique_id=1857453823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -14)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("7_qf76l")
+authored_transforms = Array[Transform3D]([Transform3D(-1.1953621, 0, 0.11905581, 0, 1.315093, 0, -0.12016275, 0, -1.2064762, -10.575012, 1.3147789, -11.06863), Transform3D(0.044385206, 0, 1.2958503, 0, 1.3169916, 0, -1.4211311, 0, 0.0486763, -8.885525, 1.4079453, -11.309849), Transform3D(0.52846545, 0, 1.0989988, 0, 1.1381704, 0, -0.93551284, 0, 0.44985148, -8.548096, 1.4208809, -10.34474), Transform3D(-0.8104277, 0, -0.038285166, 0, 0.8666883, 0, 0.038063787, 0, -0.8057415, -7.5442696, 1.4717766, -10.014317)])
+authored_colors = Array[Color]([Color(0.9140625, 0.9140625, 0.8959961, 1), Color(0.93359375, 0.93359375, 0.91503906, 1), Color(0.99072266, 0.99072266, 0.9711914, 1), Color(0.96875, 0.96875, 0.94970703, 1)])
+metadata/garden_concept = 6
+metadata/source_asset = "06_Lanceleaf_Clump"
+metadata/plant_count = 4
+metadata/footprint_radius = 0.82320035
+
+[node name="Plant_08_n2_n2" type="MultiMeshInstance3D" parent="Grasses" unique_id=672069914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("6_xs4be")
+authored_transforms = Array[Transform3D]([Transform3D(-0.7531389, 0, -0.53549, 0, 0.883203, 0, 0.54342633, 0, -0.764301, -3.9103432, 1.3690163, 4.076332), Transform3D(-0.9413688, 0, -0.38141546, 0, 1.0892609, 0, 0.3998522, 0, -0.9868724, 11.669697, -0.09930649, 3.1266441)])
+authored_colors = Array[Color]([Color(0.99609375, 0.99609375, 0.9760742, 1), Color(0.9345703, 0.9345703, 0.9160156, 1)])
+metadata/garden_concept = 8
+metadata/source_asset = "08_Windswept_Grass"
+metadata/plant_count = 2
+metadata/footprint_radius = 0.61844784
+
+[node name="Plant_08_1_1" type="MultiMeshInstance3D" parent="Grasses" unique_id=232343824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("6_xs4be")
+authored_transforms = Array[Transform3D]([Transform3D(-0.9692193, 0, -0.19448504, 0, 0.97358906, 0, 0.20036657, 0, -0.99853, 3.5661736, -0.11731186, 11.951653)])
+authored_colors = Array[Color]([Color(0.9160156, 0.9160156, 0.8979492, 1)])
+metadata/garden_concept = 8
+metadata/source_asset = "08_Windswept_Grass"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.61844784
+
+[node name="Plant_06_1_n3" type="MultiMeshInstance3D" parent="Grasses" unique_id=1439603898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -70)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("7_qf76l")
+authored_transforms = Array[Transform3D]([Transform3D(-0.91406137, 0, 0.5366655, 0, 1.0724819, 0, -0.5488266, 0, -0.93477434, -9.102135, 1.2948395, 0.9851761), Transform3D(0.96142685, 0, 0.07377384, 0, 1.0003513, 0, -0.07973263, 0, 1.0390823, -10.493612, 1.184961, -1.6220474), Transform3D(0.1610134, 0, -0.9378415, 0, 1.0048122, 0, 1.0695409, 0, 0.18362421, -11.426928, 1.1342293, -1.3920517)])
+authored_colors = Array[Color]([Color(0.953125, 0.953125, 0.93408203, 1), Color(0.9790039, 0.9790039, 0.95947266, 1), Color(0.9970703, 0.9970703, 0.9770508, 1)])
+metadata/garden_concept = 6
+metadata/source_asset = "06_Lanceleaf_Clump"
+metadata/plant_count = 3
+metadata/footprint_radius = 0.82320035
+
+[node name="Plant_07_1_n2" type="MultiMeshInstance3D" parent="Grasses" unique_id=1288670612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, -42)
+cast_shadow = 0
+visibility_range_end = 44.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("5_v5wf2")
+authored_transforms = Array[Transform3D]([Transform3D(-0.3718391, 0, -1.1373385, 0, 1.1163268, 0, 0.9896421, 0, -0.32355157, -13.741961, 1.1954361, 11.2819805)])
+authored_colors = Array[Color]([Color(0.9838867, 0.9838867, 0.96435547, 1)])
+metadata/garden_concept = 7
+metadata/source_asset = "07_Short_Grass"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.7195669
+
+[node name="Flowers" type="Node3D" parent="." unique_id=910385867]
+
+[node name="Waterside" type="Node3D" parent="." unique_id=88814288]
+
+[node name="Plant_09_n1_1" type="MultiMeshInstance3D" parent="Waterside" unique_id=1847895423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 42)
+cast_shadow = 0
+visibility_range_end = 52.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("8_arwcd")
+authored_transforms = Array[Transform3D]([Transform3D(-1.2626058, 0, 0.1747386, 0, 1.214108, 0, -0.16446467, 0, -1.1883696, -12.903072, -0.52271116, -5.974018)])
+authored_colors = Array[Color]([Color(0.93115234, 0.93115234, 0.91259766, 1)])
+metadata/garden_concept = 9
+metadata/source_asset = "09_Cattails"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.5999055
+
+[node name="Plant_09_n2_1" type="MultiMeshInstance3D" parent="Waterside" unique_id=1065078635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 42)
+cast_shadow = 0
+visibility_range_end = 52.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("8_arwcd")
+authored_transforms = Array[Transform3D]([Transform3D(0.3355919, 0, -1.0435406, 0, 1.0644791, 0, 0.9688059, 0, 0.311558, 12.930782, -0.13324586, -5.400379)])
+authored_colors = Array[Color]([Color(0.93652344, 0.93652344, 0.91796875, 1)])
+metadata/garden_concept = 9
+metadata/source_asset = "09_Cattails"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.5999055
+
+[node name="Plant_09_1_1" type="MultiMeshInstance3D" parent="Waterside" unique_id=403814717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 42)
+cast_shadow = 0
+visibility_range_end = 52.0
+script = ExtResource("1_p1ho1")
+authored_mesh = ExtResource("8_arwcd")
+authored_transforms = Array[Transform3D]([Transform3D(-0.9774962, 0, -0.03166801, 0, 0.97031415, 0, 0.03368788, 0, -1.0398434, 4.614727, -0.08005371, 5.5236664)])
+authored_colors = Array[Color]([Color(0.9272461, 0.9272461, 0.9086914, 1)])
+metadata/garden_concept = 9
+metadata/source_asset = "09_Cattails"
+metadata/plant_count = 1
+metadata/footprint_radius = 0.5999055

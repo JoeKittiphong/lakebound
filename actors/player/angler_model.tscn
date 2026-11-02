@@ -26,6 +26,7 @@ nodes/BodySpeed/position = Vector2(200, -120)
 node_connections = [&"output", 0, &"Mix", &"Mix", 0, &"BodySpeed", &"BodySpeed", 0, &"Body", &"Mix", 1, &"LegSpeed", &"LegSpeed", 0, &"Legs"]
 
 [node name="AnglerModel" type="Node3D"]
+process_priority = 100
 scale = Vector3(0.7729, 0.7729, 0.7729)
 script = ExtResource("script")
 
@@ -43,6 +44,20 @@ position = Vector3(0, 5, 0)
 scale = Vector3(100, 100, 100)
 rotation_degrees = Vector3(-24.6208, -1.484586, 6.795397)
 
+[node name="LeftHandTarget" type="Marker3D" parent="RodHand/Grip"]
+position = Vector3(0.12, -0.07, 0.17)
+
+[node name="LeftHandIK" type="SkeletonIK3D" parent="Asset/Scene/M2M_TPose_Rig/Skeleton3D"]
+process_priority = 200
+root_bone = &"clavicle_l"
+tip_bone = &"hand_l"
+target_node = NodePath("../../../../../RodHand/Grip/LeftHandTarget")
+override_tip_basis = true
+max_iterations = 24
+min_distance = 0.1
+
 [node name="FishingLocomotion" type="AnimationTree" parent="."]
 tree_root = SubResource("Tree")
 active = false
+
+[editable path="Asset"]

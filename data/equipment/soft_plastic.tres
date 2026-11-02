@@ -1,10 +1,29 @@
-[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
-[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://ca0uvlol30prr"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/soft_plastic.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/plug.tres" id="rig_plug"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/soft_plastic.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/soft_plastic.tres" id="attraction"]
+
 [resource]
 script = ExtResource("1")
 id = &"soft_plastic"
 display_name = "เหยื่อยาง"
+shop_icon = ExtResource("shop")
 kind = "lure"
 price = 120
 bait_type = "lure"
 motion = "sink"
+
+payload_g = 5
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_plug")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

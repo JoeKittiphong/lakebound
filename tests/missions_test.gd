@@ -27,7 +27,9 @@ func progress(profile: AnglerProfile, id: String) -> float:
 
 func fresh() -> AnglerProfile:
  var profile := AnglerProfile.new()
- profile.save_path = "user://missions-%d-%d.cfg" % [Time.get_ticks_usec(), serial]
+ var qa_dir := OS.get_environment("LAKEBOUND_QA_DIR")
+ var filename := "missions-%d-%d.cfg" % [Time.get_ticks_usec(), serial]
+ profile.save_path = qa_dir.path_join(filename) if not qa_dir.is_empty() else "user://" + filename
  root.add_child(profile)
  return profile
 

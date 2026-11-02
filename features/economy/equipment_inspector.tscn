@@ -1,0 +1,166 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/economy/equipment_inspector.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/economy/equipment_model_preview.tscn" id="preview"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/slot.tres" id="style"]
+[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
+[node name="EquipmentInspector" type="Control" ]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+script = ExtResource("script")
+[node name="Backdrop" type="ColorRect" parent="." ]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.015,0.025,0.04,1)
+[node name="Preview" parent="." instance=ExtResource("preview") ]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+interactive = true
+show_full_rod = true
+[node name="Floating" type="Control" parent="." ]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("safe")
+minimum_margin = 12.0
+[node name="Close" type="Button" parent="Floating" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "กลับ"
+layout_mode = 0
+offset_right = 76.0
+offset_bottom = 48.0
+[node name="Name" type="Label" parent="Floating" ]
+unique_name_in_owner = true
+layout_mode = 2
+text = "อุปกรณ์"
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_right = 160.0
+offset_bottom = 36.0
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_font_sizes/font_size = 21
+clip_text = true
+text_overrun_behavior = 3
+theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0.02,0.03,0.04,1)
+[node name="Focus" type="Button" parent="Floating" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "ดูด้ามและไกด์"
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -224.0
+offset_right = -90.0
+offset_bottom = 48.0
+[node name="Reset" type="Button" parent="Floating" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "จัดมุม"
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_bottom = 48.0
+[node name="Info" type="Button" parent="Floating" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "รายละเอียด / ซื้อ"
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -48.0
+[node name="Information" type="PanelContainer" parent="." ]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+visible = false
+theme_override_styles/panel = ExtResource("style")
+[node name="Margin" type="MarginContainer" parent="Information" ]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+[node name="Content" type="VBoxContainer" parent="Information/Margin" ]
+layout_mode = 2
+theme_override_constants/separation = 14
+[node name="HideDetails" type="Button" parent="Information/Margin/Content" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "ซ่อนรายละเอียด"
+
+[node name="Scroll" type="ScrollContainer" parent="Information/Margin/Content" ]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Text" type="VBoxContainer" parent="Information/Margin/Content/Scroll" ]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+[node name="Details" type="Label" parent="Information/Margin/Content/Scroll/Text" ]
+unique_name_in_owner = true
+layout_mode = 2
+text = "รายละเอียดสินค้า"
+autowrap_mode = 3
+[node name="Status" type="Label" parent="Information/Margin/Content/Scroll/Text" ]
+unique_name_in_owner = true
+layout_mode = 2
+text = ""
+autowrap_mode = 3
+[node name="Feedback" type="Label" parent="Information/Margin/Content/Scroll/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+[node name="Hint" type="Label" parent="Information/Margin/Content/Scroll/Text" ]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ลากหมุน · สองนิ้วเลื่อน/ซูม\nเมาส์ขวาเลื่อนมุมมอง"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 15
+[node name="Actions" type="VBoxContainer" parent="Information/Margin/Content" ]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+[node name="Stock" type="Label" parent="Information/Margin/Content/Actions" ]
+unique_name_in_owner = true
+layout_mode = 2
+text = "มี 0 ชิ้น"
+autowrap_mode = 3
+[node name="Buy" type="Button" parent="Information/Margin/Content/Actions" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "ซื้อ"
+
+[node name="Equip" type="Button" parent="Information/Margin/Content/Actions" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "เลือกใช้"
+

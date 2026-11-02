@@ -1,11 +1,25 @@
-[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
-[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://nos5xeyve57d"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/fine_line.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/line_specs/fine_line.tres" id="line_spec_fit"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/shop_goods/fine_line.tscn" id="display_model"]
+
 [resource]
 script = ExtResource("1")
 id = &"fine_line"
 display_name = "สายเล็ก 3 kgf · 100 ม."
+shop_icon = ExtResource("shop")
 kind = "line"
 price = 30
 strength = 3.0
 visibility = 0.8
 length = 100.0
+
+line_visual_style="mono"
+
+line_spec = ExtResource("line_spec_fit")
+
+model_scene = ExtResource("display_model")

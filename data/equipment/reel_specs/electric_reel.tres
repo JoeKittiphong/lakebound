@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ReelSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/reel_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+techniques = PackedStringArray("vertical_jig", "boat_drop")
+reference_diameter_mm = 0.25
+reference_capacity_m = 300
+max_drag_kgf = 8
+diameter_min_mm = 0.18
+diameter_max_mm = 0.8

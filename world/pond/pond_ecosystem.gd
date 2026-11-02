@@ -7,12 +7,31 @@ signal population_changed
 const FishRecord = preload("res://world/pond/fish_state.gd")
 const Catalog = preload("res://data/fish/fish_catalog.gd")
 @export var species: Array[Resource] = Catalog.SPECIES.duplicate()
-@export_range(3, 120) var population_limit: int = 30
+@export_range(3, 2000) var population_limit: int = 30
 @export var simulation_interval: float = 0.15
+@export var simulation_observer: Node3D
+@export var full_rate_radius:=95.0
+@export var distant_simulation_interval:=.9
+@export var population_expansion_revision: String=""
+@export var population_expansion_count:=0
+@export var population_expansion_species_offset:=0
 @export var restock_interval: float = 45.0
 @export var simulation_seed: int = 4207
 var fish: Array[RefCounted] = []
 var bait_active := false
+var bait_item:TackleItem
+@export var default_attraction_radius:=7.0
+@export var natural_commit_seconds:=1.1
+@export var lure_commit_seconds:=.45
+## Temporary, capped detection bonus earned by a lure rhythm; never forces a bite.
+var lure_appeal := 0.0
+var lure_controlled := false
+var lure_followers := 0
+var lure_strike_fish: RefCounted
+var lure_strike_until := -1.0
+var lure_strike_chance := 0.0
+var lure_interest := 0.0
+@export_range(0.5, 3.0) var lure_attack_distance := 1.8
 var bait_position := Vector3.ZERO
 var bait_type: StringName = &"worm"
 var reserved_fish: RefCounted
@@ -49,8 +68,17 @@ func reset_population(seed_value: int) -> void:
  clock = 0.0
  restock_clock = 0.0
  accumulator = 0.0
+ lure_controlled = false
+ lure_followers = 0
+ invalidate_lure_action()
  for index in population_limit:
   _spawn(index % species.size(), index)
+ population_changed.emit()
+
+func expand_population(additional_count: int) -> void:
+ var amount:=mini(maxi(0,additional_count),maxi(0,population_limit-fish.size()))
+ var start_slot:=fish.size()
+ for index in amount:_spawn((population_expansion_species_offset+index)%species.size(),start_slot+index)
  population_changed.emit()
 
 func _spawn(species_index: int, slot: int = -1) -> RefCounted:
@@ -73,19 +101,89 @@ func _destination(record: RefCounted) -> Vector3:
  var depths: Vector2 = record.species.preferred_depth
  return definition.roaming_position(rng, record.position, depths)
 
-func set_bait(point: Vector3, kind: StringName) -> void:
+func set_bait(point: Vector3, kind: StringName, requires_lure_rhythm: bool = false, item:TackleItem = null) -> void:
  cancel_bait()
  bait_position = point
  bait_type = kind
+ bait_item = item
  bait_active = true
+ lure_controlled = requires_lure_rhythm
 
 func cancel_bait() -> void:
  bait_active = false
+ bait_item = null
+ lure_appeal = 0.0
+ lure_controlled = false
+ lure_followers = 0
+ invalidate_lure_action()
  for record in fish:
-  if record.state in [&"approaching", &"inspecting", &"biting"]:
+  if record.state in [&"approaching", &"inspecting", &"biting", &"chasing_lure", &"committed"]:
    record.state = &"roaming"
    record.timer = 0.0
  reserved_fish = null
+
+func invalidate_lure_action() -> void:
+ if lure_controlled:
+  for record in fish:
+   if record.state==&"committed":record.state=&"chasing_lure";record.timer=0.0
+ lure_interest = 0.0
+ lure_strike_fish = null
+ lure_strike_until = -1.0
+ lure_strike_chance = 0.0
+
+func register_lure_action(quality: float, _duration: float = 2.5, _bite_chance: float = 0.78) -> void:
+ if not bait_active or not lure_controlled or reserved_fish != null:
+  return
+ lure_interest = clampf(quality, 0.0, 1.0)
+ lure_appeal = 0.2
+ # Progress persists for this cast until a wrong direction or a state reset.
+ lure_strike_until = INF
+ lure_strike_chance = 1.0 if lure_interest >= 1.0 else lure_interest * 0.55
+
+## Use current positions and the same conditions as simulation, not stale follower counts.
+func _interested_in_bait(record: RefCounted) -> bool:
+ if record.state in [&"hooked", &"landed"] or not bait_active or reserved_fish != null:
+  return false
+ if record.caution >= 0.6 or record.hunger <= 0.35 or String(bait_type) not in record.species.bait_preferences:
+  return false
+ var depths: Vector2 = record.species.preferred_depth
+ return record.position.distance_to(bait_position) <= fish_detection_radius(record) and bait_position.y >= depths.x - 0.5 and bait_position.y <= depths.y + 0.5
+
+func has_lure_candidate() -> bool:
+ for record in fish:
+  if _interested_in_bait(record):
+   return true
+ return false
+
+func lure_status() -> String:
+ if reserved_fish != null:
+  return "ปลากัดแล้ว!"
+ if has_lure_candidate():
+  if lure_interest >= 1.0:
+   return "ปลากำลังตาม • เต็มหลอดแล้ว รอปลาเข้าถึง"
+  return "ปลากำลังตาม • ทำสูตรต่อเพื่อเพิ่มโอกาสกัด"
+ var nearby := false
+ var compatible := false
+ var depth_ok := false
+ for record in fish:
+  if record.state in [&"hooked", &"landed"]:
+   continue
+  if record.position.distance_to(bait_position) > maxf(attraction_radius(),fish_detection_radius(record)):
+   continue
+  nearby = true
+  if String(bait_type) not in record.species.bait_preferences:
+   continue
+  compatible = true
+  var depths: Vector2 = record.species.preferred_depth
+  if bait_position.y >= depths.x - 0.5 and bait_position.y <= depths.y + 0.5:
+   depth_ok = true
+ if not nearby:
+  return "ยังไม่มีปลาใกล้เหยื่อ • ลองเปลี่ยนจุดเหวี่ยง"
+ if not compatible:
+  return "ปลาใกล้ ๆ ไม่สนใจเหยื่อนี้ • ลองเปลี่ยนเหยื่อ"
+ if not depth_ok:
+  return "เหยื่ออยู่ผิดระดับปลา • ลองปรับความลึก"
+ return "ปลายังระแวงหรือไม่หิว • รอหรือเปลี่ยนจุด"
 
 ## Move an existing bait without resetting approach/inspection or population.
 func move_bait(point: Vector3) -> void:
@@ -100,6 +198,10 @@ func _physics_process(delta: float) -> void:
 
 func step(delta: float) -> void:
  clock += delta
+ lure_appeal = maxf(0.0, lure_appeal - delta * 0.05)
+ lure_followers = 0
+ if clock > lure_strike_until:
+  invalidate_lure_action()
  restock_clock += delta
  if restock_clock >= restock_interval:
   restock_clock = 0.0
@@ -109,26 +211,51 @@ func step(delta: float) -> void:
  for record in fish:
   if record.state in [&"hooked", &"landed"]:
    continue
-  record.caution = maxf(0.0, record.caution - delta * 0.03)
-  record.stamina = minf(1.0, record.stamina + delta * (0.03 if record.state == &"resting" else 0.015))
-  record.hunger = minf(1.0, record.hunger + delta * 0.004)
-  record.surface_timer += delta
-  record.decision_timer -= delta
+  var fish_delta:=delta
+  if is_instance_valid(simulation_observer):
+   var near:=Vector2(record.position.x-simulation_observer.global_position.x,record.position.z-simulation_observer.global_position.z).length_squared()<=full_rate_radius*full_rate_radius
+   var relevant_bait: bool=bait_active and record.position.distance_squared_to(bait_position)<=pow(maxf(25,attraction_radius()+5),2)
+   if not near and not relevant_bait and record.state not in [&"approaching",&"inspecting",&"biting",&"chasing_lure", &"committed"]:
+    record.simulation_elapsed+=delta
+    if record.simulation_elapsed<distant_simulation_interval:continue
+    fish_delta=record.simulation_elapsed;record.simulation_elapsed=0
+   else:
+    fish_delta+=record.simulation_elapsed;record.simulation_elapsed=0
+  record.caution = maxf(0.0, record.caution - fish_delta * 0.03)
+  record.stamina = minf(1.0, record.stamina + fish_delta * (0.03 if record.state == &"resting" else 0.015))
+  record.hunger = minf(1.0, record.hunger + fish_delta * 0.004)
+  record.surface_timer += fish_delta
+  record.decision_timer -= fish_delta
   if record.state == &"biting":
    continue
-  var interested: bool = bait_active and reserved_fish == null and record.caution < 0.6 and record.hunger > 0.35 and String(bait_type) in record.species.bait_preferences
-  # Distance includes depth. A bottom bait is not instantly visible to surface fish.
-  interested = interested and record.position.distance_to(bait_position) <= record.species.detection_radius / maxf(0.5, line_visibility)
-  var preferred: Vector2 = record.species.preferred_depth
-  interested = interested and bait_position.y >= preferred.x - 0.5 and bait_position.y <= preferred.y + 0.5
-  if interested and record.state not in [&"approaching", &"inspecting"]:
-   record.state = &"approaching"
+  var interested := _interested_in_bait(record)
+  if interested and record.state not in [&"approaching", &"inspecting", &"chasing_lure", &"committed"]:
+   record.state = &"chasing_lure" if lure_controlled else &"approaching"
    record.timer = 0.0
-  if record.state in [&"approaching", &"inspecting"] and bait_active and reserved_fish == null:
-   _move_fish(record, bait_position, record.species.swim_speed * delta)
+  if interested and lure_controlled:
+   if record.state!=&"committed":record.state = &"chasing_lure"
+   lure_followers += 1
+   _move_fish(record, bait_position, record.species.swim_speed * fish_delta)
+   if record.position.distance_to(bait_position) < 0.65 and lure_interest > 0.0:
+    lure_strike_fish = record
+    record.timer += fish_delta
+    if record.state!=&"committed" and record.timer+.00001>=lure_commit_seconds:
+     if rng.randf()<lure_strike_chance:record.state=&"committed"
+     else:record.timer=0.0
+    if record.state==&"committed" and record.timer>=.7:
+     record.state=&"biting"
+     reserved_fish=record
+     fish_biting.emit(record)
+   else:
+    record.state=&"chasing_lure"
+    record.timer = 0.0
+   continue
+  if interested and record.state in [&"approaching", &"inspecting", &"committed"] and bait_active and reserved_fish == null:
+   _move_fish(record, bait_position, record.species.swim_speed * fish_delta)
    if record.position.distance_to(bait_position) < 0.35:
-    record.state = &"inspecting"
-    record.timer += delta
+    if record.state!=&"committed":record.state = &"inspecting"
+    record.timer += fish_delta
+    if record.timer>=natural_commit_seconds:record.state=&"committed"
     if record.timer >= 2.2 + (1.0 - record.hunger) * 2.0:
      record.state = &"biting"
      reserved_fish = record
@@ -137,8 +264,9 @@ func step(delta: float) -> void:
     record.state = &"approaching"
     record.timer = 0.0
    continue
-  if record.state in [&"approaching", &"inspecting"]:
+  if record.state in [&"approaching", &"inspecting", &"chasing_lure", &"committed"]:
    record.state = &"roaming"
+   record.timer = 0.0
   if record.decision_timer <= 0.0:
    record.destination = _destination(record)
    record.state = &"resting" if rng.randf() < 0.17 else &"roaming"
@@ -157,12 +285,12 @@ func step(delta: float) -> void:
       break
    record.decision_timer = rng.randf_range(3, 7)
   if record.state == &"feeding":
-   record.hunger = maxf(0.0, record.hunger - delta * 0.055)
+   record.hunger = maxf(0.0, record.hunger - fish_delta * 0.055)
   elif record.state != &"resting":
    var speed_factor: float = 0.8 if record.state == &"fleeing" else (0.6 if record.state == &"hunting" else 0.3)
-   _move_fish(record, record.destination, record.species.swim_speed * delta * speed_factor)
+   _move_fish(record, record.destination, record.species.swim_speed * fish_delta * speed_factor)
   if record.surface_timer > 22.0:
-   record.position.y = move_toward(record.position.y, 0.12, delta * 1.8)
+   record.position.y = move_toward(record.position.y, 0.12, fish_delta * 1.8)
    if record.surface_timer > 24.0:
     record.surface_timer = 0.0
 
@@ -175,6 +303,7 @@ func _move_fish(record: RefCounted, target: Vector3, distance: float) -> void:
 
 func hook(record: RefCounted) -> void:
  bait_active = false
+ invalidate_lure_action()
  reserved_fish = record
  record.state = &"hooked"
 
@@ -197,14 +326,14 @@ func keep(record: RefCounted) -> void:
 
 func counts() -> Dictionary:
  var result := {}
- for definition in species:
-  result[definition.id] = 0
+ for species_definition in species:
+  result[species_definition.id] = 0
  for record in fish:
   result[record.species.id] += 1
  return result
 
 func boss() -> RefCounted:
- var largest: RefCounted
+ var largest: RefCounted = null
  for record in fish:
   if largest == null or record.weight > largest.weight:
    largest = record
@@ -215,9 +344,13 @@ func snapshot() -> Array:
  for record in fish:
   records.append({"id": record.id, "persistent_key": record.persistent_key, "species": String(record.species.id), "weight": record.weight,
    "position": record.position, "stamina": record.stamina, "hunger": record.hunger, "caution": record.caution})
+  if definition is RainforestLakeDefinition:
+   records[-1]["habitat_revision"]="rainforest_lake_v1"
+   records[-1]["cave_habitat_seeded"]=definition.cave_enabled
  return records
 
 func restore(records: Array) -> bool:
+ var cave_seed_start:=maxi(0,records.size()-mini(14,maxi(1,floori(records.size()/8.0))))
  var restored: Array[RefCounted] = []
  var ids := {}
  for entry in records:
@@ -242,12 +375,21 @@ func restore(records: Array) -> bool:
   record.species = definition_found
   record.weight = entry.weight
   record.position = constrain_to_water(entry.position)
+  if definition is RainforestLakeDefinition and entry.get("habitat_revision","")!="rainforest_lake_v1":
+   # Preserve fish identity/weight/progress while relocating legacy river positions once.
+   record.position=definition.spawn_position(rng,record.species.preferred_depth,restored.size())
+  if definition is RainforestLakeDefinition and definition.cave_enabled and not bool(entry.get("cave_habitat_seeded",false)) and restored.size()>=cave_seed_start:
+   # Populate the new cave once while retaining each fish's identity, species and weight.
+   record.position=definition.spawn_cave_position(rng,record.species.preferred_depth)
   record.stamina = clampf(float(entry.get("stamina", 1.0)), 0.0, 1.0)
   record.hunger = clampf(float(entry.get("hunger", 0.7)), 0.0, 1.0)
   record.caution = clampf(float(entry.get("caution", 0.0)), 0.0, 1.0)
   record.destination = _destination(record)
   restored.append(record)
  fish = restored
+ lure_controlled = false
+ lure_followers = 0
+ invalidate_lure_action()
  next_id = 1
  for record in fish:
   next_id = maxi(next_id, record.id + 1)
@@ -255,3 +397,21 @@ func restore(records: Array) -> bool:
  bait_active = false
  population_changed.emit()
  return true
+
+## Outer radius shown on water; fish senses can reduce, never expand, this boundary.
+func attraction_radius()->float:
+ var base:=bait_item.attraction.radius_m if bait_item!=null and bait_item.attraction!=null else default_attraction_radius
+ return base*(1.0+clampf(lure_appeal,0,.2) if lure_controlled else 1.0)
+func fish_detection_radius(record:RefCounted)->float:
+ return minf(attraction_radius(),record.species.detection_radius/maxf(.5,line_visibility))
+func bait_interest_status()->Dictionary:
+ var status:={"active":bait_active,"radius_m":attraction_radius(),"phase":"waiting","interested_count":0}
+ if not bait_active:return status
+ if reserved_fish!=null and reserved_fish.state==&"biting":
+  status.phase="committed";status.interested_count=1;return status
+ for record in fish:
+  if not _interested_in_bait(record):continue
+  status.interested_count+=1
+  if record.state==&"committed":status.phase="committed"
+  elif status.phase!="committed":status.phase="interested"
+ return status

@@ -1,11 +1,31 @@
-[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
-[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://iihxwld0emaa"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/frog.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/frog.tres" id="rig_frog"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/frog.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/frog.tres" id="attraction"]
+
 [resource]
 script = ExtResource("1")
 id = &"frog"
 display_name = "กบผิวน้ำ"
+shop_icon = ExtResource("shop")
 kind = "lure"
 price = 180
 bait_type = "lure"
-motion = "float"
 recovery_cost = 3
+motion = "float"
+lure_pattern = "walk_the_dog"
+
+payload_g = 12
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_frog")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

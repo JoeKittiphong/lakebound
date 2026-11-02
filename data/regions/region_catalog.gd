@@ -1,7 +1,7 @@
 class_name RegionCatalog
 extends RefCounted
 const MAPS = [
- {"id": "river", "name": "แม่น้ำสายใหญ่", "subtitle": "วังน้ำลึก · ตลิ่งหิน · ปลายักษ์", "scene": "res://features/regions/grand_river.tscn", "fish_count": 28, "mission_count": 12},
+ {"id": "river", "name": "ทะเลสาบป่าดิบ", "subtitle": "เกาะกลางน้ำ · บ่อเชื่อม · ปลายักษ์", "scene": "res://features/regions/grand_river.tscn", "fish_count": 48, "mission_count": 12},
  {"id": "lotus_marsh", "name": "บึงบัวริมทุ่ง", "subtitle": "น้ำนิ่งตื้น · กอบัว · ฝึกตกปลา", "scene": "res://features/regions/lotus_marsh.tscn", "fish_count": 14, "mission_count": 6},
  {"id": "forest_stream", "name": "ลำธารป่าภูเขา", "subtitle": "แก่งหิน · ป่าลึก · ปลาพื้นถิ่น", "scene": "res://features/regions/forest_stream.tscn", "fish_count": 28, "mission_count": 6},
  {"id": "wild_reservoir", "name": "เขื่อนดงตอไม้", "subtitle": "อ่างน้ำลึก · ซากไม้จม · ชะโดยักษ์", "scene": "res://features/regions/wild_reservoir.tscn", "fish_count": 14, "mission_count": 6},

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TerminalRigSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+id = "ice"
+display_name = "หย่อนใต้ช่องน้ำแข็ง"
+technique = "ice_drop"

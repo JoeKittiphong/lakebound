@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_07.res" id="1_3egph"]
+
+[node name="07_Short_Grass" type="Node3D" unique_id=398592246]
+metadata/garden_concept = 7
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=120629250]
+visibility_range_end = 46.0
+mesh = ExtResource("1_3egph")

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/jigging_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/current_b603.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/current_b603.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"current_b603"
+display_name = "Current B603"
+kind = "rod"
+equipment_type = "จิ๊กกิ้ง · Current"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "จิ๊กเรือแบบโอเวอร์เฮด กำลังกลางในซีรีส์ · Moderate"
+price = 620
+strength = 17
+cast_multiplier = 0.72
+responsiveness = 1.0
+
+mount_layout = "overhead"

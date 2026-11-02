@@ -10,17 +10,17 @@ static func valid(value: Variant) -> bool:
  if not value is Dictionary or not value.get("started") is bool or not value.get("tracked") is String or not value.get("entries") is Dictionary:
   return false
  for id in value.entries:
-  var entry: Variant = value.entries[id]
-  if not id is String or not entry is Dictionary:
+  var stored_entry: Variant = value.entries[id]
+  if not id is String or not stored_entry is Dictionary:
    return false
-  if not entry.get("revision") is int or entry.revision < 1 or not entry.get("claimed") is bool:
+  if not stored_entry.get("revision") is int or stored_entry.revision < 1 or not stored_entry.get("claimed") is bool:
    return false
-  if not (entry.get("progress") is int or entry.get("progress") is float) or not is_finite(float(entry.progress)) or entry.progress < 0:
+  if not (stored_entry.get("progress") is int or stored_entry.get("progress") is float) or not is_finite(float(stored_entry.progress)) or stored_entry.progress < 0:
    return false
   for key in ["seen", "unique"]:
-   if not entry.get(key) is Array:
+   if not stored_entry.get(key) is Array:
     return false
-   for token in entry[key]:
+   for token in stored_entry[key]:
     if not token is String or token.is_empty():
      return false
  return true

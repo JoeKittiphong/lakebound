@@ -57,3 +57,10 @@ first_catch_tutorial*.cfg
 *.pfx
 *.pem
 *.key
+
+# Retired backend data is local only; Google Sheets source lives in services/.
+/server/
+services/**/.local/
+server_connection.cfg
+sheets_connection.cfg
+sheets-ranking-*.cfg

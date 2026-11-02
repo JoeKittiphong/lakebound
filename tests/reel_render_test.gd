@@ -42,6 +42,12 @@ func run() -> void:
  reel.slipping = true
  await frames()
  expect(reel.spin < start, "brake slip continues to animate and request redraws without input")
+ reel.command = Vector2(0, 1)
+ start = reel.spin
+ var previous_crank: float = reel.crank
+ await frames()
+ expect(reel.spin < start and reel.crank > previous_crank, "slipping spool pays out even while the player winds the crank")
+ reel.command = Vector2.ZERO
  reel.slipping = false
  reel.hide()
  await frames()

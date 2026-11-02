@@ -1,0 +1,224 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/economy/fishing_methods_view.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://shared/ui/swipe_scroll.gd" id="swipe"]
+[node name="FishingMethods" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("theme")
+script = ExtResource("script")
+theme_override_constants/separation = 10
+[node name="Maps" type="TabBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+scrolling_enabled = true
+clip_tabs = true
+theme_override_font_sizes/font_size = 17
+[node name="ListHint" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "แม่น้ำสายใหญ่ · 4 ชนิด"
+theme_override_font_sizes/font_size = 16
+[node name="Body" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+[node name="FishScroll" type="ScrollContainer" parent="Body"]
+layout_mode = 2
+custom_minimum_size = Vector2(420,0)
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+script = ExtResource("swipe")
+[node name="FishRows" type="GridContainer" parent="Body/FishScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+[node name="Right" type="PanelContainer" parent="Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+[node name="Empty" type="Label" parent="Body/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ยังไม่เคยจับปลาในแผนที่นี้\nบันทึกจะเพิ่มเมื่อจับปลาสำเร็จ"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+[node name="Detail" type="ScrollContainer" parent="Body/Right"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+script = ExtResource("swipe")
+[node name="Content" type="VBoxContainer" parent="Body/Right/Detail"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+[node name="Heading" type="HBoxContainer" parent="Body/Right/Detail/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+[node name="FishName" type="Label" parent="Body/Right/Detail/Content/Heading"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ปลานิล"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 28
+[node name="CatchInfo" type="Label" parent="Body/Right/Detail/Content/Heading"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1.80 กก."
+autowrap_mode = 3
+custom_minimum_size = Vector2(150,0)
+theme_override_font_sizes/font_size = 18
+[node name="Capture" type="OptionButton" parent="Body/Right/Detail/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,42)
+[node name="EquipmentTitle" type="Label" parent="Body/Right/Detail/Content"]
+layout_mode = 2
+text = "ชุดอุปกรณ์ที่ใช้จับครั้งนี้"
+theme_override_font_sizes/font_size = 18
+[node name="Gear" type="GridContainer" parent="Body/Right/Detail/Content"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 8
+[node name="BaitCard" type="PanelContainer" parent="Body/Right/Detail/Content/Gear"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,64)
+[node name="Content" type="VBoxContainer" parent="Body/Right/Detail/Content/Gear/BaitCard"]
+layout_mode = 2
+theme_override_constants/separation = 3
+[node name="Title" type="Label" parent="Body/Right/Detail/Content/Gear/BaitCard/Content"]
+layout_mode = 2
+text = "เหยื่อ"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.6,0.86,0.8,1)
+[node name="Bait" type="Label" parent="Body/Right/Detail/Content/Gear/BaitCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ไม่ได้บันทึก"
+theme_override_font_sizes/font_size = 21
+autowrap_mode = 3
+[node name="LineCard" type="PanelContainer" parent="Body/Right/Detail/Content/Gear"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,64)
+[node name="Content" type="VBoxContainer" parent="Body/Right/Detail/Content/Gear/LineCard"]
+layout_mode = 2
+theme_override_constants/separation = 3
+[node name="Title" type="Label" parent="Body/Right/Detail/Content/Gear/LineCard/Content"]
+layout_mode = 2
+text = "เอ็น"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.6,0.86,0.8,1)
+[node name="Line" type="Label" parent="Body/Right/Detail/Content/Gear/LineCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ไม่ได้บันทึก"
+theme_override_font_sizes/font_size = 21
+autowrap_mode = 3
+[node name="RodCard" type="PanelContainer" parent="Body/Right/Detail/Content/Gear"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,64)
+[node name="Content" type="VBoxContainer" parent="Body/Right/Detail/Content/Gear/RodCard"]
+layout_mode = 2
+theme_override_constants/separation = 3
+[node name="Title" type="Label" parent="Body/Right/Detail/Content/Gear/RodCard/Content"]
+layout_mode = 2
+text = "คันเบ็ด"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.6,0.86,0.8,1)
+[node name="Rod" type="Label" parent="Body/Right/Detail/Content/Gear/RodCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ไม่ได้บันทึก"
+theme_override_font_sizes/font_size = 21
+autowrap_mode = 3
+[node name="ReelCard" type="PanelContainer" parent="Body/Right/Detail/Content/Gear"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,64)
+[node name="Content" type="VBoxContainer" parent="Body/Right/Detail/Content/Gear/ReelCard"]
+layout_mode = 2
+theme_override_constants/separation = 3
+[node name="Title" type="Label" parent="Body/Right/Detail/Content/Gear/ReelCard/Content"]
+layout_mode = 2
+text = "รอก"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.6,0.86,0.8,1)
+[node name="Reel" type="Label" parent="Body/Right/Detail/Content/Gear/ReelCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ไม่ได้บันทึก"
+theme_override_font_sizes/font_size = 21
+autowrap_mode = 3
+[node name="SettingsTitle" type="Label" parent="Body/Right/Detail/Content"]
+layout_mode = 2
+text = "ค่าที่ปรับตอนตก"
+theme_override_font_sizes/font_size = 18
+[node name="Settings" type="HBoxContainer" parent="Body/Right/Detail/Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+[node name="DepthCard" type="PanelContainer" parent="Body/Right/Detail/Content/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,64)
+[node name="Content" type="VBoxContainer" parent="Body/Right/Detail/Content/Settings/DepthCard"]
+layout_mode = 2
+theme_override_constants/separation = 3
+[node name="Title" type="Label" parent="Body/Right/Detail/Content/Settings/DepthCard/Content"]
+layout_mode = 2
+text = "ความลึกที่ปลากินเหยื่อ"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.6,0.86,0.8,1)
+[node name="Depth" type="Label" parent="Body/Right/Detail/Content/Settings/DepthCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ไม่ได้บันทึก"
+theme_override_font_sizes/font_size = 24
+[node name="BrakeCard" type="PanelContainer" parent="Body/Right/Detail/Content/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,64)
+[node name="Content" type="VBoxContainer" parent="Body/Right/Detail/Content/Settings/BrakeCard"]
+layout_mode = 2
+theme_override_constants/separation = 3
+[node name="Title" type="Label" parent="Body/Right/Detail/Content/Settings/BrakeCard/Content"]
+layout_mode = 2
+text = "เบรกรอก"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.6,0.86,0.8,1)
+[node name="Brake" type="Label" parent="Body/Right/Detail/Content/Settings/BrakeCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ไม่ได้บันทึก"
+theme_override_font_sizes/font_size = 24
+[node name="DistanceCard" type="PanelContainer" parent="Body/Right/Detail/Content/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,64)
+[node name="Content" type="VBoxContainer" parent="Body/Right/Detail/Content/Settings/DistanceCard"]
+layout_mode = 2
+theme_override_constants/separation = 3
+[node name="Title" type="Label" parent="Body/Right/Detail/Content/Settings/DistanceCard/Content"]
+layout_mode = 2
+text = "ระยะตีสาย"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.6,0.86,0.8,1)
+[node name="Distance" type="Label" parent="Body/Right/Detail/Content/Settings/DistanceCard/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ไม่ได้บันทึก"
+theme_override_font_sizes/font_size = 24
+[node name="Note" type="Label" parent="Body/Right/Detail/Content"]
+layout_mode = 2
+text = "แสดงข้อมูลของครั้งที่เลือก · ค่าที่ไม่เคยบันทึกจะแสดงว่าไม่ได้บันทึก"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14

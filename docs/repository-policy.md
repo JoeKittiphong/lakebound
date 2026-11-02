@@ -1,5 +1,10 @@
 # ไฟล์ที่เก็บใน GitHub
 
+อัปเดต 28 ตุลาคม 2026: ซอร์ส Google Apps Script อยู่ที่ `services/google_sheets/`
+เก็บใน Git แต่กันออกจาก Godot ด้วย `services/.gdignore`; `server/` เป็นข้อมูล
+local ของบริการที่เลิกใช้แล้วและถูก ignore ทั้งหมด รวมถึง `.local/` ของบริการ
+ตัว audit จะตรวจพบ directory เหล่านี้หากเผลอนำไฟล์ private กลับมา track.
+
 ตรวจวันที่ 25 ตุลาคม 2026 สำหรับโปรเจกต์ Godot `fishing-game/` และ repository
 `JoeKittiphong/lakebound` เดิม (Public) ใช้ branch `main` เดิม ไม่เปลี่ยน visibility
 

@@ -11,6 +11,7 @@ signal swimming_changed(swimming: bool)
 @export var buoyancy_response: float = 8.0
 @export var fight_move_speed: float = 1.2
 @export_range(0.2, 1.0) var wading_speed_multiplier: float = 0.65
+var first_person_rod: FishingRodVisual
 var fighting := false
 @export var pond: Pond
 @export var turn_speed: float = 10.0
@@ -182,7 +183,7 @@ func _sync_rod_tip() -> void:
  # Deferred pose updates can arrive after a scene change has removed this player.
  if not is_inside_tree() or not is_instance_valid(character_model) or not character_model.is_inside_tree():
   return
- $Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5/Tip.global_position = character_model.rod_tip_position()
+ $Visual/FishingRod/Joint1/Joint2/Joint3/Joint4/Joint5/Tip.global_position = first_person_rod.tip.global_position if is_instance_valid(first_person_rod) else character_model.rod_tip_position()
 
 func set_fighting(value: bool) -> void:
  fighting = value

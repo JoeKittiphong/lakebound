@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LineSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/line_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+material = "fly"
+diameter_mm = 1
+break_kgf = 5
+stretch_factor = 1
+sinks = false
+fly_weight = 5

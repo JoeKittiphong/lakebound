@@ -1,0 +1,49 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/fishing/ui/fish_box.gd" id="view"]
+[ext_resource type="Texture2D" path="res://assets/ui/hud_affinity/case.png" id="icon"]
+[sub_resource type="StyleBoxEmpty" id="empty"]
+[node name="FishBox" type="PanelContainer"]
+script = ExtResource("view")
+custom_minimum_size = Vector2(130, 110)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("empty")
+[node name="Row" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+[node name="Icon" type="TextureRect" parent="Row"]
+layout_mode = 0
+offset_left = 21.0
+offset_right = 101.0
+offset_bottom = 70.0
+mouse_filter = 2
+texture = ExtResource("icon")
+expand_mode = 1
+stretch_mode = 5
+[node name="Info" type="Control" parent="Row"]
+layout_mode = 0
+offset_top = 67.0
+offset_right = 130.0
+offset_bottom = 110.0
+mouse_filter = 2
+[node name="Weight" type="Label" parent="Row/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "20.5/300"
+horizontal_alignment = 1
+vertical_alignment = 1
+[node name="Open" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+tooltip_text = "เปิดกล่องปลา"
+theme_override_styles/normal = SubResource("empty")
+theme_override_styles/hover = SubResource("empty")
+theme_override_styles/pressed = SubResource("empty")
+theme_override_styles/focus = SubResource("empty")
+theme_override_styles/disabled = SubResource("empty")

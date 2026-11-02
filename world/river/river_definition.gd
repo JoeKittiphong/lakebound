@@ -120,7 +120,7 @@ func is_castable(point: Vector3) -> bool:
  return water_depth_at(Vector2(point.x, point.z)) > 0.22 and point.distance_to(constrain_to_water(point)) < 0.05
 
 func spawn_position(rng: RandomNumberGenerator, depths: Vector2, slot: int) -> Vector3:
- var site := int(maxi(slot, 0) / 16) % 7 if slot >= 0 else rng.randi_range(0, 6)
+ var site := floori(maxi(slot, 0) / 16.0) % 7 if slot >= 0 else rng.randi_range(0, 6)
  var z: float = [42.0, -28.0, 68.0, 22.0, -72.0, 72.0, -100.0][site]
  var side := -1.0 if site < 3 else 1.0
  z += rng.randf_range(-4.0, 4.0)

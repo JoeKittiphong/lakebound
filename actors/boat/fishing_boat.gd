@@ -109,7 +109,15 @@ func find_shore_exit() -> Vector3:
    var point: Vector3 = global_position + Vector3(cos(angle), 0, sin(angle)) * radius
    if definition.water_depth_at(Vector2(point.x, point.z)) > 0.6 or not definition.walking_bounds.has_point(Vector2(point.x, point.z)):
     continue
+   var cave_landing: bool=definition is RainforestLakeDefinition and definition.in_cave_area(Vector2(point.x,point.z))
+   if cave_landing and definition.signed_water_distance(Vector2(point.x,point.z))<1.0:continue
    point.y = definition.ground_height(Vector2(point.x, point.z)) + 0.08
+   if cave_landing:
+    var floor_query:=PhysicsRayQueryParameters3D.create(Vector3(point.x,definition.surface_height()+5,point.z),point-Vector3.UP*4)
+    floor_query.exclude=[get_rid(),passenger.get_rid()]
+    var floor_hit:=get_world_3d().direct_space_state.intersect_ray(floor_query)
+    if floor_hit.is_empty() or floor_hit.normal.y<.65 or floor_hit.position.y<definition.surface_height()+.08:continue
+    point.y=floor_hit.position.y+.08
    var query := PhysicsShapeQueryParameters3D.new()
    query.shape = shape.shape
    query.transform = Transform3D(Basis.IDENTITY, point + shape.position)

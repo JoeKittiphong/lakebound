@@ -1,0 +1,53 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://assets/props/thai_ice_cooler/cooler_body.glb" id="body"]
+[ext_resource type="PackedScene" path="res://assets/props/thai_ice_cooler/cooler_lid.glb" id="lid"]
+[ext_resource type="PackedScene" path="res://features/fishing/ui/stored_fish_display.tscn" id="fish"]
+[sub_resource type="StandardMaterial3D" id="ice"]
+albedo_color = Color(0.53,0.78,0.82,1)
+roughness = 0.6
+[sub_resource type="BoxMesh" id="ice_bed"]
+size = Vector3(5.4,0.16,2.9)
+material = SubResource("ice")
+[sub_resource type="Animation" id="open"]
+resource_name = "open"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.32, 0.43, 0.56, 0.9), "transitions": PackedFloat32Array(1,1,1,1,1), "update": 0, "values": [Vector3(0,5,0),Vector3(0,-0.12,0),Vector3(0,0.08,0),Vector3(0,0,0),Vector3(0,0,0)]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Lid:rotation")
+tracks/1/interp = 1
+tracks/1/keys = {"times": PackedFloat32Array(0,0.38,0.9), "transitions": PackedFloat32Array(1,1,1), "update": 0, "values": [Vector3(0,0,0),Vector3(0,0,0),Vector3(-1.8325957,0,0)]}
+[sub_resource type="AnimationLibrary" id="library"]
+_data = {&"open": SubResource("open")}
+[node name="Box" type="Node3D"]
+[node name="Body" parent="." instance=ExtResource("body")]
+scale = Vector3(8,8,8)
+[node name="Lid" type="Node3D" parent="."]
+position = Vector3(0,4.12,-1.96)
+rotation = Vector3(-1.8325957,0,0)
+[node name="Model" parent="Lid" instance=ExtResource("lid")]
+scale = Vector3(8,8,8)
+[node name="IceBed" type="MeshInstance3D" parent="."]
+position = Vector3(0,3.41,0)
+mesh = SubResource("ice_bed")
+[node name="FishSlots" type="Node3D" parent="."]
+[node name="Fish1" parent="FishSlots" instance=ExtResource("fish")]
+position = Vector3(-2.04,3.5,-0.72)
+[node name="Fish2" parent="FishSlots" instance=ExtResource("fish")]
+position = Vector3(-0.68,3.5,-0.72)
+[node name="Fish3" parent="FishSlots" instance=ExtResource("fish")]
+position = Vector3(0.68,3.5,-0.72)
+[node name="Fish4" parent="FishSlots" instance=ExtResource("fish")]
+position = Vector3(2.04,3.5,-0.72)
+[node name="Fish5" parent="FishSlots" instance=ExtResource("fish")]
+position = Vector3(-2.04,3.5,0.72)
+[node name="Fish6" parent="FishSlots" instance=ExtResource("fish")]
+position = Vector3(-0.68,3.5,0.72)
+[node name="Fish7" parent="FishSlots" instance=ExtResource("fish")]
+position = Vector3(0.68,3.5,0.72)
+[node name="Fish8" parent="FishSlots" instance=ExtResource("fish")]
+position = Vector3(2.04,3.5,0.72)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {&"": SubResource("library")}

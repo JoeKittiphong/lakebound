@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/conventional_reel.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_05_conventional_star.tscn" id="model"]
+
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/conventional_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script = ExtResource("script")
+id = &"conventional_reel"
+display_name = "รอกโอเวอร์เฮด"
+kind = "reel"
+equipment_type = "โอเวอร์เฮด"
+shop_icon = ExtResource("icon")
+description = "โอเวอร์เฮด · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 320
+length = 220
+reel_speed = 2.5
+drag_power = 1.18
+model_scene = ExtResource("model")
+
+
+reel_family = "star"
+
+reel_spec = ExtResource("reel_spec_fit")

@@ -1,0 +1,418 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/economy/showroom/shop_showroom.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/economy/showroom/shelf_browser.tscn" id="shelf"]
+[ext_resource type="PackedScene" path="res://features/economy/showroom/inline_equipment_details.tscn" id="inspector"]
+[ext_resource type="PackedScene" path="res://features/economy/fishing_methods_view.tscn" id="methods"]
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/slot.tres" id="panel"]
+[ext_resource type="PackedScene" path="res://features/economy/showroom/loadout_view.tscn" id="loadoutview"]
+[node name="ShopShowroom" type="Control" ]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Background" type="ColorRect" parent="." ]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.025,0.042,0.038,1)
+[node name="Shelf" parent="." instance=ExtResource("shelf")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Floating" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("safe")
+minimum_margin = 12.0
+[node name="Close" type="Button" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 76.0
+offset_bottom = 48.0
+text = "กลับ"
+[node name="Zone" type="MenuButton" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 88.0
+offset_right = 294.0
+offset_bottom = 48.0
+text = "คันเบ็ด · เปลี่ยนโซน"
+[node name="Gear" type="Button" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -174.0
+offset_right = -62.0
+offset_bottom = 48.0
+text = "ชุดที่ใช้"
+[node name="More" type="MenuButton" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_bottom = 48.0
+text = "•••"
+[node name="Previous" type="Button" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -30.0
+offset_right = 48.0
+offset_bottom = 30.0
+text = "‹"
+modulate = Color(1,1,1,0.75)
+[node name="Next" type="Button" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -30.0
+offset_bottom = 30.0
+text = "›"
+modulate = Color(1,1,1,0.75)
+[node name="Pager" type="Label" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_right = 62.0
+offset_top = -30.0
+horizontal_alignment = 1
+text = "01 / 03"
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_colors/font_outline_color = Color(0.02,0.03,0.025,0.95)
+[node name="Message" type="Label" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_right = 300.0
+offset_top = -90.0
+offset_bottom = -36.0
+autowrap_mode = 3
+horizontal_alignment = 1
+mouse_filter = 2
+theme_override_font_sizes/font_size = 16
+theme_override_constants/outline_size = 5
+theme_override_colors/font_outline_color = Color(0.02,0.03,0.025,0.95)
+[node name="Wallet" type="Label" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+visible = false
+mouse_filter = 2
+[node name="ZoneCount" type="Label" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+visible = false
+mouse_filter = 2
+[node name="Owned" type="CheckButton" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+visible = false
+mouse_filter = 2
+[node name="Loadout" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+[node name="LoadoutView" parent="Loadout" instance=ExtResource("loadoutview")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LoadoutControls" type="Control" parent="Loadout"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("safe")
+minimum_margin = 12.0
+[node name="CloseLoadout" type="Button" parent="Loadout/LoadoutControls"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 88.0
+offset_bottom = 48.0
+text = "กลับ"
+[node name="LoadoutSettings" type="Button" parent="Loadout/LoadoutControls"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_bottom = 48.0
+text = "ชุดปลายสาย"
+[node name="LoadoutHint" type="Label" parent="Loadout/LoadoutControls"]
+unique_name_in_owner = true
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_right = 220.0
+offset_top = -32.0
+horizontal_alignment = 1
+mouse_filter = 2
+text = "แตะโมเดลเพื่อดูอุปกรณ์ที่ใช้"
+[node name="RigPanel" type="PanelContainer" parent="Loadout"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_top = 0.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_right = 0.0
+offset_top = 0.0
+offset_bottom = 0.0
+visible = false
+theme_override_styles/panel = ExtResource("panel")
+[node name="Content" type="VBoxContainer" parent="Loadout/RigPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+[node name="CloseRig" type="Button" parent="Loadout/RigPanel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "กลับไปดูชุด 3D"
+[node name="Rig" type="OptionButton" parent="Loadout/RigPanel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+clip_text = true
+[node name="RigStatus" type="Label" parent="Loadout/RigPanel/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "ใช้ได้"
+[node name="Journal" type="Control" parent="." ]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+[node name="Shade" type="ColorRect" parent="Journal" ]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01,0.02,0.02,0.94)
+[node name="Margin" type="MarginContainer" parent="Journal" ]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+[node name="Card" type="PanelContainer" parent="Journal/Margin" ]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("panel")
+[node name="Content" type="VBoxContainer" parent="Journal/Margin/Card" ]
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="CloseJournal" type="Button" parent="Journal/Margin/Card/Content" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "กลับไปที่ชั้นวาง"
+
+[node name="Methods" parent="Journal/Margin/Card/Content" instance=ExtResource("methods") ]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+[node name="Recovery" type="Control" parent="." ]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+[node name="Shade" type="ColorRect" parent="Recovery" ]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01,0.02,0.02,0.94)
+[node name="Margin" type="MarginContainer" parent="Recovery" ]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+[node name="Card" type="PanelContainer" parent="Recovery/Margin" ]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("panel")
+[node name="Content" type="VBoxContainer" parent="Recovery/Margin/Card" ]
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="RecoveryTitle" type="Label" parent="Recovery/Margin/Card/Content" ]
+unique_name_in_owner = true
+layout_mode = 2
+text = "เหยื่อปลอมรอกู้คืน"
+autowrap_mode = 3
+[node name="Ad" type="Button" parent="Recovery/Margin/Card/Content" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "ดูโฆษณา"
+
+[node name="Diamonds" type="Button" parent="Recovery/Margin/Card/Content" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "กู้ด้วยเพชร"
+
+[node name="Discard" type="Button" parent="Recovery/Margin/Card/Content" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "สละเหยื่อ"
+
+[node name="CloseRecovery" type="Button" parent="Recovery/Margin/Card/Content" ]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "กลับไปดูสินค้า"
+
+[node name="EquipmentInspector" parent="." instance=ExtResource("inspector") ]
+unique_name_in_owner = true
+
+
+[node name="Components" type="HBoxContainer" parent="Loadout/LoadoutControls"]
+layout_mode = 0
+anchor_left = 0.0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+offset_top = -164.0
+offset_bottom = -108.0
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="SelectRod" type="Button" parent="Loadout/LoadoutControls/Components"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+text = "คัน"
+
+[node name="SelectReel" type="Button" parent="Loadout/LoadoutControls/Components"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+text = "รอก"
+
+[node name="SelectLine" type="Button" parent="Loadout/LoadoutControls/Components"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+text = "เอ็น"
+
+[node name="SelectBait" type="Button" parent="Loadout/LoadoutControls/Components"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+text = "เหยื่อ"
+
+[node name="SelectBox" type="Button" parent="Loadout/LoadoutControls/Components"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+text = "กล่อง"
+
+[node name="CurrentRod" type="Label" parent="Floating"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 88.0
+offset_top = 54.0
+offset_right = 480.0
+offset_bottom = 84.0
+clip_text = true
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_colors/font_outline_color = Color(0.02,0.03,0.025,0.95)
+
+[node name="RemoveComponents" type="HBoxContainer" parent="Loadout/LoadoutControls"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+offset_top = -104.0
+offset_bottom = -52.0
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="RemoveRod" type="Button" parent="Loadout/LoadoutControls/RemoveComponents"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+theme_override_colors/font_color = Color(1,0.76,0.7,1)
+text = "ถอดคัน"
+
+[node name="RemoveReel" type="Button" parent="Loadout/LoadoutControls/RemoveComponents"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+theme_override_colors/font_color = Color(1,0.76,0.7,1)
+text = "ถอดรอก"
+
+[node name="RemoveLine" type="Button" parent="Loadout/LoadoutControls/RemoveComponents"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+theme_override_colors/font_color = Color(1,0.76,0.7,1)
+text = "ถอดเอ็น"
+
+[node name="RemoveBait" type="Button" parent="Loadout/LoadoutControls/RemoveComponents"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+theme_override_colors/font_color = Color(1,0.76,0.7,1)
+text = "ถอดเหยื่อ"
+
+[node name="RemoveBox" type="Button" parent="Loadout/LoadoutControls/RemoveComponents"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(72,48)
+theme_override_colors/font_color = Color(1,0.76,0.7,1)
+text = "ถอดกล่อง"

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/casting_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/cover_732h.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/cover_732h.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"cover_732h"
+display_name = "Cover 732H"
+kind = "rod"
+equipment_type = "เบทแคสติ้ง · Cover"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "กบและงานหมายรก ปลายทำงานก่อนและโคนมีกำลัง · Extra-Fast"
+price = 620
+strength = 14
+cast_multiplier = 1.17
+responsiveness = 1.4
+
+mount_layout = "casting"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Standard"
+family = "spinning"
+length_m = 2.1
+power = "M"
+action = "Moderate-Fast"
+cast_min_g = 3
+cast_max_g = 28
+techniques = PackedStringArray("cast_float", "cast_bottom", "cast_retrieve")
+max_working_drag_kgf = 2

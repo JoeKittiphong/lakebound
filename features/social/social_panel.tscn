@@ -1,0 +1,316 @@
+[gd_scene format=3]
+[ext_resource type="Theme" path="res://features/menu/lake_menu_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://features/social/social_panel.gd" id="script"]
+[sub_resource type="StyleBoxFlat" id="tab_active"]
+bg_color = Color(0.045, 0.38, 0.46, 1)
+content_margin_left = 24.0
+content_margin_right = 24.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+[sub_resource type="StyleBoxFlat" id="tab_idle"]
+bg_color = Color(0.82, 0.9, 0.92, 1)
+content_margin_left = 24.0
+content_margin_right = 24.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+[node name="SocialPanel" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02,0.08,0.12,0.94)
+[node name="Card" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 18.0
+offset_right = -30.0
+offset_bottom = -18.0
+[node name="Content" type="VBoxContainer" parent="Card"]
+layout_mode = 2
+theme_override_constants/separation = 12
+[node name="Header" type="HBoxContainer" parent="Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Card/Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "อันดับนักตกปลา"
+theme_override_font_sizes/font_size = 28
+[node name="ConnectionSettings" type="Button" parent="Card/Content/Header"]
+visible = false
+unique_name_in_owner = true
+layout_mode = 2
+text = "การเชื่อมต่อ"
+custom_minimum_size = Vector2(150, 48)
+[node name="Close" type="Button" parent="Card/Content/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "กลับ"
+custom_minimum_size = Vector2(100, 48)
+[node name="Identity" type="Label" parent="Card/Content"]
+visible = false
+unique_name_in_owner = true
+layout_mode = 2
+text = "สร้างโปรไฟล์ของคุณ"
+[node name="Selectors" type="HBoxContainer" parent="Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Mode" type="TabBar" parent="Card/Content/Selectors"]
+theme_override_styles/tab_selected = SubResource("tab_active")
+theme_override_styles/tab_unselected = SubResource("tab_idle")
+theme_override_styles/tab_hovered = SubResource("tab_idle")
+theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_colors/font_unselected_color = Color(0.04, 0.22, 0.28, 1)
+theme_override_colors/font_hovered_color = Color(0.04, 0.22, 0.28, 1)
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(340, 52)
+size_flags_horizontal = 3
+[node name="Filter" type="OptionButton" parent="Card/Content/Selectors"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(200, 48)
+[node name="TopLimit" type="OptionButton" parent="Card/Content/Selectors"]
+visible = false
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(125, 48)
+[node name="Refresh" type="Button" parent="Card/Content/Selectors"]
+visible = false
+unique_name_in_owner = true
+layout_mode = 2
+text = "เชื่อมต่อ / ลองใหม่"
+custom_minimum_size = Vector2(180, 48)
+[node name="Status" type="Label" parent="Card/Content"]
+visible = false
+unique_name_in_owner = true
+layout_mode = 2
+text = "สถิติในเครื่อง · ยังไม่ได้เชื่อม Google Sheets"
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 16
+[node name="Rule" type="Label" parent="Card/Content"]
+visible = false
+unique_name_in_owner = true
+layout_mode = 2
+text = "หนักที่สุดตลอดกาล · คนละ 1 สถิติ · เท่ากันให้ผู้จับได้ก่อน · นับปลาที่ปล่อยด้วย"
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 16
+[node name="Summary" type="HBoxContainer" parent="Card/Content"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+[node name="ScopeTitle" type="Label" parent="Card/Content/Summary"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "อันดับรวม · Top 10"
+theme_override_font_sizes/font_size = 20
+[node name="HistorySummary" type="Label" parent="Card/Content/Summary"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "จับสะสม 0 ตัว · ประวัติ 10 ตัวใหญ่สุด/ชนิด"
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+[node name="Comparing" type="VBoxContainer" parent="Card/Content"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+theme_override_constants/separation = 18
+[node name="ComparisonMarks" type="Control" parent="Card/Content/Comparing"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(120, 64)
+size_flags_horizontal = 4
+mouse_filter = 2
+[node name="First" type="ColorRect" parent="Card/Content/Comparing/ComparisonMarks"]
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 36.0
+offset_bottom = 60.0
+pivot_offset = Vector2(12, 56)
+color = Color(0.045, 0.38, 0.46, 1)
+mouse_filter = 2
+[node name="Second" type="ColorRect" parent="Card/Content/Comparing/ComparisonMarks"]
+offset_left = 48.0
+offset_top = 4.0
+offset_right = 72.0
+offset_bottom = 60.0
+pivot_offset = Vector2(12, 56)
+color = Color(0.045, 0.38, 0.46, 1)
+mouse_filter = 2
+[node name="Third" type="ColorRect" parent="Card/Content/Comparing/ComparisonMarks"]
+offset_left = 84.0
+offset_top = 4.0
+offset_right = 108.0
+offset_bottom = 60.0
+pivot_offset = Vector2(12, 56)
+color = Color(0.045, 0.38, 0.46, 1)
+mouse_filter = 2
+[node name="Caption" type="Label" parent="Card/Content/Comparing"]
+layout_mode = 2
+text = "กำลังเทียบอันดับของเหล่านักตกปลา…"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+[node name="Scroll" type="ScrollContainer" parent="Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="List" type="VBoxContainer" parent="Card/Content/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+[node name="Empty" type="Label" parent="Card/Content/Scroll/List"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ยังไม่มีสถิติ"
+autowrap_mode = 2
+[node name="Rows" type="VBoxContainer" parent="Card/Content/Scroll/List"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+[node name="Personal" type="Label" parent="Card/Content"]
+visible = false
+unique_name_in_owner = true
+layout_mode = 2
+text = "สถิติของคุณ"
+autowrap_mode = 2
+[node name="Request" type="HTTPRequest" parent="."]
+timeout = 15.0
+body_size_limit = 262144
+max_redirects = 0
+[node name="SyncRetry" type="Timer" parent="."]
+one_shot = true
+
+[node name="EndpointOverlay" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+[node name="Dim" type="ColorRect" parent="EndpointOverlay"]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02,0.08,0.12,0.96)
+[node name="Card" type="PanelContainer" parent="EndpointOverlay"]
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.8
+[node name="Content" type="VBoxContainer" parent="EndpointOverlay/Card"]
+layout_mode = 2
+theme_override_constants/separation = 16
+[node name="Title" type="Label" parent="EndpointOverlay/Card/Content"]
+layout_mode = 2
+text = "การเชื่อมต่ออันดับ"
+theme_override_font_sizes/font_size = 28
+[node name="Help" type="Label" parent="EndpointOverlay/Card/Content"]
+layout_mode = 2
+text = "ใส่ Google Apps Script Web App URL ที่ลงท้าย /exec"
+autowrap_mode = 2
+[node name="Endpoint" type="LineEdit" parent="EndpointOverlay/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 54)
+max_length = 254
+placeholder_text = "https://script.google.com/macros/s/…/exec"
+virtual_keyboard_type = 3
+[node name="EndpointMessage" type="Label" parent="EndpointOverlay/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "ใช้ที่อยู่ Google Sheets ของ Lakebound ที่ผู้ดูแลให้มา"
+autowrap_mode = 2
+[node name="Actions" type="HBoxContainer" parent="EndpointOverlay/Card/Content"]
+layout_mode = 2
+theme_override_constants/separation = 16
+[node name="CancelEndpoint" type="Button" parent="EndpointOverlay/Card/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,54)
+text = "กลับ"
+[node name="SaveEndpoint" type="Button" parent="EndpointOverlay/Card/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,54)
+text = "บันทึกและเชื่อมต่อ"
+
+[node name="ProfileOverlay" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+[node name="Dim" type="ColorRect" parent="ProfileOverlay"]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.02, 0.08, 0.12, 0.96)
+[node name="Card" type="PanelContainer" parent="ProfileOverlay"]
+layout_mode = 1
+anchor_left = 0.08
+anchor_top = 0.25
+anchor_right = 0.92
+anchor_bottom = 0.75
+[node name="Content" type="VBoxContainer" parent="ProfileOverlay/Card"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 16
+[node name="Title" type="Label" parent="ProfileOverlay/Card/Content"]
+layout_mode = 2
+text = "ตั้งชื่อนักตกปลา"
+theme_override_font_sizes/font_size = 28
+[node name="Edit" type="HBoxContainer" parent="ProfileOverlay/Card/Content"]
+visible = true
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Name" type="LineEdit" parent="ProfileOverlay/Card/Content/Edit"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ชื่อนักตกปลา 2–24 ตัวอักษร"
+max_length = 24
+custom_minimum_size = Vector2(0, 50)
+[node name="Save" type="Button" parent="ProfileOverlay/Card/Content/Edit"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "บันทึกชื่อ"
+custom_minimum_size = Vector2(140, 50)
+[node name="Message" type="Label" parent="ProfileOverlay/Card/Content"]
+visible = true
+unique_name_in_owner = true
+layout_mode = 2
+text = "โปรไฟล์ผูกกับเครื่องนี้ · ลบข้อมูลเกมแล้วจะกู้บัญชีไม่ได้"
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 16

@@ -41,9 +41,9 @@ func run() -> void:
   profile.data.stock.worm = 0
   controller.reset_cast()
   hud._process(0.01)
-  expect(hud.get_node("SafeArea/FishBox/Row/Icon").texture != null, "fish box illustration imported")
+  expect(hud.get_node("SafeArea/TopBar/Actions/FishBox/Row/Icon").texture != null, "fish box illustration imported")
   expect(hud.get_node("SafeArea/CastReason").visible and "เหยื่อหมด" in hud.get_node("SafeArea/CastReason").text, "cast reason visible at " + str(resolution))
-  expect(not hud.get_node("SafeArea/FishBox").get_global_rect().intersects(hud.get_node("SafeArea/BackButton").get_global_rect()), "box does not overlap Back at " + str(resolution))
+  expect(not hud.get_node("SafeArea/TopBar/Actions/FishBox").get_global_rect().intersects(hud.get_node("SafeArea/TopBar/Actions/SettingsButton").get_global_rect()), "box does not overlap Back at " + str(resolution))
   await capture("bait-empty-" + str(resolution.x))
   profile.data.stock.worm = 20
   profile.data.line_remaining = 0

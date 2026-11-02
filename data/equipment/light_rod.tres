@@ -1,11 +1,20 @@
-[gd_resource type="Resource" script_class="TackleItem" load_steps=3 format=3]
-[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://ck1dj1v0um2fs"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
 [ext_resource type="PackedScene" path="res://features/equipment/rods/light_rod.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/light_rod.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/light_rod.tres" id="rod_spec_fit"]
+
 [resource]
 script = ExtResource("1")
 id = &"light_rod"
 display_name = "คันเบา · คุมไว"
+shop_icon = ExtResource("shop")
 kind = "rod"
 price = 80
-strength = 5.0
 model_scene = ExtResource("model")
+
+mount_layout = "spinning"
+
+rod_spec = ExtResource("rod_spec_fit")

@@ -15,6 +15,26 @@ HEADLESS = ("fishing_recovery", "boat_integration", "traversal_equipment", "char
 RENDER = ("fishing_recovery_visual", "fisherman_visual", "ui_atlas_visual", "missions_visual", "expansion_visual", "collection", "mobile_collection", "mobile_multitouch", "fishing_visual", "active_scene_movement", "rod_tension", "fish_render", "water_render", "water_interactions", "water_optimization")
 HEADLESS += ("hud_session", "loading_flow", "fish_encyclopedia", "regions_fishing", "regions_legacy_save", "wooden_jetty_integration", "mobile_fishing_tuning")
 HEADLESS += ("catch_settlement",)
+HEADLESS += ("catch_archive",)
+HEADLESS += ("sheets_ranking_sync",)
+HEADLESS += ("social_profile", "sheets_settings")
+HEADLESS += ("loading_motion",)
+HEADLESS += ("loading_leg_pose",)
+HEADLESS += ("fishing_map_data",)
+HEADLESS += ("shop_redesign", "boat_model", "ranking_snapshot", "social_lifecycle")
+RENDER += ("fishing_map_visual", "boat_seating_visual", "sheets_settings_visual", "social_visual")
+RENDER += ("ui_refresh_visual",)
+RENDER += ("cooler_storage",)
+RENDER += ("cooler_choices",)
+RENDER += ("map_carousel",)
+RENDER += ("map_transition",)
+RENDER += ("equipment_removal",)
+RENDER += ("equipment_removal_visual",)
+RENDER += ("fishing_methods",)
+RENDER += ("surface_spray",)
+RENDER += ("ranking_maps",)
+RENDER += ("cached_ranking",)
+RENDER += ("loading_cooler", "compact_hud")
 PERFORMANCE = ("hud_performance", "optimization")
 PERFORMANCE_RENDER = ("frame_performance", "reel_render")
 SLOW_HEADLESS = ("river_integration",)  # Walks the full river loop at production speed.
@@ -22,8 +42,10 @@ RENDER += ("regions_integration", "loading_cinematic_visual", "character_preview
 # Asset authoring checks are opt-in; unlike gameplay regression they may need
 # source art/tool outputs and a renderer. Packed checks require an artifact.
 CONTENT = ("aquatic", "background", "dense_flora", "bridge_normal_visual", "concept_rocks", "reference_rocks", "rock_asset", "rock_clusters", "rock_landscaping")
+CONTENT += ("garden_dressing",)
 PACKED = ("packed_size", "packed_memory_smoke")
-SOURCE_TESTS = HEADLESS + SLOW_HEADLESS + RENDER + CONTENT + PERFORMANCE + PERFORMANCE_RENDER
+LIVE = ("sheets_live_http",)  # Opt-in; requires LAKEBOUND_QA_URL and outbound HTTPS.
+SOURCE_TESTS = HEADLESS + SLOW_HEADLESS + RENDER + CONTENT + PERFORMANCE + PERFORMANCE_RENDER + LIVE
 # These host/sandbox diagnostics do not concern game scripts; keep them in logs
 # and report them separately instead of treating every successful exit as proof.
 HOST_DIAGNOSTICS = (
@@ -49,7 +71,7 @@ def main() -> int:
     parser.add_argument("--android-pack", type=Path, help="Also check an existing Android PCK for exported UI and touch regressions")
     args = parser.parse_args()
     if args.list:
-        for group, tests in (("headless", HEADLESS), ("slow/headless", SLOW_HEADLESS), ("render", RENDER), ("content", CONTENT), ("performance/headless", PERFORMANCE), ("performance/render", PERFORMANCE_RENDER), ("packed (artifact required)", PACKED)):
+        for group, tests in (("headless", HEADLESS), ("slow/headless", SLOW_HEADLESS), ("render", RENDER), ("content", CONTENT), ("performance/headless", PERFORMANCE), ("performance/render", PERFORMANCE_RENDER), ("live/network (opt-in)", LIVE), ("packed (artifact required)", PACKED)):
             print(f"{group}: {', '.join(tests)}")
         registered = set(SOURCE_TESTS + PACKED)
         found = {path.stem.removesuffix("_test") for path in (ROOT / "tests").glob("*_test.gd")}
@@ -115,8 +137,10 @@ def main() -> int:
         for line in errors[:5]:
             print(line, flush=True)
 
+    # Import assets without restoring the user's open editor scenes/tool scripts.
+    # Runtime suites below load and validate the actual gameplay scripts.
     run("import", [args.godot, "--headless", "--path", str(ROOT), "--log-file", str(output / "import.log"),
-                   "--editor", "--import", "--quit"])
+                   "--editor", "--recovery-mode", "--import", "--quit"])
     if results[-1]["passed"]:
         suites = []
         if args.suite in ("headless", "all"):
@@ -131,7 +155,7 @@ def main() -> int:
         if args.suite in ("content", "all"):
             suites += [(test, False) for test in CONTENT]
         if args.tests:
-            suites = [(test, test in HEADLESS + SLOW_HEADLESS + PERFORMANCE) for test in dict.fromkeys(args.tests)]
+            suites = [(test, test in HEADLESS + SLOW_HEADLESS + PERFORMANCE + LIVE) for test in dict.fromkeys(args.tests)]
         for test, headless in suites:
             command = [args.godot, "--path", str(ROOT), "--log-file", str(output / f"{test}.log")]
             if headless:
@@ -141,8 +165,8 @@ def main() -> int:
             command += ["--script", f"res://tests/{test}_test.gd"]
             run(test, command)
         if args.android_pack:
-            for test in ("startup_flow", "mobile_collection", "mobile_multitouch"):
-                run(f"packed_{test}", [args.godot, "--main-pack", str(args.android_pack.resolve()),
+            for test in ("packed_starter", "startup_flow", "mobile_collection", "mobile_multitouch"):
+                run(f"packed_{test}", [args.godot, *( ["--headless"] if test == "packed_starter" else [] ), "--main-pack", str(args.android_pack.resolve()),
                     "--log-file", str(output / f"packed_{test}.log"),
                     "--script", str(ROOT / f"tests/{test}_test.gd")])
     (output / "results.json").write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")

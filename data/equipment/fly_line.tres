@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/nylon.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/line_specs/fly_line.tres" id="line_spec_fit"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/shop_goods/fly_line.tscn" id="display_model"]
+
+[resource]
+script=ExtResource("script")
+id=&"fly_line"
+display_name="สายฟลาย"
+kind="line"
+equipment_type="สายฟลาย"
+shop_icon=ExtResource("icon")
+price=100
+line_visual_style="fly"
+strength=5.0
+length=100.0
+
+line_spec = ExtResource("line_spec_fit")
+
+model_scene = ExtResource("display_model")

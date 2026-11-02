@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/fermented_dough.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/float.tres" id="rig_float"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/pole.tres" id="rig_pole"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/bottom.tres" id="rig_bottom"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/feeder.tres" id="rig_feeder"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/feeder_large.tres" id="rig_feeder_large"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/boat.tres" id="rig_boat"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/fermented_dough.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/fermented_dough.tres" id="attraction"]
+
+[resource]
+script = ExtResource("script")
+id = &"fermented_dough"
+display_name = "รำหมัก"
+kind = "bait"
+equipment_type = "เหยื่อผสม · สูตรหมัก"
+shop_icon = ExtResource("icon")
+description = "เหยื่อผสม · สูตรหมัก · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 60
+quantity = 15
+bait_type = "dough"
+
+
+payload_g = 1
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_float"), ExtResource("rig_pole"), ExtResource("rig_bottom"), ExtResource("rig_feeder"), ExtResource("rig_feeder_large"), ExtResource("rig_boat")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

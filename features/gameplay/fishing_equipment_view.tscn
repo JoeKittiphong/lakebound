@@ -1,0 +1,13 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/gameplay/fishing_equipment_view.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/equipment/rods/light_rod.tscn" id="rod"]
+[node name="EquipmentView" type="Node3D"]
+process_priority=300
+visible=false
+script=ExtResource("script")
+[node name="HandleAnchor" type="Marker3D" parent="."]
+position=Vector3(0,-0.26,-0.40)
+[node name="Socket" type="Node3D" parent="."]
+position=Vector3(0.04,-0.13,-0.55)
+rotation_degrees=Vector3(-64,0,-12)
+[node name="Rod" parent="Socket" instance=ExtResource("rod")]

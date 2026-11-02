@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://d2derh43i0e7"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/spinner.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/spinner.tres" id="rig_spinner"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/ice.tres" id="rig_ice"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/spinner.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/spinner.tres" id="attraction"]
+
+[resource]
+script = ExtResource("1")
+id = &"spinner"
+display_name = "สปินเนอร์จิ๋ว · 3 g"
+shop_icon = ExtResource("shop")
+kind = "lure"
+price = 180
+bait_type = &"lure"
+
+payload_g = 3
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_spinner"), ExtResource("rig_ice")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

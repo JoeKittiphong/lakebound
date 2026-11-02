@@ -143,3 +143,25 @@ func replay_events(journal: Array) -> bool:
  if changed_stats or not saved:
   changed.emit()
  return saved
+
+func restore_archive(stats_by_species: Dictionary, journal: Array) -> bool:
+ if not recording_enabled or not _records_missing or stats_by_species.is_empty(): return true
+ if incompatible_save: return false
+ records = stats_by_species.duplicate(true)
+ _events_initialized = true
+ for record in journal:
+  var id := str(record.get("catch_id", ""))
+  if not id.is_empty(): _catch_events[id] = 0
+ _events_dirty = true
+ return save_records()
+
+func trim_event_history(data: Dictionary) -> void:
+ # Only compact after the profile durably acknowledged the collection write.
+ if _catch_events.size() <= 512 or not data.history.pending.is_empty(): return
+ var keep := {}
+ for id in data.history.recent_ids: keep[id] = true
+ for record in data.journal: keep[str(record.get("catch_id", ""))] = true
+ var before := _catch_events.duplicate()
+ for id in _catch_events.keys():
+  if not keep.has(id): _catch_events.erase(id)
+ if not save_records(): _catch_events = before

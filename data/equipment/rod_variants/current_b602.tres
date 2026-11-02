@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/jigging_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/current_b602.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/current_b602.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"current_b602"
+display_name = "Current B602"
+kind = "rod"
+equipment_type = "จิ๊กกิ้ง · Current"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "จิ๊กเรือแบบโอเวอร์เฮด โค้งลึกต่อเนื่อง งาน PE 2.5 · Moderate"
+price = 480
+strength = 13
+cast_multiplier = 0.75
+responsiveness = 1.05
+
+mount_layout = "overhead"

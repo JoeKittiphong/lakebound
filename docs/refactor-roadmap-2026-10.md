@@ -112,6 +112,10 @@ RefCounted/plain data; ส่วนที่ต้องมี lifecycle หร�
 
 ## สถานะ
 
+อัปเดต 28 ตุลาคม 2026: [ผล refactor ล่าสุด](refactor-2026-10-28.md)
+ถอด custom server เหลือ Google Sheets ทางเดียว แยก service source และตัวตรวจ
+ranking/cache ลดงานของหน้าจอที่ซ่อน และแก้ test inventory พร้อม regression.
+
 phase 0–2 และบางส่วนของ phase 4 ลงมือแล้วตามผลตรวจด้านบน งานนำขึ้น GitHub
 รอบก่อนแยกจาก refactor นี้ ยังไม่ได้เพิ่ม CI release ที่เข้าถึงคีย์ลงนาม
 การทำ build/import บนเครื่องสะอาดยังต้องมี Godot 4.7.2 และ

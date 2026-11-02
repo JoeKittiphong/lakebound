@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Current"
+family = "jigging"
+power = "MH"
+action = "Moderate"
+sections = 2
+line_min_lb = 0
+line_max_lb = 0
+lure_min_g = 40
+lure_max_g = 160
+pe_max = 2.5
+bend_radians = 1.25
+progression = 0.22
+recovery_seconds = 0.2
+intended_use = "จิ๊กเรือแบบโอเวอร์เฮด โค้งลึกต่อเนื่อง งาน PE 2.5"
+reference_url = "https://fish.shimano.com/en-SG/product/rods/jigging/a075f00003e2ccwqay.html"
+length_m = 1.83
+handle_m = 0.52
+
+techniques = PackedStringArray("vertical_jig", "boat_drop")
+jig_min_g = 40
+jig_max_g = 160
+drop_min_g = 40
+drop_max_g = 160
+max_working_drag_kgf = 5

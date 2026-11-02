@@ -50,7 +50,7 @@ func run() -> void:
   var rows := panel.get_node("Card/Content/Tabs/Tackle/Scroll/Rows")
   expect(rows.get_child_count() == TackleCatalog.ITEMS.size(), "all authored item rows instantiated")
   var row := rows.get_child(2)
-  row.get_node("Buy").pressed.emit()
+  row.get_node("Content/Actions/Buy").pressed.emit()
   # minnow is reusable but multiple copies are valid.
   expect(profile.quantity("minnow") >= 2, "shop button buys actual inventory")
   profile.equip("minnow")
@@ -60,10 +60,7 @@ func run() -> void:
   root.get_texture().get_image().save_png(output.path_join("recovery-%d.png" % size.x))
   panel.get_node("Card/Content/Recovery/Choices/Discard").pressed.emit()
   expect(profile.data.pending.is_empty(), "discard button resolves persisted pending loss")
-  panel.get_node("Card/Content/Tabs").current_tab = 3
-  await render_frames()
-  expect("???" in panel.get_node("Card/Content/Tabs/Map/Info").text, "undiscovered boss name hidden in map information")
-  root.get_texture().get_image().save_png(output.path_join("map-%d.png" % size.x))
+  expect(panel.get_node("Card/Content/Tabs").get_tab_count() == 2 and not panel.has_node("Card/Content/Tabs/Storage") and not panel.has_node("Card/Content/Tabs/Map"), "shop contains only equipment and journal tabs")
   panel.get_node("Card/Content/Tabs").current_tab = 0
   await render_frames()
   root.get_texture().get_image().save_png(output.path_join("shop-%d.png" % size.x))

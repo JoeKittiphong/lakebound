@@ -1,4 +1,6 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://features/fishing/bait_interest_ring.tscn" id="interest"]
+[ext_resource type="PackedScene" path="res://features/fishing/surface_spray.tscn" id="surface_spray"]
 
 [ext_resource type="PackedScene" path="res://features/fishing/lure_visual.tscn" id="lure"]
 
@@ -8,6 +10,14 @@
 [ext_resource type="AudioStream" path="res://features/fishing/audio/reel.wav" id="audio_reel"]
 [ext_resource type="AudioStream" path="res://features/fishing/audio/splash.wav" id="audio_splash"]
 
+[ext_resource type="Script" path="res://features/equipment/detailed/line_ribbon.gd" id="ribbon_script"]
+[ext_resource type="Shader" path="res://features/equipment/detailed/materials/outgoing_line.gdshader" id="ribbon_shader"]
+[ext_resource type="Texture2D" path="res://features/equipment/detailed/textures/outgoing_strand.png" id="ribbon_texture"]
+[sub_resource type="ShaderMaterial" id="TexturedLineMaterial"]
+resource_local_to_scene=true
+shader=ExtResource("ribbon_shader")
+shader_parameter/line_texture=ExtResource("ribbon_texture")
+shader_parameter/line_color=Color(0.44,0.67,0.78,1)
 [sub_resource type="ImmediateMesh" id="FishingLineMesh"]
 resource_local_to_scene = true
 
@@ -27,13 +37,6 @@ rings = 24
 ring_segments = 6
 material = SubResource("MarkerMaterial")
 
-[sub_resource type="TorusMesh" id="RippleMesh"]
-inner_radius = 0.33
-outer_radius = 0.36
-rings = 24
-ring_segments = 6
-material = SubResource("MarkerMaterial")
-
 [sub_resource type="StandardMaterial3D" id="BobberMaterial"]
 albedo_color = Color(0.94, 0.22, 0.16, 1)
 
@@ -45,6 +48,7 @@ rings = 5
 material = SubResource("BobberMaterial")
 
 [node name="FishingEffects" type="Node3D"]
+process_priority=400
 script = ExtResource("effects")
 
 [node name="Line" type="MeshInstance3D" parent="."]
@@ -61,12 +65,8 @@ cast_shadow = 0
 visible = false
 mesh = SubResource("BobberMesh")
 
-[node name="Ripple" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("RippleMesh")
-cast_shadow = 0
-
 [node name="FishVisuals" type="Node3D" parent="."]
+[node name="SurfaceSpray" parent="." instance=ExtResource("surface_spray")]
 
 [node name="LureVisual" parent="." instance=ExtResource("lure")]
 
@@ -81,3 +81,21 @@ volume_db = -13
 [node name="SplashAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("audio_splash")
 volume_db = -8
+
+[node name="TexturedLineStart" type="Marker3D" parent="."]
+[node name="TexturedLineEnd" type="Marker3D" parent="."]
+[node name="TexturedLine" type="MeshInstance3D" parent="."]
+script=ExtResource("ribbon_script")
+material_override=SubResource("TexturedLineMaterial")
+start_anchor=NodePath("../TexturedLineStart")
+end_anchor=NodePath("../TexturedLineEnd")
+
+[node name="BaitInterest" parent="." instance=ExtResource("interest")]
+[node name="BaitLeaderStart" type="Marker3D" parent="."]
+[node name="BaitLeaderEnd" type="Marker3D" parent="."]
+[node name="BaitLeader" type="MeshInstance3D" parent="."]
+visible = false
+script = ExtResource("ribbon_script")
+material_override = SubResource("TexturedLineMaterial")
+start_anchor = NodePath("../BaitLeaderStart")
+end_anchor = NodePath("../BaitLeaderEnd")

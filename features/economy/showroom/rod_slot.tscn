@@ -1,0 +1,22 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/economy/showroom/shelf_slot.gd" id="script"]
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(0.56,3.25,0.7)
+[node name="RodSlot" type="Node3D"]
+script = ExtResource("script")
+[node name="Socket" type="Node3D" parent="."]
+[node name="Hit" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+[node name="Shape" type="CollisionShape3D" parent="Hit"]
+position = Vector3(0,1.625,0)
+shape = SubResource("shape")
+
+[node name="FitBadge" type="Label3D" parent="."]
+position = Vector3(0,-0.16,0.3)
+billboard = 1
+no_depth_test = true
+font_size = 48
+pixel_size = 0.003
+outline_size = 8
+text = ""

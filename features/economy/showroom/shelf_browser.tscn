@@ -1,0 +1,138 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/economy/showroom/shelf_browser.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/economy/showroom/models/rod_rack.glb" id="rack"]
+[ext_resource type="PackedScene" path="res://features/economy/showroom/models/display_shelf.glb" id="shelf"]
+[ext_resource type="PackedScene" path="res://features/economy/showroom/rod_slot.tscn" id="rodslot"]
+[ext_resource type="PackedScene" path="res://features/economy/showroom/display_slot.tscn" id="slot"]
+[sub_resource type="Environment" id="env"]
+background_mode = 1
+background_color = Color(0.20,0.22,0.20,1)
+ambient_light_source = 3
+ambient_light_color = Color(0.92,0.90,0.80,1)
+ambient_light_energy = 0.7
+tonemap_mode = 0
+[sub_resource type="StandardMaterial3D" id="wallmat"]
+albedo_color = Color(0.33,0.37,0.34,1)
+roughness = 0.9
+[sub_resource type="StandardMaterial3D" id="floormat"]
+albedo_color = Color(0.23,0.20,0.15,1)
+roughness = 0.8
+[sub_resource type="BoxMesh" id="wall"]
+size = Vector3(12,7,0.10)
+material = SubResource("wallmat")
+[sub_resource type="BoxMesh" id="floor"]
+size = Vector3(12,0.10,10)
+material = SubResource("floormat")
+[node name="ShelfBrowser" type="Control"]
+custom_minimum_size = Vector2(0,220)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+clip_contents = true
+mouse_filter = 0
+script = ExtResource("script")
+[node name="View" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+mouse_filter = 2
+[node name="Viewport" type="SubViewport" parent="View"]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(1280,600)
+render_target_update_mode = 0
+msaa_3d = 2
+positional_shadow_atlas_size = 0
+[node name="Room" type="Node3D" parent="View/Viewport"]
+[node name="Environment" type="WorldEnvironment" parent="View/Viewport/Room"]
+environment = SubResource("env")
+[node name="Floor" type="MeshInstance3D" parent="View/Viewport/Room"]
+position = Vector3(0,-0.06,0)
+mesh = SubResource("floor")
+[node name="Wall" type="MeshInstance3D" parent="View/Viewport/Room"]
+position = Vector3(0,2.5,-0.80)
+mesh = SubResource("wall")
+[node name="Camera" type="Camera3D" parent="View/Viewport/Room"]
+position = Vector3(1.09,2.35,7.8)
+rotation = Vector3(-0.0698,0.1396,0)
+projection = 1
+size = 4.0
+near = 0.01
+current = true
+[node name="Key" type="DirectionalLight3D" parent="View/Viewport/Room"]
+rotation_degrees = Vector3(-30,-22,0)
+light_color = Color(1.0,0.94,0.79,1)
+light_energy = 1.25
+[node name="Fill" type="DirectionalLight3D" parent="View/Viewport/Room"]
+rotation_degrees = Vector3(10,140,0)
+light_color = Color(0.65,0.78,0.85,1)
+light_energy = 0.5
+[node name="Display" type="Node3D" parent="View/Viewport/Room"]
+[node name="RodRack" parent="View/Viewport/Room/Display" instance=ExtResource("rack")]
+rotation = Vector3(0,3.14159265,0)
+[node name="DisplayShelf" parent="View/Viewport/Room/Display" instance=ExtResource("shelf")]
+visible = false
+rotation = Vector3(0,3.14159265,0)
+[node name="RodSlots" type="Node3D" parent="View/Viewport/Room/Display"]
+[node name="Slot1" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(-3.3,0.35,0.14)
+[node name="Slot2" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(-2.6999999999999997,0.35,0.14)
+[node name="Slot3" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(-2.1,0.35,0.14)
+[node name="Slot4" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(-1.5,0.35,0.14)
+[node name="Slot5" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(-0.8999999999999999,0.35,0.14)
+[node name="Slot6" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(-0.3,0.35,0.14)
+[node name="Slot7" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(0.3,0.35,0.14)
+[node name="Slot8" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(0.8999999999999999,0.35,0.14)
+[node name="Slot9" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(1.5,0.35,0.14)
+[node name="Slot10" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(2.1,0.35,0.14)
+[node name="Slot11" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(2.6999999999999997,0.35,0.14)
+[node name="Slot12" parent="View/Viewport/Room/Display/RodSlots" instance=ExtResource("rodslot")]
+position = Vector3(3.3,0.35,0.14)
+[node name="DisplaySlots" type="Node3D" parent="View/Viewport/Room/Display"]
+visible = false
+[node name="Slot1" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(-3,2.01,0.14)
+[node name="Slot2" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(-1.7999999999999998,2.01,0.14)
+[node name="Slot3" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(-0.6,2.01,0.14)
+[node name="Slot4" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(0.6,2.01,0.14)
+[node name="Slot5" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(1.7999999999999998,2.01,0.14)
+[node name="Slot6" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(3,2.01,0.14)
+[node name="Slot7" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(-3,0.51,0.14)
+[node name="Slot8" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(-1.7999999999999998,0.51,0.14)
+[node name="Slot9" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(-0.6,0.51,0.14)
+[node name="Slot10" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(0.6,0.51,0.14)
+[node name="Slot11" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(1.7999999999999998,0.51,0.14)
+[node name="Slot12" parent="View/Viewport/Room/Display/DisplaySlots" instance=ExtResource("slot")]
+position = Vector3(3,0.51,0.14)
+[node name="Empty" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "ยังไม่มีสินค้าในโซนนี้"
+mouse_filter = 2
+theme_override_font_sizes/font_size = 22

@@ -1,5 +1,7 @@
 [gd_scene format=3]
 
+[ext_resource type="PackedScene" path="res://world/regions/mangrove_estuary/garden_dressing.tscn" id="garden_dressing"]
+
 [ext_resource type="Script" path="res://world/pond/pond.gd" id="1_mqw61"]
 [ext_resource type="Resource" path="res://world/regions/mangrove_estuary/definition.tres" id="2_op7r4"]
 [ext_resource type="Sky" path="res://world/river/background/river_sky.tres" id="3_tcag6"]
@@ -905,3 +907,5 @@ transform = Transform3D(-0.1732304, 0, 1.0592887, 0, 1.0733598, 0, -1.0592887, 0
 
 [node name="Spawn" type="Marker3D" parent="GameplayMarkers" unique_id=1296868960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.652718, 0.67000014, 20)
+
+[node name="GardenDressing" parent="." instance=ExtResource("garden_dressing")]

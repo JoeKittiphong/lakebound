@@ -1,0 +1,196 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/equipment/variants/rod_variants_preview.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/brook_562ul.tscn" id="brook_562ul"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/brook_662l.tscn" id="brook_662l"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/brook_702m.tscn" id="brook_702m"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/brook_762mh.tscn" id="brook_762mh"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/cover_652l.tscn" id="cover_652l"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/cover_662m.tscn" id="cover_662m"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/cover_702mh.tscn" id="cover_702mh"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/cover_732h.tscn" id="cover_732h"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/lotus_360m.tscn" id="lotus_360m"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/lotus_450m.tscn" id="lotus_450m"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/lotus_540mh.tscn" id="lotus_540mh"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/current_b602.tscn" id="current_b602"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/current_b603.tscn" id="current_b603"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/current_b604.tscn" id="current_b604"]
+[sub_resource type="Environment" id="env"]
+background_mode = 1
+background_color = Color(0.035,0.055,0.075,1)
+ambient_light_source = 3
+ambient_light_color = Color(0.7,0.8,0.9,1)
+ambient_light_energy = 1.0
+[node name="RodVariantsPreview" type="Node3D"]
+script = ExtResource("script")
+preview_load = 0.65
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(3.15,-4.4,16)
+projection = 1
+size = 11.5
+current = true
+[node name="Light" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-35,-20,0)
+light_energy = 1.7
+[node name="Rods" type="Node3D" parent="."]
+[node name="brook_562ul" parent="Rods" instance=ExtResource("brook_562ul")]
+position = Vector3(0.0,0.0,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.6666666666666665,1.6666666666666665,1.6666666666666665)
+accepts_reel = false
+[node name="Label_0" type="Label3D" parent="."]
+position = Vector3(1.35,0.25,0)
+text = "Brook 562UL | 1.68 m | UL / Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="brook_662l" parent="Rods" instance=ExtResource("brook_662l")]
+position = Vector3(3.6,0.0,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.4141414141414141,1.4141414141414141,1.4141414141414141)
+accepts_reel = false
+[node name="Label_1" type="Label3D" parent="."]
+position = Vector3(4.95,0.25,0)
+text = "Brook 662L | 1.98 m | L / Moderate-Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="brook_702m" parent="Rods" instance=ExtResource("brook_702m")]
+position = Vector3(0.0,-1.45,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.3145539906103285,1.3145539906103285,1.3145539906103285)
+accepts_reel = false
+[node name="Label_2" type="Label3D" parent="."]
+position = Vector3(1.35,-1.2,0)
+text = "Brook 702M | 2.13 m | M / Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="brook_762mh" parent="Rods" instance=ExtResource("brook_762mh")]
+position = Vector3(3.6,-1.45,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.222707423580786,1.222707423580786,1.222707423580786)
+accepts_reel = false
+[node name="Label_3" type="Label3D" parent="."]
+position = Vector3(4.95,-1.2,0)
+text = "Brook 762MH | 2.29 m | MH / Moderate-Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="cover_652l" parent="Rods" instance=ExtResource("cover_652l")]
+position = Vector3(0.0,-2.9,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.4285714285714286,1.4285714285714286,1.4285714285714286)
+accepts_reel = false
+[node name="Label_4" type="Label3D" parent="."]
+position = Vector3(1.35,-2.65,0)
+text = "Cover 652L | 1.96 m | L / Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="cover_662m" parent="Rods" instance=ExtResource("cover_662m")]
+position = Vector3(3.6,-2.9,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.4141414141414141,1.4141414141414141,1.4141414141414141)
+accepts_reel = false
+[node name="Label_5" type="Label3D" parent="."]
+position = Vector3(4.95,-2.65,0)
+text = "Cover 662M | 1.98 m | M / Moderate"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="cover_702mh" parent="Rods" instance=ExtResource("cover_702mh")]
+position = Vector3(0.0,-4.35,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.3145539906103285,1.3145539906103285,1.3145539906103285)
+accepts_reel = false
+[node name="Label_6" type="Label3D" parent="."]
+position = Vector3(1.35,-4.1,0)
+text = "Cover 702MH | 2.13 m | MH / Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="cover_732h" parent="Rods" instance=ExtResource("cover_732h")]
+position = Vector3(3.6,-4.35,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.2669683257918551,1.2669683257918551,1.2669683257918551)
+accepts_reel = false
+[node name="Label_7" type="Label3D" parent="."]
+position = Vector3(4.95,-4.1,0)
+text = "Cover 732H | 2.21 m | H / Extra-Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="lotus_360m" parent="Rods" instance=ExtResource("lotus_360m")]
+position = Vector3(0.0,-5.8,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(0.7777777777777777,0.7777777777777777,0.7777777777777777)
+accepts_reel = false
+[node name="Label_8" type="Label3D" parent="."]
+position = Vector3(1.35,-5.55,0)
+text = "Lotus 360M | 3.60 m | M / Moderate"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="lotus_450m" parent="Rods" instance=ExtResource("lotus_450m")]
+position = Vector3(3.6,-5.8,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(0.6222222222222222,0.6222222222222222,0.6222222222222222)
+accepts_reel = false
+[node name="Label_9" type="Label3D" parent="."]
+position = Vector3(4.95,-5.55,0)
+text = "Lotus 450M | 4.50 m | M / Slow"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="lotus_540mh" parent="Rods" instance=ExtResource("lotus_540mh")]
+position = Vector3(0.0,-7.25,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(0.5185185185185185,0.5185185185185185,0.5185185185185185)
+accepts_reel = false
+[node name="Label_10" type="Label3D" parent="."]
+position = Vector3(1.35,-7.0,0)
+text = "Lotus 540MH | 5.40 m | MH / Moderate-Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="current_b602" parent="Rods" instance=ExtResource("current_b602")]
+position = Vector3(3.6,-7.25,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.530054644808743,1.530054644808743,1.530054644808743)
+accepts_reel = false
+[node name="Label_11" type="Label3D" parent="."]
+position = Vector3(4.95,-7.0,0)
+text = "Current B602 | 1.83 m | MH / Moderate"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="current_b603" parent="Rods" instance=ExtResource("current_b603")]
+position = Vector3(0.0,-8.7,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.530054644808743,1.530054644808743,1.530054644808743)
+accepts_reel = false
+[node name="Label_12" type="Label3D" parent="."]
+position = Vector3(1.35,-8.45,0)
+text = "Current B603 | 1.83 m | H / Moderate"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="current_b604" parent="Rods" instance=ExtResource("current_b604")]
+position = Vector3(3.6,-8.7,0)
+rotation = Vector3(0,0,-1.57079632679)
+scale = Vector3(1.530054644808743,1.530054644808743,1.530054644808743)
+accepts_reel = false
+[node name="Label_13" type="Label3D" parent="."]
+position = Vector3(4.95,-8.45,0)
+text = "Current B604 | 1.83 m | XH / Moderate-Fast"
+font_size = 36
+pixel_size = 0.0032
+no_depth_test = true
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(3.1,0.85,0)
+text = "LAKEBOUND / 14 ROD SPECS\nNormalized lengths / 65% load"
+font_size = 52
+pixel_size = 0.0018
+no_depth_test = true

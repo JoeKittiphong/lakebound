@@ -2,7 +2,7 @@
 [ext_resource type="Script" path="res://features/loading/loading.gd" id="script"]
 [ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
 [ext_resource type="PackedScene" path="res://features/loading/cinematic/loading_cinematic.tscn" id="cinematic"]
-[ext_resource type="FontFile" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
+[ext_resource type="FontVariation" path="res://shared/ui/fonts/game_font.tres" id="font"]
 [sub_resource type="Gradient" id="header_gradient"]
 colors = PackedColorArray(0.87, 0.96, 1, 0.85, 0.87, 0.96, 1, 0)
 [sub_resource type="GradientTexture2D" id="header_fade"]

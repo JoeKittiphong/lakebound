@@ -1,0 +1,16 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/fishing/bait_interest_ring.gd" id="script"]
+[ext_resource type="Shader" path="res://features/fishing/bait_interest_ring.gdshader" id="shader"]
+[sub_resource type="ShaderMaterial" id="material"]
+resource_local_to_scene = true
+render_priority = 3
+shader = ExtResource("shader")
+[sub_resource type="PlaneMesh" id="plane"]
+size = Vector2(2.08,2.08)
+[node name="BaitInterest" type="Node3D"]
+visible = false
+script = ExtResource("script")
+[node name="Ring" type="MeshInstance3D" parent="."]
+mesh = SubResource("plane")
+material_override = SubResource("material")
+cast_shadow = 0

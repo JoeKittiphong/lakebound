@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Lotus"
+family = "pole"
+power = "M"
+action = "Slow"
+sections = 7
+line_min_lb = 0
+line_max_lb = 0
+lure_min_g = 0
+lure_max_g = 0
+pe_max = 0
+bend_radians = 1.45
+progression = 0.22
+recovery_seconds = 0.29
+intended_use = "ชิงหลิวโค้งลึก เน้นความนุ่มและผ่อนแรงกระชาก"
+reference_url = "https://store.castingnet.jp/shop/g/g4969363362551/"
+length_m = 4.5
+handle_m = 0.36
+
+techniques = PackedStringArray("pole_float")
+pole_min_g = 0.1
+pole_max_g = 10
+max_working_drag_kgf = 1.5

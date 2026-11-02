@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TerminalRigSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+id = "spinner"
+display_name = "ตีกรอ · ลูกหมุนกันเกลียว"
+technique = "cast_retrieve"
+fittings_g = 0.3
+swivel = true

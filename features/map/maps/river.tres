@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FishingMapDefinition" format=3]
+
+[ext_resource type="Script" path="res://features/map/fishing_map_definition.gd" id="1_blen8"]
+[ext_resource type="Texture2D" path="res://features/map/maps/river.png" id="2_0qnst"]
+
+[resource]
+script = ExtResource("1_blen8")
+bounds = Rect2(-500, -250, 1000, 500)
+texture = ExtResource("2_0qnst")

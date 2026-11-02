@@ -1,8 +1,8 @@
-[gd_resource type="ArrayMesh" format=4]
+[gd_resource type="ArrayMesh" format=4 uid="uid://cgw1mlp6kx3nc"]
 
-[ext_resource type="Texture2D" path="res://assets/environment/rocks/rock_clusters_20_21_rock_set_albedo_1024.png" id="1_uurog"]
-[ext_resource type="Texture2D" path="res://assets/environment/rocks/rock_clusters_20_21_rock_set_roughness_1024.png" id="2_hb7lu"]
-[ext_resource type="Texture2D" path="res://assets/environment/rocks/rock_clusters_20_21_rock_set_normal_opengl_1024.png" id="3_0c2n8"]
+[ext_resource type="Texture2D" path="res://assets/environment/rocks/concept_rocks_01_06_set_rock_set_albedo_1024.png" id="1_uurog"]
+[ext_resource type="Texture2D" path="res://assets/environment/rocks/concept_rocks_01_06_set_rock_set_roughness_1024.png" id="2_hb7lu"]
+[ext_resource type="Texture2D" path="res://assets/environment/rocks/concept_rocks_01_06_set_rock_set_normal_opengl_1024.png" id="3_0c2n8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irosa"]
 resource_name = "Rock_Set_Atlas"

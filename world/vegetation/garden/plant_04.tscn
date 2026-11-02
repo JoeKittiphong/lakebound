@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_04.res" id="1_75llj"]
+
+[node name="04_Fern_Clump" type="Node3D" unique_id=1849048881]
+metadata/garden_concept = 4
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=124498148]
+visibility_range_end = 68.0
+mesh = ExtResource("1_75llj")

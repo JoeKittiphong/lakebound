@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/fly_reel.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_08_inline_ice.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/inline_ice_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script=ExtResource("script")
+id=&"inline_ice_reel"
+display_name="รอกอินไลน์ไอซ์"
+kind="reel"
+equipment_type="รอกอินไลน์ไอซ์"
+shop_icon=ExtResource("icon")
+price=160
+model_scene=ExtResource("model")
+
+reel_family = "ice"
+
+reel_spec = ExtResource("reel_spec_fit")

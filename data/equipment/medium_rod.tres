@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://b05bdelht17t5"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="PackedScene" path="res://features/equipment/rods/medium_rod.tscn" id="model"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/medium_rod.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/medium_rod.tres" id="rod_spec_fit"]
+
+[resource]
+script = ExtResource("1")
+id = &"medium_rod"
+display_name = "คันกลาง · สมดุล"
+shop_icon = ExtResource("shop")
+kind = "rod"
+price = 150
+strength = 8.0
+model_scene = ExtResource("model")
+
+mount_layout = "spinning"
+
+rod_spec = ExtResource("rod_spec_fit")

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/casting_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/cover_652l.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/cover_652l.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"cover_652l"
+display_name = "Cover 652L"
+kind = "rod"
+equipment_type = "เบทแคสติ้ง · Cover"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "เบทฟิเนส เหยื่อเล็กในพื้นที่แคบ · Fast"
+price = 280
+strength = 6
+cast_multiplier = 0.98
+responsiveness = 1.24
+
+mount_layout = "casting"

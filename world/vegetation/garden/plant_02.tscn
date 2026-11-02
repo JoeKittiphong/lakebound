@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_02.res" id="1_3b2vh"]
+
+[node name="02_Spreading_Shrub" type="Node3D" unique_id=814738835]
+metadata/garden_concept = 2
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=1778528219]
+visibility_range_end = 68.0
+mesh = ExtResource("1_3b2vh")

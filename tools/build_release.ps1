@@ -4,7 +4,8 @@ param(
  [string]$GradleCache = $env:GRADLE_USER_HOME,
  [string]$AndroidSdk = $env:ANDROID_SDK_ROOT,
  [string]$OutputPath = '',
- [string]$SigningDirectory = ''
+ [string]$SigningDirectory = '',
+ [string]$Python = $env:LAKEBOUND_PYTHON
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path $PSScriptRoot -Parent
@@ -31,6 +32,8 @@ if ($releaseVersion -ne $version) { throw 'Android AAB version/name must match c
 if (!$OutputPath) { $OutputPath = "exports/android/lakebound-$version-closed.aab" }
 $resolvedOutput = if ([IO.Path]::IsPathRooted($OutputPath)) { $OutputPath } else { Join-Path $projectRoot $OutputPath }
 New-Item -ItemType Directory -Force -Path (Split-Path $resolvedOutput -Parent) | Out-Null
+# Refresh selected-resource dependencies before accessing the upload identity.
+& (Join-Path $PSScriptRoot 'prepare_export.ps1') -Godot $Godot -Python $Python
 $originalSigningDir = Join-Path $projectRoot 'signing'
 # Prefer the identity used for the first Play upload; never replace it with an editor-created key.
 $signingDir = if ($SigningDirectory) { $SigningDirectory } elseif (Test-Path (Join-Path $originalSigningDir 'lakebound-upload.jks')) { $originalSigningDir } else { Join-Path $projectRoot '.signing' }
@@ -76,7 +79,11 @@ $env:JAVA_HOME = $JavaHome
 $env:ANDROID_HOME = $AndroidSdk
 $env:ANDROID_SDK_ROOT = $env:ANDROID_HOME
 try {
- & $Godot --headless --path $projectRoot --export-release 'Android AAB' $OutputPath
+ # Verbose export diagnostics help distinguish asset packing from Gradle waits.
+ # Godot can print Gradle signing arguments: redact before emitting any log.
+ & $Godot --headless --verbose --recovery-mode --path $projectRoot --export-release 'Android AAB' $OutputPath 2>&1 | ForEach-Object {
+  $_.ToString().Replace($env:GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD, '[REDACTED]')
+ }
  if ($LASTEXITCODE -ne 0) { throw 'Release export failed.' }
 } finally {
  foreach ($variableName in $buildEnvironment.Keys) {

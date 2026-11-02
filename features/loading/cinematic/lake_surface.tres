@@ -1,0 +1,46 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bi70ujtfimjhx"]
+
+[ext_resource type="Shader" uid="uid://coedtdihwlptn" path="res://world/water.gdshader" id="shader"]
+
+[sub_resource type="FastNoiseLite" id="noise"]
+seed = 37
+frequency = 0.045
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="normal"]
+width = 256
+height = 256
+noise = SubResource("noise")
+seamless = true
+as_normal_map = true
+bump_strength = 2.0
+
+[resource]
+render_priority = 0
+shader = ExtResource("shader")
+shader_parameter/ripple_normal = SubResource("normal")
+shader_parameter/interaction_enabled = false
+shader_parameter/interaction_field_active = false
+shader_parameter/interaction_neutral = 0.5019608
+shader_parameter/interaction_uv_bounds = Vector4(0, 0, 1, 1)
+shader_parameter/interaction_rect = Vector4(-24, -24, 48, 48)
+shader_parameter/interaction_strength = 1.0
+shader_parameter/detail_patch_enabled = false
+shader_parameter/is_detail_patch = false
+shader_parameter/detail_patch_center = Vector2(0, 0)
+shader_parameter/detail_patch_half_size = 8.0
+shader_parameter/shallow_color = Color(0.18, 0.4, 0.36, 1)
+shader_parameter/deep_color = Color(0.035, 0.15, 0.23, 1)
+shader_parameter/absorption = 0.65
+shader_parameter/color_depth = 4.0
+shader_parameter/surface_opacity = 0.025
+shader_parameter/reflection_horizon = Color(0.72, 0.88, 0.86, 1)
+shader_parameter/reflection_zenith = Color(0.27, 0.61, 0.77, 1)
+shader_parameter/ripple_strength = 0.23
+shader_parameter/ripple_scale = 0.8
+shader_parameter/wind_speed = 0.45
+shader_parameter/surface_roughness = 0.23
+shader_parameter/shore_wave_strength = 0.18
+shader_parameter/shore_wave_depth = 0.65
+shader_parameter/shore_wave_speed = 0.7
+shader_parameter/shore_color = Color(0.66, 0.79, 0.72, 1)

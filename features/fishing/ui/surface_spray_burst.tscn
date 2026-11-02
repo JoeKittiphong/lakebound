@@ -1,0 +1,35 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="water"]
+shading_mode = 0
+transparency = 1
+albedo_color = Color(0.78, 0.94, 1, 0.85)
+
+[sub_resource type="SphereMesh" id="drop"]
+material = SubResource("water")
+radius = 1.0
+height = 2.0
+radial_segments = 6
+rings = 3
+
+[sub_resource type="Gradient" id="fade"]
+offsets = PackedFloat32Array(0, 0.65, 1)
+colors = PackedColorArray(1, 1, 1, 0.9, 1, 1, 1, 0.7, 1, 1, 1, 0)
+
+[node name="SprayBurst" type="CPUParticles3D"]
+emitting = false
+amount = 18
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+mesh = SubResource("drop")
+direction = Vector3(0, 1, 0)
+spread = 65.0
+gravity = Vector3(0, -9.8, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.5
+scale_amount_min = 0.025
+scale_amount_max = 0.055
+color_ramp = SubResource("fade")
+cast_shadow = 0

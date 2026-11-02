@@ -1,5 +1,5 @@
 [gd_resource type="Theme" format=3 uid="uid://cj8bp0mxrmqyh"]
-[ext_resource type="FontFile" path="res://shared/ui/fonts/noto_sans_thai.ttf" id="font"]
+[ext_resource type="FontVariation" path="res://shared/ui/fonts/game_font.tres" id="font"]
 [ext_resource type="StyleBox" path="res://assets/ui/atlas/style_accent.tres" id="normal"]
 [ext_resource type="StyleBox" path="res://assets/ui/atlas/style_accent.tres" id="hover"]
 [ext_resource type="StyleBox" path="res://assets/ui/atlas/style_hover.tres" id="pressed"]

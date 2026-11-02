@@ -1,0 +1,32 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://features/fishing/surface_spray.tscn" id="spray"]
+[ext_resource type="PackedScene" path="res://features/fishing/lure_visual.tscn" id="lure"]
+[ext_resource type="PackedScene" path="res://world/pond/fish_visual.tscn" id="fish"]
+[sub_resource type="StandardMaterial3D" id="water_material"]
+albedo_color = Color(0.045, 0.23, 0.3, 1)
+roughness = 0.28
+metallic = 0.3
+[sub_resource type="PlaneMesh" id="plane"]
+size = Vector2(30, 30)
+material = SubResource("water_material")
+[sub_resource type="Environment" id="environment"]
+background_mode = 1
+background_color = Color(0.3, 0.48, 0.57, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.8, 0.9, 1, 1)
+ambient_light_energy = 0.8
+[node name="SurfaceSprayPreview" type="Node3D"]
+[node name="Water" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.18, 0)
+mesh = SubResource("plane")
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("environment")
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-55, -35, 0)
+[node name="Camera" type="Camera3D" parent="."]
+position = Vector3(4, 4, 6)
+current = true
+fov = 46.0
+[node name="SurfaceSpray" parent="." instance=ExtResource("spray")]
+[node name="Lure" parent="." instance=ExtResource("lure")]
+[node name="Fish" parent="." instance=ExtResource("fish")]

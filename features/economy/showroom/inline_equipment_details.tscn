@@ -1,0 +1,98 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/economy/showroom/inline_equipment_details.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/economy/equipment_model_preview.tscn" id="preview"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/slot.tres" id="style"]
+[node name="EquipmentInspector" type="PanelContainer"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+script = ExtResource("script")
+theme_override_styles/panel = ExtResource("style")
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+[node name="Information" type="VBoxContainer" parent="Margin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="Name" type="Label" parent="Margin/Information"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "เลือกคันเบ็ด"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 20
+[node name="Preview" parent="Margin/Information" instance=ExtResource("preview")]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,170)
+interactive = true
+show_full_rod = true
+[node name="Tools" type="HBoxContainer" parent="Margin/Information"]
+layout_mode = 2
+[node name="Focus" type="Button" parent="Margin/Information/Tools"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ดูด้ามและไกด์"
+[node name="Reset" type="Button" parent="Margin/Information/Tools"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "จัดมุม"
+[node name="Scroll" type="ScrollContainer" parent="Margin/Information"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Text" type="VBoxContainer" parent="Margin/Information/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+[node name="Status" type="Label" parent="Margin/Information/Scroll/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = ""
+[node name="Feedback" type="Label" parent="Margin/Information/Scroll/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = ""
+[node name="Details" type="Label" parent="Margin/Information/Scroll/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "รายละเอียด"
+[node name="Hint" type="Label" parent="Margin/Information/Scroll/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = "ลากโมเดลเพื่อหมุน · สองนิ้วซูม"
+[node name="Actions" type="VBoxContainer" parent="Margin/Information"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+[node name="Stock" type="Label" parent="Margin/Information/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+[node name="Buy" type="Button" parent="Margin/Information/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "ซื้อ"
+[node name="Equip" type="Button" parent="Margin/Information/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "เลือกใช้"
+
+[node name="Unequip" type="Button" parent="Margin/Information/Actions"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "ถอดอุปกรณ์นี้"

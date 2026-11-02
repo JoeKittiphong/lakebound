@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/shad.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/plug.tres" id="rig_plug"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/shad.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/shad.tres" id="attraction"]
+
+[resource]
+script = ExtResource("script")
+id = &"shad"
+display_name = "ปลายาง"
+kind = "lure"
+equipment_type = "เหยื่อยาง"
+shop_icon = ExtResource("icon")
+description = "เหยื่อยาง · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 140
+bait_type = "lure"
+motion = "sink"
+lure_pattern = "stop_and_go"
+lure_visual = "Minnow"
+sink_speed = 0.4
+swim_depth = -1
+
+
+payload_g = 10
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_plug")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

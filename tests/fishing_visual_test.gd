@@ -61,7 +61,7 @@ func run_checks() -> void:
  hud.get_node("SafeArea/FirstCatch").active = false
  hud.get_node("SafeArea/FirstCatch").hide()
  expect(hud.get_node("SafeArea/BaitPanel/Content/BaitRow/BaitSelect").item_count == 3, "three editor-authored bait options")
- expect(hud.get_node("SafeArea/CollectionButton").icon != null and hud.get_node("SafeArea/CollectionButton").text.is_empty(), "collection opens with a book icon instead of a text button")
+ expect(hud.get_node("SafeArea/TopBar/Actions/CollectionButton").icon != null and hud.get_node("SafeArea/TopBar/Actions/CollectionButton").text.is_empty(), "collection opens with a book icon instead of a text button")
  expect(not hud.get_node("SafeArea/BaitPanel").visible and not hud.get_node("SafeArea/Status").visible and not hud.get_node("SafeArea/MoveLabel").visible and not hud.get_node("SafeArea/RodInstructions").visible, "ready HUD keeps instructions and configuration off the playfield")
  var bait_button: Button = hud.get_node("SafeArea/BaitDock/BaitButton")
  touch(31, true, center(bait_button))
@@ -88,7 +88,7 @@ func run_checks() -> void:
  for size in [Vector2i(1280, 720), Vector2i(1600, 720), Vector2i(1024, 768)]:
   root.size = size
   await frames()
-  for path in ["SafeArea/Status", "SafeArea/MoveJoystick", "SafeArea/RodJoystick", "SafeArea/BaitPanel", "SafeArea/CollectionButton", "SafeArea/EcologyButton", "SafeArea/BackButton", "SafeArea/BaitDock"]:
+  for path in ["SafeArea/Status", "SafeArea/MoveJoystick", "SafeArea/RodJoystick", "SafeArea/BaitPanel", "SafeArea/TopBar/Actions/CollectionButton", "SafeArea/TopBar/Actions/SettingsButton", "SafeArea/BaitDock"]:
    inside(hud.get_node(path))
   expect(not hud.get_node("SafeArea/BaitDock").get_global_rect().intersects(hud.get_node("SafeArea/MoveJoystick").get_global_rect()) and not hud.get_node("SafeArea/BaitDock").get_global_rect().intersects(hud.get_node("SafeArea/RodJoystick").get_global_rect()), "bait dock does not overlap either touch joystick")
   await capture("fishing-ready-%dx%d" % [size.x, size.y])
@@ -134,7 +134,7 @@ func run_checks() -> void:
  expect(controller.state == controller.State.CASTING, "releasing the aiming joystick starts the cast animation")
  await create_timer(0.65).timeout
  expect(controller.state == controller.State.WAITING, "bait enters the pond after the cast arc finishes")
- expect(right.enabled and right.get_node("Reel").visible and not right.get_node("Knob").visible, "bait landing immediately switches the right control to an enabled reel")
+ expect(right.enabled and not right.has_node("Reel") and right.get_node("Knob").visible, "bait landing shows the enabled joystick beside the reel")
  expect(not hud.has_node("SafeArea/CancelButton"), "retrieval has no on-screen cancel button")
  await capture("fishing-waiting-reel")
  var cast_anchor: Vector3 = controller.cast_position
@@ -173,34 +173,22 @@ func run_checks() -> void:
  controller.advance(0.1, player.position)
  await frames()
  expect(controller.state == controller.State.FIGHT, "pulling the reel hooks the fish without a button")
+ touch(10, false, center(right))
+ await frames()
+ controller.advance(0.02, player.position)
+ touch(10, true, center(right) + Vector2(-28, 48))
  await frames()
  expect(controller.rod_input.y > 0.1, "battle joystick sends reel-in command")
- var reel := right.get_node("Reel")
- expect(reel.visible and not right.get_node("Knob").visible and left.get_node("Base").visible, "battle shows reel only; walking joystick remains unchanged")
- reel.set_process(false)
- reel.command = Vector2(0.5, 1)
- reel.slipping = false
- var before_spin: float = reel.spin
- var before_crank: float = reel.crank
- reel._process(0.2)
- expect(reel.spin > before_spin and reel.crank > before_crank and reel.tilt > 0, "pulling turns spool and crank inward and lateral input tilts reel")
- expect(is_equal_approx(reel.model.get_node("Spool").rotation.x, reel.spin) and is_equal_approx(reel.model.get_node("Crank").rotation.x, reel.crank), "actual 3D spool and crank pivots receive the animation")
- expect(reel.get_node("Viewport").own_world_3d and reel.get_node("Viewport/Camera").projection == Camera3D.PROJECTION_ORTHOGONAL, "reel uses isolated 3D viewport and overhead orthographic camera")
- expect(reel.equip(load("res://features/equipment/reels/baitcaster.tscn")), "reel model can be replaced without changing input control")
- expect(not reel.equip(load("res://world/pond/fish_visual.tscn")), "incompatible equipment scene is rejected safely")
- reel.command = Vector2(0, -1)
- before_spin = reel.spin
- reel._process(0.2)
- expect(reel.spin < before_spin, "pushing reverses reel rotation")
- reel.command = Vector2.ZERO
- before_spin = reel.spin
- before_crank = reel.crank
- reel._process(0.2)
- expect(reel.spin == before_spin and reel.crank == before_crank, "neutral stops reel without drag slip")
- reel.slipping = true
- reel._process(0.2)
- expect(reel.spin < before_spin and reel.crank == before_crank, "drag pays out spool without rotating idle crank")
- reel.set_process(true)
+ expect(not right.has_node("Reel") and right.get_node("Knob").visible, "battle has joystick controls without a duplicate reel viewport")
+ var visible_rod: FishingRodVisual = player.first_person_rod if is_instance_valid(player.first_person_rod) else player.character_model.rod_mesh
+ var reel := visible_rod.held_reel as DetailedReelVisual
+ expect(reel != null, "visible rod carries the real animated reel")
+ var before_turns: float = reel.turns
+ reel.advance(0.2, 1.0, 0.0)
+ expect(reel.turns > before_turns, "retrieve turns the mounted reel")
+ var before_payout: float = reel.payout_turns
+ reel.advance(0.2, 0.0, 1.0)
+ expect(reel.payout_turns > before_payout, "drag animates the mounted spool")
  var fish_anchor: Vector3 = controller.active_fish.position
  touch(22, true, Vector2(900, 200))
  drag(22, Vector2(950, 200), Vector2(50, 0))
@@ -213,7 +201,7 @@ func run_checks() -> void:
  await frames()
  expect(is_equal_approx(rig.rotation.y, yaw_after_release), "released camera finger cannot keep rotating")
  var meter := hud.meter as Control
- expect(absf(meter.get_global_rect().end.y - (right.reel_guide_position().y - 24.0)) < 1.0 and absf(meter.get_global_rect().get_center().x - right.reel_guide_position().x) < 1.0, "tension meter uses layout B on the actual reel axis")
+ expect(meter.get_global_rect().end.x < right.get_global_rect().position.x and absf(meter.get_global_rect().end.y - (right.get_global_rect().end.y - 18.0)) < 1.0, "tension meter retains its position to the left of the reel")
  var battle_position: Vector3 = player.position
  touch(11, true, center(left) + Vector2(0, 46))
  await create_timer(0.3).timeout
@@ -256,7 +244,7 @@ func run_checks() -> void:
   if record.id == id and record.caution > 0.9:
    same_fish = true
  expect(same_fish, "released visible fish is the original simulated individual")
- hud.get_node("SafeArea/EcologyButton").pressed.emit()
+ hud._on_ecology_pressed()
  await capture("fishing-ecosystem")
  print("VISUAL/INPUT RESULT: ", errors, " failures")
  quit(0 if errors == 0 else 1)

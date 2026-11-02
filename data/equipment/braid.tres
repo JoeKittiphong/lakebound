@@ -1,11 +1,25 @@
-[gd_resource type="Resource" script_class="TackleItem" load_steps=2 format=3]
-[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="1"]
+[gd_resource type="Resource" script_class="TackleItem" format=3 uid="uid://cr8fdog6u7sc2"]
+
+[ext_resource type="Script" uid="uid://ykyspe0xovva" path="res://data/equipment/tackle_item.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/braid.tres" id="shop"]
+
+[ext_resource type="Resource" path="res://data/equipment/line_specs/braid.tres" id="line_spec_fit"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/shop_goods/braid.tscn" id="display_model"]
+
 [resource]
 script = ExtResource("1")
 id = &"braid"
 display_name = "สายถัก 12 kgf · 80 ม."
+shop_icon = ExtResource("shop")
 kind = "line"
 price = 100
 strength = 12.0
 visibility = 1.35
 length = 80.0
+
+line_visual_style="braid"
+
+line_spec = ExtResource("line_spec_fit")
+
+model_scene = ExtResource("display_model")

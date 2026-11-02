@@ -1,0 +1,169 @@
+[gd_scene load_steps=9 format=3]
+[ext_resource type="Script" path="res://features/fishing/ui/fish_storage_panel.gd" id="script"]
+[ext_resource type="Theme" path="res://assets/ui/modern/hud_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
+[ext_resource type="PackedScene" path="res://features/fishing/ui/storage_box_model.tscn" id="box"]
+[ext_resource type="Script" path="res://shared/ui/swipe_scroll.gd" id="swipe"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/panel.tres" id="panel"]
+[ext_resource type="StyleBox" path="res://assets/ui/modern/slot.tres" id="slot"]
+[sub_resource type="Environment" id="env"]
+background_mode = 0
+ambient_light_source = 2
+ambient_light_color = Color(0.86, 0.94, 0.82, 1)
+ambient_light_energy = 0.65
+tonemap_mode = 2
+[node name="FishStoragePanel" type="Control"]
+visible = false
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.018, 0.052, 0.043, 0.94)
+[node name="Card" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("safe")
+minimum_margin = 24.0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = -32.0
+offset_bottom = -24.0
+[node name="Content" type="VBoxContainer" parent="Card"]
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="Header" type="HBoxContainer" parent="Card/Content"]
+layout_mode = 2
+[node name="Title" type="Label" parent="Card/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ถังน้ำแข็ง"
+theme_override_font_sizes/font_size = 28
+[node name="Summary" type="Label" parent="Card/Content/Header"]
+layout_mode = 2
+text = "0.00 / 25 กก."
+theme_override_colors/font_color = Color(0.66,0.88,0.76,1)
+[node name="Close" type="Button" parent="Card/Content/Header"]
+layout_mode = 2
+custom_minimum_size = Vector2(110, 48)
+text = "กลับไปตกปลา"
+theme_override_font_sizes/font_size = 17
+[node name="Body" type="HBoxContainer" parent="Card/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+[node name="Inventory" type="VBoxContainer" parent="Card/Content/Body"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+[node name="Preview" type="SubViewportContainer" parent="Card/Content/Body/Inventory"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 350)
+size_flags_vertical = 3
+stretch = true
+mouse_filter = 0
+[node name="Viewport" type="SubViewport" parent="Card/Content/Body/Inventory/Preview"]
+transparent_bg = true
+size = Vector2i(800, 270)
+own_world_3d = true
+render_target_update_mode = 0
+msaa_3d = 1
+[node name="Stage" type="Node3D" parent="Card/Content/Body/Inventory/Preview/Viewport"]
+[node name="Environment" type="WorldEnvironment" parent="Card/Content/Body/Inventory/Preview/Viewport/Stage"]
+environment = SubResource("env")
+[node name="Light" type="DirectionalLight3D" parent="Card/Content/Body/Inventory/Preview/Viewport/Stage"]
+rotation_degrees = Vector3(-55, -30, 0)
+light_color = Color(1, 0.94, 0.8, 1)
+light_energy = 0.9
+[node name="Camera" type="Camera3D" parent="Card/Content/Body/Inventory/Preview/Viewport/Stage"]
+position = Vector3(2.3, 14.8, 8.2)
+rotation_degrees = Vector3(-49.6, 15.7, 0)
+projection = 1
+size = 7.1
+current = true
+[node name="Box" parent="Card/Content/Body/Inventory/Preview/Viewport/Stage" instance=ExtResource("box")]
+[node name="Details" type="PanelContainer" parent="Card/Content/Body"]
+layout_mode = 2
+custom_minimum_size = Vector2(240, 0)
+theme_override_styles/panel = ExtResource("slot")
+[node name="Content" type="VBoxContainer" parent="Card/Content/Body/Details"]
+layout_mode = 2
+theme_override_constants/separation = 10
+[node name="Name" type="Label" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+text = "เลือกปลา"
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
+[node name="Info" type="Label" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 17
+text = "รายละเอียดปลา"
+[node name="Sell" type="Button" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+text = "ขายปลาตัวนี้"
+[node name="SellAll" type="Button" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0,48)
+text = "ขายหมดถัง"
+[node name="Release" type="Button" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+text = "ปล่อยคืนแหล่งน้ำ"
+[node name="Confirm" type="VBoxContainer" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+visible = false
+[node name="Label" type="Label" parent="Card/Content/Body/Details/Content/Confirm"]
+layout_mode = 2
+text = "ปล่อยตัวนี้? จะไม่ได้รับเหรียญ"
+theme_override_font_sizes/font_size = 15
+[node name="Yes" type="Button" parent="Card/Content/Body/Details/Content/Confirm"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "ยืนยันปล่อย"
+[node name="No" type="Button" parent="Card/Content/Body/Details/Content/Confirm"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "เก็บไว้ก่อน"
+[node name="Hint" type="Label" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+text = "แตะปลาในถังเพื่อเลือก"
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14
+[node name="Pager" type="VBoxContainer" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+[node name="Page" type="Label" parent="Card/Content/Body/Details/Content/Pager"]
+layout_mode = 2
+horizontal_alignment = 1
+text = "หน้า 1 / 1"
+[node name="Navigation" type="HBoxContainer" parent="Card/Content/Body/Details/Content/Pager"]
+layout_mode = 2
+theme_override_constants/separation = 8
+[node name="Previous" type="Button" parent="Card/Content/Body/Details/Content/Pager/Navigation"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,48)
+text = "ก่อนหน้า"
+[node name="Next" type="Button" parent="Card/Content/Body/Details/Content/Pager/Navigation"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,48)
+text = "ถัดไป"
+[node name="Message" type="Label" parent="Card/Content/Body/Details/Content"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.74,0.95,0.8,1)
+text = ""

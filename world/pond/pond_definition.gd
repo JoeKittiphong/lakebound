@@ -32,7 +32,7 @@ func is_castable(point: Vector3) -> bool:
 func spawn_position(rng: RandomNumberGenerator, depths: Vector2, slot: int) -> Vector3:
  var point := Vector3(rng.randf_range(-17, 17), rng.randf_range(depths.x, depths.y), rng.randf_range(-28, -10))
  if slot >= 0 and slot < 9:
-  point = Vector3(float(slot % 3 - 1) * 2.8, (depths.x + depths.y) * 0.5, -15.0 - float(slot / 3) * 3.0)
+  point = Vector3(float(slot % 3 - 1) * 2.8, (depths.x + depths.y) * 0.5, -15.0 - float(floori(slot / 3.0)) * 3.0)
  return point
 
 func roaming_position(rng: RandomNumberGenerator, _current: Vector3, depths: Vector2) -> Vector3:

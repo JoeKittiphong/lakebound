@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/light_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/12_ice.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/ice_rod.tres" id="rod_spec_fit"]
+
+[resource]
+script=ExtResource("script")
+id=&"ice_rod"
+display_name="คันไอซ์"
+kind="rod"
+equipment_type="คันไอซ์"
+shop_icon=ExtResource("icon")
+price=100
+model_scene=ExtResource("model")
+
+mount_layout = "ice"
+
+rod_spec = ExtResource("rod_spec_fit")

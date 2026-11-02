@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/popper.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/surface.tres" id="rig_surface"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/popper.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/popper.tres" id="attraction"]
+
+[resource]
+script = ExtResource("script")
+id = &"popper"
+display_name = "ป๊อปเปอร์"
+kind = "lure"
+equipment_type = "เหยื่อผิวน้ำ"
+shop_icon = ExtResource("icon")
+description = "เหยื่อผิวน้ำ · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 170
+bait_type = "lure"
+motion = "float"
+lure_pattern = "twitch_pause"
+lure_visual = "Popper"
+sink_speed = 0
+swim_depth = -1
+
+
+payload_g = 8
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_surface")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/live_fish.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/float.tres" id="rig_float"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/pole.tres" id="rig_pole"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/bottom.tres" id="rig_bottom"]
+[ext_resource type="Resource" path="res://data/equipment/rigs/boat.tres" id="rig_boat"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/live_fish.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/live_fish.tres" id="attraction"]
+
+[resource]
+script = ExtResource("script")
+id = &"live_fish"
+display_name = "ลูกปลาเหยื่อ"
+kind = "bait"
+equipment_type = "ธรรมชาติ · ปลาเป็น"
+shop_icon = ExtResource("icon")
+description = "ธรรมชาติ · ปลาเป็น · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 70
+quantity = 10
+bait_type = "lure"
+
+
+payload_g = 8
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_float"), ExtResource("rig_pole"), ExtResource("rig_bottom"), ExtResource("rig_boat")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

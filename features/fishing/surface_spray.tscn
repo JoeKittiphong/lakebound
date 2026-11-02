@@ -1,0 +1,13 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/fishing/surface_spray.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/fishing/ui/surface_spray_burst.tscn" id="burst"]
+[node name="SurfaceSpray" type="Node3D"]
+script = ExtResource("script")
+[node name="Burst1" parent="." instance=ExtResource("burst")]
+[node name="Burst2" parent="." instance=ExtResource("burst")]
+[node name="Burst3" parent="." instance=ExtResource("burst")]
+[node name="Burst4" parent="." instance=ExtResource("burst")]
+[node name="Burst5" parent="." instance=ExtResource("burst")]
+[node name="Burst6" parent="." instance=ExtResource("burst")]
+[node name="Burst7" parent="." instance=ExtResource("burst")]
+[node name="Burst8" parent="." instance=ExtResource("burst")]

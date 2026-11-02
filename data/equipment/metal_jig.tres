@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/metal_jig.tres" id="icon"]
+
+[ext_resource type="Resource" path="res://data/equipment/rigs/jig.tres" id="rig_jig"]
+
+[ext_resource type="Script" path="res://data/equipment/terminal_rig_spec.gd" id="rig_spec_type"]
+
+[ext_resource type="PackedScene" path="res://features/equipment/baits/metal_jig.tscn" id="bait_model"]
+
+[ext_resource type="Resource" path="res://data/equipment/attraction/metal_jig.tres" id="attraction"]
+
+[resource]
+script = ExtResource("script")
+id = &"metal_jig"
+display_name = "เมทัลจิ๊ก"
+kind = "lure"
+equipment_type = "เหยื่อโลหะ"
+shop_icon = ExtResource("icon")
+description = "เหยื่อโลหะ · อุปกรณ์สำหรับทดลอง ค่าสมดุลปรับได้ใน Inspector"
+price = 180
+bait_type = "lure"
+motion = "sink"
+lure_pattern = "jerk_fall"
+lure_visual = "Jig"
+sink_speed = 0.95
+swim_depth = -1
+
+
+payload_g = 100
+terminal_rigs = Array[ExtResource("rig_spec_type")]([ExtResource("rig_jig")])
+
+model_scene = ExtResource("bait_model")
+
+attraction = ExtResource("attraction")

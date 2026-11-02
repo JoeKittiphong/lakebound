@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="RodSpec" format=3]
+[ext_resource type="Script" path="res://data/equipment/rod_spec.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+series = "Cover"
+family = "casting"
+power = "MH"
+action = "Fast"
+sections = 2
+line_min_lb = 10
+line_max_lb = 20
+lure_min_g = 7
+lure_max_g = 28
+pe_max = 0
+bend_radians = 1.25
+progression = 0.22
+recovery_seconds = 0.12
+intended_use = "เท็กซัสริกและจิ๊ก วัดเบ็ดตอบสนองไว"
+reference_url = "https://www.daiwa.com/jp/product/995wk7u"
+length_m = 2.13
+handle_m = 0.44
+
+techniques = PackedStringArray("cast_float", "cast_bottom", "cast_retrieve")
+cast_min_g = 7
+cast_max_g = 28
+max_working_drag_kgf = 2.7215542200000002

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/pole_rod.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/variants/lotus_540mh.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/rod_specs/lotus_540mh.tres" id="spec"]
+
+[resource]
+script = ExtResource("script")
+id = &"lotus_540mh"
+display_name = "Lotus 540MH"
+kind = "rod"
+equipment_type = "ชิงหลิว · Lotus"
+shop_icon = ExtResource("icon")
+model_scene = ExtResource("model")
+rod_spec = ExtResource("spec")
+description = "ชิงหลิวระยะไกล โคนแน่นกว่ารุ่นกลาง · Moderate-Fast"
+price = 340
+strength = 7
+cast_multiplier = 0.52
+responsiveness = 1.08
+
+mount_layout = "fixed"

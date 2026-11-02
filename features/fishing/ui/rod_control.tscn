@@ -5,9 +5,6 @@
 [node name="RodControl" instance=ExtResource("base")]
 script = ExtResource("script")
 
-[node name="Reel" parent="." index="2"]
-offset_left = 0.0
-offset_right = 0.0
 
 [node name="HookIcon" type="TextureRect" parent="Knob"]
 layout_mode = 1
@@ -24,3 +21,51 @@ mouse_filter = 2
 texture = ExtResource("hook")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Directions" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Up" type="Label" parent="Directions"]
+offset_left = 76.0
+offset_top = 3.0
+offset_right = 108.0
+offset_bottom = 35.0
+mouse_filter = 2
+text = "↑"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+
+[node name="Down" type="Label" parent="Directions"]
+offset_left = 76.0
+offset_top = 145.0
+offset_right = 108.0
+offset_bottom = 179.0
+mouse_filter = 2
+text = "↓"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+
+[node name="Left" type="Label" parent="Directions"]
+offset_left = 4.0
+offset_top = 75.0
+offset_right = 36.0
+offset_bottom = 109.0
+mouse_filter = 2
+text = "←"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+
+[node name="Right" type="Label" parent="Directions"]
+offset_left = 148.0
+offset_top = 75.0
+offset_right = 180.0
+offset_bottom = 109.0
+mouse_filter = 2
+text = "→"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24

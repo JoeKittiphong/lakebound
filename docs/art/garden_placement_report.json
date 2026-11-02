@@ -1,0 +1,186 @@
+{
+  "maps": [
+    {
+      "batches": 102,
+      "dressing": "res://world/river/garden_dressing.tscn",
+      "id": "river",
+      "patches": 92,
+      "plants": 284,
+      "types": {
+        "1": 35,
+        "10": 11,
+        "11": 11,
+        "12": 15,
+        "2": 23,
+        "3": 7,
+        "4": 21,
+        "5": 39,
+        "6": 12,
+        "7": 74,
+        "8": 23,
+        "9": 13
+      },
+      "world": "res://world/river/river_world.tscn"
+    },
+    {
+      "batches": 74,
+      "dressing": "res://world/regions/lotus_marsh/garden_dressing.tscn",
+      "id": "lotus_marsh",
+      "patches": 78,
+      "plants": 253,
+      "types": {
+        "1": 18,
+        "10": 17,
+        "12": 23,
+        "2": 13,
+        "3": 25,
+        "5": 56,
+        "6": 16,
+        "7": 72,
+        "8": 11,
+        "9": 2
+      },
+      "world": "res://world/regions/lotus_marsh/world.tscn"
+    },
+    {
+      "batches": 84,
+      "dressing": "res://world/regions/forest_stream/garden_dressing.tscn",
+      "id": "forest_stream",
+      "patches": 86,
+      "plants": 273,
+      "types": {
+        "1": 23,
+        "10": 11,
+        "11": 22,
+        "2": 13,
+        "3": 24,
+        "4": 52,
+        "5": 42,
+        "6": 27,
+        "7": 56,
+        "9": 3
+      },
+      "world": "res://world/regions/forest_stream/world.tscn"
+    },
+    {
+      "batches": 90,
+      "dressing": "res://world/regions/wild_reservoir/garden_dressing.tscn",
+      "id": "wild_reservoir",
+      "patches": 80,
+      "plants": 238,
+      "types": {
+        "1": 32,
+        "10": 15,
+        "12": 14,
+        "2": 13,
+        "3": 14,
+        "4": 27,
+        "5": 32,
+        "6": 23,
+        "7": 51,
+        "8": 10,
+        "9": 7
+      },
+      "world": "res://world/regions/wild_reservoir/world.tscn"
+    },
+    {
+      "batches": 61,
+      "dressing": "res://world/regions/mangrove_estuary/garden_dressing.tscn",
+      "id": "mangrove_estuary",
+      "patches": 82,
+      "plants": 260,
+      "types": {
+        "1": 19,
+        "2": 8,
+        "3": 36,
+        "5": 39,
+        "6": 22,
+        "7": 115,
+        "8": 18,
+        "9": 3
+      },
+      "world": "res://world/regions/mangrove_estuary/world.tscn"
+    },
+    {
+      "batches": 53,
+      "dressing": "res://world/regions/coral_coast/garden_dressing.tscn",
+      "id": "coral_coast",
+      "patches": 74,
+      "plants": 270,
+      "types": {
+        "1": 27,
+        "12": 3,
+        "2": 20,
+        "3": 26,
+        "5": 67,
+        "6": 11,
+        "7": 82,
+        "8": 34
+      },
+      "world": "res://world/regions/coral_coast/world.tscn"
+    }
+  ],
+  "plant_assets": [
+    {
+      "id": 1,
+      "mesh": "res://assets/environment/garden/plant_01.res",
+      "triangles": 1788
+    },
+    {
+      "id": 2,
+      "mesh": "res://assets/environment/garden/plant_02.res",
+      "triangles": 588
+    },
+    {
+      "id": 3,
+      "mesh": "res://assets/environment/garden/plant_03.res",
+      "triangles": 778
+    },
+    {
+      "id": 4,
+      "mesh": "res://assets/environment/garden/plant_04.res",
+      "triangles": 1728
+    },
+    {
+      "id": 5,
+      "mesh": "res://assets/environment/garden/plant_05.res",
+      "triangles": 180
+    },
+    {
+      "id": 6,
+      "mesh": "res://assets/environment/garden/plant_06.res",
+      "triangles": 216
+    },
+    {
+      "id": 7,
+      "mesh": "res://assets/environment/garden/plant_07.res",
+      "triangles": 300
+    },
+    {
+      "id": 8,
+      "mesh": "res://assets/environment/garden/plant_08.res",
+      "triangles": 288
+    },
+    {
+      "id": 9,
+      "mesh": "res://assets/environment/garden/plant_09.res",
+      "triangles": 498
+    },
+    {
+      "id": 10,
+      "mesh": "res://assets/environment/garden/plant_10.res",
+      "triangles": 1350
+    },
+    {
+      "id": 11,
+      "mesh": "res://assets/environment/garden/plant_11.res",
+      "triangles": 1100
+    },
+    {
+      "id": 12,
+      "mesh": "res://assets/environment/garden/plant_12.res",
+      "triangles": 1470
+    }
+  ],
+  "total_plants": 1578
+}

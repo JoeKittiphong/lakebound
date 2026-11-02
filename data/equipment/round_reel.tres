@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TackleItem" format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/ui/shop/equipment_atlas/baitcasting_reel.tres" id="icon"]
+[ext_resource type="PackedScene" path="res://features/equipment/detailed/reel_03_round_baitcaster.tscn" id="model"]
+[ext_resource type="Resource" path="res://data/equipment/reel_specs/round_reel.tres" id="reel_spec_fit"]
+
+[resource]
+script=ExtResource("script")
+id=&"round_reel"
+display_name="รอกเบททรงกลม"
+kind="reel"
+equipment_type="รอกเบททรงกลม"
+shop_icon=ExtResource("icon")
+price=220
+model_scene=ExtResource("model")
+
+reel_family = "round"
+
+reel_spec = ExtResource("reel_spec_fit")

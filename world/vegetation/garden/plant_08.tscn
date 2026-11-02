@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/environment/garden/plant_08.res" id="1_557x3"]
+
+[node name="08_Windswept_Grass" type="Node3D" unique_id=1470733848]
+metadata/garden_concept = 8
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=771284092]
+visibility_range_end = 46.0
+mesh = ExtResource("1_557x3")
