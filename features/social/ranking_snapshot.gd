@@ -1,6 +1,6 @@
 class_name RankingSnapshot
 extends RefCounted
-## One boundary for the compact Sheets wire format and persisted view cache.
+## One boundary for the compact ranking wire format and persisted view cache.
 const MAX_GRAMS := 1000000000
 const MAX_RESPONSE_BYTES := 262144
 

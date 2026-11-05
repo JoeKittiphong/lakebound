@@ -32,7 +32,7 @@ func run() -> void:
  hud.collection_visibility_changed.connect(func(opened: bool): modal_events.append(opened))
  profile.data.identity.name = "Map tester"
  var ranking: Control = hud.get_node("SocialPanel")
- ranking.sheets_url = ""
+ ranking.supabase_url = ""
  for entry in RegionCatalog.MAPS:
   fishing.map_id = entry.id
   hud.get_node("SafeArea/RankingButton").pressed.emit()
@@ -52,7 +52,7 @@ func run() -> void:
  expect(hud.get_node("SafeArea/TopBar/Actions/Wallet/Coins/Amount").text == "123", "wallet API updates the separate coin amount")
  hud.set_boss_notice("test boss")
  hud.set_boss_notice_visible(true)
- expect(hud.get_node("SafeArea/BossToast").text == "test boss" and hud.get_node("SafeArea/BossToast").visible, "boss text and visibility use the HUD API")
+ expect(hud.get_node("SafeArea/BossToast").text == "test boss" and hud.get_node("SafeArea/BossToast").visible == not hud.is_tutorial_active(), "boss text uses the HUD API and notice stays hidden during tutorial")
  var tutorial := hud.get_node("SafeArea/FirstCatch")
  expect(hud.is_tutorial_active() == tutorial.active, "tutorial availability is queried without exposing its node")
  var rod_touch := InputEventScreenTouch.new()

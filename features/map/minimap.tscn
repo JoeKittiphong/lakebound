@@ -9,6 +9,16 @@
 [ext_resource type="Shader" path="res://features/map/minimap_marker_clip.gdshader" id="clip_shader"]
 [ext_resource type="FontVariation" path="res://assets/ui/hud_affinity/numbers.tres" id="font"]
 [sub_resource type="StyleBoxEmpty" id="empty"]
+[sub_resource type="StyleBoxFlat" id="legend_style"]
+bg_color = Color(0.025, 0.055, 0.075, 0.94)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
 [sub_resource type="ShaderMaterial" id="terrain_material"]
 resource_local_to_scene = true
 shader = ExtResource("terrain_shader")
@@ -133,4 +143,81 @@ theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(1,0.98,0.91,1)
 theme_override_colors/font_outline_color = Color(0.02,0.03,0.02,1)
 theme_override_constants/outline_size = 3
+[node name="HelpButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 0.0
+offset_right = 188.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2(48, 48)
+focus_mode = 0
+toggle_mode = true
+text = "?"
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.05, 0.06, 0.04, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.06, 0.04, 1)
+theme_override_styles/normal = SubResource("scan_normal")
+theme_override_styles/hover = SubResource("scan_normal")
+theme_override_styles/pressed = SubResource("scan_pressed")
+theme_override_styles/hover_pressed = SubResource("scan_pressed")
+tooltip_text = "เปิด/ปิดคำอธิบายสีขนาดปลา"
+
+[node name="ScanLegend" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 198.0
+offset_top = 24.0
+offset_right = 376.0
+offset_bottom = 180.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("legend_style")
+
+[node name="Content" type="VBoxContainer" parent="ScanLegend"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="Title" type="Label" parent="ScanLegend/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "ขนาดปลาที่สแกนพบ"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 0.98, 0.91, 1)
+
+[node name="Small" type="Label" parent="ScanLegend/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "● เล็ก < 1 กก."
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.337255, 0.85098, 1, 1)
+
+[node name="Medium" type="Label" parent="ScanLegend/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "● กลาง 1–<5 กก."
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.45098, 0.929412, 0.596078, 1)
+
+[node name="Large" type="Label" parent="ScanLegend/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "● ใหญ่ 5–<20 กก."
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 0.596078, 0.298039, 1)
+
+[node name="Colossal" type="Label" parent="ScanLegend/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "● มหึมา 20+ กก."
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.839216, 0.584314, 1, 1)
+
+[node name="Boss" type="Label" parent="ScanLegend/Content"]
+layout_mode = 2
+mouse_filter = 2
+text = "◆ จ้าวบ่อ"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 0.854902, 0.345098, 1)
+
 [connection signal="pressed" from="ScanButton" to="." method="scan_fish"]
+[connection signal="toggled" from="HelpButton" to="." method="_on_help_toggled"]

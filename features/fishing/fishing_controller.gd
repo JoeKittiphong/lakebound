@@ -4,6 +4,9 @@ extends Node
 signal state_changed
 signal bite_notified
 signal fish_landed(fish: RefCounted)
+var bite_authorizer: Callable
+var _bite_pending := false
+var _bite_generation := 0
 signal fish_lost(reason: String)
 signal cast_started
 signal haptic_requested(duration_ms: int)
@@ -76,6 +79,9 @@ var kept_count := 0
 var released_count := 0
 @export var map_id: String = "river"
 var profile: AnglerProfile
+var casting_enabled := true
+var session_only_catches := false
+var session_bait: TackleItem
 var cast_bait_id := ""
 var cast_terminal_rig:TerminalRigSpec
 var catch_record: Dictionary = {}
@@ -122,6 +128,7 @@ func refresh_equipment() -> void:
   player.character_model.equip_line(profile.equipped("line"))
 
 func active_bait_item()->TackleItem:
+ if profile==null and session_bait!=null: return session_bait
  if not cast_bait_id.is_empty() and state in [State.CASTING,State.WAITING,State.BITE,State.FIGHT]:
   var entry:=TackleCatalog.item(cast_bait_id) as TackleItem
   if entry!=null:return entry
@@ -156,7 +163,7 @@ func set_aim(value: Vector2) -> void:
   aim_offset = Vector3(value.x * 0.8, 0, -1).normalized() * distance
 
 func cast() -> bool:
- if state != State.READY or not is_instance_valid(player):
+ if not casting_enabled or state != State.READY or not is_instance_valid(player):
   return false
  var reason := cast_block_reason()
  if not reason.is_empty():
@@ -239,8 +246,20 @@ func get_aim_position() -> Vector3:
  return target
 
 func _on_fish_biting(record: RefCounted) -> void:
- if state != State.WAITING:
+ if state != State.WAITING or _bite_pending:
   return
+ if bite_authorizer.is_valid():
+  var generation := _bite_generation
+  _bite_pending=true
+  feedback="กำลังยืนยันปลากินเบ็ด…"
+  var allowed: bool=await bite_authorizer.call(record)
+  if generation!=_bite_generation: return
+  _bite_pending=false
+  if state!=State.WAITING: return
+  if not allowed:
+   ecosystem.release(record)
+   feedback="ยังยืนยันปลาตัวนี้ไม่ได้ · รอปลาตัวอื่น"
+   return
  active_fish = record
  catch_event_id = Crypto.new().generate_random_bytes(16).hex_encode()
  bite_depth = cast_position.y
@@ -381,6 +400,8 @@ func lose(reason: String, line_broken: bool = false) -> void:
  fish_lost.emit(reason)
 
 func reset_cast() -> void:
+ _bite_generation+=1
+ _bite_pending=false
  ecosystem.cancel_bait()
  active_fish = null
  catch_event_id = ""
@@ -410,7 +431,7 @@ func resolve_catch(keep_fish: bool) -> void:
   return
  # Retry the same immutable landed event after a save failure, before allowing
  # the result screen to discard it. Successful events are idempotent.
- if profile != null and catch_record.has("catch_id"):
+ if profile != null and not session_only_catches and catch_record.has("catch_id"):
   if is_instance_valid(_catch_collection):
    var result := CatchSettlement.persist(profile, _catch_collection, catch_record)
    if not result.saved:
@@ -420,7 +441,7 @@ func resolve_catch(keep_fish: bool) -> void:
    feedback = profile.save_error
    return
  if keep_fish:
-  if profile != null:
+  if profile != null and not session_only_catches:
    var population := ecosystem.snapshot()
    for index in range(population.size() - 1, -1, -1):
     if population[index].id == active_fish.id:

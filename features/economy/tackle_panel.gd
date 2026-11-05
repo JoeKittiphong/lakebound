@@ -7,16 +7,20 @@ var pond:PondEcosystem
 var commerce:CommerceGateway
 var map_id:="river"
 @export var equipment_trials_enabled:=true
+@export var inventory_only:=false
 func _ready()->void:$Shop.close_requested.connect(close)
 func bind(value:AnglerProfile,controller:FishingController,ecosystem:PondEcosystem,gateway:CommerceGateway)->void:
  profile=value;fishing=controller;pond=ecosystem;commerce=gateway
  $Shop.trials_enabled=equipment_trials_enabled
+ $Shop.inventory_only=inventory_only
  $Shop.bind(profile,fishing,commerce)
 func open()->void:
  if profile==null:return
+ $DepthSettings.visible=inventory_only
  show();$Shop.set_category(2);$Shop.enter();opened.emit()
 func open_category(index:int)->void:
  if profile==null:return
+ $DepthSettings.visible=inventory_only
  show();$Shop.set_category(index);$Shop.enter();opened.emit()
 func close()->void:
  if not visible:return

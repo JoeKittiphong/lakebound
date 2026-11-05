@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lakebound Web/PWA Update"
+  short_description: "Export, verify, and publish Lakebound Web/PWA"
+  default_prompt: "Use $update-pwa-web to build the latest Lakebound game, verify Web/PWA and Google login, and update the existing Netlify site."

@@ -13,6 +13,11 @@ var success_time := 0.0
 func bind(controller: FishingController, fishing_hud: FishingHUD) -> void:
  fishing = controller
  hud = fishing_hud
+ if AccountAuth.enabled: save_path=AccountAuth.tutorial_path()
+ if not Competition.room.is_empty():
+  active=false
+  hide()
+  return
  var config := ConfigFile.new()
  completed = config.load(save_path) == OK and bool(config.get_value("tutorial", "completed", false))
  active = not completed and get_node("/root/FishCollection").records.is_empty()

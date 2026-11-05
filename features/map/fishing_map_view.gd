@@ -14,7 +14,6 @@ var records: Array = []
 var favorites: Array = []
 var selection: Dictionary = {}
 var target: Dictionary = {}
-var boss: Dictionary = {}
 var zoom := 1.0
 var pan := Vector2.ZERO
 var _clusters: Array = []
@@ -134,21 +133,8 @@ func _draw() -> void:
   var side := direction.orthogonal()
   draw_circle(point, 11, Color(0.03,0.09,0.12,0.9))
   draw_colored_polygon(PackedVector2Array([point+direction*10,point-direction*6+side*6,point-direction*3,point-direction*6-side*6]), player_color)
- if not boss.is_empty():
-  var point := project(boss.position)
-  draw_circle(point, 18, Color(0.025, 0.07, 0.06, 0.95))
-  draw_circle(point, 18, Color(0.95, 0.79, 0.4), false, 2, true)
-  var crown := PackedVector2Array()
-  for offset in [Vector2(-10,-6), Vector2(-5,-1), Vector2(0,-11), Vector2(5,-1), Vector2(10,-6), Vector2(8,7), Vector2(-8,7)]:
-   crown.append(point + offset)
-  draw_colored_polygon(crown, Color(0.98, 0.82, 0.43))
 
 func _pick(point: Vector2) -> void:
- if not boss.is_empty() and point.distance_to(project(boss.position)) <= 24.0:
-  selection = {"kind": "boss"}
-  selected.emit(selection)
-  queue_redraw()
-  return
  var nearest: Dictionary = {}
  var distance := 24.0
  for spot in favorites:

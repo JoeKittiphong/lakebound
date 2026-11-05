@@ -13,16 +13,24 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 HEADLESS = ("fishing_recovery", "boat_integration", "traversal_equipment", "character_integration", "walk_sync", "playtest_feedback", "export_size", "ui_atlas", "missions", "economy", "expansion_flow", "first_catch_tutorial", "startup_flow", "camera_movement", "bait_retrieval", "tension_haptics", "fish_behavior", "fishing_simulation", "fish_catalog_fishing", "fish_models", "refactor_boundaries")
 RENDER = ("fishing_recovery_visual", "fisherman_visual", "ui_atlas_visual", "missions_visual", "expansion_visual", "collection", "mobile_collection", "mobile_multitouch", "fishing_visual", "active_scene_movement", "rod_tension", "fish_render", "water_render", "water_interactions", "water_optimization")
-HEADLESS += ("hud_session", "loading_flow", "fish_encyclopedia", "regions_fishing", "regions_legacy_save", "wooden_jetty_integration", "mobile_fishing_tuning")
+HEADLESS += ("gameplay_bag", "hud_session", "loading_flow", "fish_encyclopedia", "regions_fishing", "regions_legacy_save", "wooden_jetty_integration", "mobile_fishing_tuning")
 HEADLESS += ("catch_settlement",)
+HEADLESS += ("background_ranking",)
+HEADLESS += ("cloud_sync",)
+HEADLESS += ("competition", "competition_session", "competition_transport", "match_hud_layout")
+HEADLESS += ("google_auth",)
+HEADLESS += ("google_startup",)
+RENDER += ("google_auth_visual",)
+RENDER += ("competition_visual",)
+RENDER += ("competition_play_visual",)
 HEADLESS += ("catch_archive",)
-HEADLESS += ("sheets_ranking_sync",)
-HEADLESS += ("social_profile", "sheets_settings")
+HEADLESS += ("supabase_ranking_sync",)
+HEADLESS += ("social_profile", "supabase_settings")
 HEADLESS += ("loading_motion",)
 HEADLESS += ("loading_leg_pose",)
 HEADLESS += ("fishing_map_data",)
 HEADLESS += ("shop_redesign", "boat_model", "ranking_snapshot", "social_lifecycle")
-RENDER += ("fishing_map_visual", "boat_seating_visual", "sheets_settings_visual", "social_visual")
+RENDER += ("fishing_map_visual", "boat_seating_visual", "supabase_settings_visual", "social_visual")
 RENDER += ("ui_refresh_visual",)
 RENDER += ("cooler_storage",)
 RENDER += ("cooler_choices",)
@@ -33,6 +41,7 @@ RENDER += ("equipment_removal_visual",)
 RENDER += ("fishing_methods",)
 RENDER += ("surface_spray",)
 RENDER += ("ranking_maps",)
+RENDER += ("map_leader_visual",)
 RENDER += ("cached_ranking",)
 RENDER += ("loading_cooler", "compact_hud")
 PERFORMANCE = ("hud_performance", "optimization")
@@ -44,7 +53,8 @@ RENDER += ("regions_integration", "loading_cinematic_visual", "character_preview
 CONTENT = ("aquatic", "background", "dense_flora", "bridge_normal_visual", "concept_rocks", "reference_rocks", "rock_asset", "rock_clusters", "rock_landscaping")
 CONTENT += ("garden_dressing",)
 PACKED = ("packed_size", "packed_memory_smoke")
-LIVE = ("sheets_live_http",)  # Opt-in; requires LAKEBOUND_QA_URL and outbound HTTPS.
+LIVE = ("supabase_live_http",)  # Opt-in; requires LAKEBOUND_QA_URL and outbound HTTPS.
+LIVE += ("background_ranking_live",)
 SOURCE_TESTS = HEADLESS + SLOW_HEADLESS + RENDER + CONTENT + PERFORMANCE + PERFORMANCE_RENDER + LIVE
 # These host/sandbox diagnostics do not concern game scripts; keep them in logs
 # and report them separately instead of treating every successful exit as proof.
@@ -91,6 +101,11 @@ def main() -> int:
     screenshots = output / "screenshots"
     screenshots.mkdir(exist_ok=True)
     env = os.environ.copy()
+    env["LAKEBOUND_BACKGROUND_SYNC"] = "0"  # QA fixtures must never auto-upload to production.
+    env["LAKEBOUND_CLOUD"] = "0"
+    env["LAKEBOUND_AUTH"] = "0"
+    env["LAKEBOUND_COMPETITION"] = "0"
+    env["LAKEBOUND_MATCH_EDGE"] = "0"  # Keep legacy/mock transport suites off the deployed Worker.
     env["LAKEBOUND_QA_DIR"] = screenshots.as_posix()
     results = []
 
@@ -175,3 +190,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+

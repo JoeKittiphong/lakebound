@@ -1,5 +1,11 @@
 # Google Sheets ranking API
 
+**Historical backend (superseded 2 November 2026).** Production identities and
+scores now live in Supabase. The unchanged Web App URL runs compatibility bridge
+deployment version 3; it forwards to Supabase rather than writing Sheets.
+This original implementation is retained for recovery. Current source,
+deployment instructions and verification: [Supabase service](../supabase/README.md).
+
 Status: deployed as a public Web App and configured as the default in online.cfg.
 Live GET/POST and Godot HTTPS checks passed; a 100-client read burst passed 100/100
 on the empty leaderboard. See docs/sheets-live-http-results.md for measured limits.

@@ -10,8 +10,9 @@ func run() -> void:
  profile.data.identity.name = "นักตกปลาริมน้ำ"
  profile.data.journal = [{"catch_id":"visual1","name":"ปลานิล","map":"river","species":"tilapia","weight":1.234,"time":100}]
  var panel: Control = load("res://features/social/social_panel.tscn").instantiate()
+ panel.supabase_key = "sb_publishable_fixture"
  root.add_child(panel)
- panel.sheets_url = ""
+ panel.supabase_url = ""
  panel.open()
  for dimensions in [Vector2i(1280,720), Vector2i(1600,720), Vector2i(960,540)]:
   root.size = dimensions
@@ -23,7 +24,7 @@ func run() -> void:
   if close.get_global_rect().end.x > root.get_visible_rect().size.x or bottom.get_global_rect().end.y > root.get_visible_rect().size.y:
    failures += 1
    print("FAIL: layout bounds ", dimensions)
- panel.sheets_url = "https://script.google.com/macros/s/test/exec"
+ panel.supabase_url = "https://abcdefghijklmnopqrst.supabase.co/rest/v1/rpc/lakebound_rankings"
  panel._set_busy(true)
  await process_frame
  var marks: Control = panel.get_node("%ComparisonMarks/First")
@@ -35,7 +36,7 @@ func run() -> void:
  await RenderingServer.frame_post_draw
  root.get_texture().get_image().save_png("res://exports/social-comparing.png")
  panel._cancel_request()
- panel.sheets_url = ""
+ panel.supabase_url = ""
  panel._mode_changed(1)
  if not panel.get_node("%Filter").visible or panel.scope != "map":
   failures += 1

@@ -46,6 +46,7 @@ func _ready() -> void:
  _fit_camera()
 
 func _fit_camera() -> void:
+ if visible and not animation.is_playing(): viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
  if not auto_frame_cooler or _frame_points.is_empty() or preview.size.y <= 0:
   return
  var minimum := Vector2(INF,INF)
@@ -91,9 +92,11 @@ func close() -> void:
  closing = true
  _finger = -1
  _set_confirmation(false)
+ viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
  animation.play_backwards("open")
 
 func _animation_finished(_name: StringName) -> void:
+ if not closing: viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
  if closing:
   hide()
   viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
@@ -101,6 +104,7 @@ func _animation_finished(_name: StringName) -> void:
   closed.emit()
 
 func _refresh() -> void:
+ if visible and not animation.is_playing(): viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
  if profile == null or not visible:
   return
  var catches: Array = profile.data.catches

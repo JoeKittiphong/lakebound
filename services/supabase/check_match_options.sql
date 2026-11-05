@@ -1,0 +1,54 @@
+-- Owner acceptance check. Fixtures, scores, leases and reservations all roll back.
+begin;
+do $smoke$
+declare mode text; a jsonb; b jsonb; room jsonb; result jsonb; one uuid; two uuid; packet jsonb; expected_id text; expected_grams integer; nonce text;
+begin
+ foreach mode in array array['species_total','total_weight','biggest_fish'] loop
+  one:=gen_random_uuid();two:=gen_random_uuid();
+  perform set_config('request.jwt.claims','{"app_metadata":{"provider":"google"}}',true);
+  perform set_config('request.jwt.claim.sub',one::text,true);
+  a:=public.lakebound_account('{}')->'identity';
+  a:=a||jsonb_build_object('player_id',a->>'id','player_name',a->>'name');
+  packet:=jsonb_build_object('op','create','map','lotus_marsh','duration',180,'rule',mode);
+  if mode='species_total' then packet:=packet||jsonb_build_object('target_species','tilapia'); end if;
+  room:=public.lakebound_matches(a||packet);
+  if room ? 'error' or room->>'rule' is distinct from mode then raise exception 'create failed: %',room; end if;
+  perform set_config('request.jwt.claim.sub',two::text,true);
+  b:=public.lakebound_account('{}')->'identity';b:=b||jsonb_build_object('player_id',b->>'id','player_name',b->>'name');
+  result:=public.lakebound_matches(b||jsonb_build_object('op','quick_join'));
+  if result->>'id' is distinct from room->>'id' then raise exception 'quick join failed'; end if;
+  perform public.lakebound_matches(b||jsonb_build_object('op','ready','room_id',room->>'id','ready',true));
+  perform set_config('request.jwt.claim.sub',one::text,true);
+  perform public.lakebound_matches(a||jsonb_build_object('op','ready','room_id',room->>'id','ready',true));
+  perform public.lakebound_matches(a||jsonb_build_object('op','start','room_id',room->>'id'));
+  perform public.lakebound_matches(a||jsonb_build_object('op','loaded','room_id',room->>'id'));
+  perform set_config('request.jwt.claim.sub',two::text,true);
+  result:=public.lakebound_matches(b||jsonb_build_object('op','loaded','room_id',room->>'id'));
+  if result->>'phase' is distinct from 'countdown' or (result->>'ends_at')::numeric-(result->>'starts_at')::numeric<>180 then raise exception 'duration failed'; end if;
+  update lakebound_private.match_rooms set phase='running',starts_at=clock_timestamp()-interval '1 second',ends_at=clock_timestamp()+interval '3 minutes' where id=(room->>'id')::uuid;
+  packet:=jsonb_build_object('op','catch','room_id',room->>'id','round_id',room->>'round_id','catch_id',repeat('a',32),'species','tilapia','grams',1000);
+  perform set_config('request.jwt.claim.sub',one::text,true);
+  perform pg_sleep(1.02);
+  result:=public.lakebound_matches(a||packet||jsonb_build_object('op','claim_fish','fish_id',1));
+  select value->>2 into nonce from jsonb_array_elements(result->'fish_claims') where (value->>0)::integer=1;
+  perform set_config('request.jwt.claim.sub',two::text,true);
+  result:=public.lakebound_matches(b||packet||jsonb_build_object('op','claim_fish','fish_id',1));
+  if result->>'error' is distinct from 'fish_busy' then raise exception 'duplicate bite was not blocked'; end if;
+  perform set_config('request.jwt.claim.sub',one::text,true);
+  perform public.lakebound_matches(a||packet||jsonb_build_object('fish_id',1,'claim_id',nonce));
+  result:=public.lakebound_matches(a||packet||jsonb_build_object('op','claim_fish','fish_id',2,'species',case when mode='species_total' then 'snakehead' else 'tilapia' end,'grams',2000));
+  select value->>2 into nonce from jsonb_array_elements(result->'fish_claims') where (value->>0)::integer=2;
+  perform public.lakebound_matches(a||packet||jsonb_build_object('fish_id',2,'claim_id',nonce,'catch_id',repeat('b',32),'species',case when mode='species_total' then 'snakehead' else 'tilapia' end,'grams',2000));
+  perform set_config('request.jwt.claim.sub',two::text,true);
+  result:=public.lakebound_matches(b||packet||jsonb_build_object('op','claim_fish','fish_id',3,'species',case when mode='species_total' then 'tilapia' else 'snakehead' end,'grams',case when mode='species_total' then 1500 else 2500 end));
+  select value->>2 into nonce from jsonb_array_elements(result->'fish_claims') where (value->>0)::integer=3;
+  result:=public.lakebound_matches(b||packet||jsonb_build_object('fish_id',3,'claim_id',nonce,'catch_id',repeat('c',32),'species',case when mode='species_total' then 'tilapia' else 'snakehead' end,'grams',case when mode='species_total' then 1500 else 2500 end));
+  expected_id:=case when mode='total_weight' then a->>'id' else b->>'id' end;
+  expected_grams:=case when mode='total_weight' then 3000 when mode='species_total' then 1500 else 2500 end;
+  if result->'members'->0->>'id' is distinct from expected_id or (result->'members'->0->>'grams')::integer<>expected_grams then raise exception 'score failed for %: %',mode,result; end if;
+  if jsonb_array_length(result->'consumed_fish')<>3 then raise exception 'consumed fish did not sync'; end if;
+  update lakebound_private.match_rooms set phase='finished' where id=(room->>'id')::uuid;
+ end loop;
+end $smoke$;
+rollback;
+select 'quick_rules_smoke_passed' as result,max_rooms,max_players,monthly_events from lakebound_private.match_limits;

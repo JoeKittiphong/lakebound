@@ -194,6 +194,7 @@ func refresh_badges()->void:
   if badge==null:continue
   if slot.item==null:badge.text="";continue
   var blocked:=profile!=null and not EquipmentChoiceRules.error(profile,slot.item).is_empty()
-  badge.text=("● " if str(slot.item.id)==selected_id else "")+("×" if blocked else "✓")
+  var count:int=profile.quantity(str(slot.item.id)) if profile!=null else 0
+  badge.text=("● " if str(slot.item.id)==selected_id else "")+("×" if blocked else "✓")+" %d"%count
   badge.modulate=Color(.55,.59,.61) if blocked else Color(.5,1,.7)
  _redraw()

@@ -3,21 +3,25 @@ extends Control
 signal opened
 signal closed
 
-@export var sheets_url: String = ""
+@export var supabase_url: String = ""
+@export var supabase_key: String = ""
 var profile: AnglerProfile
 var online_rows: Array = []
 var online := false
 var busy := false
 var scope := "all"
 var top_limit := 10
-var sheets_sync := SheetsRankingSync.new()
+var ranking_sync := RankingSync.new()
 var retry_attempt := 0
-var redirect_hops := 0
 var displaying_cached := false
+var background: Node
 @onready var request: HTTPRequest = $Request
 
 func _ready() -> void:
+ if OS.has_feature("web"): request.accept_gzip=false
  profile = get_node_or_null("/root/AnglerSave")
+ background = get_node_or_null("/root/RankingOnline")
+ if background != null: background.scores_uploaded.connect(_background_uploaded)
  %Save.pressed.connect(_save)
  %Close.pressed.connect(close)
  %Refresh.pressed.connect(func(): retry_attempt = 0; $SyncRetry.stop(); _sync())
@@ -38,8 +42,9 @@ func _ready() -> void:
  %Mode.add_tab("อันดับแต่ละแผนที่")
  var config := ConfigFile.new()
  if config.load("res://online.cfg") == OK:
-  sheets_url = str(config.get_value("sheets", "url", config.get_value("server", "url", sheets_url)))
- sheets_url = SheetsConnectionSettings.resolve(sheets_url)
+  supabase_url = str(config.get_value("supabase", "url", supabase_url))
+  supabase_key = str(config.get_value("supabase", "publishable_key", supabase_key))
+ supabase_url = SupabaseConnectionSettings.resolve(supabase_url)
  _mode_changed(0)
 
 func open_for_map(map_id: String) -> void:
@@ -80,21 +85,22 @@ func close() -> void:
   closed.emit()
 
 func _open_connection_settings() -> void:
- %Endpoint.text = sheets_url
- %EndpointMessage.text = "ใช้ที่อยู่ Google Sheets ของ Lakebound ที่ผู้ดูแลให้มา"
+ %Endpoint.text = supabase_url
+ %EndpointMessage.text = "ใช้ที่อยู่ Supabase ของ Lakebound ที่ผู้ดูแลให้มา"
  %EndpointOverlay.show()
 
 func _save_endpoint() -> void:
  if busy: return
- var address := SheetsConnectionSettings.normalize(%Endpoint.text)
- if not SheetsConnectionSettings.valid_url(address):
-  %EndpointMessage.text = "ใส่ Google Apps Script Web App URL ที่ลงท้าย /exec"
+ var address := SupabaseConnectionSettings.normalize(%Endpoint.text)
+ if not SupabaseConnectionSettings.valid_url(address):
+  %EndpointMessage.text = "ใส่ Supabase URL สำหรับระบบอันดับ"
   return
- if SheetsConnectionSettings.save_url(address) != OK:
+ if SupabaseConnectionSettings.save_url(address) != OK:
   %EndpointMessage.text = "บันทึกที่อยู่ไม่ได้ · ลองอีกครั้ง"
   return
- sheets_url = address
- sheets_sync.configure(sheets_url, str(profile.data.identity.id))
+ supabase_url = address
+ if background != null and background.enabled: background.set_connection(supabase_url, supabase_key)
+ ranking_sync.configure(supabase_url, str(profile.data.identity.id))
  _profile_changed()
  %EndpointOverlay.hide()
  _sync()
@@ -102,7 +108,7 @@ func _save_endpoint() -> void:
 func _profile_changed() -> void:
  online = false
  displaying_cached = false
- %Status.text = "สถิติในเครื่อง · ยังไม่ได้เชื่อม Google Sheets" if sheets_url.is_empty() else "สถิติในเครื่อง · กดเชื่อมต่อเพื่ออัปเดตอันดับ"
+ %Status.text = "สถิติในเครื่อง · ยังไม่ได้เชื่อม Supabase" if supabase_url.is_empty() else "สถิติในเครื่อง · กดเชื่อมต่อเพื่ออัปเดตอันดับ"
  _render()
 
 func _save() -> void:
@@ -146,12 +152,12 @@ func _render() -> void:
  var filter := _selected_filter()
  var remote_rows := online or displaying_cached
  var local_best := AnglerIdentity.best(profile.ranking_records(), scope, filter)
- var records: Array = (online_rows if remote_rows else (local_best if sheets_url.is_empty() else [])).slice(0, top_limit)
+ var records: Array = (online_rows if remote_rows else (local_best if supabase_url.is_empty() else [])).slice(0, top_limit)
  var title := "อันดับรวมทุกแผนที่" if scope == "all" else str(RegionCatalog.find(filter).name)
  %ScopeTitle.text = "%s · Top %d" % [title, top_limit]
  %HistorySummary.text = "จับสะสม %d ตัว · ประวัติ 10 ตัวใหญ่สุด/ชนิด" % profile.lifetime_catches()
  %Empty.visible = records.is_empty()
- %Empty.text = "ยังไม่มีสถิติในหมวดนี้ · ออกไปตกปลาตัวแรกกัน" if remote_rows or sheets_url.is_empty() else "ยังเทียบอันดับไม่ได้ในตอนนี้ · แตะแท็บเพื่อลองอีกครั้ง"
+ %Empty.text = "ยังไม่มีสถิติในหมวดนี้ · ออกไปตกปลาตัวแรกกัน" if remote_rows or supabase_url.is_empty() else "ยังเทียบอันดับไม่ได้ในตอนนี้ · แตะแท็บเพื่อลองอีกครั้ง"
  %Personal.text = "ยังไม่มีสถิติของคุณในหมวดนี้"
  if not local_best.is_empty():
   %Personal.text = "สถิติในเครื่องของคุณ · %.3f กก." % float(local_best[0].weight)
@@ -187,41 +193,32 @@ func _cancel_request() -> void:
  $SyncRetry.stop()
 
 func _sync() -> void:
- if busy or sheets_url.is_empty() or profile.data.identity.name.is_empty(): return
- if not SheetsConnectionSettings.valid_url(sheets_url):
-  %Status.text = "ใช้ Google Apps Script Web App URL ที่ลงท้าย /exec"
+ if busy or supabase_url.is_empty() or profile.data.identity.name.is_empty(): return
+ if not SupabaseConnectionSettings.valid_url(supabase_url):
+  %Status.text = "ใช้ Supabase URL สำหรับระบบอันดับ"
   return
- sheets_sync.configure(sheets_url, str(profile.data.identity.id))
+ ranking_sync.configure(supabase_url, str(profile.data.identity.id))
  _show_cached()
  _set_busy(true)
  %Status.text = "อันดับที่บันทึกไว้ · กำลังอัปเดตข้อมูลล่าสุด…" if displaying_cached else "กำลังเชื่อมต่อ…"
- redirect_hops = 0
- var payload := sheets_sync.build(profile, scope, _selected_filter(), top_limit)
- var target := sheets_url
- var method := HTTPClient.METHOD_POST
- var body := JSON.stringify(payload)
- if sheets_sync.read_only:
-  method = HTTPClient.METHOD_GET
-  body = ""
-  target += "?scope=" + str(payload.query.scope).uri_encode() + "&limit=" + str(top_limit)
-  if payload.query.has("version"): target += "&version=" + str(payload.query.version).uri_encode()
- # Apps Script parses postData.contents as JSON regardless of MIME type.
- # A CORS-safelisted type avoids an OPTIONS preflight unsupported by Apps Script.
- var content_type := "text/plain;charset=UTF-8" if OS.has_feature("web") else "application/json"
- var error := request.request(target, ["Content-Type: " + content_type], method, body)
+ # The persistent service is the only uploader when it is active. The open
+ # panel owns an independent read/cache, so filter changes cannot race its batch.
+ var use_background: bool = background != null and background.active_for(profile) and background.endpoint == supabase_url
+ if AccountAuth.enabled and not AccountAuth.signed_in(): use_background=true
+ var payload := ranking_sync.build_read(scope, _selected_filter(), top_limit) if use_background else ranking_sync.build(profile, scope, _selected_filter(), top_limit)
+ # Public reads omit guest credentials. Every RPC uses HTTPS POST.
+ var body := ranking_sync.rpc_body(payload)
+ var headers := PackedStringArray(["Content-Type: application/json", "apikey: " + supabase_key])
+ if AccountAuth.signed_in(): headers.append("Authorization: Bearer "+AccountAuth.access_token)
+ var error := request.request(supabase_url, headers, HTTPClient.METHOD_POST, body)
  if error != OK: _received(HTTPRequest.RESULT_CANT_CONNECT, 0, PackedStringArray(), PackedByteArray())
 
-func _received(result: int, code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
- # Follow only the Google content redirect, as a fresh GET without credentials.
- if code in [301, 302, 303] and redirect_hops < 3:
-  for header in headers:
-   if not header.to_lower().begins_with("location:"): continue
-   var location := header.substr(header.find(":") + 1).strip_edges()
-   if not location.begins_with("https://script.googleusercontent.com/macros/echo?"): break
-   redirect_hops += 1
-   var error := request.request(location, [], HTTPClient.METHOD_GET, "")
-   if error != OK: _received(HTTPRequest.RESULT_CANT_CONNECT, 0, PackedStringArray(), PackedByteArray())
-   return
+func _background_uploaded() -> void:
+ if not visible: return
+ _cancel_request()
+ _sync.call_deferred()
+
+func _received(result: int, code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
  _set_busy(false)
  var data: Variant = null
  if result == HTTPRequest.RESULT_SUCCESS and code == 200 and body.size() <= RankingSnapshot.MAX_RESPONSE_BYTES:
@@ -229,7 +226,7 @@ func _received(result: int, code: int, headers: PackedStringArray, body: PackedB
   if parser.parse(body.get_string_from_utf8()) == OK: data = parser.data
  var api_error := str(data.get("error", "")) if data is Dictionary else ""
  var retryable := result != HTTPRequest.RESULT_SUCCESS or code == 429 or code >= 500 or (code == 200 and (data == null or api_error in ["busy_retry", "write_failed_retry", "refresh_failed_retry", "snapshot_not_ready"]))
- var decoded := sheets_sync.accept(data) if data is Dictionary else {}
+ var decoded := ranking_sync.accept(data) if data is Dictionary else {}
  if decoded.get("upload_only", false):
   if visible: _sync()
   return
@@ -239,10 +236,10 @@ func _received(result: int, code: int, headers: PackedStringArray, body: PackedB
   retry_attempt = 0
   $SyncRetry.stop()
   online_rows = decoded.rows
-  %Status.text = "เชื่อมต่อ Google Sheets แล้ว · สถิติยังไม่ผ่านการรับรองป้องกันโกง"
+  %Status.text = "เชื่อมต่อ Supabase แล้ว · สถิติยังไม่ผ่านการรับรองป้องกันโกง"
  else:
   _show_cached()
-  %Status.text = SheetsConnectionSettings.failure_message(result, code, api_error) + " · แสดงสถิติในเครื่อง"
+  %Status.text = SupabaseConnectionSettings.failure_message(result, code, api_error) + " · แสดงสถิติในเครื่อง"
   if displaying_cached: %Status.text += " · มีอันดับที่บันทึกไว้"
   if retryable and visible and retry_attempt < 3:
    retry_attempt += 1
@@ -254,7 +251,7 @@ func _received(result: int, code: int, headers: PackedStringArray, body: PackedB
  _render()
 
 func _show_cached() -> void:
- var cached := sheets_sync.cached_view(scope, _selected_filter(), top_limit)
+ var cached := ranking_sync.cached_view(scope, _selected_filter(), top_limit)
  displaying_cached = not cached.is_empty()
  if displaying_cached:
   online_rows = cached.rows

@@ -1,0 +1,9 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/auth/account_auth.gd" id="script"]
+[node name="AccountAuth" type="Node"]
+process_mode = 3
+script = ExtResource("script")
+[node name="Request" type="HTTPRequest" parent="."]
+timeout = 15.0
+max_redirects = 0
+body_size_limit = 65536

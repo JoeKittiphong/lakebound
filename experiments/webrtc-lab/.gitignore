@@ -1,0 +1,6 @@
+*.zip
+godot/.godot/
+godot/addons/
+*.log
+.local/
+test-results/

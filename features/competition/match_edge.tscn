@@ -1,0 +1,8 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/competition/match_edge.gd" id="script"]
+[node name="Edge" type="Node"]
+script = ExtResource("script")
+[node name="SessionRequest" type="HTTPRequest" parent="."]
+timeout = 10.0
+body_size_limit = 4096
+max_redirects = 0

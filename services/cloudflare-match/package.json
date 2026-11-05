@@ -1,0 +1,1 @@
+{"name":"lakebound-match-edge","private":true,"type":"module","scripts":{"test":"node --test test/*.test.mjs","dev":"node test/serve.mjs","bundle":"wrangler deploy --dry-run --outdir dist"},"devDependencies":{"wrangler":"4.157.0"}}

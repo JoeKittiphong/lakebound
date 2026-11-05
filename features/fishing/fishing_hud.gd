@@ -13,6 +13,11 @@ signal greet_requested
 signal run_toggled(enabled: bool)
 signal boat_action_requested
 signal boat_exit_requested
+signal boat_use_requested
+signal boat_pack_requested
+signal boat_place_requested
+signal boat_place_cancelled
+signal fishing_perspective_changed(first_person: bool)
 signal configuration_changed(bait: StringName, depth: float)
 
 const F = preload("res://features/fishing/fishing_controller.gd")
@@ -29,6 +34,7 @@ const BAIT_ICONS = [preload("res://assets/ui/shop/equipment_atlas/worm.tres"), p
 @onready var _tension_text: Label = $SafeArea/TensionText
 @onready var _modal_panels: Array[Control] = [$CollectionPanel, $TacklePanel, $MissionPanel, $MapPanel, $FishStoragePanel, $GameSettingsPanel, $SocialPanel]
 var _modal_reported := false
+var competition_mode := false
 var controller: FishingController
 var ecology: PondEcosystem
 var last_state: int = -1
@@ -59,9 +65,13 @@ func _ready() -> void:
 	$MapPanel.spots_changed.connect($SafeArea/Minimap.set_spots)
 	$CollectionPanel.history_requested.connect(_open_species_map)
 	$SafeArea/TopBar/Actions/FishBox.pressed.connect(open_fish_storage)
+	$TacklePanel/DepthSettings/Slider.value_changed.connect(func(value: float):
+		$SafeArea/BaitPanel/Content/DepthRow/Depth.value=value
+		$TacklePanel/DepthSettings/Label.text="ความลึก %.1f ม."%value)
 
 func bind_map(profile: AnglerProfile, player: AnglerPlayer, _definition: PondDefinition) -> void:
 	$SafeArea/Minimap.visible = profile != null
+	$SafeArea/RankingButton.bind(get_node_or_null("/root/RankingOnline") if profile != null else null, str(controller.map_id))
 	$SafeArea/Minimap.bind(player, controller.map_id, ecology)
 	$MapPanel.bind(profile, player, controller.map_id, ecology)
 	$CollectionPanel.map_history_enabled = profile != null
@@ -72,6 +82,7 @@ func open_map() -> void:
 	$MapPanel.open()
 
 func open_map_ranking() -> void:
+	if competition_mode:return
 	if controller == null or controller.profile == null or controller.state not in [F.State.READY, F.State.WAITING, F.State.LOST]:
 		return
 	$SocialPanel.open_for_map(str(controller.map_id))
@@ -85,12 +96,17 @@ func _open_species_map(species_id: String) -> void:
 
 func configure_session(region_id: String, depth_limit: float) -> void:
 	$SafeArea/BaitPanel/Content/DepthRow/Depth.max_value = depth_limit
+	$TacklePanel/DepthSettings/Slider.max_value = depth_limit
 	$TacklePanel.map_id = region_id
 	$MissionPanel.map_id = region_id
 	$FishStoragePanel.map_id = region_id
 
 func bind_economy(profile: AnglerProfile, fishing: FishingController, pond: PondEcosystem, commerce: CommerceGateway) -> void:
 	$TacklePanel.bind(profile, fishing, pond, commerce)
+	$SafeArea/BagDock.bind(profile, fishing)
+	$SafeArea/BagDock.category_requested.connect($TacklePanel.open_category)
+	$SafeArea/BagDock.boat_requested.connect(func():boat_use_requested.emit())
+	$SafeArea/BagDock.fish_requested.connect(open_fish_storage)
 	$MissionPanel.bind(profile)
 	$FishStoragePanel.bind(profile, pond)
 
@@ -197,6 +213,11 @@ func _on_jump_pressed() -> void:
 func _on_run_toggled(enabled: bool) -> void:
 	run_toggled.emit(enabled)
 
+func set_auto_run(active: bool) -> void:
+	var button: Button = $SafeArea/MovementActions/LeftActions/Run
+	button.set_pressed_no_signal(active)
+	button.text = "หยุดวิ่ง" if active else "วิ่ง"
+
 func _on_wave_pressed() -> void:
 	greet_requested.emit()
 
@@ -205,12 +226,15 @@ func set_boat_state(nearby: bool, aboard: bool, driving: bool, can_exit: bool, c
 	_boat_nearby = nearby
 	_boat_driving = driving
 	$SafeArea/BoatActions.visible = nearby or aboard
-	$SafeArea/BoatActions/Action.text = "ตกปลา" if driving else "ขับเรือ"
+	$SafeArea/BoatActions/Action.text = "ตกปลา / เดิน" if driving else "ขับเรือ"
 	$SafeArea/BoatActions/Action.disabled = not controls_enabled or not can_stand
 	$SafeArea/BoatActions/Action.tooltip_text = "พื้นที่เหนือเรือไม่พอให้ยืน — ขับออกจากใต้สิ่งกีดขวางก่อน" if not can_stand else "หยุดเรือและยืนตกปลา" if driving else "นั่งขับเรือ"
 	$SafeArea/BoatActions/Exit.visible = aboard
 	$SafeArea/BoatActions/Exit.disabled = not can_exit or not controls_enabled
-	$SafeArea/BoatActions/Exit.tooltip_text = "ลงเรือที่ฝั่งใกล้ที่สุด" if can_exit else "ขับเรือเข้าใกล้ฝั่งก่อนลงเรือ"
+	$SafeArea/BoatActions/Exit.tooltip_text = "ลงฝั่งใกล้เรือ หรือลงน้ำเพื่อว่ายน้ำ" if can_exit else "ยังไม่มีพื้นที่ว่างให้ลงจากเรือ"
+	$SafeArea/BoatActions/Pack.disabled = not controls_enabled or driving
+	$SafeArea/BoatActions/Pack.tooltip_text = "เลิกขับก่อนเก็บเรือ" if driving else "เก็บเรือกลับช่องอุปกรณ์"
+	$SafeArea/MovementActions/Jump.visible = not nearby and not aboard
 	$SafeArea/MovementActions.visible = not aboard and controller.state in [F.State.READY, F.State.LOST]
 	$SafeArea/RodJoystick.visible = not driving
 	if driving:
@@ -225,6 +249,15 @@ func _on_boat_action_pressed() -> void:
 
 func _on_boat_exit_pressed() -> void:
 	boat_exit_requested.emit()
+
+func _on_boat_pack_pressed() -> void:
+	boat_pack_requested.emit()
+
+func _on_boat_place_pressed() -> void:
+	boat_place_requested.emit()
+
+func _on_boat_place_cancelled() -> void:
+	boat_place_cancelled.emit()
 
 func is_collection_open() -> bool:
 	for panel in _modal_panels:
@@ -245,9 +278,10 @@ func _process(delta: float) -> void:
 	$SafeArea/RankingButton.disabled = controller.profile == null or state not in [F.State.READY, F.State.WAITING, F.State.LOST]
 	$SafeArea/Minimap.disabled = state not in [F.State.READY, F.State.WAITING, F.State.LOST]
 	$SafeArea/Minimap.visible = controller.profile != null and state in [F.State.READY, F.State.WAITING, F.State.LOST] and not is_collection_open()
+	$SafeArea/RankingButton.visible = not competition_mode and $SafeArea/Minimap.visible
 	_refresh_cast_reason(state)
 	_refresh_fish_box()
-	_mission_hud.refresh(controller.profile, controller.profile != null and not is_tutorial_active() and state == F.State.READY and not is_collection_open(), delta)
+	_mission_hud.refresh(controller.profile, not competition_mode and controller.profile != null and not is_tutorial_active() and state == F.State.READY and not is_collection_open(), delta)
 	$SafeArea/LureAction.visible = false
 	var lure_mode: bool = controller.using_lure() and state == F.State.WAITING
 	var rhythm_panel: Control = $SafeArea/Status/Content/LureRhythm
@@ -270,7 +304,7 @@ func _process(delta: float) -> void:
 		$SafeArea/LureHint.visible = true
 		$SafeArea/LureHint.text = "ปลาหนี →  หักคัน ←" if lateral > 0.2 else ("ปลาหนี ←  หักคัน →" if lateral < -0.2 else "ปลาประคองตัว • อ่านแรงตึง")
 	if controller.profile != null:
-		$SafeArea/TopBar/Actions/TackleButton.visible = state in [F.State.READY, F.State.RESULT, F.State.LOST] and not $SafeArea/FirstCatch.active
+		$SafeArea/TopBar/Actions/TackleButton.visible = false
 		$SafeArea/BaitDock/BaitButton.tooltip_text = controller.profile.equipment_name("bait")
 		$SafeArea/BaitDock/BaitButton.icon = (controller.profile.equipped("bait").shop_icon if controller.profile.equipped("bait") != null else null)
 		if state == F.State.RESULT:
@@ -343,6 +377,8 @@ func _align_tension_meter() -> void:
 
 	var info: Control = $SafeArea/LineInfo
 	info.global_position = Vector2(rod_rect.get_center().x - info.size.x * 0.5, rod_rect.position.y - info.size.y - 16.0)
+	var boat_actions: Control = $SafeArea/BoatActions
+	boat_actions.global_position = Vector2(rod_rect.get_center().x - boat_actions.size.x * .5,rod_rect.position.y - boat_actions.size.y - 16.0)
 
 func _refresh_state(state: int) -> void:
 	if state != F.State.READY:
@@ -365,7 +401,8 @@ func _refresh_state(state: int) -> void:
 	rod_joystick.set_battle_mode(state in [F.State.WAITING, F.State.BITE, F.State.FIGHT])
 	$SafeArea/TopBar/Actions/CollectionButton.visible = state == F.State.READY
 	settings_panel.hide()
-	$SafeArea/BaitDock.visible = state == F.State.READY
+	$SafeArea/BaitDock.visible = false # Equipment selection lives in BagDock.
+	$SafeArea/BagDock.visible = state in [F.State.READY,F.State.LOST]
 	$SafeArea/Status.visible = state not in [F.State.READY, F.State.RESULT]
 	$SafeArea/EcologyPanel.hide()
 	meter.visible = battle
@@ -475,6 +512,7 @@ func sync_equipment() -> void:
 	$SafeArea/BaitDock/BaitButton.tooltip_text = controller.profile.equipment_name("bait")
 
 func _on_missions_pressed() -> void:
+	if competition_mode:return
 	if controller == null or controller.profile == null or controller.state != F.State.READY or $SafeArea/FirstCatch.active:
 		return
 	$MissionPanel.open()
@@ -484,8 +522,11 @@ func notify_missions_completed(ids: Array[String]) -> void:
 
 func _apply_fishing_visibility(state: int) -> void:
 	var fishing_mode := state in [F.State.CASTING, F.State.WAITING, F.State.BITE, F.State.FIGHT]
-	$SafeArea/BaitDock.visible = state == F.State.READY and not _boat_driving
-	$SafeArea/OrbitButton.visible = not fishing_mode and state != F.State.RESULT
+	$SafeArea/RankingButton.visible = not competition_mode and not fishing_mode and state in [F.State.READY, F.State.LOST] and controller.profile != null
+	$SafeArea/PerspectiveButton.visible = true
+	$SafeArea/BaitDock.visible = false # Equipment selection lives in BagDock.
+	$SafeArea/BagDock.visible = state in [F.State.READY,F.State.LOST] and not _boat_driving
+	$SafeArea/OrbitButton.visible = false
 	$SafeArea/BoatActions.visible = not fishing_mode and (_boat_nearby or _on_boat)
 	$SafeArea/TopBar.visible = not fishing_mode
 	$SafeArea/MovementActions.visible = not fishing_mode and not _on_boat and state in [F.State.READY, F.State.LOST]
@@ -497,6 +538,10 @@ func _apply_fishing_visibility(state: int) -> void:
 		$SafeArea/BossToast.hide()
 		$SafeArea/RodInstructions.hide()
 		settings_panel.hide()
+
+func _on_perspective_toggled(first_person: bool) -> void:
+	$SafeArea/PerspectiveButton.text = "1st" if first_person else "3rd"
+	fishing_perspective_changed.emit(first_person)
 
 func _refresh_fish_health(state: int) -> void:
 	var active := state == F.State.FIGHT and controller.active_fish != null
@@ -514,3 +559,11 @@ func _refresh_fish_health(state: int) -> void:
 		$SafeArea/LureHint.text = "แรงเกินสเปคเอ็น! ↑ ผ่อนสายก่อนสายขาด"
 	else:
 		$SafeArea/LureHint.text = "ประคองเหลือง/แดงเพื่อลดเลือด • แดงเสี่ยงสายขาด"
+
+func set_competition_mode(enabled: bool) -> void:
+	competition_mode = enabled
+	if enabled:
+		$SafeArea/RankingButton.hide()
+		$SafeArea/TopBar/Actions/MissionButton.hide()
+		$SafeArea/MissionTracker.hide()
+		$SafeArea/MissionToast.hide()

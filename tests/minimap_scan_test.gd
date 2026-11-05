@@ -126,6 +126,7 @@ func run() -> void:
 	expect(uv.is_equal_approx(Vector2.ZERO),"map-edge UV is not clamped or wrapped to the opposite shore")
 	mini.bind(player,"river",pond)
 	player.global_position = boat.global_position + Vector3(2,0,0)
+	boat.set_deployed(true) # Scanner/passenger fixture, not a free gameplay boat.
 	expect(boat.board(player),"fixture boards the real boat")
 	boat.global_position += Vector3(15,0,-6)
 	boat.rotation.y = .7

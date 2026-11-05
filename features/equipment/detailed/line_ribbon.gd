@@ -12,6 +12,8 @@ extends MeshInstance3D
 @export var control_points: PackedVector3Array = PackedVector3Array()
 var rendered_triangles: int = 0
 var endpoint_error: float = 0.0
+var _previous_geometry: Array = []
+var mesh_rebuilds := 0
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint(): refresh()
@@ -26,6 +28,10 @@ func refresh() -> void:
 	if anchors.size() < 2:
 		anchors = PackedVector3Array([start.global_position, end.global_position])
 	visible = true
+	var geometry: Array = [anchors, global_transform, camera.global_transform, camera.projection, camera.size, camera.fov, camera.get_viewport().get_visible_rect().size, width, maximum_width, minimum_pixel_width, slack, curved_segments]
+	if mesh != null and geometry == _previous_geometry: return
+	_previous_geometry = geometry.duplicate(true)
+	mesh_rebuilds += 1
 	var tool := SurfaceTool.new()
 	tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var points: Array[Vector3] = []

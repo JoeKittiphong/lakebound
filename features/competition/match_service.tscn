@@ -1,0 +1,18 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/competition/match_service.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/competition/match_webrtc.tscn" id="rtc"]
+[ext_resource type="PackedScene" path="res://features/competition/match_edge.tscn" id="edge"]
+[ext_resource type="Script" path="res://features/competition/match_friends.gd" id="friends"]
+[ext_resource type="PackedScene" path="res://features/competition/invite_notice.tscn" id="invite_notice"]
+[node name="Competition" type="Node"]
+process_mode = 3
+script = ExtResource("script")
+[node name="Request" type="HTTPRequest" parent="."]
+timeout = 12.0
+body_size_limit = 65536
+max_redirects = 0
+[node name="WebRTC" parent="." instance=ExtResource("rtc")]
+[node name="Edge" parent="." instance=ExtResource("edge")]
+[node name="Friends" type="Node" parent="."]
+script = ExtResource("friends")
+[node name="InviteNotice" parent="." instance=ExtResource("invite_notice")]

@@ -1,6 +1,10 @@
 # โปรไฟล์และกระดานอันดับ Lakebound
 
-ปรับปรุง 28 ตุลาคม 2026: ใช้ Google Sheets ผ่าน Google Apps Script เท่านั้น
+สถานะ 2 พฤศจิกายน 2026: ย้ายตัวตนและอันดับไป Supabase แล้ว เกมรุ่นเดิมใช้ URL เดิมผ่าน compatibility bridge
+ดู [แผนย้ายและผลทดสอบ](supabase-migration.md) และ [API ปัจจุบัน](../services/supabase/README.md)
+เนื้อหาด้านล่างเป็นบันทึกระบบ Sheets เดิมสำหรับการอ้างอิงและกู้คืน
+
+ปรับปรุงเดิม 28 ตุลาคม 2026: ใช้ Google Sheets ผ่าน Google Apps Script เท่านั้น
 ซอร์สบริการอยู่ใน `services/google_sheets/` และไม่มี Python API หรือ SQL backend
 ในตัวเกมอีกต่อไป ดู [API และวิธีดูแล](../services/google_sheets/README.md)
 

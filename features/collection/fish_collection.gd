@@ -155,6 +155,22 @@ func restore_archive(stats_by_species: Dictionary, journal: Array) -> bool:
  _events_dirty = true
  return save_records()
 
+func replace_cloud_archive(stats_by_species: Dictionary, journal: Array) -> bool:
+ if incompatible_save:return false
+ var old_records:=records.duplicate(true)
+ var old_events:=_catch_events.duplicate()
+ records=stats_by_species.duplicate(true)
+ _catch_events={}
+ for record in journal:_catch_events[str(record.catch_id)]=0
+ _events_initialized=true
+ _events_dirty=true
+ if not save_records():
+  records=old_records
+  _catch_events=old_events
+  return false
+ changed.emit()
+ return true
+
 func trim_event_history(data: Dictionary) -> void:
  # Only compact after the profile durably acknowledged the collection write.
  if _catch_events.size() <= 512 or not data.history.pending.is_empty(): return

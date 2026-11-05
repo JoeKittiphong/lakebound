@@ -36,6 +36,8 @@ func run() -> void:
  current_scene = scene
  player = scene.get_node("Player")
  boat = scene.get_node("FishingBoat")
+ # Transport fixture only; purchased-boat deployment is covered separately.
+ boat.set_deployed(true)
  hud = scene.get_node("HUD/FishingHUD")
  fishing = scene.get_node("FishingController")
  fishing.set_physics_process(false)
@@ -100,7 +102,7 @@ func run() -> void:
  Input.action_press("move_forward")
  await ticks(20)
  Input.action_release("move_forward")
- expect(boat.velocity.length() < 0.01 and player.global_position.distance_to(boat.fishing_anchor.global_position) < 0.05, "walking input cannot drift standing passenger off deck")
+ expect(boat.velocity.length() < 0.01 and player.boat == boat and absf(boat.deck_position.x) <= 0.86 and boat.deck_position.z >= boat.deck_bounds.position.y and boat.deck_position.z <= boat.deck_bounds.end.y, "walking changes fishing position without leaving the deck")
  await capture("standing")
  for size in [Vector2i(1024, 768), Vector2i(1600, 720)]:
   root.size = size
@@ -144,8 +146,11 @@ func run() -> void:
  boat.global_position = Vector3(0, -0.18, 0)
  boat.forward_speed = 0
  await ticks(25)
- expect(not boat.disembark(), "disembarking in deep open water is refused")
- expect(hud.get_node("SafeArea/BoatActions/Exit").disabled, "shore exit button disabled far from land")
+ expect(not hud.get_node("SafeArea/BoatActions/Exit").disabled, "exit button allows swimming in open water")
+ expect(boat.disembark(), "disembarking in deep open water enters the water")
+ await ticks(6)
+ expect(player.swimming and player.boat == null and boat.passenger == null, "deep-water exit restores free swimming")
+ expect(boat.board(player), "swimmer can board the same boat again")
  var roof := StaticBody3D.new()
  var roof_collision := CollisionShape3D.new()
  var roof_shape := BoxShape3D.new()

@@ -9,15 +9,22 @@ the real controller-to-water connection. It renders isolated and river previews 
 `features/fishing/ui/surface_spray_burst.tscn` and thresholds on
 `features/fishing/surface_spray.tscn`.
 
-## Google Sheets (28 October 2026)
+## Supabase (2 November 2026)
+
+`background_ranking` covers persistent catch-event uploads, concurrency, offline
+retry/restart and map cache isolation. `map_leader_visual` covers the minimap
+leader's layout and touch navigation. `background_ranking_live` is an opt-in,
+score-free real HTTPS check. See [verification](../docs/background-ranking-sync.md).
 
 `node services/google_sheets/test-ranking.cjs` exercises Apps Script handlers
 against in-memory Sheets/Cache/Properties doubles without Google traffic.
-`ranking_snapshot`, `sheets_settings`, `sheets_ranking_sync`, `social_lifecycle`
-cover input bounds, old URL migration, cache corruption, failed acknowledgements,
+`ranking_snapshot`, `supabase_settings`, `supabase_ranking_sync`, `social_lifecycle`
+cover input bounds, ignoring retired Sheets URLs, cache corruption, failed acknowledgements,
 retries and hidden-panel work. `ranking_maps`, `cached_ranking`, `social_visual`,
-`sheets_settings_visual` cover authored UI at multiple viewport sizes offline.
-`sheets_live_http` remains an opt-in read-only test with `LAKEBOUND_QA_URL`.
+`supabase_settings_visual` cover authored UI at multiple viewport sizes offline.
+`supabase_live_http` is an opt-in read-only test using the configured Supabase
+endpoint (optional `LAKEBOUND_QA_URL` override). PostgreSQL, bridge, migration
+parity and cutover checks are in [services/supabase](../services/supabase/README.md).
 The retired custom-server integration tests have been removed.
 Run `python tools/run_tests.py --list` to verify every source test is registered.
 

@@ -4,6 +4,11 @@
 [ext_resource type="Script" path="res://features/menu/main_menu.gd" id="script"]
 [ext_resource type="Script" path="res://shared/ui/safe_area.gd" id="safe"]
 [ext_resource type="PackedScene" path="res://features/social/social_panel.tscn" id="social"]
+[ext_resource type="PackedScene" path="res://features/competition/match_panel.tscn" id="competition"]
+[ext_resource type="PackedScene" path="res://features/auth/login_panel.tscn" id="login"]
+[ext_resource type="PackedScene" path="res://features/economy/tackle_panel.tscn" id="shop"]
+[ext_resource type="Script" path="res://features/economy/commerce_gateway.gd" id="commerce"]
+[ext_resource type="Theme" path="res://features/menu/main_menu_button_theme.tres" id="button_theme"]
 [sub_resource type="Gradient" id="header_gradient"]
 colors = PackedColorArray(0.87, 0.96, 1, 0.85, 0.87, 0.96, 1, 0)
 [sub_resource type="GradientTexture2D" id="header_fade"]
@@ -79,7 +84,7 @@ anchor_left = 1
 anchor_top = 0
 anchor_right = 1
 anchor_bottom = 0
-offset_left = -244
+offset_left = -440
 offset_top = 0
 offset_right = 0
 offset_bottom = 76
@@ -88,23 +93,24 @@ grow_vertical = 2
 
 [node name="Row" type="HBoxContainer" parent="SafeArea/Profile"]
 layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Badge" type="Label" parent="SafeArea/Profile/Row"]
-layout_mode = 2
-mouse_filter = 2
-text = "01"
-theme_override_font_sizes/font_size = 26
-theme_override_colors/font_color = Color(0.06, 0.46, 0.54, 1)
-
+theme_override_constants/separation = 0
 
 [node name="Name" type="Label" parent="SafeArea/Profile/Row"]
 layout_mode = 2
 mouse_filter = 2
-text = "นักตกปลามือใหม่"
+size_flags_horizontal = 3
+text = "ชื่อผู้เล่น"
+text_overrun_behavior = 3
+horizontal_alignment = 2
 theme_override_font_sizes/font_size = 19
 theme_override_colors/font_color = Color(0.04, 0.22, 0.28, 1)
 
+[node name="Level" type="Label" parent="SafeArea/Profile/Row"]
+layout_mode = 2
+mouse_filter = 2
+text = " - นักตกปลา Lv.1"
+theme_override_font_sizes/font_size = 19
+theme_override_colors/font_color = Color(0.06, 0.46, 0.54, 1)
 
 [node name="PlayCard" type="PanelContainer" parent="SafeArea"]
 layout_mode = 1
@@ -185,6 +191,8 @@ theme_override_constants/outline_size = 6
 horizontal_alignment = 1
 
 [node name="PlayButton" type="Button" parent="SafeArea/PlayCard/Content"]
+theme = ExtResource("button_theme")
+theme_override_constants/outline_size = 0
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 1
 anchor_top = 1.0
@@ -196,14 +204,7 @@ offset_right = -80.0
 offset_bottom = -22.0
 text = "เริ่มตกปลา    →"
 
-theme_override_colors/font_outline_color = Color(0.015,0.07,0.08,1)
-theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 25
-theme_override_colors/font_hover_color = Color(1,0.9,0.48,1)
-theme_override_styles/normal = SubResource("transparent")
-theme_override_styles/hover = SubResource("transparent")
-theme_override_styles/pressed = SubResource("transparent")
-theme_override_styles/disabled = SubResource("transparent")
 
 [node name="Build" type="Label" parent="SafeArea/PlayCard/Content"]
 layout_mode = 1
@@ -248,12 +249,14 @@ theme_override_colors/font_color = Color(0.04, 0.22, 0.28, 1)
 [node name="Version" type="Label" parent="SafeArea/BottomNote"]
 layout_mode = 2
 mouse_filter = 2
-text = "TEST BUILD 0.1.26   /   LAKEBOUND"
+text = "TEST BUILD 0.1.29   /   LAKEBOUND"
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.17, 0.34, 0.39, 1)
 
 
 [node name="PrivacyButton" type="Button" parent="SafeArea"]
+theme = ExtResource("button_theme")
+theme_override_constants/outline_size = 0
 layout_mode = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -267,6 +270,8 @@ tooltip_text = "เปิดในเบราว์เซอร์"
 theme_override_font_sizes/font_size = 17
 
 [node name="SocialButton" type="Button" parent="SafeArea"]
+theme = ExtResource("button_theme")
+theme_override_constants/outline_size = 0
 layout_mode = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -277,9 +282,55 @@ offset_bottom = 202.0
 text = "โปรไฟล์ / อันดับปลา"
 [node name="SocialPanel" parent="." instance=ExtResource("social")]
 
+[node name="CompetitionButton" type="Button" parent="SafeArea"]
+theme = ExtResource("button_theme")
+theme_override_constants/outline_size = 0
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -290.0
+offset_top = 210.0
+offset_right = 0.0
+offset_bottom = 262.0
+text = "แข่งขันกับเพื่อน · 2–5 คน"
+
+[node name="MatchPanel" parent="." instance=ExtResource("competition")]
+
+[node name="AccountButton" type="Button" parent="SafeArea"]
+theme = ExtResource("button_theme")
+theme_override_constants/outline_size = 0
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -290.0
+offset_top = 270.0
+offset_right = 0.0
+offset_bottom = 322.0
+text = "บัญชี Google"
+
+[node name="LoginPanel" parent="." instance=ExtResource("login")]
+
+[connection signal="pressed" from="SafeArea/AccountButton" to="LoginPanel" method="open"]
+
+[connection signal="pressed" from="SafeArea/CompetitionButton" to="." method="_on_competition_pressed"]
+
 [connection signal="pressed" from="SafeArea/PlayCard/Content/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="SafeArea/PrivacyButton" to="." method="_on_privacy_pressed"]
 
 [connection signal="region_selected" from="SafeArea/PlayCard/Content/MapCarousel" to="." method="_select_region"]
 
 [connection signal="pressed" from="SafeArea/SocialButton" to="SocialPanel" method="open"]
+
+[node name="ShopButton" type="Button" parent="SafeArea"]
+theme = ExtResource("button_theme")
+theme_override_constants/outline_size = 0
+layout_mode = 1
+offset_left = 16.0
+offset_top = 180.0
+offset_right = 306.0
+offset_bottom = 238.0
+text = "ร้านค้า / เตรียมอุปกรณ์"
+[node name="CommerceGateway" type="Node" parent="."]
+script = ExtResource("commerce")
+[node name="ShopPanel" parent="." instance=ExtResource("shop")]
+[connection signal="pressed" from="SafeArea/ShopButton" to="ShopPanel" method="open"]

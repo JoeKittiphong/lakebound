@@ -9,7 +9,17 @@ extends Node3D
 @onready var hud: FishingHUD = $HUD/FishingHUD
 var _modal_active := false
 var _previous_pause := false
+var _shop_render_suspended := false
+var _previous_disable_3d := false
+var fishing_first_person := false
+const Travel = preload("res://features/gameplay/map_travel_state.gd")
+const BoatLoadout = preload("res://features/gameplay/boat_loadout.gd")
+var boats: RefCounted = BoatLoadout.new()
+var _travel_ready := false
+var _map_saved_for_exit := false
 var _mission_region_ready := false
+@export_range(0.5, 1.0, 0.05) var web_3d_scale := 0.75
+@export_range(10.0, 75.0) var web_shadow_distance := 35.0
 @export var economy_enabled := false
 var profile: AnglerProfile
 @export var map_id := "river"
@@ -19,6 +29,10 @@ var _boss_toast := 0.0
 @onready var vessel: FishingBoat = get_node_or_null("FishingBoat")
 
 func _notification(what: int) -> void:
+ if what in [NOTIFICATION_APPLICATION_FOCUS_OUT,NOTIFICATION_APPLICATION_PAUSED] and is_node_ready() and boats.placing:
+  boats.cancel()
+ if what in [NOTIFICATION_APPLICATION_PAUSED, NOTIFICATION_WM_CLOSE_REQUEST] and is_node_ready():
+  _save_map_state()
  if what in [NOTIFICATION_APPLICATION_FOCUS_OUT, NOTIFICATION_APPLICATION_PAUSED] and is_instance_valid(camera_rig):
   camera_rig.reset_input()
   if is_instance_valid(fishing):
@@ -33,6 +47,12 @@ func _notification(what: int) -> void:
   get_tree().quit()
 
 func _ready() -> void:
+ if OS.has_feature("web"):
+  get_viewport().scaling_3d_scale = web_3d_scale
+  _limit_web_shadows($World)
+ AnglerSave.shopping_locked=true
+ if not Competition.room.is_empty() and Competition.room.get("map","")==map_id:
+  economy_enabled=false
  camera_rig.configure_fishing_view(player, fishing)
  hud.configure_session(map_id, maximum_fishing_depth)
  fishing.map_id = map_id
@@ -83,6 +103,7 @@ func _ready() -> void:
  hud.bind(fishing, pond)
  hud.bind_map(profile, player, $World.definition)
  hud.orbit_requested.connect(camera_rig.set_orbiting)
+ hud.fishing_perspective_changed.connect(_on_fishing_perspective_changed)
  hud.orbit_dragged.connect(camera_rig.drag_orbit)
  if profile != null:
   _start_missions_if_ready()
@@ -92,16 +113,26 @@ func _ready() -> void:
  hud.configuration_changed.connect(_on_configuration_changed)
  hud.back_requested.connect(_on_back_pressed)
  hud.collection_visibility_changed.connect(_on_collection_visibility_changed)
+ hud.get_node("TacklePanel").visibility_changed.connect(_sync_shop_rendering)
  fishing.cast_started.connect(func():
   if not fishing.is_drop_method(): player.play_cast(fishing.tuning.cast_duration))
  fishing.fish_landed.connect(_on_fish_landed)
  fishing.state_changed.connect(_on_fishing_state_changed)
  _on_fishing_state_changed()
 
+ $MatchSession.setup(self)
+ boats.setup(self)
+
+ _travel_ready = profile == null or profile.data.travel.get(map_id,{}).is_empty()
+ if not _travel_ready: _restore_map_state.call_deferred()
+
  if profile != null and not profile.data.pending.is_empty():
   hud.open_tackle.call_deferred()
 
 func _on_fish_landed(fish: FishState) -> void:
+ if $MatchSession.active:
+  $MatchSession.landed(fish)
+  return
  var outcome: Dictionary = {}
  var error: String = collection.save_error
  if profile != null:
@@ -129,13 +160,27 @@ func _on_view_changed(yaw: float) -> void:
  fishing.aim_yaw = yaw
 
 func _on_fishing_state_changed() -> void:
- camera_rig.set_fishing_view(fishing.state in [FishingController.State.WAITING, FishingController.State.BITE, FishingController.State.FIGHT])
+ _refresh_fishing_perspective()
  player.input_enabled = fishing.state != fishing.State.RESULT
  player.set_fighting(fishing.state == fishing.State.FIGHT)
  player.set_fishing_animation_state(fishing.state, maxf(0.0, fishing.rod_input.y), fishing.tension)
  camera_rig.enabled = fishing.state != fishing.State.RESULT and not _modal_active
 
+func _on_fishing_perspective_changed(first_person: bool) -> void:
+ fishing_first_person = first_person
+ _refresh_fishing_perspective()
+
+func _refresh_fishing_perspective() -> void:
+ # Keep traversal/cast animation and the recovered rig in third person.
+ # The button stores a preference, applied only once the bait is in the water.
+ var deployed: bool = fishing.state in [FishingController.State.WAITING, FishingController.State.BITE, FishingController.State.FIGHT]
+ camera_rig.set_fishing_view(fishing_first_person and deployed)
+
 func _process(_delta: float) -> void:
+ boats.update()
+ if _modal_active or player.fishing_active or hud.is_aiming() or player.swimming or player.boat != null or not player.input_enabled:
+  player.run_requested = false
+ hud.set_auto_run(player.run_requested)
  hud.set_traversal_state(player.swimming, player.can_fish(), player.input_enabled)
  if vessel != null:
   hud.set_boat_state(vessel.can_board(player), player.boat != null, player.boat_driving(), vessel.exit_point.is_finite(), player.input_enabled and fishing.state != FishingController.State.RESULT, not player.boat_driving() or vessel.can_stand_to_fish())
@@ -161,7 +206,7 @@ func _process(_delta: float) -> void:
  player.set_fishing_animation_state(fishing.state, maxf(0.0, fishing.rod_input.y), fishing.tension)
 
 func _on_boat_action() -> void:
- if vessel == null or _modal_active or fishing.state == FishingController.State.RESULT:
+ if vessel == null or not vessel.deployed or _modal_active or fishing.state == FishingController.State.RESULT:
   return
  if player.boat == null:
   vessel.board(player)
@@ -175,7 +220,7 @@ func _on_boat_action() -> void:
 func _on_boat_exit() -> void:
  if vessel == null or player.boat == null or _modal_active or fishing.state == FishingController.State.RESULT:
   return
- if vessel.find_shore_exit().is_finite():
+ if vessel.find_exit().is_finite():
   fishing.cancel()
   vessel.disembark()
 
@@ -188,49 +233,84 @@ func _on_swimming_changed(active: bool) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
  if event.is_action_pressed("cancel_cast"):
+  if boats.placing:
+   boats.cancel()
+   get_viewport().set_input_as_handled()
+   return
   fishing.cancel()
   get_viewport().set_input_as_handled()
 
 func _on_aim_released() -> void:
+ if $MatchSession.active and not $MatchSession.can_cast(): return
  if fishing.state == fishing.State.READY:
   fishing.cast()
 
 func _on_configuration_changed(bait: StringName, depth: float) -> void:
  if fishing.state == fishing.State.READY:
+  if $MatchSession.active: $MatchSession.select_bait(str(bait))
   if profile == null:
    fishing.selected_bait = bait
   fishing.selected_depth = depth
 
 func _on_collection_visibility_changed(opened: bool) -> void:
+ if opened and boats.placing: boats.cancel()
  camera_rig.reset_input()
  if opened and not _modal_active:
+  player.run_requested = false
+  hud.set_auto_run(false)
   fishing.lure_input.reset()
   fishing.lure_holding = false
   _previous_pause = get_tree().paused
   _modal_active = true
-  get_tree().paused = true
+  get_tree().paused = not $MatchSession.active
  elif not opened and _modal_active:
   get_tree().paused = _previous_pause
   _modal_active = false
  _on_fishing_state_changed()
 
 func _exit_tree() -> void:
+ if _shop_render_suspended:
+  get_viewport().disable_3d = _previous_disable_3d
+ AnglerSave.shopping_locked=false
+ if profile != null: profile.boat_in_use = false
  # Persistent services must not refresh child panels while the session's
  # children are already detached and this final population save emits changed.
  if is_instance_valid(profile) and profile.changed.is_connected(_refresh_profile):
   profile.changed.disconnect(_refresh_profile)
  if profile != null and is_instance_valid(pond):
-  profile.store_pond(map_id, pond.snapshot())
+  if not _map_saved_for_exit: _save_map_state()
  if _modal_active:
   get_tree().paused = _previous_pause
 
 func _on_back_pressed() -> void:
+ if boats.placing:
+  boats.cancel()
+  return
+ if $MatchSession.active:
+  $MatchHUD/MatchPanel.open()
+  return
  if hud.close_top_panel():
   return
  fishing.cancel()
  if fishing.state == FishingController.State.RESULT:
   return
+ if not _save_map_state():
+  fishing.feedback = profile.save_error
+  return
+ _map_saved_for_exit = true
  get_tree().change_scene_to_file(menu_path)
+
+func _save_map_state() -> bool:
+ if profile == null or not is_instance_valid(pond): return true
+ if not _travel_ready: return profile.store_pond(map_id,pond.snapshot())
+ return profile.store_map_state(map_id,pond.snapshot(),Travel.capture(player,vessel,camera_rig))
+
+func _restore_map_state() -> void:
+ # Let physics register the map, bridges and boat before testing saved positions.
+ await get_tree().physics_frame
+ if not is_inside_tree() or profile == null: return
+ Travel.restore(profile.data.travel.get(map_id,{}),player,vessel,camera_rig)
+ _travel_ready = true
 
 func _start_missions_if_ready() -> void:
  _track_current_region()
@@ -260,3 +340,20 @@ func _refresh_profile() -> void:
  if boss != null:
   var discovered: bool = collection.stats(boss.species.id).count > 0
   hud.set_boss_notice("จ้าวบ่อ: %s — %.2f กก." % [boss.species.display_name if discovered else "???", boss.weight])
+
+func _limit_web_shadows(node: Node) -> void:
+ if node is DirectionalLight3D:
+  node.directional_shadow_max_distance = minf(node.directional_shadow_max_distance, web_shadow_distance)
+ for child in node.get_children(): _limit_web_shadows(child)
+
+func _sync_shop_rendering() -> void:
+ # The opaque, full-screen shop owns independent 3D viewports. Suspend only
+ # this viewport's world; online simulation and shop input must keep running.
+ var covered: bool = hud.get_node("TacklePanel").is_visible_in_tree()
+ if covered == _shop_render_suspended: return
+ if covered:
+  _previous_disable_3d = get_viewport().disable_3d
+  get_viewport().disable_3d = true
+ else:
+  get_viewport().disable_3d = _previous_disable_3d
+ _shop_render_suspended = covered

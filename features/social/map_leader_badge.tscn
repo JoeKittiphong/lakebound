@@ -1,0 +1,58 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/social/map_leader_badge.gd" id="script"]
+[sub_resource type="StyleBoxFlat" id="normal"]
+bg_color = Color(0.025, 0.10, 0.13, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.65, 0.68, 0.7)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+[sub_resource type="StyleBoxFlat" id="hover"]
+bg_color = Color(0.06, 0.23, 0.27, 0.95)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+[node name="MapLeaderBadge" type="Button"]
+custom_minimum_size = Vector2(196, 86)
+focus_mode = 0
+script = ExtResource("script")
+theme_override_styles/normal = SubResource("normal")
+theme_override_styles/disabled = SubResource("normal")
+theme_override_styles/hover = SubResource("hover")
+theme_override_styles/pressed = SubResource("hover")
+tooltip_text = "ดูอันดับแผนที่"
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 7.0
+offset_right = -12.0
+offset_bottom = -7.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+[node name="Title" type="Label" parent="Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.40, 1)
+theme_override_font_sizes/font_size = 15
+text = "อันดับ 1 · แผนที่นี้"
+[node name="Player" type="Label" parent="Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 19
+text = "กำลังตรวจอันดับ…"
+text_overrun_behavior = 3
+[node name="Weight" type="Label" parent="Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.70, 0.91, 0.92, 1)
+theme_override_font_sizes/font_size = 15
+text = "แตะดูอันดับแผนที่"

@@ -3,6 +3,8 @@ extends FishingRodVisual
 @export var rod_id: String = "01_spinning"
 @export var rod_spec: RodSpec
 @export_file("*.json") var config_path: String = "res://features/equipment/detailed/rods.json"
+var _guide_frame := -1
+var _guide_transform := Transform3D.IDENTITY
 var config: Dictionary
 var rig: Skeleton3D
 var guide_points: PackedVector3Array = PackedVector3Array()
@@ -104,6 +106,8 @@ func skin_point(record: Dictionary) -> Vector3:
   if bone >= 0: point += (rig.get_bone_global_pose(bone) * rig.get_bone_global_rest(bone).affine_inverse() * rest) * float(item["weight"])
  return rig.global_transform * point
 func update_guides() -> void:
+ _guide_frame = Engine.get_process_frames()
+ _guide_transform = global_transform
  guide_points.clear()
  for guide in config["guides"]: guide_points.append(skin_point(guide))
  tip.global_position = skin_point(config["tip"]) if guide_points.is_empty() else guide_points[-1]
@@ -111,6 +115,17 @@ func update_guides() -> void:
  ribbon.visible = line_attached and camera != null and not guide_points.is_empty() and is_instance_valid(held_reel)
  feed_ribbon.visible = false
  if not ribbon.visible: return
+ # Keep the physical tip current, but do not rebuild decorative guide/feed
+ # ribbons when their entire bounds are outside a frustum plane.
+ for plane in camera.get_frustum():
+  var outside := plane.distance_to(held_reel.global_position) > 0.3
+  for point in guide_points:
+   if plane.distance_to(point) <= 0.3:
+    outside = false
+    break
+  if outside:
+   ribbon.hide()
+   return
  ribbon.camera_path = ribbon.get_path_to(camera)
  var exit_point: Vector3 = held_reel.exit_position(guide_points[0]) if held_reel is DetailedReelVisual else held_reel.global_position
  $LineStart.global_position = exit_point
@@ -132,7 +147,9 @@ func guide_frame(record: Dictionary) -> Transform3D:
  var v := skin_point(along_v) - center
  return Transform3D(Basis(u, v, u.cross(v).normalized()), center)
 func _process(_delta: float) -> void:
- update_guides()
+ if not is_visible_in_tree() or get_viewport().disable_3d: return
+ if _guide_frame != Engine.get_process_frames() or _guide_transform != global_transform:
+  update_guides()
 
 
 

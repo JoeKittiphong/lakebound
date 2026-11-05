@@ -6,7 +6,8 @@ extends Resource
 @export var shop_icon: Texture2D
 @export_multiline var description: String
 @export var equipment_type: String = ""
-@export_enum("bait", "lure", "rod", "reel", "line", "box") var kind := "bait"
+@export_enum("bait", "lure", "rod", "reel", "line", "box", "boat") var kind := "bait"
+@export var boat_spec: Resource
 @export var price: int = 20
 @export var quantity: int = 1
 @export var bait_type: StringName = &"worm"

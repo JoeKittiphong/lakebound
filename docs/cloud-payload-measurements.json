@@ -1,0 +1,55 @@
+{
+  "measurement": "UTF-8 compact JSON body, no compression or HTTP/auth/TLS",
+  "fixture": "synthetic, based on current source fields; not real player data",
+  "comparability": "Current ranking sends only best statistics. New ingest includes journal/mission/location context; compare tuple semantics before claiming savings.",
+  "results": [
+    {
+      "case": "Verbose catch record with location",
+      "json_body_bytes": 465
+    },
+    {
+      "case": "Current best-only catch tuple (fewer semantics)",
+      "json_body_bytes": 74
+    },
+    {
+      "case": "Current guest ranking request (not equivalent to cloud ingest)",
+      "json_body_bytes": 300
+    },
+    {
+      "case": "Proposed catch tuple with location",
+      "json_body_bytes": 63
+    },
+    {
+      "case": "Proposed catch tuple without location",
+      "json_body_bytes": 37
+    },
+    {
+      "case": "Proposed single-event RPC body",
+      "json_body_bytes": 137
+    },
+    {
+      "case": "Ten verbose catch records",
+      "json_body_bytes": 4670
+    },
+    {
+      "case": "Proposed ten-event RPC body",
+      "json_body_bytes": 740
+    },
+    {
+      "case": "Proposed version-only check",
+      "json_body_bytes": 20
+    },
+    {
+      "case": "Proposed compact acknowledgement",
+      "json_body_bytes": 9
+    },
+    {
+      "case": "Proposed unchanged response",
+      "json_body_bytes": 6
+    },
+    {
+      "case": "Proposed buy command",
+      "json_body_bytes": 62
+    }
+  ]
+}

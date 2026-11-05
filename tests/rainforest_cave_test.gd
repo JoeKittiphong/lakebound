@@ -31,6 +31,7 @@ func run() -> void:
  var definition: RainforestLakeDefinition=game.get_node("World").definition
  var player: AnglerPlayer=game.get_node("Player")
  var boat: FishingBoat=game.get_node("FishingBoat")
+ boat.set_deployed(true) # Raw transport fixture; normal play deploys purchased equipment.
  var ecosystem: PondEcosystem=game.get_node("PondEcosystem")
  var fishing: FishingController=game.get_node("FishingController")
  var cave: Node3D=game.get_node("World/CliffFishingCave")

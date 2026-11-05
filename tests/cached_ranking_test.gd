@@ -8,8 +8,8 @@ func run() -> void:
  var profile: AnglerProfile=root.get_node("AnglerSave")
  profile.data=profile.defaults()
  profile.data.identity.name="ทดสอบแคชอันดับ"
- var endpoint: String="https://script.google.com/macros/s/QA_CACHE_RENDER/exec"
- var writer:=SheetsRankingSync.new()
+ var endpoint: String="https://abcdefghijklmnopqrst.supabase.co/rest/v1/rpc/lakebound_rankings"
+ var writer:=RankingSync.new()
  writer.save_path="user://cache-render-ack.cfg"
  writer.cache_path="user://cache-render-views.cfg"
  writer.configure(endpoint,str(profile.data.identity.id))
@@ -19,15 +19,16 @@ func run() -> void:
   rows.append(["%032x"%(i+1),"นักตกปลาทดสอบ %d"%(i+1),"river","tilapia",100000-i*100])
  expect(not writer.accept({"schema":3,"version":"render-fixture-100","rows":rows}).is_empty(),"persist compact 100-row fixture locally")
  var panel: Control=load("res://features/social/social_panel.tscn").instantiate()
+ panel.supabase_key = "sb_publishable_fixture"
  root.add_child(panel)
- panel.sheets_url=endpoint
+ panel.supabase_url=endpoint
  panel.top_limit=100
  panel.get_node("%TopLimit").select(2)
- panel.sheets_sync.save_path=writer.save_path
- panel.sheets_sync.cache_path=writer.cache_path
+ panel.ranking_sync.save_path=writer.save_path
+ panel.ranking_sync.cache_path=writer.cache_path
  root.size=Vector2i(1280,720)
  var start:=Time.get_ticks_usec()
- panel.sheets_sync.configure(endpoint,str(profile.data.identity.id))
+ panel.ranking_sync.configure(endpoint,str(profile.data.identity.id))
  panel.show()
  panel._show_cached()
  panel.get_node("%Status").text="อันดับที่บันทึกไว้ · แสดงจากแคชในเครื่อง (ข้อมูลทดสอบภาพ)"

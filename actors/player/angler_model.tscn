@@ -52,7 +52,7 @@ process_priority = 200
 root_bone = &"clavicle_l"
 tip_bone = &"hand_l"
 target_node = NodePath("../../../../../RodHand/Grip/LeftHandTarget")
-override_tip_basis = true
+override_tip_basis = false
 max_iterations = 24
 min_distance = 0.1
 

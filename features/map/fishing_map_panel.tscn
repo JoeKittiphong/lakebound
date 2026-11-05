@@ -129,43 +129,9 @@ text = "N ↑"
 mouse_filter = 2
 theme_override_font_sizes/font_size = 20
 
-[node name="BossInfo" type="PanelContainer" parent="SafeArea/Content/Body/MapColumn/MapSurface/MapView"]
-layout_mode = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -260.0
-offset_right = -12.0
-offset_top = 12.0
-offset_bottom = 98.0
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("panel")
-[node name="Content" type="VBoxContainer" parent="SafeArea/Content/Body/MapColumn/MapSurface/MapView/BossInfo"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 0
-[node name="Title" type="Label" parent="SafeArea/Content/Body/MapColumn/MapSurface/MapView/BossInfo/Content"]
-layout_mode = 2
-mouse_filter = 2
-text = "จ้าวบ่อ"
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.98, 0.82, 0.43, 1)
-[node name="BossName" type="Label" parent="SafeArea/Content/Body/MapColumn/MapSurface/MapView/BossInfo/Content"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-text = "??? · 0.00 กก."
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 18
-[node name="BossStats" type="Label" parent="SafeArea/Content/Body/MapColumn/MapSurface/MapView/BossInfo/Content"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-text = "พิชิตแล้ว 0 ครั้ง"
-autowrap_mode = 3
-theme_override_font_sizes/font_size = 14
 [node name="Legend" type="Label" parent="SafeArea/Content/Body/MapColumn"]
 layout_mode = 2
-text = "▲ คุณ   ◆ จุดโปรด   ● จุดปลากิน   ○ จุดยืน   มงกุฎ = จ้าวบ่อ"
+text = "▲ คุณ   ◆ จุดโปรด   ● จุดปลากิน   ○ จุดยืน"
 theme_override_font_sizes/font_size = 16
 autowrap_mode = 3
 

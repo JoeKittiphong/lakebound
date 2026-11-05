@@ -2,13 +2,16 @@ class_name AnglerProfile
 extends Node
 
 signal changed
+signal catch_recorded(record: Dictionary)
 signal missions_completed(ids: Array[String])
 const Catalog = preload("res://data/equipment/tackle_catalog.gd")
-const SNAPSHOT_RECORD_CONTAINERS = ["catches", "journal", "boss_history", "ponds", "receipts"]
-var save_path := "user://angler_profile_v1.cfg"
+const SNAPSHOT_RECORD_CONTAINERS = ["catches", "journal", "boss_history", "ponds", "receipts", "cloud"]
+var save_path := PlayerSavePaths.PROFILE
 var data: Dictionary = {}
 var save_error := ""
 var incompatible := false
+var shopping_locked := false
+var boat_in_use := false
 
 func _ready() -> void:
  load_profile()
@@ -42,9 +45,13 @@ func _transaction_snapshot() -> Dictionary:
    before[key] = data[key].duplicate(key not in SNAPSHOT_RECORD_CONTAINERS)
  return before
 
-func _commit(before: Dictionary) -> bool:
+func _commit(before: Dictionary, cloud_event: Array = [], capture_cloud := true) -> bool:
  if incompatible:
   data = before
+  return false
+ if capture_cloud and not CloudOutbox.capture(before, data, cloud_event):
+  data = before
+  save_error = "คิวสำรองข้อมูลไม่พร้อม · ยังไม่เขียนทับเซฟเดิม"
   return false
  var error := ProfileStore.save_profile(save_path, data)
  if error != OK:
@@ -82,7 +89,10 @@ func _clear_rod_components() -> void:
  data.terminal_rig = ""
 
 func unequip(slot: String) -> bool:
- if incompatible or not data.pending.is_empty() or slot not in ["rod", "reel", "line", "bait", "box"] or equipped(slot) == null:
+ if incompatible or not data.pending.is_empty() or slot not in ["rod", "reel", "line", "bait", "box", "boat"] or equipped(slot) == null:
+  return false
+ if slot == "boat" and boat_in_use:
+  save_error = "เก็บเรือที่วางอยู่ก่อนเปลี่ยนหรือถอดเรือ"
   return false
  if slot == "box" and box_weight() > 0:
   save_error = "นำปลาออกจากกล่องก่อนถอดกล่อง"
@@ -103,6 +113,7 @@ func reel_for_rod(rod: Resource) -> Resource:
 
 func equipment_fit_error(entry: Resource) -> String:
  if entry == null: return "ไม่พบอุปกรณ์"
+ if entry.kind == "boat" and boat_in_use and equipped("boat") != entry: return "เก็บเรือที่วางอยู่ก่อนเปลี่ยนเรือ"
  if entry.kind == "rod": return ""
  if entry.kind in ["reel", "line", "bait", "lure"] and equipped("rod") == null:
   return "เลือกคันเบ็ดก่อน"
@@ -258,10 +269,12 @@ func quantity(id: String) -> int:
 
 ## Explicit playtest grant: does not spend currency, equip gear or settle lost lures.
 func grant_trial_equipment() -> bool:
+ if data.get("cloud",{}).get("tracking",false): return false
  if incompatible or not data.pending.is_empty():
   return false
  var before := _transaction_snapshot()
  for entry in Catalog.ITEMS:
+  if entry.kind == "boat": continue
   var id := String(entry.id)
   if entry.kind == "line":
    data.spares[id] = maxi(int(data.spares.get(id, 0)), 3)
@@ -270,6 +283,9 @@ func grant_trial_equipment() -> bool:
  return _commit(before)
 
 func buy(id: String) -> bool:
+ if shopping_locked:
+  save_error = "ซื้อของได้เฉพาะหน้าเมนูก่อนเข้าเกม"
+  return false
  var entry := Catalog.item(id)
  if entry == null or data.coins < entry.price:
   return false
@@ -281,7 +297,7 @@ func buy(id: String) -> bool:
   data.spares[id] = int(data.spares.get(id, 0)) + 1
  else:
   data.stock[id] = quantity(id) + entry.quantity
- return _commit(before)
+ return _commit(before, [2,CloudCatalog.code("item",id)])
 
 func equip(id: String) -> bool:
  var entry := Catalog.item(id)
@@ -317,7 +333,7 @@ func equip(id: String) -> bool:
   data.equipped.bait = id
   # A bait selection chooses a compatible preset but never changes rod/reel/line.
   data.terminal_rig = str(candidate_rig_result(entry).rig_id)
- return _commit(before)
+ return _commit(before, [20,CloudCatalog.code("item",id)])
 
 func prepare_cast() -> bool:
  if incompatible or not data.pending.is_empty() or data.line_remaining < 1.0:
@@ -333,7 +349,7 @@ func prepare_cast() -> bool:
   return true
  var before := _transaction_snapshot()
  data.stock[String(bait.id)] -= 1
- return _commit(before)
+ return _commit(before, [3,CloudCatalog.code("item",str(bait.id))])
 
 func break_line(deployed: float, lure_id: String) -> bool:
  if not is_finite(deployed) or deployed < 0 or not data.pending.is_empty():
@@ -344,7 +360,7 @@ func break_line(deployed: float, lure_id: String) -> bool:
  if entry != null and entry.kind == "lure" and quantity(lure_id) > 0:
   data.stock[lure_id] -= 1
   data.pending = {"id": "%d-%d" % [Time.get_unix_time_from_system() * 1000, Time.get_ticks_usec()], "lure": lure_id, "cost": entry.recovery_cost}
- return _commit(before)
+ return _commit(before, [14,roundi(deployed*100),CloudCatalog.code("item",lure_id),data.pending.duplicate(true)])
 
 func recover_with_diamonds() -> bool:
  if data.pending.is_empty() or data.diamonds < int(data.pending.cost):
@@ -354,7 +370,7 @@ func recover_with_diamonds() -> bool:
  var id: String = data.pending.lure
  data.stock[id] = quantity(id) + 1
  data.pending = {}
- return _commit(before)
+ return _commit(before, [16])
 
 # Only the trusted provider handles earned rewards/verified purchase receipts.
 # The game UI cannot mint diamonds or claim an ad was watched.
@@ -366,7 +382,7 @@ func apply_verified_reward(receipt: String, recovery_id: String) -> bool:
  data.stock[id] = quantity(id) + 1
  data.pending = {}
  data.receipts.append(receipt)
- return _commit(before)
+ return _commit(before, [17,receipt])
 
 func apply_verified_purchase(receipt: String, amount: int) -> bool:
  if receipt.is_empty() or amount <= 0 or receipt in data.receipts:
@@ -374,14 +390,14 @@ func apply_verified_purchase(receipt: String, amount: int) -> bool:
  var before := _transaction_snapshot()
  data.diamonds += amount
  data.receipts.append(receipt)
- return _commit(before)
+ return _commit(before, [17,receipt])
 
 func discard_lure() -> bool:
  if data.pending.is_empty():
   return false
  var before := _transaction_snapshot()
  data.pending = {}
- return _commit(before)
+ return _commit(before, [15])
 
 func box_weight() -> float:
  var total := 0.0
@@ -396,7 +412,7 @@ func keep_catch(record: Dictionary, map_id: String = "", population: Array = [])
  data.catches.append(record.duplicate(true))
  if not map_id.is_empty():
   data.ponds[map_id] = population
- return _commit(before)
+ return _commit(before, [4,str(record.get("catch_id",""))])
 
 func sell_catches() -> bool:
  if data.catches.is_empty():
@@ -405,7 +421,7 @@ func sell_catches() -> bool:
  for record in data.catches:
   data.coins += maxi(1, int(round(float(record.weight) * 35.0)))
  data.catches = []
- return _commit(before)
+ return _commit(before, [5,before.catches.map(func(row: Dictionary): return str(row.get("catch_id","")))])
 
 ## The expected record prevents stale UI selection from disposing another fish.
 ## Restored population data is committed with the storage change in one save.
@@ -421,7 +437,7 @@ func dispose_stored_catch(index: int, expected: Dictionary, sell: bool, return_p
  elif not return_population.is_empty():
   data.ponds[str(record.map)] = return_population
  data.catches.remove_at(index)
- return _commit(before)
+ return _commit(before, [5,[str(record.get("catch_id",""))]] if sell else [6,str(record.get("catch_id",""))])
 
 func record_catch(record: Dictionary, boss: bool, track_collection: bool = true) -> bool:
  # Gameplay supplies a stable event token; repeated delivery is a no-op.
@@ -442,10 +458,12 @@ func record_catch(record: Dictionary, boss: bool, track_collection: bool = true)
  var completed: Array[String] = []
  if event.get("mission_eligible", true):
   completed = MissionProgress.apply_catch(data.missions, event)
- if not _commit(before):
+ event["boss"] = boss
+ if not _commit(before, [1,event]):
   return false
  if not completed.is_empty():
   missions_completed.emit(completed)
+ catch_recorded.emit(record.duplicate(true))
  return true
 
 func finish_catch_history(collection: Node) -> bool:
@@ -499,12 +517,19 @@ func claim_mission(id: String) -> bool:
  data.coins += definition.reward_coins
  if data.missions.tracked == id:
   data.missions.tracked = ""
- return _commit(before)
+ return _commit(before, [7,CloudCatalog.code("mission",id)])
 
 func store_pond(map_id: String, records: Array, population_revision: String="") -> bool:
  var before := _transaction_snapshot()
  data.ponds[map_id] = records
  if not population_revision.is_empty():data.pond_revisions[map_id]=population_revision
+ return _commit(before)
+
+func store_map_state(map_id: String, records: Array, travel: Dictionary) -> bool:
+ if not FishingJournal.known_map(map_id) or not ProfileStore.Travel.valid(travel): return false
+ var before := _transaction_snapshot()
+ data.ponds[map_id] = records
+ data.travel[map_id] = travel.duplicate(true)
  return _commit(before)
 
 func emergency_supplies() -> bool:
@@ -521,7 +546,7 @@ func emergency_supplies() -> bool:
   data.equipped.line = "fine_line"
   data.line_remaining = 15.0
  repair_terminal_rig()
- return _commit(before)
+ return _commit(before, [18])
 
 func set_display_name(value: String) -> bool:
  var text := value.strip_edges()

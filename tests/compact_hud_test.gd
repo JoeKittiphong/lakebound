@@ -88,7 +88,7 @@ func run() -> void:
  await settle()
  profile.data.identity.name = "Map tester"
  var ranking: Control = hud.get_node("SocialPanel")
- ranking.sheets_url = ""
+ ranking.supabase_url = ""
  await tap(hud.get_node("SafeArea/RankingButton"))
  expect(paused and ranking.visible and ranking.can_process(), "touch ranking opens a processable modal while gameplay pauses")
  expect(str(ranking.get_node("%Filter").get_item_metadata(ranking.get_node("%Filter").selected)) == str(controller.map_id), "touch ranking selects current gameplay map")

@@ -33,7 +33,7 @@ func run() -> void:
  profile.incompatible = false
  root.get_node("FishCollection").recording_enabled = false
  expect(ProfileStore.valid(profile.data), "old default save remains compatible")
- expect(TackleCatalog.ITEMS.size() == 80, "66 original equipment entries and 14 rod variants exist")
+ expect(TackleCatalog.ITEMS.size() == 81, "80 existing equipment entries plus one purchasable boat")
  var ids := {}
  var rects := {}
  var counts := {}
@@ -41,6 +41,9 @@ func run() -> void:
   expect(not ids.has(item.id), "unique item: " + String(item.id))
   ids[item.id] = true
   counts[item.kind] = int(counts.get(item.kind, 0)) + 1
+  if item.kind == "boat":
+   expect(item.model_scene != null and item.boat_spec != null,"boat uses its authored 3D preview and hull specification")
+   continue
   var icon: AtlasTexture = item.shop_icon as AtlasTexture
   expect(icon != null and icon.atlas.resource_path.ends_with("equipment.png"), "generated shared atlas icon: " + String(item.id))
   if icon == null:
@@ -51,7 +54,7 @@ func run() -> void:
   var image := icon.atlas.get_image().get_region(Rect2i(icon.region))
   var padding := roundi(icon.region.size.x / 16.0)
   expect(image.get_used_rect().has_area() and image.get_used_rect().position.x >= padding and image.get_used_rect().position.y >= padding and image.get_used_rect().end.x <= int(icon.region.size.x)-padding and image.get_used_rect().end.y <= int(icon.region.size.y)-padding, "complete padded sprite: " + String(item.id))
- expect(counts == {"rod":29,"reel":12,"bait":12,"lure":13,"line":8,"box":6}, "all equipment families and rod variants are represented")
+ expect(counts == {"rod":29,"reel":12,"bait":12,"lure":13,"line":8,"box":6,"boat":1}, "all equipment families and rod variants are represented")
  # Export repacks scenes; non-editable child overrides can disappear there.
  var shop_source: Control = load("res://features/economy/tackle_panel.tscn").instantiate()
  var repacked := PackedScene.new()
@@ -66,6 +69,9 @@ func run() -> void:
  expect(profile.grant_trial_equipment() and profile.data.stock == before, "trial grant is idempotent")
  for item in TackleCatalog.ITEMS:
   # Selection now requires a valid terminal loadout. Fixtures pick owned gear,
+  if item.kind == "boat":
+   expect(profile.quantity(str(item.id)) == 0,"boats must be bought rather than granted by trials")
+   continue
   # then exercise the same inventory action rather than bypassing the validator.
   if item.kind in ["bait", "lure"]:
    choose_fixture(profile, item)

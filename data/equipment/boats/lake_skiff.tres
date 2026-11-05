@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=3]
+[ext_resource type="Script" path="res://data/equipment/tackle_item.gd" id="script"]
+[ext_resource type="Resource" path="res://data/equipment/boats/lake_skiff_spec.tres" id="spec"]
+[ext_resource type="PackedScene" path="res://actors/boat/models/fishing_boat_b.glb" id="model"]
+[resource]
+script = ExtResource("script")
+id = &"lake_skiff"
+display_name = "เรือตกปลาเลคสกิฟฟ์"
+description = "เรือตกปลาส่วนตัว ซื้อครั้งเดียวใช้ซ้ำได้ · วางในน้ำจากฝั่ง · เลิกขับเพื่อเดินเลือกจุดตกปลาบนดาดฟ้า · เก็บคืนได้เมื่อไม่ได้ขับ · เรือไม่ค้างข้ามการเข้าแผนที่"
+kind = "boat"
+equipment_type = "เรือ"
+price = 1500
+quantity = 1
+model_scene = ExtResource("model")
+boat_spec = ExtResource("spec")

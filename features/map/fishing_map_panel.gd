@@ -7,8 +7,6 @@ signal spots_changed(spots: Array)
 const PAGE_SIZE := 100
 var profile: AnglerProfile
 var player: AnglerPlayer
-var ecosystem: PondEcosystem
-var boss_info: Dictionary = {}
 var session_map := "river"
 var map_id := "river"
 var species := ""
@@ -40,10 +38,9 @@ func _ready() -> void:
  %Previous.pressed.connect(func(): page -= 1; _fill_history())
  %Next.pressed.connect(func(): page += 1; _fill_history())
 
-func bind(value: AnglerProfile, actor: AnglerPlayer, region: String, source: PondEcosystem = null) -> void:
+func bind(value: AnglerProfile, actor: AnglerPlayer, region: String, _source: PondEcosystem = null) -> void:
  profile = value
  player = actor
- ecosystem = source
  session_map = region
  map_id = region
  _emit_spots()
@@ -129,43 +126,12 @@ func _emit_spots() -> void:
  spots_changed.emit(_spots(session_map))
 
 func _refresh() -> void:
- _refresh_boss()
  records = FishingJournal.history(profile.data.journal, map_id, species)
  view.set_history(records, _spots(map_id))
  view.selection = selected
  _fill_history()
  _show_details()
  %Here.disabled = map_id != session_map or profile.incompatible
-
-func _refresh_boss() -> void:
- boss_info = {}
- var population: Array = []
- var live := map_id == session_map and is_instance_valid(ecosystem)
- if live:
-  population = ecosystem.snapshot()
- else:
-  population = profile.data.ponds.get(map_id, [])
- for fish in population:
-  if boss_info.is_empty() or float(fish.weight) > float(boss_info.weight):
-   boss_info = fish.duplicate(true)
- view.boss = {}
- CatchArchive.prepare(profile.data)
- var victories: int = profile.data.history.boss_counts.get(map_id, 0)
- if boss_info.is_empty():
-  %BossName.text = "ยังไม่มีจ้าวบ่อ" if live else "ยังไม่มีข้อมูลแหล่งน้ำนี้"
-  %BossStats.text = "พิชิตแล้ว %d ครั้ง" % victories
-  return
- var definition := FishCatalog.find(StringName(boss_info.species))
- var collection := get_node("/root/FishCollection")
- var discovered: bool = collection.stats(StringName(boss_info.species)).count > 0
- var display_name: String = definition.display_name if discovered and definition != null else "???"
- %BossName.text = "%s · %.2f กก." % [display_name, boss_info.weight]
- %BossStats.text = "พิชิตแล้ว %d ครั้ง · %s" % [victories, "ตำแหน่งปัจจุบัน" if live else "ข้อมูลที่บันทึกไว้"]
- boss_info["display_name"] = display_name
- boss_info["victories"] = victories
- boss_info["live"] = live
- var boss_position: Vector3 = boss_info.position
- view.boss = {"position": Vector2(boss_position.x, boss_position.z)}
 
 func _fill_history() -> void:
  page = clampi(page, 0, maxi(0, floori((records.size() - 1) / float(PAGE_SIZE))))
@@ -219,9 +185,6 @@ func _show_details() -> void:
  elif kind == "point":
   %DetailTitle.text = "จุดที่เลือก"
   %Detail.text = "บันทึกเป็นจุดโปรดได้ทันที\nเกมจะตั้งชื่อให้อัตโนมัติ"
- elif kind == "boss" and not boss_info.is_empty():
-  %DetailTitle.text = "จ้าวบ่อ · %s" % boss_info.display_name
-  %Detail.text = "น้ำหนัก %.2f กก.\nพิชิตแล้ว %d ครั้ง\n%s\nปลาเคลื่อนที่ได้ตามธรรมชาติ" % [boss_info.weight, boss_info.victories, "ตำแหน่งขณะเปิดแผนที่" if boss_info.live else "ตำแหน่งจากข้อมูลที่บันทึกไว้"]
  var point: Variant = _selected_point()
  if not _matching_spot().is_empty():
   %Favorite.text = "ลบจุดโปรด"

@@ -33,10 +33,11 @@ func run() -> void:
  check(AnglerIdentity.best(records,"species","tilapia").size() == 1, "species filter")
  check(AnglerIdentity.best(records,"species","absent").is_empty(), "empty filter")
  var panel: Control = load("res://features/social/social_panel.tscn").instantiate()
+ panel.supabase_key = "sb_publishable_fixture"
  root.add_child(panel)
- panel.sheets_url = ""
+ panel.supabase_url = ""
  panel.open()
- check(panel.visible and panel.get_node("%Mode").item_count == 2, "panel authored and opened")
+ check(panel.visible and panel.get_node("%Mode").tab_count == 2, "panel authored and opened")
  panel._mode_changed(1)
  check(panel.get_node("%Filter").item_count == 6, "all map choices")
  panel.queue_free()
@@ -47,7 +48,7 @@ func run() -> void:
  await process_frame
  check(menu.get_node("SocialPanel").visible, "new player naming screen opens from main menu")
  menu.get_node("SocialPanel").close()
- check(menu.get_node("SocialPanel").visible, "cannot skip required name")
+ check(session.data.identity.name.is_empty(), "closing profile does not create or replace a player name")
  menu.get_node("SocialPanel").hide()
  menu._on_play_pressed()
  check(menu.get_node("SocialPanel").visible, "play requires a name")

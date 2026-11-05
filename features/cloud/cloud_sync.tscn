@@ -1,0 +1,13 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/cloud/cloud_sync.gd" id="script"]
+[node name="CloudSync" type="Node"]
+process_mode = 3
+script = ExtResource("script")
+[node name="Request" type="HTTPRequest" parent="."]
+timeout = 15.0
+max_redirects = 0
+body_size_limit = 32768
+[node name="Retry" type="Timer" parent="."]
+one_shot = true
+[node name="Refresh" type="Timer" parent="."]
+wait_time = 60.0

@@ -5,6 +5,7 @@ extends RefCounted
 ## applied event IDs atomically with its statistics. These are two writes, not
 ## a cross-file transaction. Replaying the journal repairs an interrupted gap.
 static func reconcile(profile: AnglerProfile, collection: Node) -> bool:
+ if not repair_cloud_collection(profile,collection):return false
  if profile.incompatible:
   return false
  if not collection.recording_enabled:
@@ -18,6 +19,7 @@ static func reconcile(profile: AnglerProfile, collection: Node) -> bool:
  return true
 
 static func persist(profile: AnglerProfile, collection: Node, record: Dictionary) -> Dictionary:
+ if not repair_cloud_collection(profile,collection):return {"saved":false,"error":"ยังซ่อมสมุดปลาจากคลาวด์ไม่สำเร็จ · เก็บเซฟเดิมไว้","outcome":{}}
  if profile.incompatible:
   return {"saved": false, "error": profile.save_error, "outcome": {}}
  CatchArchive.prepare(profile.data)
@@ -31,6 +33,14 @@ static func persist(profile: AnglerProfile, collection: Node, record: Dictionary
   saved = profile.finish_catch_history(collection)
   if saved: collection.trim_event_history(profile.data)
  return {"saved": saved, "error": "" if saved else (profile.save_error if not profile.save_error.is_empty() else collection.save_error), "outcome": outcome}
+
+static func repair_cloud_collection(profile: AnglerProfile,collection: Node) -> bool:
+ if not profile.data.get("cloud",{}).get("collection_pending",false):return true
+ if not collection.replace_cloud_archive(profile.data.history.stats,profile.data.journal):return false
+ var before:=profile._transaction_snapshot()
+ profile.data.cloud=profile.data.cloud.duplicate(true)
+ profile.data.cloud.collection_pending=false
+ return profile._commit(before,[],false)
 
 static func make_record(fish: FishState, profile: AnglerProfile, map_id: String, event_id: String, bait_id: String, depth: float, boss: bool, mission_eligible: bool, location: Dictionary = {}) -> Dictionary:
  var record := {"species": String(fish.species.id), "name": fish.species.display_name,

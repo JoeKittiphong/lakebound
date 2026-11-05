@@ -1,0 +1,36 @@
+[gd_scene format=3]
+[ext_resource type="Texture2D" path="res://assets/ui/atlas/modern_flat.png" id="texture"]
+[sub_resource type="StyleBoxTexture" id="compact_panel"]
+texture = ExtResource("texture")
+region_rect = Rect2(23,27,106,103)
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+[node name="MatchRow" type="PanelContainer"]
+theme_override_styles/panel = SubResource("compact_panel")
+custom_minimum_size = Vector2(0, 48)
+size_flags_horizontal = 3
+[node name="Line" type="HBoxContainer" parent="."]
+theme_override_constants/separation = 12
+[node name="Rank" type="Label" parent="Line"]
+custom_minimum_size = Vector2(40, 0)
+text = "01"
+horizontal_alignment = 1
+[node name="Player" type="Label" parent="Line"]
+size_flags_horizontal = 3
+text = "นักตกปลา"
+text_overrun_behavior = 3
+[node name="Score" type="Label" parent="Line"]
+custom_minimum_size = Vector2(190, 0)
+text = "พร้อม"
+horizontal_alignment = 2
+[node name="AddFriend" type="Button" parent="Line"]
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(145,48)
+text = "เพิ่มเพื่อน"
+visible = false

@@ -1,0 +1,3 @@
+[functions.lakebound-turn]
+# The handler validates the user with Supabase Auth and checks Google + room membership.
+verify_jwt = false

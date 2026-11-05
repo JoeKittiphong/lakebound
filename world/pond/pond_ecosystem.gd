@@ -40,6 +40,8 @@ var next_id := 1
 var restock_clock := 0.0
 var accumulator := 0.0
 var rng := RandomNumberGenerator.new()
+## Match-only identity/metadata stream; movement and bite decisions stay independent.
+var shared_population_seed := -1
 var line_visibility := 1.0
 
 @export var definition: PondDefinition = preload("res://world/pond/default_pond.tres")
@@ -85,15 +87,21 @@ func _spawn(species_index: int, slot: int = -1) -> RefCounted:
  var record = FishRecord.new()
  record.id = next_id
  next_id += 1
+ var spawn_rng := rng
+ if shared_population_seed>=0:
+  spawn_rng=RandomNumberGenerator.new()
+  spawn_rng.seed=(str(shared_population_seed)+":"+str(record.id)).hash()
+  species_index=(record.id-1)%species.size()
+  record.persistent_key=(str(shared_population_seed)+":"+str(record.id)).md5_text()
  record.species = species[species_index]
- record.weight = rng.randf_range(record.species.min_weight, record.species.max_weight)
+ record.weight = spawn_rng.randf_range(record.species.min_weight, record.species.max_weight)
  var depth: Vector2 = record.species.preferred_depth
  # This population exists before casting; it is never spawned in response to bait.
- record.position = definition.spawn_position(rng, depth, slot)
- record.destination = _destination(record)
- record.hunger = rng.randf_range(0.65, 1.0)
- record.decision_timer = rng.randf_range(3, 8)
- record.surface_timer = rng.randf_range(0, 22)
+ record.position = definition.spawn_position(spawn_rng, depth, slot)
+ record.destination = definition.roaming_position(spawn_rng,record.position,depth)
+ record.hunger = spawn_rng.randf_range(0.65, 1.0)
+ record.decision_timer = spawn_rng.randf_range(3, 8)
+ record.surface_timer = spawn_rng.randf_range(0, 22)
  fish.append(record)
  return record
 
@@ -142,7 +150,7 @@ func register_lure_action(quality: float, _duration: float = 2.5, _bite_chance: 
 
 ## Use current positions and the same conditions as simulation, not stale follower counts.
 func _interested_in_bait(record: RefCounted) -> bool:
- if record.state in [&"hooked", &"landed"] or not bait_active or reserved_fish != null:
+ if not record.available_for_bait or record.state in [&"hooked", &"landed"] or not bait_active or reserved_fish != null:
   return false
  if record.caution >= 0.6 or record.hunger <= 0.35 or String(bait_type) not in record.species.bait_preferences:
   return false
@@ -166,7 +174,7 @@ func lure_status() -> String:
  var compatible := false
  var depth_ok := false
  for record in fish:
-  if record.state in [&"hooked", &"landed"]:
+  if not record.available_for_bait or record.state in [&"hooked", &"landed"]:
    continue
   if record.position.distance_to(bait_position) > maxf(attraction_radius(),fish_detection_radius(record)):
    continue
@@ -203,7 +211,7 @@ func step(delta: float) -> void:
  if clock > lure_strike_until:
   invalidate_lure_action()
  restock_clock += delta
- if restock_clock >= restock_interval:
+ if shared_population_seed<0 and restock_clock >= restock_interval:
   restock_clock = 0.0
   if fish.size() < population_limit:
    _spawn(rng.randi_range(0, species.size() - 1))

@@ -103,15 +103,24 @@ func _physics_process(delta: float) -> void:
   boat.drive_input = input_vector if boat_driving() else Vector2.ZERO
   character_model.driving = boat_driving()
   character_model.driving_speed = absf(boat.forward_speed)
-  character_model.update_motion(delta, false, 0.0, false)
+  var deck_input := Vector3(input_vector.x,0,input_vector.y)
+  if is_instance_valid(movement_reference):
+   deck_input = deck_input.rotated(Vector3.UP,movement_reference.global_rotation.y)
+  actual_ground_speed = boat.walk_passenger(deck_input,delta) if boat_fishing() else 0.0
+  character_model.update_motion(delta, actual_ground_speed > .04, actual_ground_speed, false)
   character_model.set_rod_load(rod_tension, rod_side)
-  actual_ground_speed = 0.0
   return
  _swim_exit_cooldown = maxf(0.0, _swim_exit_cooldown - delta)
  _update_swimming()
+ if not input_enabled or fishing_active or swimming or fighting:
+  run_requested = false
+ # Manual input steers while held; releasing resumes camera-forward auto-run.
+ if run_requested and input_vector.length() <= 0.05:
+  input_vector = Vector2.UP
  if Input.is_action_just_pressed("jump"):
   request_jump()
- running = input_enabled and (run_requested or Input.is_action_pressed("sprint")) and not fishing_active and not swimming and input_vector.length() > 0.05
+ var stick_running: bool = is_instance_valid(joystick) and joystick.run_requested and joystick.direction.length() > 0.05
+ running = input_enabled and (run_requested or stick_running or Input.is_action_pressed("sprint")) and not fishing_active and not fighting and not swimming and input_vector.length() > 0.05
  var speed := swim_speed if swimming else fight_move_speed if fighting else run_speed if running else move_speed
  if not swimming and is_instance_valid(pond) and pond.definition.is_wading(global_position):
   speed *= wading_speed_multiplier
@@ -178,6 +187,10 @@ func _set_swimming(value: bool) -> void:
 func _process(_delta: float) -> void:
  # Existing line effects bind this editor-authored marker; follow the real animated rod.
  _sync_rod_tip()
+
+func _notification(what: int) -> void:
+ if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
+  run_requested = false
 
 func _sync_rod_tip() -> void:
  # Deferred pose updates can arrive after a scene change has removed this player.

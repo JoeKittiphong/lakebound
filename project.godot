@@ -11,16 +11,22 @@ config_version=5
 [application]
 
 config/name="Lakebound"
-config/version="0.1.26"
+config/version="0.1.29"
 run/main_scene="res://features/loading/loading.tscn"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://shared/branding/icon.png"
+run/max_fps.web=30
+run/max_fps.mobile=30
 
 [autoload]
 
 FishCollection="*res://features/collection/fish_collection.gd"
 AnglerSave="*res://features/economy/angler_profile.gd"
+AccountAuth="*res://features/auth/account_auth.tscn"
+CloudSync="*res://features/cloud/cloud_sync.tscn"
+RankingOnline="*res://features/social/ranking_online.tscn"
+Competition="*res://features/competition/match_service.tscn"
 
 [display]
 

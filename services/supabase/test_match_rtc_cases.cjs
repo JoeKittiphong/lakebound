@@ -1,0 +1,26 @@
+module.exports=async function({sql,q,rpc,people,uid,check}){
+ sql("truncate lakebound_private.match_leases,lakebound_private.match_requests,lakebound_private.match_budget;update lakebound_private.match_rooms set phase='cancelled';update lakebound_private.match_limits set max_rooms=1,max_players=5,monthly_events=1500000;");
+ let r=rpc(0,'create',{map:'river',duration:180});rpc(1,'join',{code:r.code});
+ const session=i=>(i+1).toString(16).repeat(32);
+ const rtc=(i,op,data={})=>JSON.parse(sql(`update lakebound_private.match_requests set window_at=clock_timestamp()-interval '2 seconds';set role authenticated;set request.jwt.claim.sub='${uid(i)}';set request.jwt.claims='{"app_metadata":{"provider":"google"}}';select public.lakebound_rtc(${q({...people[i],room_id:r.id,round_id:r.round_id,session_id:session(i),op,...data})});`).split('\n').at(-1));
+ check(rtc(0,'open').peers.length===1,'RTC caller opens authenticated session');
+ check(rtc(1,'open').peers.length===2,'RTC roster includes only same room members');
+ check(rtc(2,'open').error==='not_a_member','RTC outsider cannot register');
+ const items=[{to:people[1].player_id,to_session:session(1),kind:'offer',data:'test SDP'}];
+ check(!!rtc(0,'send',{items,from:people[1].player_id}).signals,'RTC accepts bounded signaling batch');
+ let got=rtc(1,'poll');check(got.signals.length===1&&got.signals[0].from===people[0].player_id,'RTC sender is bound by Google JWT and cannot be spoofed');
+ check(rtc(1,'poll',{cursor:got.signals[0].id}).signals.length===0,'RTC inbox cursor prevents repeated delivery');
+ check(rtc(0,'send',{items:[{...items[0],kind:'pose'}]}).error==='invalid_rtc_payload','RTC gateway refuses pose traffic');
+ check(rtc(0,'poll',{round_id:'00000000-0000-4000-8000-000000000099'}).error==='wrong_round','RTC previous round rejected');
+ rtc(1,'open',{session_id:'e'.repeat(32)});
+ check(rtc(1,'poll').error==='stale_rtc_session','RTC superseded session cannot poll');
+ check(sql("select has_table_privilege('authenticated','lakebound_private.rtc_signals','select');")==='f','RTC private signaling tables are not public');
+ check(sql("select has_function_privilege('authenticated','public.lakebound_turn_cache(jsonb)','execute');")==='f','players cannot read TURN cache directly');
+ const cache=(op,data={})=>JSON.parse(sql(`set role service_role;set request.jwt.claims='{"role":"service_role"}';select public.lakebound_turn_cache(${q({op,auth_id:uid(0),room_id:r.id,round_id:r.round_id,...data})});`).split('\n').at(-1));
+ const ticket=cache('reserve');check(typeof ticket.ticket==='string','server can reserve one TURN issuance');
+ check(cache('reserve').error==='turn_rate_limited','concurrent TURN credential issuance is rate limited');
+ const iceServers=[{urls:['turn:turn.cloudflare.com:3478'],username:'ephemeral',credential:'temporary'}];
+ check(cache('commit',{ticket:'00000000-0000-4000-8000-000000000000',iceServers}).error==='invalid_ticket','wrong TURN issuance ticket rejected');
+ check(cache('commit',{ticket:ticket.ticket,iceServers}).expiresIn===3300,'temporary TURN credentials cached with expiry');
+ check(cache('reserve').iceServers[0].credential==='temporary','retries reuse same cached TURN credentials');
+};

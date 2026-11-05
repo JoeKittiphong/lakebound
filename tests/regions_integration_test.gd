@@ -79,6 +79,7 @@ func run() -> void:
 		expect(player.swimming,"swimming works "+entry.id)
 		expect(absf(player.global_position.y-(world.definition.surface_height()-player.swim_float_depth))<.5,"stable water level "+entry.id)
 		player.global_position=boat.global_position+Vector3(-3,0,0);player.velocity=Vector3.ZERO;await ticks(2)
+		boat.set_deployed(true) # Geometry/transport fixture; ownership is covered separately.
 		expect(boat.board(player),"board boat "+entry.id)
 		boat.forward_speed=0;boat.drive_input=Vector2(0,-1);player.input_enabled=false
 		var boat_start:=boat.global_position

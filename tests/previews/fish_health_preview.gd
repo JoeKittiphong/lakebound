@@ -51,6 +51,13 @@ func run() -> void:
  scene.fishing.fight.health=0.0
  scene.fishing.fight.advance(0.1,scene.player.global_position,scene.fishing.active_fish,Vector2.ZERO,scene.fishing.tuning)
  await shot("exhausted_all_yellow")
+ for side in [-1.0,1.0]:
+  scene.fishing.rod_input=Vector2(side,0)
+  await create_timer(0.6).timeout
+  await shot("third_person_left" if side<0 else "third_person_right")
+ scene.fishing.rod_input=Vector2.ZERO
+ await create_timer(0.6).timeout
+ await shot("third_person_center")
  scene.fishing.reset_cast()
  await shot("reset_restores_hud")
  scene.queue_free()

@@ -52,6 +52,10 @@ desktop.ini
 angler_profile*.cfg
 fish_collection*.cfg
 first_catch_tutorial*.cfg
+google_session*.cfg
+google_oauth_pending*.cfg
+match_session.cfg
+/accounts_v1/
 *service-account*.json
 *.p12
 *.pfx
@@ -64,3 +68,5 @@ services/**/.local/
 server_connection.cfg
 sheets_connection.cfg
 sheets-ranking-*.cfg
+supabase_connection.cfg
+supabase-ranking-*.cfg

@@ -1,6 +1,8 @@
 [gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://features/gameplay/gameplay.gd" id="script"]
+[ext_resource type="Script" path="res://features/competition/match_session.gd" id="match_session"]
+[ext_resource type="PackedScene" path="res://features/competition/match_hud.tscn" id="match_hud"]
 
 [ext_resource type="PackedScene" path="res://actors/player/player.tscn" id="player"]
 
@@ -12,6 +14,11 @@
 [ext_resource type="PackedScene" path="res://features/fishing/fishing_effects.tscn" id="effects_scene"]
 [node name="Gameplay" type="Node3D"]
 script = ExtResource("script")
+
+[node name="MatchSession" type="Node3D" parent="."]
+script = ExtResource("match_session")
+
+[node name="MatchHUD" parent="." instance=ExtResource("match_hud")]
 
 [node name="World" parent="." instance=ExtResource("pond_scene")]
 

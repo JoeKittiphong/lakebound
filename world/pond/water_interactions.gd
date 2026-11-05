@@ -27,6 +27,8 @@ const NEUTRAL := 128.0 / 255.0
 const PACKET_WIDTH := 0.65
 const PACKET_SUPPORT := PACKET_WIDTH * 2.8
 @onready var surface_detail: MeshInstance3D = $SurfaceDetail
+@export_range(128, 256, 128) var web_field_resolution: int = 128
+@export_range(0.05, 0.2) var web_field_update_interval: float = 0.1
 var water_material: ShaderMaterial
 var detail_material: ShaderMaterial
 var field_texture: Texture2D
@@ -65,6 +67,9 @@ var step_travel := 0.0
 var emitted_count := 0
 
 func _ready() -> void:
+	if OS.has_feature("web"):
+		field_resolution = mini(field_resolution, web_field_resolution)
+		field_update_interval = maxf(field_update_interval, web_field_update_interval)
 	events.resize(MAX_EVENTS)
 	event_positions.resize(MAX_EVENTS)
 	for i in events.size():
@@ -124,6 +129,7 @@ func emit_ripple(point: Vector3, strength: float = 1.0) -> void:
 	emitted_count += 1
 
 func _process(delta: float) -> void:
+	if get_viewport().disable_3d: return
 	clock += delta
 	sample_clock += delta
 	if sample_clock >= sample_interval:

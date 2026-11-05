@@ -5,6 +5,9 @@ signal drag_released
 signal drag_started
 @export_range(20.0, 120.0) var radius: float = 62.0
 @export_range(0.0, 0.5) var deadzone: float = 0.12
+## Movement only: compare the unclamped pointer with the visible base circle.
+@export var run_outside_base := false
+var run_requested := false
 @export var enabled: bool = true:
 	set(value):
 		enabled = value
@@ -67,13 +70,18 @@ func _inside(point: Vector2) -> bool:
 
 func _update_direction(point: Vector2) -> void:
 	var local := get_global_transform_with_canvas().affine_inverse() * point
-	var offset := (local - size * 0.5).limit_length(radius)
+	var raw_offset := local - size * 0.5
+	var distance := raw_offset.length()
+	var boundary := minf(size.x, size.y) * 0.5
+	run_requested = run_outside_base and distance > boundary and not is_equal_approx(distance, boundary)
+	var offset := raw_offset.limit_length(radius)
 	var strength := offset.length() / radius
 	direction = Vector2.ZERO if strength <= deadzone else offset.normalized() * ((strength - deadzone) / (1.0 - deadzone))
 	knob.position = size * 0.5 + offset - knob.size * 0.5
 	direction_changed.emit(direction)
 
 func reset() -> void:
+	run_requested = false
 	_release_required = false
 	touch_index = -1
 	mouse_active = false
@@ -83,6 +91,7 @@ func reset() -> void:
 	direction_changed.emit(direction)
 
 func require_release() -> void:
+	run_requested = false
 	# Keep ownership of the held finger. Its movement and eventual release belong
 	# to retrieval, even though the visible control has changed back to aiming.
 	_release_required = touch_index != -1 or mouse_active

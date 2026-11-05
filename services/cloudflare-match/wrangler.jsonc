@@ -1,0 +1,8 @@
+{
+ "name":"lakebound-matches","main":"src/worker.mjs","compatibility_date":"2026-11-03",
+ "workers_dev":true,
+ "vars":{"SUPABASE_URL":"https://efxjvrywbivyolluvuyp.supabase.co","SUPABASE_PUBLISHABLE_KEY":"sb_publishable_dX14nGS3Ehgo3ye6VTR-SQ_siezjHpk","MAX_PLAYERS":"100","MAX_ROOMS":"20","ACCEPTS_NEW":"true","TURN_DAILY_LIMIT":"3000"},
+ "durable_objects":{"bindings":[{"name":"MATCHES","class_name":"LakeboundMatches"}]},
+ "migrations":[{"tag":"v1","new_sqlite_classes":["LakeboundMatches"]}],
+ "observability":{"enabled":false}
+}

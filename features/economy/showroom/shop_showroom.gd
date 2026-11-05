@@ -1,13 +1,14 @@
 extends Control
 signal close_requested
-const ZONES := {2:"คันเบ็ด",3:"รอก",1:"เหยื่อ",4:"สายเอ็น",5:"กล่องปลา"}
-const KINDS := {2:["rod"],3:["reel"],1:["bait","lure"],4:["line"],5:["box"]}
+const ZONES := {2:"คันเบ็ด",3:"รอก",1:"เหยื่อ",4:"สายเอ็น",5:"กล่องปลา",6:"เรือ"}
+const KINDS := {2:["rod"],3:["reel"],1:["bait","lure"],4:["line"],5:["box"],6:["boat"]}
 const GEAR := {"Rod":"rod","Reel":"reel","Line":"line","Bait":"bait","Box":"box"}
 var profile:AnglerProfile
 var fishing:FishingController
 var commerce:CommerceGateway
 var category:=2
 var trials_enabled:=true
+var inventory_only:=false
 @onready var browser:ShopShelfBrowser=%Shelf
 @onready var inspector:Control=%EquipmentInspector
 func _ready()->void:
@@ -65,6 +66,8 @@ func bind(value:AnglerProfile,controller:FishingController,gateway:CommerceGatew
  %Methods.bind(profile)
 func enter()->void:
  _layout_workspace()
+ %Owned.button_pressed=inventory_only
+ %Owned.disabled=inventory_only
  inspector.show()
  refresh(true)
  if not profile.data.pending.is_empty():%Recovery.show()
@@ -104,15 +107,16 @@ func set_category(index:int)->void:
  if is_node_ready():%Loadout.hide();_show_rig(false)
  refresh(true)
 func refresh(reset_page:=false)->void:
+ if inventory_only and is_node_ready():%Owned.set_pressed_no_signal(true)
  if profile==null or not is_visible_in_tree():return
  %Wallet.text="%d เหรียญ · %d เพชร"%[profile.data.coins,profile.data.diamonds]
  %CurrentRod.text="คันที่ใช้: "+profile.equipment_name("rod")
- %Zone.text=({2:"1 คันเบ็ด",3:"2 รอก",4:"3 เอ็น",1:"4 เหยื่อ",5:"กล่องปลา"}[category])+" · เลือกหมวด"
+ %Zone.text=({2:"1 คันเบ็ด",3:"2 รอก",4:"3 เอ็น",1:"4 เหยื่อ",5:"กล่องปลา",6:"เรือ"}[category])+" · เลือกหมวด"
  var entries:Array[TackleItem]=[]
  for item in TackleCatalog.ITEMS:
   if item.kind not in KINDS[category]:continue
   var count:int=profile.spare_line_count(str(item.id)) if item.kind=="line" else profile.quantity(str(item.id))
-  if %Owned.button_pressed and count<=0 and str(profile.data.equipped.line)!=str(item.id):continue
+  if (inventory_only or %Owned.button_pressed) and count<=0 and str(profile.data.equipped.line)!=str(item.id):continue
   entries.append(item)
  if category in [3,4,1]:entries.sort_custom(func(a:TackleItem,b:TackleItem):return int(not EquipmentChoiceRules.error(profile,a).is_empty())<int(not EquipmentChoiceRules.error(profile,b).is_empty()))
  if category==5:entries.sort_custom(func(a:TackleItem,b:TackleItem):return a.capacity<b.capacity)
@@ -121,9 +125,10 @@ func refresh(reset_page:=false)->void:
  %ZoneCount.text="%d รายการ%s"%[entries.size()," · ในกระเป๋า" if %Owned.button_pressed else ""]
  browser.get_node("Empty").visible=entries.is_empty()
  if not %Loadout.visible and (inspector.selected_item==null or inspector.selected_item not in entries):
-  var equipped:TackleItem=profile.equipped({2:"rod",3:"reel",4:"line",1:"bait",5:"box"}[category])
+  var equipped:TackleItem=profile.equipped({2:"rod",3:"reel",4:"line",1:"bait",5:"box",6:"boat"}[category])
   if equipped in entries:_inspect_item(equipped)
   elif not entries.is_empty():_inspect_item(entries[0])
+  else:inspector.close()
  browser.refresh_badges()
  _page_changed()
  var active:=profile.current_rig()
@@ -164,16 +169,19 @@ func refresh(reset_page:=false)->void:
   %Diamonds.disabled=profile.data.diamonds<int(profile.data.pending.cost)
   %Ad.disabled=not commerce.ad_available()
  inspector.refresh()
+ inspector.get_node("%Buy").visible=not inventory_only
+ for id in [20,30]:menu.set_item_disabled(menu.get_item_index(id),inventory_only or menu.is_item_disabled(menu.get_item_index(id)))
 func _page_changed()->void:
  %Pager.text="%02d / %02d"%[browser.page+1,browser.page_count()]
  %Previous.disabled=browser.page<=0
  %Next.disabled=browser.page>=browser.page_count()-1
 func _report(ok:bool,message:String,equipment_changed:=false)->void:
- if ok and equipment_changed:fishing.refresh_equipment()
+ if ok and equipment_changed and is_instance_valid(fishing):fishing.refresh_equipment()
  refresh()
  %Message.text=message if ok else profile.save_error if not profile.save_error.is_empty() else "ทำรายการไม่ได้ — ตรวจจำนวน เงิน และความเข้ากันได้ของอุปกรณ์"
  if inspector.visible:inspector.show_feedback(ok,%Message.text)
 func _more(id:int)->void:
+ if inventory_only and id in [20,30]:return
  match id:
   10:%Journal.show()
   20:_report(profile.grant_trial_equipment(),"รับชุดทดลองแล้ว — เปิดเฉพาะของที่มีเพื่อเลือกใช้")

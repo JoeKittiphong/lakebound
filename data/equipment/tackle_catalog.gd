@@ -2,6 +2,7 @@ class_name TackleCatalog
 extends RefCounted
 
 const ITEMS: Array[Resource] = [
+ preload("res://data/equipment/boats/lake_skiff.tres"),
  preload("res://data/equipment/rod_variants/brook_562ul.tres"),
  preload("res://data/equipment/rod_variants/brook_662l.tres"),
  preload("res://data/equipment/rod_variants/brook_702m.tres"),

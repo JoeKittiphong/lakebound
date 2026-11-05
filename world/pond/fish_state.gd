@@ -11,6 +11,7 @@ var hunger: float = 0.8
 var stamina: float = 1.0
 var caution: float = 0.0
 var state: StringName = &"roaming"
+var available_for_bait := true
 var timer: float = 0.0
 var surface_timer: float = 0.0
 var decision_timer: float = 0.0

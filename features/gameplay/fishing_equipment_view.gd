@@ -32,10 +32,7 @@ func set_active(value: bool) -> void:
   player.first_person_rod = null
   player.character_model.first_person_rod = null
  else:
-  visual_stick = Vector2.ZERO
-  stick_velocity = Vector2.ZERO
   sync_equipment()
-  smooth_pull = -global_basis.z.normalized()
   player.first_person_rod = rod if player.character_model.rod_mesh != null else null
 func sync_equipment() -> void:
  if not is_instance_valid(player): return
@@ -58,32 +55,38 @@ func sync_equipment() -> void:
  player.first_person_rod = rod if active else null
  player.character_model.first_person_rod = player.first_person_rod
 func _process(delta: float) -> void:
- if not active or not is_instance_valid(controller) or not is_instance_valid(player): return
- sync_equipment()
+ if not is_instance_valid(controller) or not is_instance_valid(player): return
+ var fishing_pose := controller.state in [FishingController.State.WAITING, FishingController.State.BITE, FishingController.State.FIGHT]
+ if active: sync_equipment()
+ player.character_model.apply_rod_action(Vector3.ZERO, fishing_pose and not active)
+ if not fishing_pose: return
  if player.character_model.rod_mesh == null: return
  update_rod_pose(delta, controller.rod_input)
+ var displayed := rod if active else player.character_model.rod_mesh as FishingRodVisual
+ if not active:
+  player.character_model.apply_rod_action(socket.rotation - _socket_rest, true)
  var desired := controller.tension if controller.state == FishingController.State.FIGHT else 0.03
  var response_seconds := 0.1
- if rod is DetailedFishingRod and rod.rod_spec != null:
-  response_seconds = rod.rod_spec.recovery_seconds if desired < _smooth_load else rod.rod_spec.recovery_seconds * 0.65
+ if displayed is DetailedFishingRod and displayed.rod_spec != null:
+  response_seconds = displayed.rod_spec.recovery_seconds if desired < _smooth_load else displayed.rod_spec.recovery_seconds * 0.65
  _smooth_load = lerpf(_smooth_load, desired, 1.0 - exp(-delta / response_seconds))
  var target := controller.cast_position
  target.y = -0.18 - controller.cast_position.y
  if controller.state == FishingController.State.FIGHT and controller.active_fish != null:
   target = controller.active_fish.position
   target.y = -0.18 - controller.active_fish.position.y
- var direction := (target - rod.tip.global_position).normalized()
+ var direction := (target - displayed.tip.global_position).normalized()
  smooth_pull = smooth_pull.lerp(direction, 1.0 - exp(-pull_follow_speed * delta)).normalized()
- if rod is DetailedFishingRod:
-  rod.set_pull_direction(smooth_pull)
- rod.set_load(_smooth_load, visual_stick.x)
- if rod is DetailedFishingRod:
-  rod.payout_amount = maxf(0.0, controller.fish_force - controller.drag_strength) if controller.state == FishingController.State.FIGHT else 0.0
+ if displayed is DetailedFishingRod:
+  displayed.set_pull_direction(smooth_pull)
+ displayed.set_load(_smooth_load, visual_stick.x)
+ if displayed is DetailedFishingRod:
+  displayed.payout_amount = maxf(0.0, controller.fish_force - controller.drag_strength) if controller.state == FishingController.State.FIGHT else 0.0
   if controller.profile != null:
    var capacity := controller.profile.line_capacity()
-   rod.fill_fraction = clampf((minf(controller.profile.data.line_remaining, capacity) - controller.line_length) / maxf(1.0, capacity), 0.05, 1.0)
- rod.advance_reel(delta, maxf(0.0, controller.rod_input.y))
- if rod is DetailedFishingRod: rod.update_guides()
+   displayed.fill_fraction = clampf((minf(controller.profile.data.line_remaining, capacity) - controller.line_length) / maxf(1.0, capacity), 0.05, 1.0)
+ displayed.advance_reel(delta, maxf(0.0, controller.rod_input.y))
+ # set_load already updates the guides for this pose.
  player._sync_rod_tip()
 
 func update_rod_pose(delta: float, command: Vector2) -> void:

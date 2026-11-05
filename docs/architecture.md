@@ -1,10 +1,16 @@
 # Runtime architecture
 
-Current online boundary (28 October 2026): the game uses Google Sheets only.
-`SocialPanel` owns UI/request lifecycle; `SheetsRankingSync` owns upload deltas
+Current online boundary (2 November 2026): the game uses Supabase RPC directly.
+`RankingOnline` persists across scenes, uploads on committed catch events, and
+feeds the minimap leader card. See [automatic sync](background-ranking-sync.md).
+Installed legacy clients reach the same database through the existing Apps Script
+URL, now a compatibility proxy. See [migration and verification](supabase-migration.md).
+`SocialPanel` owns UI/request lifecycle; `RankingSync` owns upload deltas
 and acknowledgements; `RankingSnapshot` validates both HTTP rows and disk cache.
-Apps Script and its tooling live in `services/google_sheets/`, outside Godot's
-resource graph via `services/.gdignore`. Local profile/collection persistence
+Database migrations, import tooling and the compatibility bridge live in
+`services/supabase/`; the original Sheets implementation is retained for recovery
+in `services/google_sheets/`. Both are outside Godot's resource graph via
+`services/.gdignore`. Local profile/collection persistence
 remains authoritative for offline gameplay. See [profile and ranking](profile-and-ranking.md)
 and [this refactor's plan/results](refactor-2026-10-28.md).
 

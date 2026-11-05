@@ -4,6 +4,10 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path $PSScriptRoot -Parent
+if (Test-Path (Join-Path $projectRoot 'android/build/src/main')) {
+ & node (Join-Path $PSScriptRoot 'prepare_android_auth.cjs')
+ if ($LASTEXITCODE -ne 0) { throw 'Android OAuth callback bridge preparation failed.' }
+}
 if (!$Python) {
  $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
  if ($pythonCommand) { $Python = $pythonCommand.Source }

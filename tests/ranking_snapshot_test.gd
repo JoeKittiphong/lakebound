@@ -32,10 +32,10 @@ func run() -> void:
  check(RankingSnapshot.decode([row], "all", 11).is_empty(), "unsupported limit rejected")
  check(not RankingSnapshot.valid_version(123) and not RankingSnapshot.valid_version(""), "invalid cache versions rejected")
 
- var sync := SheetsRankingSync.new()
+ var sync := RankingSync.new()
  sync.save_path = "user://snapshot-ack.cfg"
  sync.cache_path = "user://snapshot-views.cfg"
- sync.configure("https://script.google.com/macros/s/TEST/exec",id)
+ sync.configure("https://abcdefghijklmnopqrst.supabase.co/rest/v1/rpc/lakebound_rankings",id)
  var profile: AnglerProfile = root.get_node("AnglerSave")
  profile.data = profile.defaults()
  profile.data.identity.id = id
@@ -50,25 +50,26 @@ func run() -> void:
  config.set_value("cache","player",id)
  config.set_value("cache","views",{"all:10":{"version":"bad","rows":[row,row]}})
  config.save(sync.cache_path)
- var reopened := SheetsRankingSync.new()
+ var reopened := RankingSync.new()
  reopened.save_path = sync.save_path
  reopened.cache_path = sync.cache_path
  reopened.configure(sync.endpoint,id)
  check(reopened.views.is_empty(), "disk cache uses same row validator")
 
  var panel: Control = load("res://features/social/social_panel.tscn").instantiate()
+ panel.supabase_key = "sb_publishable_fixture"
  root.add_child(panel)
  panel.hide()
- panel.sheets_sync.save_path = "user://http-status-ack.cfg"
- panel.sheets_sync.more = true
- panel.sheets_sync.pending = {"river:tilapia":"unsent"}
+ panel.ranking_sync.save_path = "user://http-status-ack.cfg"
+ panel.ranking_sync.more = true
+ panel.ranking_sync.pending = {"river:tilapia":"unsent"}
  panel._received(HTTPRequest.RESULT_SUCCESS,503,PackedStringArray(),JSON.stringify({"ok":true}).to_utf8_buffer())
- check(panel.sheets_sync.acknowledged.is_empty(), "non-200 cannot acknowledge upload")
+ check(panel.ranking_sync.acknowledged.is_empty(), "non-200 cannot acknowledge upload")
  panel._received(HTTPRequest.RESULT_SUCCESS,200,PackedStringArray(),(" ".repeat(RankingSnapshot.MAX_RESPONSE_BYTES)+JSON.stringify({"ok":true})).to_utf8_buffer())
- check(panel.sheets_sync.acknowledged.is_empty(), "oversized body cannot acknowledge upload")
- check(panel.request.body_size_limit == RankingSnapshot.MAX_RESPONSE_BYTES and panel.request.max_redirects == 0, "authored request limits and manual redirects")
+ check(panel.ranking_sync.acknowledged.is_empty(), "oversized body cannot acknowledge upload")
+ check(panel.request.body_size_limit == RankingSnapshot.MAX_RESPONSE_BYTES and panel.request.max_redirects == 0, "authored request limits and redirects disabled")
  panel._received(HTTPRequest.RESULT_SUCCESS,302,PackedStringArray(["Location: https://evil.example/macros/echo?x=1"]),PackedByteArray())
- check(panel.redirect_hops == 0 and panel.request.get_http_client_status() == HTTPClient.STATUS_DISCONNECTED, "untrusted redirect not followed")
+ check(panel.request.get_http_client_status() == HTTPClient.STATUS_DISCONNECTED, "untrusted redirect not followed")
  panel.queue_free()
  await process_frame
  print("RANKING SNAPSHOT RESULT: ",failures," failures")

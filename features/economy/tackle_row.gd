@@ -34,6 +34,7 @@ static func specifications(item: Resource) -> String:
    var material_name:String={"mono":"ไนลอน","fluoro":"ฟลูออโรคาร์บอน","braid":"สายถัก PE","coated_mono":"ไนลอนเคลือบฟลูออโร","fly":"สายฟลาย"}.get(spec.material,"สายตกปลา")
    return "%s · %.2f mm\n%.1f kgf · %.0f ม." % [material_name, spec.diameter_mm, spec.break_kgf, item.length]
   "box": return "ความจุ %.0f กก." % item.capacity
+  "boat": return "ความเร็ว %.1f ม./วิ · เดินตกปลาบนเรือได้\nซื้อครั้งเดียว ใช้ซ้ำได้" % item.boat_spec.speed
   "lure": return {"float": "เหยื่อผิวน้ำ", "swim": "เหยื่อว่ายน้ำ", "sink": "เหยื่อจมน้ำ"}.get(item.motion, "เหยื่อปลอม") + " · %.1f g พร้อมตก\nใช้ซ้ำได้" % item.payload_g + attraction_text(item)
  return "ตัวเหยื่อ %.2f g + ชุดปลายสาย\nใช้ 1 ชิ้นต่อการเหวี่ยง" % item.payload_g + attraction_text(item)
 

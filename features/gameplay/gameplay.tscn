@@ -5,6 +5,8 @@
 [ext_resource type="Script" path="res://features/economy/commerce_gateway.gd" id="commerce"]
 
 [ext_resource type="Script" path="res://features/gameplay/gameplay.gd" id="script"]
+[ext_resource type="Script" path="res://features/competition/match_session.gd" id="match_session"]
+[ext_resource type="PackedScene" path="res://features/competition/match_hud.tscn" id="match_hud"]
 
 [ext_resource type="PackedScene" path="res://actors/player/player.tscn" id="player"]
 
@@ -19,6 +21,11 @@
 [node name="Gameplay" type="Node3D"]
 script = ExtResource("script")
 economy_enabled = true
+
+[node name="MatchSession" type="Node3D" parent="."]
+script = ExtResource("match_session")
+
+[node name="MatchHUD" parent="." instance=ExtResource("match_hud")]
 
 [node name="CommerceGateway" type="Node" parent="."]
 script = ExtResource("commerce")

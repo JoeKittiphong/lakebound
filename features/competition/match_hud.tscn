@@ -1,0 +1,194 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/competition/match_hud.gd" id="script"]
+[ext_resource type="Theme" path="res://shared/ui/game_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://features/competition/match_panel.tscn" id="panel"]
+[sub_resource type="StyleBoxFlat" id="board"]
+bg_color = Color(0.045, 0.14, 0.19, 0.96)
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+[node name="MatchHUD" type="CanvasLayer"]
+layer = 12
+process_mode = 3
+script = ExtResource("script")
+[node name="Overlay" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource("theme")
+[node name="Board" type="PanelContainer" parent="Overlay"]
+layout_mode = 1
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 20.0
+offset_top = 242.0
+offset_right = 350.0
+offset_bottom = 242.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("board")
+[node name="Content" type="VBoxContainer" parent="Overlay/Board"]
+theme_override_constants/separation = 0
+mouse_filter = 2
+[node name="Header" type="HBoxContainer" parent="Overlay/Board/Content"]
+mouse_filter = 2
+[node name="Clock" type="Label" parent="Overlay/Board/Content/Header"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "10:00"
+mouse_filter = 2
+[node name="Rule" type="Label" parent="Overlay/Board/Content/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text_overrun_behavior = 3
+clip_text = true
+horizontal_alignment = 2
+text = "10 นาที · น้ำหนักรวมปลาทุกชนิด"
+mouse_filter = 2
+[node name="Connection" type="Label" parent="Overlay/Board/Content"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 11
+text = "เชื่อมต่อแล้ว"
+mouse_filter = 2
+[node name="Scores" type="VBoxContainer" parent="Overlay/Board/Content"]
+unique_name_in_owner = true
+mouse_filter = 2
+theme_override_constants/separation = 0
+[node name="Row0" type="HBoxContainer" parent="Overlay/Board/Content/Scores"]
+visible = true
+mouse_filter = 2
+theme_override_constants/separation = 6
+[node name="Rank" type="Label" parent="Overlay/Board/Content/Scores/Row0"]
+custom_minimum_size = Vector2(22, 0)
+theme_override_font_sizes/font_size = 13
+text = "1."
+mouse_filter = 2
+[node name="Name" type="Label" parent="Overlay/Board/Content/Scores/Row0"]
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+clip_text = true
+theme_override_font_sizes/font_size = 13
+text = "นักตกปลา"
+mouse_filter = 2
+[node name="Weight" type="Label" parent="Overlay/Board/Content/Scores/Row0"]
+custom_minimum_size = Vector2(82, 0)
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 13
+text = "0.000 กก."
+mouse_filter = 2
+[node name="Row1" type="HBoxContainer" parent="Overlay/Board/Content/Scores"]
+visible = true
+mouse_filter = 2
+theme_override_constants/separation = 6
+[node name="Rank" type="Label" parent="Overlay/Board/Content/Scores/Row1"]
+custom_minimum_size = Vector2(22, 0)
+theme_override_font_sizes/font_size = 13
+text = "2."
+mouse_filter = 2
+[node name="Name" type="Label" parent="Overlay/Board/Content/Scores/Row1"]
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+clip_text = true
+theme_override_font_sizes/font_size = 13
+text = "นักตกปลา"
+mouse_filter = 2
+[node name="Weight" type="Label" parent="Overlay/Board/Content/Scores/Row1"]
+custom_minimum_size = Vector2(82, 0)
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 13
+text = "0.000 กก."
+mouse_filter = 2
+[node name="Row2" type="HBoxContainer" parent="Overlay/Board/Content/Scores"]
+visible = false
+mouse_filter = 2
+theme_override_constants/separation = 6
+[node name="Rank" type="Label" parent="Overlay/Board/Content/Scores/Row2"]
+custom_minimum_size = Vector2(22, 0)
+theme_override_font_sizes/font_size = 13
+text = "3."
+mouse_filter = 2
+[node name="Name" type="Label" parent="Overlay/Board/Content/Scores/Row2"]
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+clip_text = true
+theme_override_font_sizes/font_size = 13
+text = "นักตกปลา"
+mouse_filter = 2
+[node name="Weight" type="Label" parent="Overlay/Board/Content/Scores/Row2"]
+custom_minimum_size = Vector2(82, 0)
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 13
+text = "0.000 กก."
+mouse_filter = 2
+[node name="Row3" type="HBoxContainer" parent="Overlay/Board/Content/Scores"]
+visible = false
+mouse_filter = 2
+theme_override_constants/separation = 6
+[node name="Rank" type="Label" parent="Overlay/Board/Content/Scores/Row3"]
+custom_minimum_size = Vector2(22, 0)
+theme_override_font_sizes/font_size = 13
+text = "4."
+mouse_filter = 2
+[node name="Name" type="Label" parent="Overlay/Board/Content/Scores/Row3"]
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+clip_text = true
+theme_override_font_sizes/font_size = 13
+text = "นักตกปลา"
+mouse_filter = 2
+[node name="Weight" type="Label" parent="Overlay/Board/Content/Scores/Row3"]
+custom_minimum_size = Vector2(82, 0)
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 13
+text = "0.000 กก."
+mouse_filter = 2
+[node name="Row4" type="HBoxContainer" parent="Overlay/Board/Content/Scores"]
+visible = false
+mouse_filter = 2
+theme_override_constants/separation = 6
+[node name="Rank" type="Label" parent="Overlay/Board/Content/Scores/Row4"]
+custom_minimum_size = Vector2(22, 0)
+theme_override_font_sizes/font_size = 13
+text = "5."
+mouse_filter = 2
+[node name="Name" type="Label" parent="Overlay/Board/Content/Scores/Row4"]
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+clip_text = true
+theme_override_font_sizes/font_size = 13
+text = "นักตกปลา"
+mouse_filter = 2
+[node name="Weight" type="Label" parent="Overlay/Board/Content/Scores/Row4"]
+custom_minimum_size = Vector2(82, 0)
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 13
+text = "0.000 กก."
+mouse_filter = 2
+[node name="Banner" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -35.0
+offset_right = 360.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 32
+theme_override_colors/font_outline_color = Color(0.01,0.03,0.04,1)
+theme_override_constants/outline_size = 8
+text = "เริ่มใน 5"
+horizontal_alignment = 1
+mouse_filter = 2
+[node name="MatchPanel" parent="." instance=ExtResource("panel")]
+auto_travel = false
+

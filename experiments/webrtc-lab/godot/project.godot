@@ -1,0 +1,9 @@
+config_version=5
+[application]
+config/name="Lakebound WebRTC Lab"
+run/main_scene="res://lab.tscn"
+[display]
+window/size/viewport_width=840
+window/size/viewport_height=420
+[rendering]
+renderer/rendering_method="gl_compatibility"

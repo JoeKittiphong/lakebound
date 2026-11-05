@@ -10,7 +10,8 @@ func scan(path: String):
 	var dir = DirAccess.open(path)
 	if not dir: return
 	for name in dir.get_directories():
-		if name.begins_with(".") or name in ["android","signing","exports","docs","tools","tests","server","services","export_templates","feature_profiles","script_templates","text_editor_themes","fishing-game"]:continue
+		if name.begins_with(".") or name in ["android","signing","exports","docs","tools","tests","server","services","experiments","export_templates","feature_profiles","script_templates","text_editor_themes","fishing-game"]:continue
+		if FileAccess.file_exists(path.path_join(name).path_join(".gdignore")):continue
 		scan(path.path_join(name))
 	for name in dir.get_files():
 		if not name.ends_with(".import") and not name.ends_with(".uid") and ResourceLoader.exists(path.path_join(name)):

@@ -2,11 +2,12 @@ class_name ProfileStore
 extends RefCounted
 
 const Catalog = preload("res://data/equipment/tackle_catalog.gd")
+const Travel = preload("res://features/gameplay/map_travel_state.gd")
 
 static func defaults() -> Dictionary:
  return {"terminal_rig": "float", "identity": AnglerIdentity.create(), "coins": 350, "diamonds": 0, "stock": {"worm": 20, "dough": 10, "minnow": 1, "light_rod": 1, "basic_reel": 1, "small_box": 1},
-  "equipped": {"bait": "worm", "lure": "minnow", "rod": "light_rod", "reel": "basic_reel", "box": "small_box", "line": "nylon"},
-  "line_remaining": 65.0, "spares": {}, "stored_lines": {}, "catches": [], "journal": [], "boss_history": [], "ponds": {}, "pond_revisions": {}, "pending": {}, "receipts": [], "missions": MissionProgress.defaults(), "map_memory": FishingJournal.defaults(), "history": CatchArchive.defaults()}
+  "equipped": {"bait": "worm", "lure": "minnow", "rod": "light_rod", "reel": "basic_reel", "box": "small_box", "line": "nylon", "boat": ""},
+  "line_remaining": 65.0, "spares": {}, "stored_lines": {}, "catches": [], "journal": [], "boss_history": [], "ponds": {}, "pond_revisions": {}, "travel": {}, "pending": {}, "receipts": [], "missions": MissionProgress.defaults(), "map_memory": FishingJournal.defaults(), "history": CatchArchive.defaults(), "cloud": CloudOutbox.defaults()}
 
 static func valid(value: Variant) -> bool:
  if not value is Dictionary:
@@ -15,6 +16,9 @@ static func valid(value: Variant) -> bool:
  for key in expected:
   if not value.has(key) or typeof(value[key]) != typeof(expected[key]):
    return false
+ if not CloudOutbox.valid(value.cloud): return false
+ for map_id in value.travel:
+  if not map_id is String or not FishingJournal.known_map(map_id) or not Travel.valid(value.travel[map_id]): return false
  if not AnglerIdentity.valid(value.identity):
   return false
  if value.coins < 0 or value.diamonds < 0 or not is_finite(value.line_remaining) or value.line_remaining < 0:
@@ -27,7 +31,7 @@ static func valid(value: Variant) -> bool:
   return false
  for slot in expected.equipped:
   if not value.equipped.has(slot) or not value.equipped[slot] is String: return false
-  if value.equipped[slot].is_empty() and slot in ["rod", "reel", "line", "bait", "box"]: continue
+  if value.equipped[slot].is_empty() and slot in ["rod", "reel", "line", "bait", "box", "boat"]: continue
   var entry := Catalog.item(str(value.equipped.get(slot, "")))
   if entry == null or (entry.kind != slot and not (slot == "bait" and entry.kind == "lure")):
    return false
@@ -85,6 +89,9 @@ static func load_profile(path: String) -> Dictionary:
   result.error = error if error != OK else ERR_INVALID_DATA
   return result
  var saved = config.get_value("profile", "data", {})
+ if saved is Dictionary and saved.get("equipped") is Dictionary and not saved.equipped.has("boat"): saved.equipped["boat"] = ""
+ if saved is Dictionary: saved["travel"] = Travel.clean_memory(saved.get("travel",{}))
+ if saved is Dictionary and not saved.has("cloud"): saved["cloud"] = CloudOutbox.defaults()
  if saved is Dictionary and not saved.has("stored_lines"): saved["stored_lines"] = {}
  if saved is Dictionary and not saved.has("identity"):
   saved["identity"] = AnglerIdentity.create()

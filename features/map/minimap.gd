@@ -18,12 +18,18 @@ var _live_ids: Dictionary = {}
 func _ready() -> void:
 	view.radius_m = radius_m
 	$ScanButton.disabled = true
+	for tier in 5:
+		var label: Label = $ScanLegend/Content.get_child(tier + 1)
+		label.text = view.scan_palette.legend_for(tier)
+		label.add_theme_color_override("font_color",view.scan_palette.color_for(tier))
 
 func bind(value: AnglerPlayer, map: String, source: PondEcosystem = null) -> void:
 	_disconnect_ecosystem()
 	player = value
 	current_map = map
 	ecosystem = source
+	$HelpButton.set_pressed_no_signal(false)
+	$ScanLegend.hide()
 	_clear_scan()
 	view.radius_m = radius_m
 	view.configure(FishingMapDefinition.for_region(map))
@@ -57,7 +63,10 @@ func set_target(value: Dictionary) -> void:
 
 func _has_point(point: Vector2) -> bool:
 	# A transparent corner must not behave like an invisible rectangular map button.
-	return point.distance_squared_to(Vector2(98,104)) <= 92.0*92.0 or Rect2(140,142,48,48).has_point(point)
+	return point.distance_squared_to(Vector2(98,104)) <= 92.0*92.0 or Rect2(140,142,48,48).has_point(point) or $HelpButton.get_rect().has_point(point)
+
+func _on_help_toggled(opened: bool) -> void:
+	$ScanLegend.visible = opened
 
 func _sync_player() -> void:
 	if not is_instance_valid(player): return
@@ -92,18 +101,24 @@ func _clear_scan() -> void:
 	_scan_age = 0.0
 	_detected.clear()
 	view.fish_positions = PackedVector2Array()
+	view.fish_tiers = PackedInt32Array()
 	view.pulse_progress = -1.0
 	$ScanFeedback.hide()
 	view.queue_redraw()
 
 func _sync_hits() -> void:
 	var positions := PackedVector2Array()
+	var tiers := PackedInt32Array()
 	if _scan_remaining > 0:
+		var boss: RefCounted = ecosystem.boss() if is_instance_valid(ecosystem) else null
 		for fish in _detected:
 			if not is_instance_valid(fish) or not _live_ids.has(fish.get_instance_id()) or not fish.position.is_finite(): continue
 			var point := Vector2(fish.position.x,fish.position.z)
-			if view.in_range(point): positions.append(point)
+			if view.in_range(point):
+				positions.append(point)
+				tiers.append(view.scan_palette.classify(fish.weight,fish == boss))
 	view.fish_positions = positions
+	view.fish_tiers = tiers
 	view.marker_alpha = clampf(_scan_remaining,0.0,1.0)
 	view.queue_redraw()
 

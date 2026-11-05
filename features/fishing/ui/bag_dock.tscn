@@ -1,0 +1,305 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/fishing/ui/bag_dock.gd" id="script"]
+[ext_resource type="PackedScene" path="res://features/fishing/ui/bag_slot_preview.tscn" id="preview"]
+[sub_resource type="StyleBoxFlat" id="gear"]
+bg_color = Color(0.12, 0.19, 0.23, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.84, 0.38, 0.31, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+[sub_resource type="StyleBoxFlat" id="fish"]
+bg_color = Color(0.07, 0.20, 0.29, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.27, 0.64, 0.88, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+[node name="BagDock" type="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -274.0
+offset_right = 274.0
+offset_top = -88.0
+offset_bottom = -12.0
+mouse_filter = 2
+theme_override_constants/separation = 16
+script = ExtResource("script")
+[node name="Equipment" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 296.0
+offset_bottom = 76.0
+theme_override_constants/separation = 4
+[node name="Rod" type="Button" parent="Equipment"]
+custom_minimum_size = Vector2(56, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("gear")
+theme_override_font_sizes/font_size = 13
+theme_override_constants/icon_max_width = 32
+expand_icon = true
+alignment = 1
+icon_alignment = 1
+vertical_icon_alignment = 0
+text = ""
+focus_mode = 0
+[node name="Reel" type="Button" parent="Equipment"]
+custom_minimum_size = Vector2(56, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("gear")
+theme_override_font_sizes/font_size = 13
+theme_override_constants/icon_max_width = 32
+expand_icon = true
+alignment = 1
+icon_alignment = 1
+vertical_icon_alignment = 0
+text = ""
+focus_mode = 0
+[node name="Line" type="Button" parent="Equipment"]
+custom_minimum_size = Vector2(56, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("gear")
+theme_override_font_sizes/font_size = 13
+theme_override_constants/icon_max_width = 32
+expand_icon = true
+alignment = 1
+icon_alignment = 1
+vertical_icon_alignment = 0
+text = ""
+focus_mode = 0
+[node name="Bait" type="Button" parent="Equipment"]
+custom_minimum_size = Vector2(56, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("gear")
+theme_override_font_sizes/font_size = 13
+theme_override_constants/icon_max_width = 32
+expand_icon = true
+alignment = 1
+icon_alignment = 1
+vertical_icon_alignment = 0
+text = ""
+focus_mode = 0
+[node name="Boat" type="Button" parent="Equipment"]
+custom_minimum_size = Vector2(56,72)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/normal = SubResource("gear")
+
+[node name="Preview" parent="Equipment/Boat" instance=ExtResource("preview")]
+
+[node name="Caption" type="Label" parent="Equipment/Boat"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 13
+text = "เรือ"
+
+[node name="Fish" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_right = 548.0
+offset_bottom = 76.0
+mouse_filter = 0
+theme_override_constants/separation = 4
+[node name="Slot0" type="Button" parent="Fish"]
+custom_minimum_size = Vector2(56, 72)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/normal = SubResource("fish")
+theme_override_font_sizes/font_size = 12
+theme_override_constants/icon_max_width = 36
+expand_icon = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+text = ""
+focus_mode = 0
+[node name="Slot1" type="Button" parent="Fish"]
+custom_minimum_size = Vector2(56, 72)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/normal = SubResource("fish")
+theme_override_font_sizes/font_size = 12
+theme_override_constants/icon_max_width = 36
+expand_icon = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+text = ""
+focus_mode = 0
+[node name="Slot2" type="Button" parent="Fish"]
+custom_minimum_size = Vector2(56, 72)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/normal = SubResource("fish")
+theme_override_font_sizes/font_size = 12
+theme_override_constants/icon_max_width = 36
+expand_icon = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+text = ""
+focus_mode = 0
+[node name="Slot3" type="Button" parent="Fish"]
+custom_minimum_size = Vector2(56, 72)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/normal = SubResource("fish")
+theme_override_font_sizes/font_size = 12
+theme_override_constants/icon_max_width = 36
+expand_icon = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+text = ""
+focus_mode = 0
+
+[node name="PageHint" type="Label" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_top = -26.0
+offset_right = 548.0
+mouse_filter = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.81, 0.94, 1, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.10, 0.16, 1)
+theme_override_constants/outline_size = 4
+text = "ปลา 1/1 · ปัดซ้าย–ขวา"
+
+[node name="Preview" parent="Equipment/Rod" instance=ExtResource("preview")]
+
+[node name="Preview" parent="Equipment/Reel" instance=ExtResource("preview")]
+
+[node name="Preview" parent="Equipment/Line" instance=ExtResource("preview")]
+
+[node name="Preview" parent="Equipment/Bait" instance=ExtResource("preview")]
+
+[node name="Preview" parent="Fish/Slot0" instance=ExtResource("preview")]
+
+[node name="Preview" parent="Fish/Slot1" instance=ExtResource("preview")]
+
+[node name="Preview" parent="Fish/Slot2" instance=ExtResource("preview")]
+
+[node name="Preview" parent="Fish/Slot3" instance=ExtResource("preview")]
+
+[node name="Caption" type="Label" parent="Equipment/Rod"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 13
+text = "คัน"
+
+[node name="Caption" type="Label" parent="Equipment/Reel"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 13
+text = "รอก"
+
+[node name="Caption" type="Label" parent="Equipment/Line"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 13
+text = "เอ็น"
+
+[node name="Caption" type="Label" parent="Equipment/Bait"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 13
+text = "เหยื่อ"
+
+[node name="Caption" type="Label" parent="Fish/Slot0"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "ว่าง"
+
+[node name="Caption" type="Label" parent="Fish/Slot1"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "ว่าง"
+
+[node name="Caption" type="Label" parent="Fish/Slot2"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "ว่าง"
+
+[node name="Caption" type="Label" parent="Fish/Slot3"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -3.0
+mouse_filter = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "ว่าง"

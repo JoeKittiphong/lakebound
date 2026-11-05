@@ -1,0 +1,108 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/competition/friends_panel.gd" id="script"]
+[ext_resource type="Theme" path="res://shared/ui/game_theme.tres" id="theme"]
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.025,0.075,0.09,0.99)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_left = 20
+corner_radius_bottom_right = 20
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+[node name="FriendsPanel" type="Control"]
+visible = false
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01,0.03,0.04,0.9)
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 20.0
+offset_right = -28.0
+offset_bottom = -20.0
+[node name="Panel" type="PanelContainer" parent="Margin"]
+theme_override_styles/panel = SubResource("panel")
+[node name="Content" type="VBoxContainer" parent="Margin/Panel"]
+theme_override_constants/separation = 10
+[node name="Header" type="HBoxContainer" parent="Margin/Panel/Content"]
+[node name="Title" type="Label" parent="Margin/Panel/Content/Header"]
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "เพื่อนและคำเชิญ"
+[node name="Close" type="Button" parent="Margin/Panel/Content/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90,48)
+text = "ปิด"
+[node name="Identity" type="HBoxContainer" parent="Margin/Panel/Content"]
+[node name="OwnCode" type="Label" parent="Margin/Panel/Content/Identity"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = "รหัสเพื่อนของคุณ · กำลังเชื่อมต่อ"
+[node name="Copy" type="Button" parent="Margin/Panel/Content/Identity"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110,48)
+text = "คัดลอกรหัส"
+[node name="AddRow" type="HBoxContainer" parent="Margin/Panel/Content"]
+theme_override_constants/separation = 10
+[node name="FriendCode" type="LineEdit" parent="Margin/Panel/Content/AddRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,48)
+max_length = 8
+placeholder_text = "ใส่รหัสเพื่อน 8 ตัว"
+[node name="Add" type="Button" parent="Margin/Panel/Content/AddRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150,48)
+text = "เพิ่มเพื่อน"
+[node name="Status" type="Label" parent="Margin/Panel/Content"]
+unique_name_in_owner = true
+text = "เป็นเพื่อนกันแล้วจึงเห็นสถานะและส่งคำเชิญได้"
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 17
+[node name="Scroll" type="ScrollContainer" parent="Margin/Panel/Content"]
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Rows" type="VBoxContainer" parent="Margin/Panel/Content/Scroll"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+[node name="InvitesTitle" type="Label" parent="Margin/Panel/Content/Scroll/Rows"]
+text = "คำเชิญเข้าห้อง"
+theme_override_font_sizes/font_size = 21
+[node name="Invites" type="VBoxContainer" parent="Margin/Panel/Content/Scroll/Rows"]
+unique_name_in_owner = true
+[node name="RequestsTitle" type="Label" parent="Margin/Panel/Content/Scroll/Rows"]
+text = "คำขอเป็นเพื่อน"
+theme_override_font_sizes/font_size = 21
+[node name="Requests" type="VBoxContainer" parent="Margin/Panel/Content/Scroll/Rows"]
+unique_name_in_owner = true
+[node name="OutgoingTitle" type="Label" parent="Margin/Panel/Content/Scroll/Rows"]
+text = "คำขอที่ส่งแล้ว"
+[node name="Outgoing" type="VBoxContainer" parent="Margin/Panel/Content/Scroll/Rows"]
+unique_name_in_owner = true
+[node name="FriendsTitle" type="Label" parent="Margin/Panel/Content/Scroll/Rows"]
+text = "รายชื่อเพื่อน"
+theme_override_font_sizes/font_size = 21
+[node name="Friends" type="VBoxContainer" parent="Margin/Panel/Content/Scroll/Rows"]
+unique_name_in_owner = true
+[node name="RemoveConfirm" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "ลบเพื่อน"
+dialog_text = "ต้องการลบคนนี้ออกจากรายชื่อเพื่อนหรือไม่?"
+ok_button_text = "ลบเพื่อน"
+cancel_button_text = "ยกเลิก"

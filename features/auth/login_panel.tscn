@@ -1,0 +1,106 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/auth/login_panel.gd" id="script"]
+[ext_resource type="Theme" path="res://shared/ui/game_theme.tres" id="theme"]
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.025,0.075,0.09,0.98)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_left = 22
+corner_radius_bottom_right = 22
+content_margin_left = 32.0
+content_margin_right = 32.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+[sub_resource type="StyleBoxFlat" id="google"]
+bg_color = Color(1,1,1,1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+[node name="LoginPanel" type="Control"]
+visible = false
+process_mode = 3
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01,0.03,0.04,0.88)
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_right = -28.0
+offset_top = 20.0
+offset_bottom = -20.0
+[node name="Center" type="CenterContainer" parent="Margin"]
+[node name="Panel" type="PanelContainer" parent="Margin/Center"]
+custom_minimum_size = Vector2(600,0)
+theme_override_styles/panel = SubResource("panel")
+[node name="Content" type="VBoxContainer" parent="Margin/Center/Panel"]
+theme_override_constants/separation = 10
+[node name="Title" type="Label" parent="Margin/Center/Panel/Content"]
+theme_override_font_sizes/font_size = 30
+text = "ยินดีต้อนรับสู่ Lakebound"
+horizontal_alignment = 1
+[node name="Description" type="Label" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+text = "ใช้บัญชี Google เพื่อเข้าร่วมการแข่งขันกับเพื่อน"
+horizontal_alignment = 1
+[node name="Email" type="Label" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+text = ""
+horizontal_alignment = 1
+[node name="Google" type="Button" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,56)
+text = "เข้าสู่ระบบด้วย Google"
+theme_override_colors/font_color = Color(0.12,0.14,0.16,1)
+theme_override_colors/font_hover_color = Color(0.12,0.14,0.16,1)
+theme_override_colors/font_pressed_color = Color(0.12,0.14,0.16,1)
+theme_override_styles/normal = SubResource("google")
+theme_override_styles/hover = SubResource("google")
+theme_override_styles/pressed = SubResource("google")
+[node name="Status" type="Label" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,32)
+text = "เข้าสู่ระบบเพื่อแข่งขันกับเพื่อน"
+autowrap_mode = 2
+horizontal_alignment = 1
+[node name="NameSetup" type="VBoxContainer" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+visible = false
+theme_override_constants/separation = 10
+[node name="Prompt" type="Label" parent="Margin/Center/Panel/Content/NameSetup"]
+text = "ตั้งชื่อผู้เล่นของคุณ · 2–24 ตัวอักษร"
+horizontal_alignment = 1
+[node name="PlayerName" type="LineEdit" parent="Margin/Center/Panel/Content/NameSetup"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+placeholder_text = "ชื่อที่ต้องการใช้ในเกม"
+max_length = 24
+[node name="SaveName" type="Button" parent="Margin/Center/Panel/Content/NameSetup"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+text = "บันทึกชื่อและเข้าเล่น"
+[node name="Cancel" type="Button" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,48)
+text = "ยกเลิกการเข้าสู่ระบบ"
+[node name="Offline" type="Button" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,48)
+text = "เล่นออฟไลน์"
+[node name="SignOut" type="Button" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,48)
+text = "ออกจากระบบ"
+[node name="Close" type="Button" parent="Margin/Center/Panel/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,48)
+text = "กลับเข้าเกม"

@@ -1,0 +1,72 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/competition/invite_notice.gd" id="script"]
+[ext_resource type="Theme" path="res://shared/ui/game_theme.tres" id="theme"]
+[sub_resource type="StyleBoxFlat" id="card"]
+bg_color = Color(0.025, 0.075, 0.09, 0.99)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.8, 0.65, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_left = 16
+corner_radius_bottom_right = 16
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+[node name="InviteNotice" type="CanvasLayer"]
+layer = 90
+process_mode = 3
+script = ExtResource("script")
+[node name="Alert" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+[node name="Shade" type="ColorRect" parent="Alert"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0, 0.015, 0.025, 0.78)
+[node name="Center" type="CenterContainer" parent="Alert"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+[node name="Card" type="PanelContainer" parent="Alert/Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(560, 0)
+theme = ExtResource("theme")
+theme_override_styles/panel = SubResource("card")
+[node name="Content" type="VBoxContainer" parent="Alert/Center/Card"]
+theme_override_constants/separation = 10
+[node name="Title" type="Label" parent="Alert/Center/Card/Content"]
+text = "คำเชิญเข้าห้องแข่งขัน"
+theme_override_font_sizes/font_size = 24
+[node name="Message" type="Label" parent="Alert/Center/Card/Content"]
+unique_name_in_owner = true
+text = "เพื่อน ชวนเข้าห้อง 12345"
+autowrap_mode = 3
+[node name="Remaining" type="Label" parent="Alert/Center/Card/Content"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 16
+[node name="Error" type="Label" parent="Alert/Center/Card/Content"]
+unique_name_in_owner = true
+autowrap_mode = 3
+theme_override_colors/font_color = Color(1, 0.65, 0.5, 1)
+[node name="Buttons" type="HBoxContainer" parent="Alert/Center/Card/Content"]
+theme_override_constants/separation = 12
+[node name="Accept" type="Button" parent="Alert/Center/Card/Content/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+size_flags_horizontal = 3
+text = "ยอมรับเข้าห้อง"
+[node name="Decline" type="Button" parent="Alert/Center/Card/Content/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 48)
+text = "ปฏิเสธ"

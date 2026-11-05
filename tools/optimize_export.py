@@ -7,11 +7,16 @@ from pathlib import Path
 import argparse,json,re
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'exports/cleanup-qa'
-EXCLUDE='docs/*,exports/*,tools/*,tests/*,signing/*,.signing/*,server/*,services/*,android/*,fishing-game/*,export_templates/*,feature_profiles/*,script_templates/*,text_editor_themes/*,*.log,*.bak'
+EXCLUDE='docs/*,exports/*,tools/*,tests/*,signing/*,.signing/*,server/*,services/*,experiments/*,android/*,fishing-game/*,export_templates/*,feature_profiles/*,script_templates/*,text_editor_themes/*,*.log,*.bak'
 def generate():
  deps=json.loads((OUT/'godot-dependencies.json').read_text(encoding='utf-8'))
  roots={p for p in deps if p.endswith('.gd') or p.startswith(('res://data/','res://features/map/maps/'))}
+ project_text=(ROOT/'project.godot').read_text(encoding='utf-8-sig')
+ autoloads=re.search(r'(?ms)^\[autoload\]\s*(.*?)(?=^\[|\Z)',project_text)
+ if autoloads:roots.update(re.findall(r'=\s*"\*?(res://[^\"]+)"',autoloads.group(1)))
  roots.update(['res://features/loading/loading.tscn','res://shared/branding/icon.png','res://shared/branding/adaptive_foreground.png','res://shared/branding/adaptive_background.png'])
+ native_rtc='res://addons/webrtc_native/webrtc_native.gdextension'
+ if (ROOT/native_rtc[6:]).is_file():roots.add(native_rtc)
  seen=set();queue=list(roots);missing=set()
  while queue:
   name=queue.pop()
@@ -36,18 +41,23 @@ def generate():
  return resources
 
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--apply',action='store_true');args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--apply',action='store_true');parser.add_argument('--preset');args=parser.parse_args()
  resources=generate();config=ROOT/'export_presets.cfg';text=config.read_text(encoding='utf-8')
  files='export_files=PackedStringArray('+', '.join(json.dumps(p) for p in resources)+')'
  blocks=re.split(r'(?=\[preset\.\d+\])',text)
  for i,block in enumerate(blocks):
   if not block.startswith('[preset.'):continue
+  if args.preset and ('name="'+args.preset+'"') not in block:continue
   # Only preset-level keys are matched; option sections remain unchanged.
+  web='platform="Web"' in block
+  selected=[p for p in resources if not (web and p.startswith('res://addons/webrtc_native/'))]
+  files='export_files=PackedStringArray('+', '.join(json.dumps(p) for p in selected)+')'
   block=re.sub(r'^export_filter=.*$', 'export_filter="resources"',block,flags=re.M)
   block=re.sub(r'^export_files=.*\n?', '',block,flags=re.M)
   block=re.sub(r'^export_filter="resources"$', 'export_filter="resources"\n'+files,block,flags=re.M)
-  block=re.sub(r'^include_filter=.*$', 'include_filter="online.cfg,data/regions/*.json,world/pond/models/encyclopedia/*.json,shared/ui/fonts/OFL.txt"',block,flags=re.M)
-  block=re.sub(r'^exclude_filter=.*$', 'exclude_filter="'+EXCLUDE+'"',block,flags=re.M)
+  native_includes='' if web else ',addons/webrtc_native/*.gdextension,addons/webrtc_native/LICENSE*'
+  block=re.sub(r'^include_filter=.*$', 'include_filter="online.cfg,data/cloud/*.json,data/regions/*.json,world/pond/models/encyclopedia/*.json,shared/ui/fonts/OFL.txt'+native_includes+'"',block,flags=re.M)
+  block=re.sub(r'^exclude_filter=.*$', 'exclude_filter="'+EXCLUDE+(',addons/webrtc_native/*' if web else '')+'"',block,flags=re.M)
   blocks[i]=block
  updated=''.join(blocks).rstrip()+'\n'
  if args.apply:config.write_text(updated,encoding='utf-8')

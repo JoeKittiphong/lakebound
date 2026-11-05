@@ -46,6 +46,18 @@ def main():
     require(manifest.attrib[ANDROID + "versionName"] == version, "Manifest version differs from project.godot")
     require(manifest.find("uses-sdk").attrib[ANDROID + "targetSdkVersion"] == "36", "Unexpected target SDK")
     require(manifest.find("application").attrib.get(ANDROID + "debuggable", "false") == "false", "Debug build")
+    if (ROOT / "features/auth/account_auth.gd").exists():
+        activity = next((node for node in manifest.find("application").findall("activity")
+                         if node.attrib.get(ANDROID + "name", "").endswith(".GodotApp")), None)
+        require(activity is not None, "Missing Godot Android activity")
+        require(activity.attrib.get(ANDROID + "exported") == "true"
+                and activity.attrib.get(ANDROID + "launchMode") == "singleTask",
+                "OAuth activity must accept callbacks in the existing task")
+        require(any(node.attrib.get(ANDROID + "scheme") == "com.zylaah.lakebound"
+                    and node.attrib.get(ANDROID + "host") == "auth"
+                    and node.attrib.get(ANDROID + "path") == "/callback"
+                    for node in activity.findall("intent-filter/data")),
+                "Missing Google OAuth callback in final Android manifest")
     permissions = [el.attrib.get(ANDROID + "name") for el in manifest.findall("uses-permission")]
     require(set(permissions) <= {"android.permission.VIBRATE", "android.permission.INTERNET"}, "Unexpected permissions: " + str(permissions))
     libraries = {}

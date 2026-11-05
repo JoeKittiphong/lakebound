@@ -10,6 +10,8 @@ const FishVisual = preload("res://world/pond/fish_visual.tscn")
 @export_range(1,24) var maximum_visible_fish:=7
 @export_range(1.0, 8.0) var visible_fish_depth: float = 5.0
 @export var water_height: float = -0.18
+@export_range(1.0, 8.0) var fish_frustum_margin := 3.0
+@export var cull_offscreen_fish := true
 @onready var line_mesh: ImmediateMesh = $Line.mesh
 var visual_pool: Array[Node3D] = []
 var _visible_candidates: Array = []
@@ -57,6 +59,9 @@ func _process(delta: float) -> void:
    $ReelAudio.play()
  else:
   $ReelAudio.stop()
+ if get_viewport().disable_3d:
+  for visual in visual_pool: visual.hide()
+  return
  var ready_state: bool = state == controller.State.READY
  var line_visible: bool = state in [controller.State.WAITING, controller.State.BITE, controller.State.FIGHT, controller.State.CASTING]
  $AimMarker.visible = ready_state and (not player is AnglerPlayer or player.can_fish())
@@ -147,6 +152,8 @@ func _process(delta: float) -> void:
 
 func _update_fish_visuals() -> void:
  var slot := 0
+ var camera := get_viewport().get_camera_3d()
+ var planes: Array[Plane] = camera.get_frustum() if camera != null and cull_offscreen_fish else []
  var here := Vector2(player.global_position.x, player.global_position.z)
  _visible_candidates.clear()
  # Reject invisible fish before sorting; retain the configured visual budget,
@@ -157,6 +164,8 @@ func _update_fish_visuals() -> void:
   if record.position.y > visible_fish_depth and record.state != &"landed":
    continue
   if here.distance_squared_to(Vector2(record.position.x, record.position.z)) <= 55.0 * 55.0:
+   var position_world := Vector3(record.position.x, water_height - record.position.y, record.position.z)
+   if not _fish_in_view(position_world, planes): continue
    _visible_candidates.append(record)
  _visible_candidates.sort_custom(func(a: RefCounted, b: RefCounted) -> bool:
   if (a.state in [&"chasing_lure",&"committed"]) != (b.state in [&"chasing_lure",&"committed"]):
@@ -186,3 +195,8 @@ func _update_fish_visuals() -> void:
   slot += 1
  for index in range(slot, visual_pool.size()):
   visual_pool[index].hide()
+
+func _fish_in_view(point: Vector3, planes: Array[Plane]) -> bool:
+ for plane in planes:
+  if plane.distance_to(point) > fish_frustum_margin: return false
+ return true

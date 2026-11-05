@@ -26,6 +26,8 @@ var _direction := 1.0
 var _equipped_scene: PackedScene
 var locomotion_active := false
 var first_person := false
+var shared_rod_action := false
+var _rod_rest := Transform3D.IDENTITY
 var first_person_rod: FishingRodVisual
 var aiming := false
 var driving := false
@@ -70,6 +72,7 @@ func equip_rod(scene: PackedScene) -> void:
  _equipped_scene = scene
  rod_mesh = scene.instantiate() as Node3D
  rod_grip.add_child(rod_mesh)
+ _rod_rest = rod_mesh.transform
  rod_mesh.visible = (_is_fishing() or carrying) and not first_person and not driving
 
 func clear_rod() -> void:
@@ -80,6 +83,7 @@ func clear_rod() -> void:
  _equipped_scene = null
 
 func set_rod_load(tension: float, side: float) -> void:
+ if shared_rod_action: return
  if rod_mesh is FishingRodVisual:
   rod_mesh.set_load(0.0 if carrying else tension, 0.0 if carrying else side)
 
@@ -93,17 +97,27 @@ func _process(delta: float) -> void:
   if left_hand_ik.is_running():
    left_hand_ik.stop()
   return
- rod_mesh.advance_reel(delta, _reeling)
- var grip_mode := FishingRodVisual.GripMode.CAST if _state == FishingController.State.CASTING else (FishingRodVisual.GripMode.SUPPORT if _state == FishingController.State.FIGHT else FishingRodVisual.GripMode.REEL)
+ rod_mesh.show()
+ if not shared_rod_action: rod_mesh.advance_reel(delta, _reeling)
+ var grip_mode := FishingRodVisual.GripMode.CAST if _state == FishingController.State.CASTING else FishingRodVisual.GripMode.SUPPORT
  # Place the palm, not the wrist bone, on the contact. Orient the support
  # hand around the shaft and preserve the skeleton's centimeter scale.
  var right_hand := skeleton.global_transform * skeleton.get_bone_global_pose(_right_hand_index)
- var shaft_axis := rod_mesh.global_basis.y.normalized()
- var hand_basis := Basis(shaft_axis, PI * 0.5) * right_hand.basis
+ var hand_basis := right_hand.basis
  var palm_offset := hand_basis * _left_leaf_rest * 0.28
  left_hand_target.global_transform = Transform3D(hand_basis, rod_mesh.left_hand_contact(grip_mode) - palm_offset)
  if not left_hand_ik.is_running():
   left_hand_ik.start()
+
+func apply_rod_action(angles: Vector3, enabled: bool) -> void:
+ shared_rod_action = enabled
+ if not is_instance_valid(rod_mesh): return
+ rod_mesh.transform = _rod_rest
+ if not enabled: return
+ # Rotate around the authored PrimaryGrip (rod origin), not around the reel.
+ var frame := global_basis.orthonormalized()
+ var turn := frame * Basis.from_euler(angles) * frame.inverse()
+ rod_mesh.basis = rod_grip.global_basis.inverse() * turn * rod_grip.global_basis * _rod_rest.basis
 
 func equip_reel(item: TackleItem) -> void:
  if rod_mesh is FishingRodVisual and item == null:

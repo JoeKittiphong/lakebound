@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://actors/player/player.gd" id="script"]
-[ext_resource type="PackedScene" path="res://actors/player/angler_model.tscn" id="angler"]
+[ext_resource type="PackedScene" path="res://actors/player/angler_visual.tscn" id="angler"]
 
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.378
@@ -15,12 +15,7 @@ swim_float_depth = 1.48
 position = Vector3(0, 1.0836, 0)
 shape = SubResource("shape")
 
-[node name="Visual" type="Node3D" parent="."]
-scale = Vector3(1.4868, 1.4868, 1.4868)
-
-[node name="AnglerModel" parent="Visual" instance=ExtResource("angler")]
-walk_cycle_distance = 2.52
-run_cycle_distance = 3.78
+[node name="Visual" parent="." instance=ExtResource("angler")]
 
 [node name="FishingRod" type="Node3D" parent="Visual"]
 

@@ -1,0 +1,170 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://features/competition/match_panel.gd" id="script"]
+[ext_resource type="Theme" path="res://shared/ui/game_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://features/competition/friends_panel.tscn" id="friends"]
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.025, 0.075, 0.09, 0.98)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_left = 20
+corner_radius_bottom_right = 20
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+[node name="MatchPanel" type="Control"]
+visible = false
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+script = ExtResource("script")
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.01, 0.03, 0.04, 0.8)
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 20.0
+offset_right = -28.0
+offset_bottom = -20.0
+[node name="Panel" type="PanelContainer" parent="Margin"]
+theme_override_styles/panel = SubResource("panel")
+[node name="Content" type="VBoxContainer" parent="Margin/Panel"]
+theme_override_constants/separation = 10
+[node name="Header" type="HBoxContainer" parent="Margin/Panel/Content"]
+[node name="Title" type="Label" parent="Margin/Panel/Content/Header"]
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "แข่งขันตกปลา"
+[node name="FriendsOpen" type="Button" parent="Margin/Panel/Content/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140,48)
+text = "เพื่อน / คำเชิญ"
+[node name="Close" type="Button" parent="Margin/Panel/Content/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90,48)
+text = "ปิด"
+[node name="Rules" type="Label" parent="Margin/Panel/Content"]
+unique_name_in_owner = true
+text = "เลือกเวลาและกติกาเมื่อสร้างห้อง · หาห้องด่วนจะใช้กติกาของห้องที่พบ"
+autowrap_mode = 2
+[node name="Status" type="Label" parent="Margin/Panel/Content"]
+unique_name_in_owner = true
+theme_override_colors/font_color = Color(0.95, 0.78, 0.38, 1)
+text = "ห้องส่วนตัว · 2–5 คน · ไม่มีค่าสมัคร"
+autowrap_mode = 2
+[node name="Entry" type="ScrollContainer" parent="Margin/Panel/Content"]
+unique_name_in_owner = true
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Options" type="VBoxContainer" parent="Margin/Panel/Content/Entry"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+[node name="MapRow" type="HBoxContainer" parent="Margin/Panel/Content/Entry/Options"]
+theme_override_constants/separation = 10
+[node name="Duration" type="OptionButton" parent="Margin/Panel/Content/Entry/Options/MapRow"]
+theme_override_colors/font_color = Color(0.025,0.16,0.14,1)
+theme_override_colors/font_hover_color = Color(0.025,0.16,0.14,1)
+theme_override_colors/font_pressed_color = Color(0.025,0.16,0.14,1)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(170,52)
+[node name="Map" type="OptionButton" parent="Margin/Panel/Content/Entry/Options/MapRow"]
+theme_override_colors/font_color = Color(0.025,0.16,0.14,1)
+theme_override_colors/font_hover_color = Color(0.025,0.16,0.14,1)
+theme_override_colors/font_pressed_color = Color(0.025,0.16,0.14,1)
+size_flags_horizontal = 3
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+[node name="Rule" type="OptionButton" parent="Margin/Panel/Content/Entry/Options"]
+theme_override_colors/font_color = Color(0.025,0.16,0.14,1)
+theme_override_colors/font_hover_color = Color(0.025,0.16,0.14,1)
+theme_override_colors/font_pressed_color = Color(0.025,0.16,0.14,1)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+[node name="Species" type="OptionButton" parent="Margin/Panel/Content/Entry/Options"]
+theme_override_colors/font_color = Color(0.025,0.16,0.14,1)
+theme_override_colors/font_hover_color = Color(0.025,0.16,0.14,1)
+theme_override_colors/font_pressed_color = Color(0.025,0.16,0.14,1)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+[node name="Actions" type="HBoxContainer" parent="Margin/Panel/Content/Entry/Options"]
+theme_override_constants/separation = 10
+[node name="QuickJoin" type="Button" parent="Margin/Panel/Content/Entry/Options/Actions"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,52)
+text = "หาห้องด่วน"
+[node name="Create" type="Button" parent="Margin/Panel/Content/Entry/Options/Actions"]
+size_flags_horizontal = 3
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+text = "สร้างห้องแข่งขัน"
+[node name="Separator" type="HSeparator" parent="Margin/Panel/Content/Entry/Options"]
+[node name="JoinRow" type="HBoxContainer" parent="Margin/Panel/Content/Entry/Options"]
+theme_override_constants/separation = 12
+[node name="Code" type="LineEdit" parent="Margin/Panel/Content/Entry/Options/JoinRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+size_flags_horizontal = 3
+max_length = 5
+placeholder_text = "รหัสห้อง 5 หลัก เช่น 01234"
+virtual_keyboard_type = 2
+[node name="Join" type="Button" parent="Margin/Panel/Content/Entry/Options/JoinRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160,52)
+text = "เข้าห้อง"
+[node name="Lobby" type="VBoxContainer" parent="Margin/Panel/Content"]
+unique_name_in_owner = true
+visible = false
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+[node name="RoomTitle" type="Label" parent="Margin/Panel/Content/Lobby"]
+unique_name_in_owner = true
+text = "รหัสห้อง  01234"
+autowrap_mode = 2
+[node name="Phase" type="Label" parent="Margin/Panel/Content/Lobby"]
+unique_name_in_owner = true
+text = "รอผู้เล่น · 2/5 คน"
+[node name="Scroll" type="ScrollContainer" parent="Margin/Panel/Content/Lobby"]
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+[node name="Rows" type="VBoxContainer" parent="Margin/Panel/Content/Lobby/Scroll"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+[node name="Buttons" type="HBoxContainer" parent="Margin/Panel/Content/Lobby"]
+theme_override_constants/separation = 10
+[node name="Ready" type="Button" parent="Margin/Panel/Content/Lobby/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+size_flags_horizontal = 3
+text = "พร้อมแข่งขัน"
+[node name="Start" type="Button" parent="Margin/Panel/Content/Lobby/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+size_flags_horizontal = 3
+text = "เริ่มแข่งขัน"
+[node name="Resume" type="Button" parent="Margin/Panel/Content/Lobby/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+size_flags_horizontal = 3
+text = "กลับเข้าสนาม"
+[node name="Rematch" type="Button" parent="Margin/Panel/Content/Lobby/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0,52)
+size_flags_horizontal = 3
+text = "แข่งใหม่กลุ่มเดิม"
+[node name="Leave" type="Button" parent="Margin/Panel/Content/Lobby/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(130,52)
+text = "ออกจากห้อง"
+[node name="FriendsPanel" parent="." instance=ExtResource("friends")]

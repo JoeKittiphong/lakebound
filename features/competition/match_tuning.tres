@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="FishingTuning" format=3]
+[ext_resource type="Script" path="res://features/fishing/fishing_tuning.gd" id="script"]
+[resource]
+script = ExtResource("script")
+reel_speed = 2.6
+spool_capacity = 65.0
